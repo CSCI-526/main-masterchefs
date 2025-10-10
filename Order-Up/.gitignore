@@ -72,6 +72,10 @@ mono_crash.*
 *.unitypackage
 *.unitypackage.meta
 *.app
+*.unityweb
+*.wasm
+*.data
+*.js
 
 # Crashlytics generated file
 crashlytics-build.properties
