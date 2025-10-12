@@ -11,10 +11,10 @@ public class KitchenManager : MonoBehaviour
     void Awake()
     {
         // retrieve currentDishId
-        currentDishId = GameData.currentDishId;
+        // currentDishId = GameData.currentDishId; // todo: uncomment
 
         // reset currentDishId
-        // GameData.currentDishId = -1;
+        GameData.currentDishId = 1; // todo: comment out
 
         if (currentDishId >= 0 && currentDishId < dishPrefabs.Length)
         {
@@ -26,6 +26,7 @@ public class KitchenManager : MonoBehaviour
                            ". Make sure the ID is within the range of the dishPrefabs array size.");
         }
     }
+
 
     private void DisplayDishPrefab(int dishID)
     {
