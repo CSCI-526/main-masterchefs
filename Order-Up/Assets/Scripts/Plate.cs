@@ -1,20 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Plate : MonoBehaviour
+public class Plate : MonoBehaviour, IDropZone
 {
     [Header("Plate Settings")]
-    public Transform ingredientParent; // Where ingredients will be parented (optional)
+    public Transform ingredientParent;
     public float maxIngredients = 100f;
     public bool allowDuplicates = true;
     public float ingredientSpacing = 0.2f;
     public CombinationSystem comboSystem;
 
     [Header("Visual Feedback")]
-    public GameObject highlightEffect; // Optional highlight when hovering
+    public GameObject highlightEffect;
     public Color highlightColor;
-    //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
-    // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
 
     private List<DraggableIngredient> ingredientsOnPlate; 
     private SpriteRenderer plateRenderer;
@@ -35,7 +33,6 @@ public class Plate : MonoBehaviour
         if (plateRenderer != null)
             originalColor = plateRenderer.color;
 
-        // If no ingredient parent specified, use this transform
         if (ingredientParent == null)
             ingredientParent = transform;
 
@@ -43,30 +40,28 @@ public class Plate : MonoBehaviour
             highlightEffect.SetActive(false);
     }
 
+    // IDropZone implementation
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
     public bool AddIngredient(DraggableIngredient ingredient)
     {
-        // Check if we can add this ingredient
         if (!CanAddIngredient(ingredient))
             return false;
 
-        // Add to our list
         ingredientsOnPlate.Add(ingredient);
-
-        // Position the ingredient on the plate
         PositionIngredientOnPlate(ingredient);
 
-        // Parent the ingredient to the plate (optional)
         if (ingredientParent != null)
             ingredient.transform.SetParent(ingredientParent);
 
-
-        // Trigger events
         OnIngredientAdded?.Invoke(ingredient);
 
         if (IsFull())
             OnPlateFull?.Invoke();
 
-        // if there are more than 1 ingredient, check for combinations
         if (ingredientsOnPlate.Count > 1)
             comboSystem.CheckForCombinations();
 
@@ -83,11 +78,9 @@ public class Plate : MonoBehaviour
 
         ingredientsOnPlate.Remove(ingredient);
 
-        // Unparent and re-enable dragging
         ingredient.transform.SetParent(null);
         ingredient.EnableDragging();
 
-        // Reposition remaining ingredients
         RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
@@ -101,14 +94,12 @@ public class Plate : MonoBehaviour
 
     bool CanAddIngredient(DraggableIngredient ingredient)
     {
-        // Check if plate is full
         if (IsFull())
         {
             Debug.Log("Plate is full!");
             return false;
         }
 
-        // Check for duplicates if not allowed
         if (!allowDuplicates)
         {
             foreach (DraggableIngredient existing in ingredientsOnPlate)
@@ -127,36 +118,19 @@ public class Plate : MonoBehaviour
 
     void PositionIngredientOnPlate(DraggableIngredient ingredient)
     {
-        // Simple positioning in a grid or circle pattern
         Vector3 plateCenter = transform.position;
-        int index = ingredientsOnPlate.Count - 1; // -1 because we already added to list
+        int index = ingredientsOnPlate.Count - 1;
 
-        // Spiral positioning
-        float angle = index * 60f * Mathf.Deg2Rad; // 60 degrees apart
-        float radius = 0.3f + (index / 6f) * 0.2f; // Increase radius for outer rings
+        float angle = index * 60f * Mathf.Deg2Rad;
+        float radius = 0.3f + (index / 6f) * 0.2f;
 
         Vector3 offset = new Vector3(
             Mathf.Cos(angle) * radius,
             Mathf.Sin(angle) * radius,
-            -0.1f // Slightly in front of plate
+            -0.1f
         );
 
         ingredient.transform.position = plateCenter + offset;
-
-        // You could also do a simple grid:
-        /*
-        int columns = 3;
-        int row = index / columns;
-        int col = index % columns;
-        
-        Vector3 gridOffset = new Vector3(
-            (col - 1) * ingredientSpacing,
-            (row - 1) * ingredientSpacing,
-            -0.1f
-        );
-        
-        ingredient.transform.position = plateCenter + gridOffset;
-        */
     }
 
     void RepositionIngredients()
@@ -165,12 +139,10 @@ public class Plate : MonoBehaviour
         {
             if (ingredientsOnPlate[i] != null)
             {
-                // Temporarily add to list position for repositioning calculation
                 var temp = ingredientsOnPlate[i];
                 ingredientsOnPlate.RemoveAt(i);
                 ingredientsOnPlate.Insert(i, temp);
 
-                // Reposition based on new index
                 Vector3 plateCenter = transform.position;
                 float angle = i * 60f * Mathf.Deg2Rad;
                 float radius = 0.3f + (i / 6f) * 0.2f;
@@ -187,7 +159,6 @@ public class Plate : MonoBehaviour
         }
     }
 
-    // Visual feedback methods
     void OnMouseEnter()
     {
         ShowHighlight();
@@ -214,13 +185,11 @@ public class Plate : MonoBehaviour
             plateRenderer.color = originalColor;
     }
 
-    //----------------------------------- UTILITITY METHODS -----------------------------------//
     public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;
     public bool IsEmpty() => ingredientsOnPlate.Count == 0;
     public int GetIngredientCount() => ingredientsOnPlate.Count;
     public List<DraggableIngredient> GetIngredients() => new List<DraggableIngredient>(ingredientsOnPlate);
 
-    // Button to reset the dish
     public void ClearPlate()
     {
         while (ingredientsOnPlate.Count > 0)
@@ -229,7 +198,6 @@ public class Plate : MonoBehaviour
         }
     }
 
-    // Get recipe/dish information
     public List<string> GetIngredientNames()
     {
         List<string> names = new List<string>();
