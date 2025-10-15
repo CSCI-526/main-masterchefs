@@ -14,6 +14,12 @@ public class Plate : MonoBehaviour
     public GameObject highlightEffect; // Optional highlight when hovering
     public Color highlightColor;
 
+    [Header("Stirring Settings")]
+    public Transform spoon;
+    public Animator stirringAnimator;
+    public float stirSpeed = 100f;
+    private bool isStirring = false;
+
     //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
     // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
 
@@ -198,6 +204,40 @@ public class Plate : MonoBehaviour
             highlightEffect.SetActive(false);
         else if (plateRenderer != null)
             plateRenderer.color = originalColor;
+    }
+
+    //---------------------------- STIRRING INTERACTION ----------------------------//
+    void OnMouseDown()
+    {
+        // start stirring only if enabled and plate has contents
+        if (!enableStirring || IsEmpty()) return;
+
+        isStirring = true;
+
+        if (stirringAnimator != null)
+            stirringAnimator.SetBool("isStirring", true);
+    }
+
+    void OnMouseUp()
+    {
+        if (!enableStirring) return;
+
+        isStirring = false;
+
+        if (stirringAnimator != null)
+            stirringAnimator.SetBool("isStirring", false);
+    }
+
+    void Update()
+    {
+        if (enableStirring && isStirring && spoonOrUtensil != null)
+        {
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            Vector3 rotation = new Vector3(-mouseY, mouseX, 0f);
+            spoonOrUtensil.Rotate(rotation * stirSpeed * Time.deltaTime, Space.Self);
+        }
     }
 
 
