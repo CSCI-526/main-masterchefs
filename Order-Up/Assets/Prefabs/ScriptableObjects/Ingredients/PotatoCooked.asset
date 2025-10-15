@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7afaf7e1b80cfdd48a8978620450490b, type: 3}
-  m_Name: Egg
+  m_Name: PotatoCooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
-  ingredientName: Egg
-  icon: {fileID: 3801843947054940190, guid: e7074c223a4924e5d93a2e2aedf2ede5, type: 3}
+  ingredientName: Potato Cooked
+  icon: {fileID: 21300000, guid: 1392620ff6b49f94da7e6a9228fc0dac, type: 3}
   cookedResult: {fileID: 0}
