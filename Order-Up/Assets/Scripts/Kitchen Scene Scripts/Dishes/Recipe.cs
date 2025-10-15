@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+ 
 
 // ScriptableObject to define a recipe
 [CreateAssetMenu(fileName = "New Recipe", menuName = "Scriptable Objects/Recipe")]
