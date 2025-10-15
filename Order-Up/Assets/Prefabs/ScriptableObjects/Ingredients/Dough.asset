@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Dough
   icon: {fileID: 21300000, guid: ae884faebd16531408ed791898cc2804, type: 3}
-  cookedResult: {fileID: 0}
+  cookedResult: {fileID: 11400000, guid: 7ea98c3c1f4f34510a9366edd3f92fb6, type: 2}
