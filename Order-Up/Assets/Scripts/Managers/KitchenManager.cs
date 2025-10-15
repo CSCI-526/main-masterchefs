@@ -7,14 +7,16 @@ public class KitchenManager : MonoBehaviour
     public Transform orderWindow;
 
     private int currentDishId;
+    
+    [SerializeField] private bool enableDebugLogs = false;
 
     void Awake()
     {
         // retrieve currentDishId
-        currentDishId = GameData.currentDishId;
+        // currentDishId = GameData.currentDishId; // todo: uncomment
 
         // reset currentDishId
-        // GameData.currentDishId = -1;
+        GameData.currentDishId = 1; // todo: comment out
 
         if (currentDishId >= 0 && currentDishId < dishPrefabs.Length)
         {
@@ -27,6 +29,7 @@ public class KitchenManager : MonoBehaviour
         }
     }
 
+
     private void DisplayDishPrefab(int dishID)
     {
         // Use the dishID as the index to get the correct prefab
@@ -35,6 +38,6 @@ public class KitchenManager : MonoBehaviour
         // Instantiate (create) the prefab in the scene
         Instantiate(dishPrefab, orderWindow.position, Quaternion.identity); 
 
-        Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");
+        if (enableDebugLogs) Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");
     }
 }

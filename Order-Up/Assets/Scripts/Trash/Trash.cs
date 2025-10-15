@@ -1,35 +1,27 @@
 using UnityEngine;
+using System.Collections.Generic;
 
+/// <summary>
+///     Call clearplate method from Plate script to clear all ingredients on plate
+/// </summary>
 public class Trash : MonoBehaviour
 {
-    [Header("Target Dish")]
-    public GameObject dish; // Assign the Dish GameObject in Inspector
-
-    [Header("Debug")]
-    public bool enableDebugLogs = true;
-
-    private void OnMouseDown()
+    [SerializeField] private Plate plate;
+    
+    void Start()
     {
-        if (dish == null)
+        if (plate == null)
         {
-            if (enableDebugLogs) Debug.LogWarning("[Trash] No Dish assigned!");
-            return;
+            Debug.LogError("Plate reference is not assigned in Trash script.");
         }
+    }
 
-        if (dish.transform.childCount == 0)
+    public void ClearPlate()
+    {
+        // Call the ClearPlate method from the Plate script
+        if (plate != null)
         {
-            if (enableDebugLogs) Debug.Log("[Trash] Dish is already empty.");
-            return;
-        }
-
-        // Loop through all children and destroy them
-        for (int i = dish.transform.childCount - 1; i >= 0; i--)
-        {
-            Transform child = dish.transform.GetChild(i);
-            Destroy(child.gameObject);
-
-            if (enableDebugLogs)
-                Debug.Log($"[Trash] Deleted {child.name} from Dish.");
+            plate.ClearPlate();
         }
     }
 }
