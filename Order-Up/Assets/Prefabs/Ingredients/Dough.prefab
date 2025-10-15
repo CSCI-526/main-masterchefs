@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 8598886495310222801}
   - component: {fileID: 2161678375737905415}
   - component: {fileID: 4937303549503120951}
-  - component: {fileID: -8844182881565059481}
   m_Layer: 0
   m_Name: Dough
-  m_TagString: Ingredient
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1118,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  dropZoneLayerMask:
+  plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
   dragOffset: 0.1
@@ -1138,30 +1137,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: da4a59453f92941c2ba5f9296bdb7b20, type: 2}
   currentState: 0
---- !u!50 &-8844182881565059481
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 992363892594901227}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

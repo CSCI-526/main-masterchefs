@@ -13,10 +13,9 @@ GameObject:
   - component: {fileID: 2974412492847052124}
   - component: {fileID: 3675042069917101096}
   - component: {fileID: 590780015227289604}
-  - component: {fileID: 9062182388199995992}
   m_Layer: 0
   m_Name: Chocolate
-  m_TagString: Ingredient
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1059,7 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  dropZoneLayerMask:
+  plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
   dragOffset: 0.1
@@ -1078,30 +1077,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: a2d6dcef50986434e87189d0a3d30060, type: 2}
---- !u!50 &9062182388199995992
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2445644261294012018}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  currentState: 0
