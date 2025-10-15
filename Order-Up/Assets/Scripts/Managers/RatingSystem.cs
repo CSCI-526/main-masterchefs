@@ -15,6 +15,13 @@ public class RatingSystem : MonoBehaviour
     public Image[] starDisplay = new Image[3];
     public Sprite filledStar;
     public Sprite emptyStar;
+    public TMPro.TextMeshProUGUI averageTimeText;
+    public TMPro.TextMeshProUGUI averageScoreText;
+
+    // Tracking variables
+    private static List<float> completionTimes = new List<float>();
+    private static List<int> starRatings = new List<int>();
+
 
     // compare gameData with the Dish.recipe id to see if it is a match
     // if it is then 3 stars 
@@ -25,11 +32,38 @@ public class RatingSystem : MonoBehaviour
         int stars = CalculateRating();
         Debug.Log("Rating: " + stars + " Stars!");
 
-        // Display visual feedback
+        float timeTaken = Timer.Instance.StopTimer();
+        completionTimes.Add(timeTaken);
+        starRatings.Add(stars);
+
+        UpdateAverageDisplays();
         DisplayEvaluation(stars);
 
-        // Transition back to CustomerScene after a short delay
         Invoke("TransitionToCustomerScene", 2f);
+    }
+    
+    void UpdateAverageDisplays()
+    {
+        // Calculate average time
+        float avgTime = completionTimes.Average();
+        
+        // Calculate average score
+        float avgScore = (float)starRatings.Average();
+
+        // Update the text displays
+        // Format time as minutes:seconds
+        int minutes = Mathf.FloorToInt(avgTime / 60f);
+        int seconds = Mathf.FloorToInt(avgTime % 60f);
+        averageTimeText.text = $"Average Time: {minutes:00}:{seconds:00}";
+
+        // Format score to 1 decimal place
+        averageScoreText.text = $"Average Stars: {avgScore:F1}";
+
+        if (enableDebugLogs)
+        {
+            Debug.Log($"[RatingSystem] Average Time: {avgTime:F2}s, Average Score: {avgScore:F2} stars");
+            Debug.Log($"[RatingSystem] Total Orders: {starRatings.Count}");
+        }
     }
 
     int CalculateRating()
