@@ -1295,4 +1295,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19ff086614ecbe46b99b98c3a1f248e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientData: {fileID: 11400000, guid: 4377fe4318534463f84dbe1f38bb575c, type: 2}
+  ingredientData: {fileID: 11400000, guid: 414c308ad498248c887eb59213535148, type: 2}

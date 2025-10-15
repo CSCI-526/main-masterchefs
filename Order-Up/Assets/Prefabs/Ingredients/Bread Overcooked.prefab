@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9211686672026327020}
   - component: {fileID: 3980813072201152152}
   m_Layer: 0
-  m_Name: Bread Cooked
+  m_Name: Bread Overcooked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
-  m_Color: {r: 0.7264151, g: 0.4315396, b: 0.11307406, a: 1}
+  m_Color: {r: 0.4056604, g: 0.24834923, b: 0.07845318, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,7 +131,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 8.533334, y: 17.066668}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -202,4 +202,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19ff086614ecbe46b99b98c3a1f248e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientData: {fileID: 11400000, guid: b37da0a185aec4c89a28b96b0dbf72bc, type: 2}
+  ingredientData: {fileID: 11400000, guid: bd7739d55d2034b4dac6ebbbbbcaf02b, type: 2}
