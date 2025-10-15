@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
-  m_Name: FrenchFries
+  m_Name: Salad
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  dishName: Cheesy Fries
-  ID: 2
+  dishName: Salad
+  ID: 4
   requiredIngredients:
-  - {fileID: 11400000, guid: 3d3de83986e604b96b944cd2ba553cf9, type: 2}
-  - {fileID: 11400000, guid: 3c1f70a80fa8a429aa9734062b5543a4, type: 2}
-  dishPrefab: {fileID: 4283136327410539459, guid: 79bf7d3d2e83747e0bca3b8f373746bf, type: 3}
+  - {fileID: 11400000, guid: 1683158c380e9d9448cb3b02d1bbc8fd, type: 2}
+  - {fileID: 11400000, guid: 371d236a76e754013a166f4236e31fe6, type: 2}
+  dishPrefab: {fileID: 4612916372687549598, guid: 08fa64ca566014cba8b56d24a6fee5a6, type: 3}
   icon: {fileID: 0}
