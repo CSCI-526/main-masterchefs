@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MacNCheese
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: Mac & Cheese
-  ID: 1
+  ID: 7
   requiredIngredients:
   - {fileID: 11400000, guid: af3860e436dcb41d986556bebd746935, type: 2}
   - {fileID: 11400000, guid: b7f7a2c8ff2d846d8a2f235b2e1db1b5, type: 2}

@@ -1502,7 +1502,6 @@ MonoBehaviour:
   - {fileID: 5268278291036711262, guid: d4251bff851625448b38128fcfb941e8, type: 3}
   - {fileID: 5019135914713170762, guid: 982af6c00a30c594faf8f01bfd0273f3, type: 3}
   - {fileID: 7448852694630630562, guid: 8df517cb042e14044be1f22b3ac1088e, type: 3}
-  - {fileID: 2445644261294012018, guid: e6c595edf34a0464aae934a7fc5154f8, type: 3}
   - {fileID: 992363892594901227, guid: 86bce0e450bdd5440bb029d50f4bc3c3, type: 3}
   - {fileID: 1678815630160733816, guid: 5826382499d860140a7f3587a6a63cd2, type: 3}
   - {fileID: 1479273608746904182, guid: a75d4433fd727174f8d716d4d54fcd78, type: 3}
@@ -3974,6 +3973,9 @@ MonoBehaviour:
   - {fileID: 7029227814471459491, guid: 7a8e64c5d6dac4954b3fd97684495f48, type: 3}
   - {fileID: 4612916372687549598, guid: 08fa64ca566014cba8b56d24a6fee5a6, type: 3}
   - {fileID: 5537902939462073213, guid: 4b80324d224924758b18633bfe69f92f, type: 3}
+  - {fileID: 4283136327410539459, guid: 04799e262880d4f0e9d1cebf913333a2, type: 3}
+  - {fileID: 4283136327410539459, guid: 4193bc1c5fe83431a81e75d96e6ba351, type: 3}
+  - {fileID: 5537902939462073213, guid: 248e60387fb674a7dbf9571e3a1f2842, type: 3}
   orderWindow: {fileID: 388210663}
 --- !u!4 &2086967197
 Transform:
@@ -4004,12 +4006,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CombinationSystem
   plate: {fileID: 1398576955}
   allRecipes:
-  - {fileID: 11400000, guid: 9e1e8a7f302da4247bfd6cb8966a7860, type: 2}
-  - {fileID: 11400000, guid: 814775388bec04141a9e7a23b586cf62, type: 2}
-  - {fileID: 11400000, guid: eca8fccc4c16843779ac64ceb58ca138, type: 2}
-  - {fileID: 11400000, guid: 9a371438258b549c9b12b6d4c5e38852, type: 2}
   - {fileID: 11400000, guid: f5df6a714b8239f4f9070086769a320f, type: 2}
+  - {fileID: 11400000, guid: eca8fccc4c16843779ac64ceb58ca138, type: 2}
+  - {fileID: 11400000, guid: 9e1e8a7f302da4247bfd6cb8966a7860, type: 2}
+  - {fileID: 11400000, guid: 9a371438258b549c9b12b6d4c5e38852, type: 2}
   - {fileID: 11400000, guid: bf90192be8f0a4e328a7449c0750d513, type: 2}
+  - {fileID: 11400000, guid: 814775388bec04141a9e7a23b586cf62, type: 2}
+  - {fileID: 11400000, guid: a9ba79867e3ea41c2be500188a4468ec, type: 2}
+  - {fileID: 11400000, guid: 799c1e2f2d4c441288e498df188be7ab, type: 2}
+  - {fileID: 11400000, guid: d70823a87be3242d484f10c01274a8f6, type: 2}
   enableDebugLogs: 1
 --- !u!114 &2086967199
 MonoBehaviour:

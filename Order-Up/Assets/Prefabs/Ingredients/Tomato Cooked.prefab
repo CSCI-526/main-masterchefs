@@ -131,7 +131,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 8.533334, y: 8.533334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -192,7 +192,11 @@ MonoBehaviour:
   plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   dragOffset: 0.1
+  cookedResult: {fileID: 5380496696629025603, guid: 78975cb8c303a44bc8dad16adc4b3345, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &8304786401651748134

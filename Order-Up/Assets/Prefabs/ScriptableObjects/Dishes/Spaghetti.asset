@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spaghetti
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: Spaghetti
-  ID: 1
+  ID: 0
   requiredIngredients:
   - {fileID: 11400000, guid: af3860e436dcb41d986556bebd746935, type: 2}
   - {fileID: 11400000, guid: 484060354d2d54f95bf19508b1389ce9, type: 2}

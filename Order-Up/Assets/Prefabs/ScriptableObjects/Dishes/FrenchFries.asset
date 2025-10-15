@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FrenchFries
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: French Fries
-  ID: 2
+  ID: 6
   requiredIngredients:
   - {fileID: 11400000, guid: 5321160051adf4387bfbcb855d763505, type: 2}
   dishPrefab: {fileID: 4283136327410539459, guid: 04799e262880d4f0e9d1cebf913333a2, type: 3}

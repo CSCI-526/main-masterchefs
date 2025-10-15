@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OmeletteSandwich
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: ' Chicken Sandwich'
-  ID: 5
+  ID: 8
   requiredIngredients:
   - {fileID: 11400000, guid: 9d4cd8094de741946a6bf16ed542e0fe, type: 2}
   - {fileID: 11400000, guid: 414c308ad498248c887eb59213535148, type: 2}

@@ -1,38 +1,87 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class Stirring : MonoBehaviour
 {
-    public Animator plateAnimator;
-    public Transform spoon;
-    public float stirSpeed = 100f;
+    [Header("Stirring Settings")]
+    public LayerMask cookwareLayer;
+    public float stirSensitivity = 1.5f; // How fast the player must move to stir more
+    public float maxStirMultiplier = 2.5f;
 
-    private bool isStirring = false;
+    private Vector3 lastMousePosition;
+    private float stirIntensity = 0f;
+    private Pot potBelow;
 
-    void OnMouseDown()
+    private bool isDragging = false;
+    private Camera mainCamera;
+    private Vector3 mouseOffset;
+
+    void Start()
     {
-        isStirring = true;
-        if (plateAnimator != null)
-            plateAnimator.SetBool("isStirring", true);
-    }
-
-    void OnMouseUp()
-    {
-        isStirring = false;
-        if (plateAnimator != null)
-            plateAnimator.SetBool("isStirring", false);
+        mainCamera = Camera.main;
+        if (mainCamera == null)
+            mainCamera = FindAnyObjectByType<Camera>();
     }
 
     void Update()
     {
-        if (isStirring && spoon != null)
-        {
-            // rotate spoon based on mouse movement
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
+        if (!isDragging) return;
 
-            // make it feel like circular stirring
-            Vector2 rotation = new Vector3(-mouseY, mouseX, 0f);
-            spoon.Rotate(rotation * stirSpeed * Time.deltaTime, Space.Self);
+        Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = transform.position.z;
+
+        // Apply offset so spoon doesn’t jump when clicked
+        transform.position = mouseWorld + mouseOffset;
+
+        // Calculate movement distance to determine stirring intensity
+        float distanceMoved = Vector3.Distance(mouseWorld, lastMousePosition);
+        stirIntensity = Mathf.Clamp(distanceMoved * stirSensitivity, 0f, maxStirMultiplier);
+
+        if (potBelow != null)
+            potBelow.ApplyStirring(stirIntensity);
+
+        lastMousePosition = mouseWorld;
+    }
+
+    void OnMouseDown()
+    {
+        // Begin dragging only if clicking directly on spoon collider
+        isDragging = true;
+
+        Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mouseWorld.z = transform.position.z;
+        mouseOffset = transform.position - mouseWorld;
+        lastMousePosition = mouseWorld;
+    }
+
+    void OnMouseUp()
+    {
+        // Stop dragging when mouse released
+        isDragging = false;
+        stirIntensity = 0f;
+
+        if (potBelow != null)
+            potBelow.StopStirring();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Pot cookware = other.GetComponent<Pot>();
+        if (cookware != null)
+        {
+            potBelow = cookware;
+            Debug.Log($"[{gameObject.name}] Entered cookware {cookware.name}");
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Pot cookware = other.GetComponent<Pot>();
+        if (cookware != null && cookware == potBelow)
+        {
+            potBelow.StopStirring();
+            potBelow = null;
+            Debug.Log($"[{gameObject.name}] Left cookware {cookware.name}");
         }
     }
 }

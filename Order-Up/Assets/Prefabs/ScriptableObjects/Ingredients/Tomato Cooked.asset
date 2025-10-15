@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Tomato Cooked
   icon: {fileID: 21300000, guid: b1b8e51673d5b5b4989be67377d17cdb, type: 3}
-  cookedResult: {fileID: 0}
+  cookedResult: {fileID: 11400000, guid: d805b40fe2b9242ffb5bf2f88aa329ff, type: 2}

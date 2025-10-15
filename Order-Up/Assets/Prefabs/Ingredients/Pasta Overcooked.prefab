@@ -1207,6 +1207,9 @@ MonoBehaviour:
   plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   dragOffset: 0.1
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

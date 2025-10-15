@@ -164,7 +164,11 @@ MonoBehaviour:
   plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   dragOffset: 0.1
+  cookedResult: {fileID: 9145703149347527784, guid: 709a4ca62b9a347e4ac9184dd7a5f6bf, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4262880259563109038

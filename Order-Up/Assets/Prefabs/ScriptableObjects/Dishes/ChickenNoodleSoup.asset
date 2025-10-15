@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChickenNoodleSoup
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: Chicken Noodle Soup
-  ID: 0
+  ID: 3
   requiredIngredients:
   - {fileID: 11400000, guid: af3860e436dcb41d986556bebd746935, type: 2}
   - {fileID: 11400000, guid: aeb9c400d383d4802b550c647e655eae, type: 2}
