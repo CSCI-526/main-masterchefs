@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: 3c1f70a80fa8a429aa9734062b5543a4, type: 2}
+  currentState: 0
 --- !u!50 &-7862329187605646965
 Rigidbody2D:
   serializedVersion: 5
