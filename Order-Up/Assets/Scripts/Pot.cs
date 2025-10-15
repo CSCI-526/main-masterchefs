@@ -9,17 +9,17 @@ public class Pot : MonoBehaviour
     [Header("Visual Feedback")]
     public GameObject highlightEffect; // Optional highlight when hovering
     public Color highlightColor;
+    public float cookTime = 5f;
 
     //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
     // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
 
-    private List<DraggableIngredient> ingredientsInPot; 
+    private DraggableIngredient ingredientInPot; 
     private SpriteRenderer plateRenderer;
     private Color originalColor;
     private Dictionary<DraggableIngredient, float> cookProgress = new Dictionary<DraggableIngredient, float>();
     private bool isCooking = false;
     private float stirMultiplier = 1f;
-    private float cookTime = 5f;
 
     // Events
     public System.Action<DraggableIngredient> OnIngredientAdded;
@@ -29,7 +29,7 @@ public class Pot : MonoBehaviour
 
     void Start()
     {
-        ingredientsInPot = new List<DraggableIngredient>();
+        ingredientInPot = null;
         highlightColor = Color.yellow;
 
         plateRenderer = GetComponent<SpriteRenderer>();
@@ -48,13 +48,13 @@ public class Pot : MonoBehaviour
     {
         if (!isCooking) return;
 
-        foreach (var ingredient in ingredientsInPot)
+        if (ingredientInPot != null)
         {
-            cookProgress[ingredient] += Time.deltaTime * stirMultiplier;
+            cookProgress[ingredientInPot] += Time.deltaTime * stirMultiplier;
 
-            if (cookProgress[ingredient] >= cookTime)
+            if (cookProgress[ingredientInPot] >= cookTime)
             {
-                CookIngredient(ingredient);
+                CookIngredient(ingredientInPot);
             }
         }
     }
@@ -62,19 +62,13 @@ public class Pot : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         DraggableIngredient ingredient = other.GetComponent<DraggableIngredient>();
-        if (!ingredientsInPot.Contains(ingredient))
-        {
-            AddIngredient(ingredient);
-        }
+        AddIngredient(ingredient);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         DraggableIngredient ingredient = other.GetComponent<DraggableIngredient>();
-        if (ingredientsInPot.Contains(ingredient))
-        {
-            RemoveIngredient(ingredient);
-        }
+        RemoveIngredient(ingredient);
     }
 
     public bool AddIngredient(DraggableIngredient ingredient)
@@ -84,11 +78,11 @@ public class Pot : MonoBehaviour
             return false;
 
         // Add to our list
-        ingredientsInPot.Add(ingredient);
+        ingredientInPot = ingredient;
         cookProgress[ingredient] = 0f;
         isCooking = true;
 
-        // Parent the ingredient to the plate (optional)
+        // Parent the ingredient to the pot (optional)
         if (ingredientParent != null)
             ingredient.transform.SetParent(ingredientParent);
 
@@ -98,18 +92,18 @@ public class Pot : MonoBehaviour
         if (IsFull())
             OnPotFull?.Invoke();
 
-        Debug.Log($"Added {ingredient.name} to plate. Total ingredients: {ingredientsInPot.Count}");
+        Debug.Log($"Added {ingredient.name} to pot. Total ingredients: 1");
         return true;
     }
 
     public bool RemoveIngredient(DraggableIngredient ingredient)
     {
-        if (!ingredientsInPot.Contains(ingredient))
+        if (ingredientInPot == null)
             return false;
 
         bool wasEmpty = IsEmpty();
 
-        ingredientsInPot.Remove(ingredient);
+        ingredientInPot = null;
         cookProgress.Remove(ingredient);
         isCooking = false;
 
@@ -122,7 +116,7 @@ public class Pot : MonoBehaviour
         if (!wasEmpty && IsEmpty())
             OnPotEmpty?.Invoke();
 
-        Debug.Log($"Removed {ingredient.name} from plate. Total ingredients: {ingredientsInPot.Count}");
+        Debug.Log($"Removed {ingredient.name} from pot. Total ingredients: 0");
         return true;
     }
 
@@ -131,7 +125,7 @@ public class Pot : MonoBehaviour
         // Check if plate is full
         if (IsFull())
         {
-            Debug.Log("Plate is full!");
+            Debug.Log("pot is full!");
             return false;
         }
 
@@ -140,18 +134,6 @@ public class Pot : MonoBehaviour
 
     void CookIngredient(DraggableIngredient ingredient)
     {
-        // Ingredient ingredientComponent = ingredient.GetComponent<Ingredient>();
-        // IngredientData data = ingredientComponent.ingredientData;
-
-        // if (data.cookedResult == null)
-        // {
-        //     Debug.Log($"[{gameObject.name}] Cannot be cooked!");
-        //     return;
-        // }
-
-        // ingredientComponent.ingredientData = data.cookedResult;
-        // ingredientComponent.SetSprite(data.cookedResult.icon, data.cookedResult.ingredientName);
-
         if (ingredient.cookedResult == null)
         {
             Debug.Log($"[{gameObject.name}] Cannot be cooked!");
@@ -171,6 +153,7 @@ public class Pot : MonoBehaviour
         DraggableIngredient cookedIngredient = Instantiate(ingredient.cookedResult, pos, rot, parent);
         cookedIngredient.SetNewOriginalPosition();
         AddIngredient(cookedIngredient);
+        isCooking = false;
 
         Debug.Log($"[{gameObject.name}] Overcooked!");
         cookProgress[cookedIngredient] = 0f;
@@ -216,17 +199,13 @@ public class Pot : MonoBehaviour
 
 
     //----------------------------------- UTILITITY METHODS -----------------------------------//
-    public bool IsFull() => ingredientsInPot.Count == 1;
-    public bool IsEmpty() => ingredientsInPot.Count == 0;
-    public int GetIngredientCount() => ingredientsInPot.Count;
-    public List<DraggableIngredient> GetIngredients() => new List<DraggableIngredient>(ingredientsInPot);
+    public bool IsFull() => ingredientInPot != null;
+    public bool IsEmpty() => ingredientInPot == null;
+    public DraggableIngredient GetIngredient() => ingredientInPot;
 
     // Button to reset the dish
     public void ClearPot()
     {
-        while (ingredientsInPot.Count > 0)
-        {
-            RemoveIngredient(ingredientsInPot[0]);
-        }
+        RemoveIngredient(ingredientInPot);
     }
 }
