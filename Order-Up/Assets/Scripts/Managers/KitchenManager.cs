@@ -7,6 +7,8 @@ public class KitchenManager : MonoBehaviour
     public Transform orderWindow;
 
     private int currentDishId;
+    
+    [SerializeField] private bool enableDebugLogs = false;
 
     void Awake()
     {
@@ -35,6 +37,6 @@ public class KitchenManager : MonoBehaviour
         // Instantiate (create) the prefab in the scene
         Instantiate(dishPrefab, orderWindow.position, Quaternion.identity); 
 
-        Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");
+        if (enableDebugLogs) Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");
     }
 }

@@ -79,8 +79,8 @@ public class Plate : MonoBehaviour, IDropZone
         ingredientsOnPlate.Remove(ingredient);
 
         ingredient.transform.SetParent(null);
-        ingredient.EnableDragging();
 
+        Destroy(ingredient.gameObject);
         RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
