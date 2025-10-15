@@ -15,7 +15,7 @@ MonoBehaviour:
   dishName: Omelette Sandwich
   ID: 8
   requiredIngredients:
-  - {fileID: 11400000, guid: 3d3de83986e604b96b944cd2ba553cf9, type: 2}
-  - {fileID: 11400000, guid: 3c1f70a80fa8a429aa9734062b5543a4, type: 2}
+  - {fileID: 11400000, guid: 9d4cd8094de741946a6bf16ed542e0fe, type: 2}
+  - {fileID: 11400000, guid: 414c308ad498248c887eb59213535148, type: 2}
   dishPrefab: {fileID: 0}
   icon: {fileID: 0}

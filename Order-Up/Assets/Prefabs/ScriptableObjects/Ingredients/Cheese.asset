@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Cheese
-  icon: {fileID: 21300000, guid: 2526add8c3507e44a92b469e4a5133df, type: 3}
+  icon: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   cookedResult: {fileID: 0}

@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: ChickenSalad
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: Chicken Salad
-  ID: 10
+  ID: 4
   requiredIngredients:
-  - {fileID: 11400000, guid: 3d3de83986e604b96b944cd2ba553cf9, type: 2}
-  - {fileID: 11400000, guid: 3c1f70a80fa8a429aa9734062b5543a4, type: 2}
+  - {fileID: 11400000, guid: 371d236a76e754013a166f4236e31fe6, type: 2}
+  - {fileID: 11400000, guid: 414c308ad498248c887eb59213535148, type: 2}
+  - {fileID: 11400000, guid: 356fd3a04109c4e1e8388b95fba5887c, type: 2}
+  - {fileID: 11400000, guid: 4d659b798483e48d9a7a8d1dd8c17016, type: 2}
   dishPrefab: {fileID: 0}
   icon: {fileID: 0}

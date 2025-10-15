@@ -15,7 +15,8 @@ MonoBehaviour:
   dishName: Sphaghetti
   ID: 9
   requiredIngredients:
-  - {fileID: 11400000, guid: 3d3de83986e604b96b944cd2ba553cf9, type: 2}
-  - {fileID: 11400000, guid: 3c1f70a80fa8a429aa9734062b5543a4, type: 2}
+  - {fileID: 11400000, guid: 858e89433fe554e7f9eb5da5ce357417, type: 2}
+  - {fileID: 11400000, guid: c1430a02cacea4c04be18db915aacdbc, type: 2}
+  - {fileID: 11400000, guid: 6bd51ce8d3e34479180a610839878b9e, type: 2}
   dishPrefab: {fileID: 0}
   icon: {fileID: 0}
