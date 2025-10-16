@@ -5,7 +5,12 @@ public class DraggableIngredient : MonoBehaviour
 {
     [Header("Drag Settings")]
     public LayerMask plateLayerMask = -1; // Layer mask to identify plates
+    public LayerMask potLayerMask = -1; // Layer mask to identify plates
     public float dragOffset = 0.1f; // How far in front of camera to place while dragging
+    
+    [Header("Cooked Result")]
+    public DraggableIngredient cookedResult; // What this ingredient becomes when cooked
+
 
     [Header("Debug Settings")]
     public bool enableDebugLogs = true;
@@ -25,6 +30,7 @@ public class DraggableIngredient : MonoBehaviour
     public System.Action<DraggableIngredient> OnStartDrag;
     public System.Action<DraggableIngredient> OnEndDrag;
     public System.Action<DraggableIngredient, Plate> OnDroppedOnPlate;
+    public System.Action<DraggableIngredient, Pot> OnDroppedOnPot;
 
     void Start()
     {
@@ -182,6 +188,7 @@ public class DraggableIngredient : MonoBehaviour
 
         // Check if we're over a valid drop zone
         Plate plateBelow = GetPlateBelow();
+        Pot potBelow = GetPotBelow();
 
         if (plateBelow != null)
         {
@@ -192,6 +199,18 @@ public class DraggableIngredient : MonoBehaviour
             }
             plateBelow.AddIngredient(this);
             OnDroppedOnPlate?.Invoke(this, plateBelow);
+        }
+        else if (potBelow != null)
+        {
+            // Successfully dropped on plate
+            if (enableDebugLogs)
+            {
+                Debug.Log($"[{gameObject.name}] Dropped on pot: {potBelow.name}");
+            }
+            potBelow.AddIngredient(this);
+            OnDroppedOnPot?.Invoke(this, potBelow);
+            transform.SetParent(potBelow.ingredientParent != null ? potBelow.ingredientParent : potBelow.transform);
+            SetNewOriginalPosition();
         }
         else
         {
@@ -316,6 +335,31 @@ public class DraggableIngredient : MonoBehaviour
                 Plate plate = collider.GetComponent<Plate>();
                 if (plate != null)
                     return plate;
+            }
+        }
+
+        return null;
+    }
+
+    Pot GetPotBelow()
+    {
+        // Raycast downward to find plates
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, potLayerMask);
+
+        if (hit.collider != null)
+        {
+            return hit.collider.GetComponent<Pot>();
+        }
+
+        // Alternative method using OverlapPoint
+        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position, potLayerMask);
+        foreach (Collider2D collider in colliders)
+        {
+            if (collider.gameObject != gameObject) // Don't detect ourselves
+            {
+                Pot pot = collider.GetComponent<Pot>();
+                if (pot != null)
+                    return pot;
             }
         }
 

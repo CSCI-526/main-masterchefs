@@ -13,6 +13,7 @@ public class Plate : MonoBehaviour
     [Header("Visual Feedback")]
     public GameObject highlightEffect; // Optional highlight when hovering
     public Color highlightColor;
+
     //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
     // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
 
@@ -142,21 +143,6 @@ public class Plate : MonoBehaviour
         );
 
         ingredient.transform.position = plateCenter + offset;
-
-        // You could also do a simple grid:
-        /*
-        int columns = 3;
-        int row = index / columns;
-        int col = index % columns;
-        
-        Vector3 gridOffset = new Vector3(
-            (col - 1) * ingredientSpacing,
-            (row - 1) * ingredientSpacing,
-            -0.1f
-        );
-        
-        ingredient.transform.position = plateCenter + gridOffset;
-        */
     }
 
     void RepositionIngredients()
@@ -213,6 +199,7 @@ public class Plate : MonoBehaviour
         else if (plateRenderer != null)
             plateRenderer.color = originalColor;
     }
+
 
     //----------------------------------- UTILITITY METHODS -----------------------------------//
     public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;

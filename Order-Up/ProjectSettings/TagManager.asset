@@ -11,8 +11,8 @@ TagManager:
   - plateLayerMask
   - Water
   - UI
-  - 
-  - 
+  - potLayerMask
+  - cookwareLayer
   - 
   - 
   - 

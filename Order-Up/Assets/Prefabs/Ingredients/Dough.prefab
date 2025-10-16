@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: ae884faebd16531408ed791898cc2804, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -2413806693520163455, guid: bda853ef10fd84f33b0adfdfa8139739, type: 3}
+  m_Color: {r: 1, g: 0.9040197, b: 0.8160377, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,10 +129,10 @@ PolygonCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 3.1399999, y: 5.9, z: 2.06, w: 7.58}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 20.48, y: 20.48}
+    oldSize: {x: 8.533334, y: 8.533334}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -1120,7 +1120,11 @@ MonoBehaviour:
   plateLayerMask:
     serializedVersion: 2
     m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
   dragOffset: 0.1
+  cookedResult: {fileID: 2161678375737905415, guid: f5fcb032f9f404f5cb128c062362a2d1, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4937303549503120951
