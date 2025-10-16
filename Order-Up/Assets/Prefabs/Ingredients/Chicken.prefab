@@ -716,9 +716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  plateLayerMask:
+  dropZoneLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   dragOffset: 0.1
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -736,3 +736,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: 66decadd542334f6281aadd193f815d9, type: 2}
   currentState: 0
+  currentCookware: 0

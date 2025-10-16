@@ -8,6 +8,7 @@ public class RecipeIngredientRequirement
 {
     public IngredientData ingredient;
     public IngredientState requiredState;
+    public CookwareType requiredCookware = CookwareType.None;
 }
 
 
@@ -52,7 +53,7 @@ public class Recipe : ScriptableObject
             return false;
         
         
-        //
+        // check ingredients
         foreach (RecipeIngredientRequirement req in requiredIngredients)
         {
             bool found = false;
@@ -60,9 +61,11 @@ public class Recipe : ScriptableObject
             {
                 Debug.Log($"Checking {ing.ingredientData.name} ({ing.currentState}) vs {req.ingredient.name} ({req.requiredState})");
 
-                if (ing.ingredientData == req.ingredient && ing.currentState == req.requiredState)
+                if (ing.ingredientData == req.ingredient && ing.currentState == req.requiredState && 
+                (req.requiredCookware == CookwareType.None || ing.currentCookware == req.requiredCookware))
                 {
                     found = true;
+                    Debug.Log($"Found recipe: {req.ingredient}");
                     break;
                 }
             }

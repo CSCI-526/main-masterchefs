@@ -6,7 +6,7 @@
       "dishName": "French Fries",
       "sentenceTemplate": "Ugh, I just need something crispy and salty right now... can you make me some {dish}?",
       "color": "yellow",
-      "image": "FrenchFries"
+      "image": "dish"
     },
     {
       "id": 2,
@@ -14,7 +14,7 @@
       "dishName": "Cheesy Fries",
       "sentenceTemplate": "I was going to eat healthy today, but then I remembered {dish} exists. Worth it.",
       "color": "orange",
-      "image": "CheesyFries"
+      "image": "dish"
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "dishName": "Cheese Pizza",
       "sentenceTemplate": "My friends are coming over for movie night. No {dish}, no friendship. You know the rule.",
       "color": "red",
-      "image": "CheesePizza"
+      "image": "dish"
     },
     {
       "id": 4,
@@ -30,7 +30,7 @@
       "dishName": "Mac & Cheese",
       "sentenceTemplate": "Life’s tough, but a bowl of {dish} makes it better. Can you make it extra creamy?",
       "color": "yellow",
-      "image": "MacAndCheese"
+      "image": "dish"
     },
     {
       "id": 5,
@@ -38,7 +38,7 @@
       "dishName": "Chicken Sandwich",
       "sentenceTemplate": "Lunch break in 10 minutes! I need a {dish} before my coworker steals the last one again.",
       "color": "brown",
-      "image": "ChickenSandwich"
+      "image": "dish"
     },
     {
       "id": 6,
@@ -46,7 +46,7 @@
       "dishName": "Omelette Sandwich",
       "sentenceTemplate": "I overslept again… can you make me an {dish} so it at least looks like I have my life together?",
       "color": "yellow",
-      "image": "OmeletteSandwich"
+      "image": "dish"
     },
     {
       "id": 7,
@@ -54,7 +54,7 @@
       "dishName": "Spaghetti with Tomato Sauce",
       "sentenceTemplate": "Date night disaster! I promised homemade {dish}, can you save my love life?",
       "color": "red",
-      "image": "SpaghettiTomato"
+      "image": "dish"
     },
     {
       "id": 8,
@@ -62,7 +62,7 @@
       "dishName": "Chicken Salad without cheese",
       "sentenceTemplate": "Trying to be healthy for once... Can you make a {dish} that doesn’t taste like sadness?",
       "color": "green",
-      "image": "ChickenSalad"
+      "image": "dish"
     },
     {
       "id": 9,
@@ -70,7 +70,7 @@
       "dishName": "Chicken Noodle Soup",
       "sentenceTemplate": "I caught a cold and need comfort food ASAP. Only {dish} can fix my soul.",
       "color": "yellow",
-      "image": "ChickenNoodleSoup"
+      "image": "dish"
     }
   ]
 }

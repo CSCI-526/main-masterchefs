@@ -13,6 +13,7 @@ public class Ingredient : MonoBehaviour
     [Header("Ingredient Settings")]
     public IngredientData ingredientData;
     public IngredientState currentState = IngredientState.Raw;
+    public CookwareType currentCookware = CookwareType.None;
 
     private PolygonCollider2D polyCollider;
     private SpriteRenderer spriteRenderer;
