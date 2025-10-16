@@ -37,9 +37,20 @@ public class Stirring : MonoBehaviour
         float distanceMoved = Vector3.Distance(mouseWorld, lastMousePosition);
         stirIntensity = Mathf.Clamp(distanceMoved * stirSensitivity, 0f, maxStirMultiplier);
 
-        if (potBelow != null)
-            potBelow.ApplyStirring(stirIntensity);
-
+        Collider2D hit = Physics2D.OverlapPoint(mouseWorld, cookwareLayer);
+        if (hit != null)
+        {
+            Pot cookware = hit.GetComponent<Pot>();
+            if (cookware != null)
+            {
+                potBelow = cookware;
+                potBelow.ApplyStirring(stirIntensity);
+            }
+        }
+        else
+        {
+            potBelow = null;
+        }
         lastMousePosition = mouseWorld;
     }
 

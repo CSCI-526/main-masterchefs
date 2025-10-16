@@ -46,9 +46,9 @@ public class Pot : MonoBehaviour
 
     void Update()
     {
-        if (!isCooking) return;
+        if (ingredientInPot == null) return;
 
-        if (ingredientInPot != null)
+        if (stirMultiplier > 1f)
         {
             cookProgress[ingredientInPot] += Time.deltaTime * stirMultiplier;
 
