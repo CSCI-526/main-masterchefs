@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
+  m_Name: Mac&Cheese_Raw
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  dishName: Mac & Cheese_Raw
+  ID: 3
+  requiredIngredients:
+  - ingredient: {fileID: 11400000, guid: ff08345f8d22d41d78f601be5920d22e, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+  - ingredient: {fileID: 11400000, guid: b5d81143e8d474db196672758b936373, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+  dishPrefab: {fileID: 5870176838085705797, guid: d845be0350ab2430789d5cfb9139ac83, type: 3}
+  icon: {fileID: 3342090361184808959, guid: 824c8743d5bc245a29fe6277a19e413f, type: 3}

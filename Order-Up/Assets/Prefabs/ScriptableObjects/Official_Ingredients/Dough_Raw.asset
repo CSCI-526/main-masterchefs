@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7afaf7e1b80cfdd48a8978620450490b, type: 3}
+  m_Name: Dough_Raw
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientData
+  ingredientName: Dough_Raw
+  icon: {fileID: -9107184221809037925, guid: c1d0c6515734845a18bcc27125309fd0, type: 3}
+  cookedResult: {fileID: 11400000, guid: 7807ed4edfb184b9689e073e1a54a955, type: 2}
+  overcookedResult: {fileID: 11400000, guid: 0abd52367bad243cf928611e75474f9a, type: 2}
