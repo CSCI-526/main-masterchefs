@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 481671894}
   - component: {fileID: 481671893}
   - component: {fileID: 481671892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: spoon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +853,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Stirring
   cookwareLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   stirSensitivity: 1.5
   maxStirMultiplier: 2.5
 --- !u!114 &481671894
@@ -918,7 +918,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.745283, g: 0.6558528, b: 0.5730242, a: 1}
   m_FlipX: 0
