@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
         // Load Kitchen scene (replace with your actual scene name)
         if (IsGameInProgress) return; // Prevent double start
         IsGameInProgress = true;
+        GameData.ResetGameData();
+
         SceneManager.LoadScene("CustomerScene");
     }
 
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         // Handle game end logic
         // e.g., player progress, score tracking, etc.
         IsGameInProgress = false;
+        GameData.ResetGameData();
         Debug.Log("Game Over!");
         SceneManager.LoadScene("Kitchen");
     }

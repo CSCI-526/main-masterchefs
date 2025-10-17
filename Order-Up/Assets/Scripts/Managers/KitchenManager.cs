@@ -33,8 +33,7 @@ public class KitchenManager : MonoBehaviour
             customizeButton.onClick.AddListener(OnCustomizeClicked);
 
         UpdatePlayButtonState();
-
-        // Don't start the timer
+        GameData.CheckAndIncrementLevel();
     }
 
 
