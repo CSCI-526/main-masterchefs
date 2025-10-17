@@ -7,6 +7,7 @@ public class KitchenManager : MonoBehaviour
     // The array to hold your dish prefabs. 
     public GameObject[] dishPrefabs;
     public Transform orderWindow;
+    public TMPro.TMP_Text dishNameText;
 
     private int currentDishId;
     [Header("Debug Settings")]
@@ -42,7 +43,7 @@ public class KitchenManager : MonoBehaviour
     {
         // Use the dishID as the index to get the correct prefab
         GameObject dishPrefab = dishPrefabs[dishID];
-
+        dishNameText.text = dishPrefab.name;
         // Instantiate (create) the prefab in the scene
         Instantiate(dishPrefab, orderWindow.position, Quaternion.identity);
         if (enableDebugLogs) Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");

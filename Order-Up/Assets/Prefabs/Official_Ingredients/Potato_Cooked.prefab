@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8582653425292525919}
   - component: {fileID: 2987408843506760670}
   - component: {fileID: 5623640995956706327}
+  - component: {fileID: 6676587240460845249}
   m_Layer: 0
   m_Name: Potato_Cooked
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
+  cookedResult: {fileID: 0}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2987408843506760670
@@ -187,3 +189,30 @@ PolygonCollider2D:
       - {x: 0.65, y: -0.305}
       - {x: 0.37, y: 0.235}
   m_UseDelaunayMesh: 0
+--- !u!50 &6676587240460845249
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378597899136247894}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

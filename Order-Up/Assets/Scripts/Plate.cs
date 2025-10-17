@@ -13,12 +13,6 @@ public class Plate : MonoBehaviour, IDropZone
     [Header("Visual Feedback")]
     public GameObject highlightEffect;
     public Color highlightColor;
-<<<<<<< HEAD
-
-    //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
-    // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
-=======
->>>>>>> dave-branch
 
     private List<DraggableIngredient> ingredientsOnPlate; 
     private SpriteRenderer plateRenderer;
@@ -191,11 +185,6 @@ public class Plate : MonoBehaviour, IDropZone
             plateRenderer.color = originalColor;
     }
 
-<<<<<<< HEAD
-
-    //----------------------------------- UTILITITY METHODS -----------------------------------//
-=======
->>>>>>> dave-branch
     public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;
     public bool IsEmpty() => ingredientsOnPlate.Count == 0;
     public int GetIngredientCount() => ingredientsOnPlate.Count;

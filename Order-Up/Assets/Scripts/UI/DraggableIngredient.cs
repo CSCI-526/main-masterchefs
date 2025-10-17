@@ -3,19 +3,10 @@ using UnityEngine;
 public class DraggableIngredient : MonoBehaviour
 {
     [Header("Drag Settings")]
-<<<<<<< HEAD
-    public LayerMask plateLayerMask = -1; // Layer mask to identify plates
-    public LayerMask potLayerMask = -1; // Layer mask to identify plates
-    public float dragOffset = 0.1f; // How far in front of camera to place while dragging
-    
-    [Header("Cooked Result")]
-    public DraggableIngredient cookedResult; // What this ingredient becomes when cooked
-
-=======
     public LayerMask dropZoneLayerMask = -1; // Layer mask for both plates AND cookwares
     public float dragOffset = 0.1f;
->>>>>>> dave-branch
-
+    [Header("Cooked Result")]
+    public DraggableIngredient cookedResult; // What this ingredient becomes when cooked
     [Header("Debug Settings")]
     public bool enableDebugLogs = false;
     public Color hoverColor = Color.yellow;
@@ -34,11 +25,7 @@ public class DraggableIngredient : MonoBehaviour
     public System.Action<DraggableIngredient> OnStartDrag;
     public System.Action<DraggableIngredient> OnEndDrag;
     public System.Action<DraggableIngredient, Plate> OnDroppedOnPlate;
-<<<<<<< HEAD
-    public System.Action<DraggableIngredient, Pot> OnDroppedOnPot;
-=======
     public System.Action<DraggableIngredient, Cookwares> OnDroppedOnCookware;
->>>>>>> dave-branch
 
     void Start()
     {
@@ -186,14 +173,8 @@ public class DraggableIngredient : MonoBehaviour
             Debug.Log($"[{gameObject.name}] Stopped dragging!");
         }
 
-<<<<<<< HEAD
-        // Check if we're over a valid drop zone
-        Plate plateBelow = GetPlateBelow();
-        Pot potBelow = GetPotBelow();
-=======
         // Check what's below using the unified layer mask
         IDropZone dropZone = GetDropZoneBelow();
->>>>>>> dave-branch
 
         if (dropZone != null)
         {
@@ -214,18 +195,6 @@ public class DraggableIngredient : MonoBehaviour
                 transform.position = dropZone.GetGameObject().transform.position;
                 OnDroppedOnCookware?.Invoke(this, cookware);
             }
-        }
-        else if (potBelow != null)
-        {
-            // Successfully dropped on plate
-            if (enableDebugLogs)
-            {
-                Debug.Log($"[{gameObject.name}] Dropped on pot: {potBelow.name}");
-            }
-            potBelow.AddIngredient(this);
-            OnDroppedOnPot?.Invoke(this, potBelow);
-            transform.SetParent(potBelow.ingredientParent != null ? potBelow.ingredientParent : potBelow.transform);
-            SetNewOriginalPosition();
         }
         else
         {
@@ -334,31 +303,6 @@ public class DraggableIngredient : MonoBehaviour
                 IDropZone dropZone = collider.GetComponent<IDropZone>();
                 if (dropZone != null)
                     return dropZone;
-            }
-        }
-
-        return null;
-    }
-
-    Pot GetPotBelow()
-    {
-        // Raycast downward to find plates
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero, 0f, potLayerMask);
-
-        if (hit.collider != null)
-        {
-            return hit.collider.GetComponent<Pot>();
-        }
-
-        // Alternative method using OverlapPoint
-        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position, potLayerMask);
-        foreach (Collider2D collider in colliders)
-        {
-            if (collider.gameObject != gameObject) // Don't detect ourselves
-            {
-                Pot pot = collider.GetComponent<Pot>();
-                if (pot != null)
-                    return pot;
             }
         }
 
