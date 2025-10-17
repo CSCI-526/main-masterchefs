@@ -22,7 +22,7 @@ public class DialogueList
 public class DialogueManager : MonoBehaviour
 {
     private DialogueList dialogueList;
-    private HashSet<int> usedIds = new HashSet<int>();
+    private static HashSet<int> usedIds = new HashSet<int>();
 
     //Load dialogue data when start
     void Awake()
@@ -46,7 +46,6 @@ public class DialogueManager : MonoBehaviour
             usedIds.Clear(); // Clear if all dialogues have been used
         }
 
-        
         //Get a random dialogue that hasn't been used
         int randomIndex = UnityEngine.Random.Range(0, dialogueList.dialogues.Length);
         while (usedIds.Contains(dialogueList.dialogues[randomIndex].id))
@@ -56,7 +55,36 @@ public class DialogueManager : MonoBehaviour
 
         DialogueData randomDialogue = dialogueList.dialogues[randomIndex];
         usedIds.Add(randomDialogue.id);
-        
+
         return randomDialogue;
+    }
+
+    // Go through the dialogues one by one until there are no more left
+    public DialogueData GetNextDialogue()
+    {
+        if (usedIds.Count == dialogueList.dialogues.Length)
+        {
+            // Call the Game Manager for end game
+            ResetUsedIds();
+            GameManager.Instance.EndGame();
+        }
+
+        for (int i = 0; i < dialogueList.dialogues.Length; i++)
+        {
+            if (!usedIds.Contains(dialogueList.dialogues[i].id))
+            {
+                usedIds.Add(dialogueList.dialogues[i].id);
+                Debug.Log($"[DialogueManager] Returning dialogue ID: {dialogueList.dialogues[i].id}");
+                return dialogueList.dialogues[i];
+            }
+        }
+        Debug.LogWarning("No more dialogues left. End the game!");
+        return null;
+    }
+
+    // reset used ids 
+    public void ResetUsedIds()
+    {
+        usedIds.Clear();
     }
 }

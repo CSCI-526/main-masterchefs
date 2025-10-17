@@ -57,7 +57,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 41873933
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
   m_Color: {r: 0.7735849, g: 0.53877425, b: 0.31016377, a: 1}
@@ -607,12 +607,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  plateLayerMask:
+  dropZoneLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD
     m_Bits: 8
   potLayerMask:
     serializedVersion: 2
     m_Bits: 64
+=======
+    m_Bits: 4294967295
+>>>>>>> dave-branch
   dragOffset: 0.1
   cookedResult: {fileID: 6690192005403807941, guid: 51c2e0194ee40436697e3c9f7fc270a7, type: 3}
   enableDebugLogs: 0
@@ -630,3 +634,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: 3d3de83986e604b96b944cd2ba553cf9, type: 2}
+  currentState: 0
+  currentCookware: 0

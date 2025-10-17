@@ -81,7 +81,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7419058964374809761, guid: 01a0d5bcd53e81e409ac1a680cc7d523, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plateLayerMask:
+  dropZoneLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 4294967295
   dragOffset: 0.1
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ingredientData: {fileID: 0}
+  currentState: 0
+  currentCookware: 0
 --- !u!60 &8903990124501221652
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
+  m_Name: ChickenSaladWithoutCheese
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  dishName: Chicken Salad Without Cheese
+  ID: 7
+  requiredIngredients:
+  - ingredient: {fileID: 11400000, guid: cce1943473bcb44b390a723afd38332f, type: 2}
+    requiredState: 1
+    requiredCookware: 2
+  - ingredient: {fileID: 11400000, guid: ae620c216a5db472ea1f3416addae4b0, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+  - ingredient: {fileID: 11400000, guid: 6cc5f1d366d2e4775b91fbaace310b92, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+  - ingredient: {fileID: 11400000, guid: b65e2e468026f4bddb1444b02f41fd29, type: 2}
+    requiredState: 1
+    requiredCookware: 0
+  dishPrefab: {fileID: 3755099817112370921, guid: a9b2c2d6968e141c4b5b260752697b8d, type: 3}
+  icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}
