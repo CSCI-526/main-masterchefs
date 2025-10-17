@@ -10,6 +10,7 @@ public class Pot : MonoBehaviour
     public GameObject highlightEffect; // Optional highlight when hovering
     public Color highlightColor;
     public float cookTime = 5f;
+  
 
     //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
     // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
@@ -20,6 +21,7 @@ public class Pot : MonoBehaviour
     private Dictionary<DraggableIngredient, float> cookProgress = new Dictionary<DraggableIngredient, float>();
     private bool isCooking = false;
     private float stirMultiplier = 1f;
+    private bool isStirring = false;
 
     // Events
     public System.Action<DraggableIngredient> OnIngredientAdded;
@@ -46,10 +48,11 @@ public class Pot : MonoBehaviour
 
     void Update()
     {
-        if (ingredientInPot == null) return;
+        if (ingredientInPot == null || !isCooking) return;
 
-        if (stirMultiplier > 1f)
+        if (isStirring)
         {
+            if (!cookProgress.ContainsKey(ingredientInPot)) return; 
             cookProgress[ingredientInPot] += Time.deltaTime * stirMultiplier;
 
             if (cookProgress[ingredientInPot] >= cookTime)
@@ -161,12 +164,14 @@ public class Pot : MonoBehaviour
 
     public void ApplyStirring(float intensity)
     {
+        isStirring = true;
         stirMultiplier = 1f + intensity;
         Debug.Log($"[{gameObject.name}] Stirring applied. Multiplier = {stirMultiplier:F2}");
     }
 
     public void StopStirring()
     {
+        isStirring = false;
         stirMultiplier = 1f;
     }
 
