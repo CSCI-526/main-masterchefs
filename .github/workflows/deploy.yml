@@ -28,7 +28,7 @@ jobs:
       - name: Build project for WebGL
         uses: game-ci/unity-builder@v4
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_SERIAL }}
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
         with:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
