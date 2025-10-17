@@ -3,48 +3,62 @@ name: Build and Deploy WebGL to GitHub Pages
 on:
   push:
     branches:
-      - main   # Only run when main is updated
+      - main
 
 jobs:
   build:
     name: Build WebGL
     runs-on: ubuntu-latest
-    env:
-      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-      
+
     steps:
-      # Step 1: Checkout your Unity project
+      # Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          lfs: true  # Support for large files (like textures and models)
 
-      # Step 2: Cache Unity dependencies for faster builds
-      - name: Cache Unity packages
+      # Cache the Unity library folder (optional but speeds up builds)
+      - name: Cache Unity Library
         uses: actions/cache@v3
         with:
-          path: |
-            ~/.cache/unity3d
-            ~/.local/share/unity3d
-          key: ${{ runner.os }}-unity-${{ hashFiles('**/Packages/manifest.json') }}
+          path: Order-Up/Library
+          key: Library-${{ runner.os }}-${{ hashFiles('Order-Up/Assets/**', 'Order-Up/Packages/**', 'Order-Up/ProjectSettings/**') }}
           restore-keys: |
-            ${{ runner.os }}-unity-
+            Library-${{ runner.os }}-
 
-      # Step 3: Build WebGL using GameCI
-      - name: Build WebGL Player
+      # Run Unity build
+      - name: Build project for WebGL
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE_SERIAL }}
         with:
-          unityVersion: 6000.2.6f1   # Change this to match your Unity version
+          unityVersion: 6000.2.6f1
           targetPlatform: WebGL
-          projectPath: Order-Up       # Folder where your Unity project lives
+          projectPath: Order-Up
           buildName: WebGL
-          buildsPath: build           # Output path (build/WebGL)
+          buildsPath: build
+          versioning: Semantic
 
-      # Step 4: Deploy to gh-pages branch
-      - name: Deploy WebGL to GitHub Pages
+      - name: Upload WebGL build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WebGL-Build
+          path: build/WebGL
+
+  deploy:
+    name: Deploy WebGL to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download WebGL build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: WebGL-Build
+          path: build/WebGL
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: build/WebGL
-          publish_branch: gh-pages
-          force_orphan: true  # Keeps gh-pages clean (optional but recommended)
