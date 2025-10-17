@@ -5,7 +5,8 @@ public class DraggableIngredient : MonoBehaviour
     [Header("Drag Settings")]
     public LayerMask dropZoneLayerMask = -1; // Layer mask for both plates AND cookwares
     public float dragOffset = 0.1f;
-
+    [Header("Cooked Result")]
+    public DraggableIngredient cookedResult; // What this ingredient becomes when cooked
     [Header("Debug Settings")]
     public bool enableDebugLogs = false;
     public Color hoverColor = Color.yellow;

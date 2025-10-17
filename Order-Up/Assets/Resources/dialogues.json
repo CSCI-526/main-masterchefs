@@ -5,7 +5,7 @@
       "dishId": 0,
       "dishName": "French Fries",
       "sentenceTemplate": "Ugh, I just need something crispy and salty right now... can you make me some {dish}?",
-      "color": "yellow",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -21,7 +21,7 @@
       "dishId": 2,
       "dishName": "Cheese Pizza",
       "sentenceTemplate": "My friends are coming over for movie night. No {dish}, no friendship. You know the rule.",
-      "color": "red",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -29,7 +29,7 @@
       "dishId": 3,
       "dishName": "Mac & Cheese",
       "sentenceTemplate": "Life’s tough, but a bowl of {dish} makes it better. Can you make it extra creamy?",
-      "color": "yellow",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -37,7 +37,7 @@
       "dishId": 4,
       "dishName": "Chicken Sandwich",
       "sentenceTemplate": "Lunch break in 10 minutes! I need a {dish} before my coworker steals the last one again.",
-      "color": "brown",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -45,7 +45,7 @@
       "dishId": 5,
       "dishName": "Omelette Sandwich",
       "sentenceTemplate": "I overslept again… can you make me an {dish} so it at least looks like I have my life together?",
-      "color": "yellow",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -53,7 +53,7 @@
       "dishId": 6,
       "dishName": "Spaghetti with Tomato Sauce",
       "sentenceTemplate": "Date night disaster! I promised homemade {dish}, can you save my love life?",
-      "color": "red",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -61,7 +61,7 @@
       "dishId": 7,
       "dishName": "Chicken Salad without cheese",
       "sentenceTemplate": "Trying to be healthy for once... Can you make a {dish} that doesn’t taste like sadness?",
-      "color": "green",
+      "color": "orange",
       "image": "dish"
     },
     {
@@ -69,7 +69,7 @@
       "dishId": 8,
       "dishName": "Chicken Noodle Soup",
       "sentenceTemplate": "I caught a cold and need comfort food ASAP. Only {dish} can fix my soul.",
-      "color": "yellow",
+      "color": "orange",
       "image": "dish"
     }
   ]

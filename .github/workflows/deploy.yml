@@ -1,0 +1,64 @@
+name: Build and Deploy WebGL to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build WebGL
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Cache the Unity library folder (optional but speeds up builds)
+      - name: Cache Unity Library
+        uses: actions/cache@v3
+        with:
+          path: Order-Up/Library
+          key: Library-${{ runner.os }}-${{ hashFiles('Order-Up/Assets/**', 'Order-Up/Packages/**', 'Order-Up/ProjectSettings/**') }}
+          restore-keys: |
+            Library-${{ runner.os }}-
+
+      # Run Unity build
+      - name: Build project for WebGL
+        uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+        with:
+          unityVersion: 6000.2.6f1
+          targetPlatform: WebGL
+          projectPath: Order-Up
+          buildName: WebGL
+          buildsPath: build
+          versioning: Semantic
+
+      - name: Upload WebGL build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WebGL-Build
+          path: build/WebGL
+
+  deploy:
+    name: Deploy WebGL to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download WebGL build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: WebGL-Build
+          path: build/WebGL
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/WebGL

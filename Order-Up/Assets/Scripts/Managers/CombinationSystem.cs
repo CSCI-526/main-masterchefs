@@ -42,7 +42,7 @@ public class CombinationSystem : MonoBehaviour
         }
 
         // Need at least 2 ingredients to combine
-        if (ingredients.Count < 2)
+        if (ingredients.Count < 1)
             return;
 
         // Check all recipes to find a match

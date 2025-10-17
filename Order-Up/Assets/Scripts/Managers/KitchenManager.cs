@@ -7,6 +7,7 @@ public class KitchenManager : MonoBehaviour
     // The array to hold your dish prefabs. 
     public GameObject[] dishPrefabs;
     public Transform orderWindow;
+    public TMPro.TMP_Text dishNameText;
 
     private int currentDishId;
     [Header("Debug Settings")]
@@ -16,7 +17,8 @@ public class KitchenManager : MonoBehaviour
     [Header("Play/Customize Button")]
     public Button playButton;
     public Button customizeButton;
-    void Awake()
+    public Button submitButton;
+    void Start()
     {
         // retrieve currentDishId
         currentDishId = GameData.currentDishId; // todo: uncomment
@@ -26,7 +28,7 @@ public class KitchenManager : MonoBehaviour
         else
             Debug.LogError("Invalid Dish ID: " + currentDishId +
                            ". Make sure the ID is within the range of the dishPrefabs array size.");
-        
+
         // Add button listeners
         playButton.onClick.AddListener(OnPlayClicked);
         if (customizeButton != null)
@@ -41,7 +43,7 @@ public class KitchenManager : MonoBehaviour
     {
         // Use the dishID as the index to get the correct prefab
         GameObject dishPrefab = dishPrefabs[dishID];
-
+        dishNameText.text = dishPrefab.name;
         // Instantiate (create) the prefab in the scene
         Instantiate(dishPrefab, orderWindow.position, Quaternion.identity);
         if (enableDebugLogs) Debug.Log("Successfully loaded dish: " + dishPrefab.name + " (ID: " + dishID + ")");
@@ -60,7 +62,14 @@ public class KitchenManager : MonoBehaviour
 
     private void UpdatePlayButtonState()
     {
-        // Re-enable play button only if no game in progress
+        if (GameManager.Instance == null)
+            Debug.LogError("GameManager.Instance is NULL!");
+        if (playButton == null)
+            Debug.LogError("playButton is NULL!");
+        if (submitButton == null)
+            Debug.LogError("submitButton is NULL!");
+
         playButton.gameObject.SetActive(!GameManager.Instance.IsGameInProgress);
+        submitButton.gameObject.SetActive(GameManager.Instance.IsGameInProgress);
     }
 }

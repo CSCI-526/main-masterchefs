@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1571180572028894149}
   - component: {fileID: 8624562555687650654}
   - component: {fileID: 7525908229889438641}
+  - component: {fileID: 7666354769594600582}
   m_Layer: 0
   m_Name: Cheese_Raw
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
+  cookedResult: {fileID: 0}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &8624562555687650654
@@ -190,3 +192,30 @@ PolygonCollider2D:
       - {x: 0.615, y: -0.31}
       - {x: 0.545, y: -0.19}
   m_UseDelaunayMesh: 0
+--- !u!50 &7666354769594600582
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3041373705656863090}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

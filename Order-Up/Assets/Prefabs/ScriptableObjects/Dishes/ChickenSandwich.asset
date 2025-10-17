@@ -16,7 +16,8 @@ MonoBehaviour:
   ID: 5
   requiredIngredients:
   - {fileID: 11400000, guid: 9d4cd8094de741946a6bf16ed542e0fe, type: 2}
-  - {fileID: 11400000, guid: 66decadd542334f6281aadd193f815d9, type: 2}
+  - {fileID: 11400000, guid: aeb9c400d383d4802b550c647e655eae, type: 2}
   - {fileID: 11400000, guid: 371d236a76e754013a166f4236e31fe6, type: 2}
+  - {fileID: 11400000, guid: 1683158c380e9d9448cb3b02d1bbc8fd, type: 2}
   dishPrefab: {fileID: 5537902939462073213, guid: 4b80324d224924758b18633bfe69f92f, type: 3}
   icon: {fileID: 0}
