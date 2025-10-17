@@ -10,6 +10,7 @@ public class Cookwares : MonoBehaviour, IDropZone
 {
     [Header("Cookware Settings")]
     [SerializeField] private string cookwareName;
+    public CookwareType cookwareType;
     
     [Header("UI References")]
     [SerializeField] private GameObject sliderPanel;
@@ -233,20 +234,60 @@ public class Cookwares : MonoBehaviour, IDropZone
         EnableIngredients();
         
         // Verify ingredients are properly enabled
+        // foreach (GameObject ingredient in ingredientsInside)
+        // {
+        //     if (ingredient != null)
+        //     {
+        //         DraggableIngredient draggable = ingredient.GetComponent<DraggableIngredient>();
+        //         SpriteRenderer sr = ingredient.GetComponent<SpriteRenderer>();
+                
+        //         Debug.Log($"[{cookwareName}] 🍽️ Ingredient {ingredient.name} is now cooked!");
+        //         Debug.Log($"  - DraggableIngredient exists: {draggable != null}");
+        //         Debug.Log($"  - DraggableIngredient enabled: {(draggable != null ? draggable.enabled : false)}");
+        //         Debug.Log($"  - GameObject active: {ingredient.activeSelf}");
+        //         Debug.Log($"  - Color: {(sr != null ? sr.color.ToString() : "No SpriteRenderer")}");
+        //     }
+        // }
+
         foreach (GameObject ingredient in ingredientsInside)
         {
-            if (ingredient != null)
+            if (ingredient == null) continue;
+
+            Ingredient ing = ingredient.GetComponent<Ingredient>();
+
+            if (ing != null)
             {
-                DraggableIngredient draggable = ingredient.GetComponent<DraggableIngredient>();
-                SpriteRenderer sr = ingredient.GetComponent<SpriteRenderer>();
-                
-                Debug.Log($"[{cookwareName}] 🍽️ Ingredient {ingredient.name} is now cooked!");
-                Debug.Log($"  - DraggableIngredient exists: {draggable != null}");
-                Debug.Log($"  - DraggableIngredient enabled: {(draggable != null ? draggable.enabled : false)}");
-                Debug.Log($"  - GameObject active: {ingredient.activeSelf}");
-                Debug.Log($"  - Color: {(sr != null ? sr.color.ToString() : "No SpriteRenderer")}");
+                ing.currentCookware = cookwareType;
+                //change ingredient data
+                if(ing.currentState == IngredientState.Raw)
+                {
+                    ing.CookIngredient();
+                    if (ing.ingredientData.cookedResult != null)
+                    {
+                        ing.ingredientData = ing.ingredientData.cookedResult;
+                    }
+                    Debug.Log($"[{cookwareType}] {ing.ingredientData.ingredientName} is now Cooked!");
+                }
+            else if (ing.currentState == IngredientState.Cooked)
+            { 
+                ing.OvercookIngredient();
+ 
+                if (ing.ingredientData.overcookedResult != null)
+                {
+                    ing.ingredientData = ing.ingredientData.overcookedResult;
+                }
+
+                Debug.Log($"[{cookwareType}] {ing.ingredientData.ingredientName} got Overcooked!");
+            }
+
+
             }
         }
+
+
+
+
+        
         
         UpdateSliderState();
     }
