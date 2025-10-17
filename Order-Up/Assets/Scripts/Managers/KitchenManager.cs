@@ -16,6 +16,7 @@ public class KitchenManager : MonoBehaviour
     [Header("Play/Customize Button")]
     public Button playButton;
     public Button customizeButton;
+    public Button submitButton;
     void Awake()
     {
         // retrieve currentDishId
@@ -62,5 +63,6 @@ public class KitchenManager : MonoBehaviour
     {
         // Re-enable play button only if no game in progress
         playButton.gameObject.SetActive(!GameManager.Instance.IsGameInProgress);
+        submitButton.gameObject.SetActive(GameManager.Instance.IsGameInProgress);
     }
 }
