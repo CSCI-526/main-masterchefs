@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
     // Singleton instance
     public static GameManager Instance { get; private set; }
     public bool IsGameInProgress { get; private set; } = false;
+    public long SessionID { get; private set; }
+    public int CurrentLevel { get; private set; }
     private void Awake()
     {
         // Ensure only one instance exists
@@ -17,6 +21,18 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject); // Make it persistent across scenes
+    }
+    public void StartSession()
+    {
+        SessionID = DateTime.Now.Ticks;
+        CurrentLevel = 1;
+        Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
+    }
+    
+    public void GoToNextLevel()
+    {   
+        Debug.Log($"Advanced to Level: {CurrentLevel}");
+        CurrentLevel++;
     }
 
     // --- SCENE MANAGEMENT ---

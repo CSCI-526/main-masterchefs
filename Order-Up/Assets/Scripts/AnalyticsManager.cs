@@ -4,33 +4,39 @@ using UnityEngine.UI;
 using System;
 using System.Collections;
 
-public class SendToGoogle : MonoBehaviour
-{
+public class AnalyticsManager : MonoBehaviour
+{   
+    public static AnalyticsManager Instance { get; private set; }
     [SerializeField] private string URL;
     private long sessionID;
     private int level;
     private float timeToComplete;
     public Button orderCompleteButton;
 
-
-    private void Awake()
+    public void Awake()
     {
-        sessionID = DateTime.Now.Ticks;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        orderCompleteButton.onClick.AddListener(Send);
-    }
+    // private void Start()
+    // {   
+    //     orderCompleteButton.onClick.AddListener(Send);
+    // }
 
-    private void OnDestroy()
+    // private void OnDestroy()
+    // {
+    //     orderCompleteButton.onClick.RemoveListener(Send);
+    // }
+    public void Send(long sessionID, int level, float timeToComplete)
     {
-        orderCompleteButton.onClick.RemoveListener(Send);
-    }
-    public void Send()
-    {
-        timeToComplete = Timer.Instance.ElapsedSeconds;
-        level = 1; //todo: retrieve current level
+        Debug.Log($"Sending Session: {sessionID}, Level: {level}, Time(s): {timeToComplete}");
         StartCoroutine(Post(sessionID.ToString(), level.ToString(), timeToComplete.ToString()));
     }
 
