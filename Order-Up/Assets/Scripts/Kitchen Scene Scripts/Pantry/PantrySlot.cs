@@ -46,6 +46,7 @@ public class PantrySlot : MonoBehaviour
         // Subscribe to drag events
         draggableComponent.OnStartDrag += OnIngredientStartDrag;
         draggableComponent.OnDroppedOnPlate += OnIngredientDroppedOnPlate;
+        draggableComponent.OnDroppedOnPot += OnIngredientDroppedOnPot;
 
         if (pantry != null && pantry.enableDebugLogs)
         {
@@ -72,6 +73,18 @@ public class PantrySlot : MonoBehaviour
         // Ingredient was successfully placed on a plate
         // Clean up our reference and notify pantry to respawn
         CleanupIngredient();
+
+        if (pantry != null)
+        {
+            pantry.OnIngredientDragged(this);
+        }
+    }
+    
+    void OnIngredientDroppedOnPot(DraggableIngredient ingredient, Pot pot)
+    {
+        // Ingredient was successfully placed on a pot
+        // Clean up our reference and notify pantry to respawn
+        CleanupIngredient();
         
         if (pantry != null)
         {
@@ -85,6 +98,7 @@ public class PantrySlot : MonoBehaviour
         {
             draggableComponent.OnStartDrag -= OnIngredientStartDrag;
             draggableComponent.OnDroppedOnPlate -= OnIngredientDroppedOnPlate;
+            draggableComponent.OnDroppedOnPot -= OnIngredientDroppedOnPot;
         }
 
         currentIngredient = null;

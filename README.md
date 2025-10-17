@@ -3,6 +3,17 @@
 **Order-Up!** is a Unity-based cooking puzzle game currently under development.  
 The project uses **GitHub Actions** for automatic WebGL builds and deployment to **GitHub Pages**, following a structured branching workflow for stable releases and team collaboration.
 
+Key:
+- Bread = pink oval
+- Cheese = orange triangle
+- Chicken = pink hexagon
+- Dough = tan circle
+- Egg = black oval
+- Lettuce = green circle
+- Pasta = small tan diamond
+- Potato = brown oval
+- Tomato = red circle
+
 ---
 
 ## 🧠 Repository Structure

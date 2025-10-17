@@ -82,12 +82,12 @@ SpriteRenderer:
   m_SortingLayerID: 41873933
   m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 2526add8c3507e44a92b469e4a5133df, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: be9708aac700d468e86a71bf17141199, type: 3}
+  m_Color: {r: 0.9339623, g: 0.749983, b: 0.5066305, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -129,10 +129,10 @@ PolygonCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
-    border: {x: 3.55, y: 5.37, z: 2.8899999, w: 5.42}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 20.48, y: 20.48}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.28866667}
+    oldSize: {x: 8.533334, y: 8.533334}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -163,8 +163,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
   dropZoneLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD
+    m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+=======
     m_Bits: 4294967295
+>>>>>>> dave-branch
   dragOffset: 0.1
+  cookedResult: {fileID: 9145703149347527784, guid: 709a4ca62b9a347e4ac9184dd7a5f6bf, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4262880259563109038
