@@ -9,7 +9,9 @@ jobs:
   build:
     name: Build WebGL
     runs-on: ubuntu-latest
-
+    env:
+      UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      
     steps:
       # Step 1: Checkout your Unity project
       - name: Checkout repository
@@ -32,7 +34,7 @@ jobs:
       - name: Build WebGL Player
         uses: game-ci/unity-builder@v4
         with:
-          unityVersion: 2022.3.30f1   # Change this to match your Unity version
+          unityVersion: 6000.2.6f1   # Change this to match your Unity version
           targetPlatform: WebGL
           projectPath: Order-Up       # Folder where your Unity project lives
           buildName: WebGL
