@@ -57,7 +57,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 41873933
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 3625043607559282579, guid: 818a3b94603e7480c89ca494fc3a21ba, type: 3}
   m_Color: {r: 0.8207547, g: 0.7070062, b: 0.53813636, a: 1}
@@ -1204,12 +1204,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  plateLayerMask:
+  dropZoneLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD:Order-Up/Assets/Prefabs/Ingredients/Pasta.prefab
     m_Bits: 8
   potLayerMask:
     serializedVersion: 2
     m_Bits: 64
+=======
+    m_Bits: 4294967295
+>>>>>>> dave-branch:Order-Up/Assets/Prefabs/Ingredients/Pepperoni.prefab
   dragOffset: 0.1
   cookedResult: {fileID: 6234362394180331478, guid: 1a90bc961016c430bad1b9c0ea20f02c, type: 3}
   enableDebugLogs: 0
@@ -1227,3 +1231,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: 356fd3a04109c4e1e8388b95fba5887c, type: 2}
+  currentState: 0
+  currentCookware: 0

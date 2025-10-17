@@ -4042,8 +4042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a43fbd4f6e2f6f4eb6442678e522de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  dish: {fileID: 1398576953}
-  enableDebugLogs: 1
+  plate: {fileID: 0}
 --- !u!58 &1606606576
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4328,9 +4327,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2086967199}
-        m_TargetAssemblyTypeName: RatingSystem, Assembly-CSharp
-        m_MethodName: SubmitDish
+      - m_Target: {fileID: 2086967200}
+        m_TargetAssemblyTypeName: SubmitButton, Assembly-CSharp
+        m_MethodName: OnSubmitClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4468,6 +4467,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &1916789017
+=======
+--- !u!1 &1769870652
+>>>>>>> dave-branch
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4475,23 +4477,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 1916789018}
   - component: {fileID: 1916789020}
   - component: {fileID: 1916789019}
   m_Layer: 5
   m_Name: Title-Pan
+=======
+  - component: {fileID: 1769870653}
+  - component: {fileID: 1769870656}
+  - component: {fileID: 1769870655}
+  - component: {fileID: 1769870654}
+  m_Layer: 5
+  m_Name: Timer
+>>>>>>> dave-branch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!224 &1916789018
+=======
+--- !u!224 &1769870653
+>>>>>>> dave-branch
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1916789017}
+=======
+  m_GameObject: {fileID: 1769870652}
+>>>>>>> dave-branch
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -4499,23 +4518,57 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 467131062}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 47}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916789019
+=======
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &1769870654
+>>>>>>> dave-branch
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1916789017}
+=======
+  m_GameObject: {fileID: 1769870652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8581cba6c170706408d6887ae0e0fd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Timer
+  autoStartOnKitchenScene: 1
+  kitchenSceneName: KitchenScene
+  useUnscaledDeltaTime: 0
+  timerText: {fileID: 1769870655}
+  enableDebugLogs: 0
+--- !u!114 &1769870655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769870652}
+>>>>>>> dave-branch
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
+<<<<<<< HEAD
   m_EditorClassIdentifier: 
+=======
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+>>>>>>> dave-branch
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
@@ -4524,7 +4577,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
+<<<<<<< HEAD
   m_text: 'Pan
+=======
+  m_text: 'Timer
+>>>>>>> dave-branch
 
 '
   m_isRightToLeft: 0
@@ -4535,8 +4592,13 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
+<<<<<<< HEAD
     rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+=======
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+>>>>>>> dave-branch
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4597,13 +4659,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+<<<<<<< HEAD
 --- !u!222 &1916789020
+=======
+--- !u!222 &1769870656
+>>>>>>> dave-branch
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1916789017}
+=======
+  m_GameObject: {fileID: 1769870652}
+>>>>>>> dave-branch
   m_CullTransparentMesh: 1
 --- !u!1 &1931399985
 GameObject:
@@ -5039,6 +5109,7 @@ GameObject:
   - component: {fileID: 2086967196}
   - component: {fileID: 2086967198}
   - component: {fileID: 2086967199}
+  - component: {fileID: 2086967200}
   m_Layer: 0
   m_Name: Kitchen Manager
   m_TagString: Untagged
@@ -5069,6 +5140,7 @@ MonoBehaviour:
   - {fileID: 4283136327410539459, guid: 4193bc1c5fe83431a81e75d96e6ba351, type: 3}
   - {fileID: 5537902939462073213, guid: 248e60387fb674a7dbf9571e3a1f2842, type: 3}
   orderWindow: {fileID: 388210663}
+  enableDebugLogs: 0
 --- !u!4 &2086967197
 Transform:
   m_ObjectHideFlags: 0
@@ -5130,6 +5202,19 @@ MonoBehaviour:
   - {fileID: 1680908844}
   filledStar: {fileID: 7809497162449050188, guid: 09308f565784543e1937636dba6ea35b, type: 3}
   emptyStar: {fileID: 3109289202915743527, guid: 9836803295b754a22b2ed0dc71780ab6, type: 3}
+--- !u!114 &2086967200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086967195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75bcf5cead1dfdf4992d43cebbb256fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SubmitButton
+  ratingSystem: {fileID: 2086967199}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

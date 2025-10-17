@@ -15,6 +15,13 @@ public class RatingSystem : MonoBehaviour
     public Image[] starDisplay = new Image[3];
     public Sprite filledStar;
     public Sprite emptyStar;
+    public TMPro.TextMeshProUGUI averageTimeText;
+    public TMPro.TextMeshProUGUI averageScoreText;
+
+    // Tracking variables
+    private static List<float> completionTimes = new List<float>();
+    private static List<int> starRatings = new List<int>();
+
 
     // compare gameData with the Dish.recipe id to see if it is a match
     // if it is then 3 stars 
@@ -25,11 +32,36 @@ public class RatingSystem : MonoBehaviour
         int stars = CalculateRating();
         Debug.Log("Rating: " + stars + " Stars!");
 
-        // Display visual feedback
+        float timeTaken = Timer.Instance.StopTimer();
+        completionTimes.Add(timeTaken);
+        starRatings.Add(stars);
+
+        UpdateAverageDisplays();
         DisplayEvaluation(stars);
 
-        // Transition back to CustomerScene after a short delay
-        Invoke("TransitionToCustomerScene", 2f);
+        // if the current game id = 2 || 5 || 8 call the average time and score 
+        // to display for 10 seconds before
+        // transitioning to the customer scene
+        if (GameData.currentDishId == 2 || GameData.currentDishId == 5 || GameData.currentDishId == 8)
+        {
+            // for now call the transitiontoCustomerScene deplay for 10 seconds
+            // during this transition, display the average score and average time
+            // via UpdateAverageDisplays()
+            UpdateAverageDisplays();
+            
+            Invoke("TransitionToCustomerScene", 10f);
+        }
+        else
+        {
+            Invoke("TransitionToCustomerScene", 2f);
+        }
+    }
+    
+    void UpdateAverageDisplays()
+    {
+        // TODO: Update the average time after every round
+        // TODO: Update the average score after every round
+        evaluationPanel.SetActive(false);
     }
 
     int CalculateRating()
