@@ -39,31 +39,29 @@ public class RatingSystem : MonoBehaviour
         UpdateAverageDisplays();
         DisplayEvaluation(stars);
 
-        Invoke("TransitionToCustomerScene", 2f);
+        // if the current game id = 2 || 5 || 8 call the average time and score 
+        // to display for 10 seconds before
+        // transitioning to the customer scene
+        if (GameData.currentDishId == 2 || GameData.currentDishId == 5 || GameData.currentDishId == 8)
+        {
+            // for now call the transitiontoCustomerScene deplay for 10 seconds
+            // during this transition, display the average score and average time
+            // via UpdateAverageDisplays()
+            UpdateAverageDisplays();
+            
+            Invoke("TransitionToCustomerScene", 10f);
+        }
+        else
+        {
+            Invoke("TransitionToCustomerScene", 2f);
+        }
     }
     
     void UpdateAverageDisplays()
     {
-        // Calculate average time
-        float avgTime = completionTimes.Average();
-        
-        // Calculate average score
-        float avgScore = (float)starRatings.Average();
-
-        // Update the text displays
-        // Format time as minutes:seconds
-        int minutes = Mathf.FloorToInt(avgTime / 60f);
-        int seconds = Mathf.FloorToInt(avgTime % 60f);
-        averageTimeText.text = $"Average Time: {minutes:00}:{seconds:00}";
-
-        // Format score to 1 decimal place
-        averageScoreText.text = $"Average Stars: {avgScore:F1}";
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[RatingSystem] Average Time: {avgTime:F2}s, Average Score: {avgScore:F2} stars");
-            Debug.Log($"[RatingSystem] Total Orders: {starRatings.Count}");
-        }
+        // TODO: Update the average time after every round
+        // TODO: Update the average score after every round
+        evaluationPanel.SetActive(false);
     }
 
     int CalculateRating()

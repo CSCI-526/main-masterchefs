@@ -7,7 +7,7 @@ public class DraggableIngredient : MonoBehaviour
     public float dragOffset = 0.1f;
 
     [Header("Debug Settings")]
-    public bool enableDebugLogs = true;
+    public bool enableDebugLogs = false;
     public Color hoverColor = Color.yellow;
 
     private Camera mainCamera;
