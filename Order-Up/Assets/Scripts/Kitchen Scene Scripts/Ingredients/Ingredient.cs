@@ -7,11 +7,14 @@ using UnityEditor;
 [ExecuteInEditMode] // Runs in editor without Play
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DraggableIngredient))]
 public class Ingredient : MonoBehaviour
 {
     [Header("Ingredient Settings")]
     public IngredientData ingredientData;
+    public IngredientState currentState = IngredientState.Raw;
+    public CookwareType currentCookware = CookwareType.None;
 
     private PolygonCollider2D polyCollider;
     private SpriteRenderer spriteRenderer;
@@ -81,6 +84,26 @@ public class Ingredient : MonoBehaviour
             gameObject.name = newName;
 
         ResetCollider();
+    }
+
+    // Public API for cookwares interact with ingredients
+    public void CookIngredient()
+    {
+        if(ingredientData.cookedResult != null)
+        {
+            currentState = IngredientState.Cooked;
+            SetSprite(ingredientData.cookedResult.icon, ingredientData.cookedResult.ingredientName);
+        }
+    }
+
+
+        public void OvercookIngredient()
+    {
+        if(ingredientData.overcookedResult != null)
+        {
+            currentState = IngredientState.Overcooked;
+            SetSprite(ingredientData.overcookedResult.icon, ingredientData.overcookedResult.ingredientName);
+        }
     }
 
     public string IngredientName => ingredientData != null ? ingredientData.ingredientName : name;
