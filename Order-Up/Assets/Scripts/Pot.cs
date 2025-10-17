@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using System;
 
 public class Pot : MonoBehaviour
 {
@@ -10,12 +12,12 @@ public class Pot : MonoBehaviour
     public GameObject highlightEffect; // Optional highlight when hovering
     public Color highlightColor;
     public float cookTime = 5f;
-  
+    public Slider stirProgressBar; // For slider 
 
-    //---------------FLAG: dont do draggable ingredients because whatif the food needs to get dragged
-    // for simplicity, dont drag the recipe dish, just click on the trash to delete the food
+    //---------------FLAG: don't do draggable ingredients because what if the food needs to get dragged
+    // for simplicity, don't drag the recipe dish, just click on the trash to delete the food
 
-    private DraggableIngredient ingredientInPot; 
+    private DraggableIngredient ingredientInPot;
     private SpriteRenderer plateRenderer;
     private Color originalColor;
     private Dictionary<DraggableIngredient, float> cookProgress = new Dictionary<DraggableIngredient, float>();
@@ -44,6 +46,9 @@ public class Pot : MonoBehaviour
 
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
+
+        if (stirProgressBar != null)
+            stirProgressBar.value = 0f;
     }
 
     void Update()
@@ -52,12 +57,18 @@ public class Pot : MonoBehaviour
 
         if (isStirring)
         {
-            if (!cookProgress.ContainsKey(ingredientInPot)) return; 
+            if (!cookProgress.ContainsKey(ingredientInPot)) return;
+
             cookProgress[ingredientInPot] += Time.deltaTime * stirMultiplier;
+
+            if (stirProgressBar != null)
+                stirProgressBar.value = cookProgress[ingredientInPot] / cookTime;
 
             if (cookProgress[ingredientInPot] >= cookTime)
             {
                 CookIngredient(ingredientInPot);
+                if (stirProgressBar != null)
+                    stirProgressBar.value = 0f;
             }
         }
     }
@@ -77,15 +88,19 @@ public class Pot : MonoBehaviour
     public bool AddIngredient(DraggableIngredient ingredient)
     {
         // Check if we can add this ingredient
-        if (!CanAddIngredient(ingredient))
-            return false;
+        if (!CanAddIngredient(ingredient)) return false;
+
+        if (ingredientInPot != null) return false;
 
         // Add to our list
         ingredientInPot = ingredient;
         cookProgress[ingredient] = 0f;
         isCooking = true;
 
-        // Parent the ingredient to the pot (optional)
+        if (stirProgressBar != null)
+            stirProgressBar.value = 0f;
+
+        // Parent the ingredient to the pot
         if (ingredientParent != null)
             ingredient.transform.SetParent(ingredientParent);
 
@@ -101,14 +116,16 @@ public class Pot : MonoBehaviour
 
     public bool RemoveIngredient(DraggableIngredient ingredient)
     {
-        if (ingredientInPot == null)
-            return false;
+        if (ingredientInPot == null) return false;
 
         bool wasEmpty = IsEmpty();
 
         ingredientInPot = null;
         cookProgress.Remove(ingredient);
         isCooking = false;
+
+        if (stirProgressBar != null)
+            stirProgressBar.value = 0f;
 
         // Unparent and re-enable dragging
         ingredient.transform.SetParent(null);
@@ -201,7 +218,6 @@ public class Pot : MonoBehaviour
         else if (plateRenderer != null)
             plateRenderer.color = originalColor;
     }
-
 
     //----------------------------------- UTILITITY METHODS -----------------------------------//
     public bool IsFull() => ingredientInPot != null;
