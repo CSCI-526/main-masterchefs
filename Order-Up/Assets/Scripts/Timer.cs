@@ -18,7 +18,7 @@ public class Timer : MonoBehaviour
     public bool autoStartOnKitchenScene = true;
 
     [Tooltip("Scene name that should auto-start the timer when loaded.")]
-    public string kitchenSceneName = "Kitchen";
+    public string kitchenSceneName = "Kitchen 2";
 
     [Tooltip("Use unscaled time so timer ignores timeScale changes (pauses, slow-mo).")]
     public bool useUnscaledDeltaTime = false;
