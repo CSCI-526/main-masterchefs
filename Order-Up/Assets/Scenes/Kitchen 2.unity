@@ -5229,13 +5229,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2138625494}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2138625495}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartSession
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6299,12 +6299,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a5f14e4951194fcaa32e6bc6c92d145, type: 2}
   - {fileID: 11400000, guid: 855fd8e891e2c483c869eb89287398f8, type: 2}
   - {fileID: 11400000, guid: 9c259e246dffa4ffdbec18d1f0ba43e8, type: 2}
+  - {fileID: 11400000, guid: 027194f120c3642f084685112432da4a, type: 2}
   - {fileID: 11400000, guid: f55e904ae5f2142ca83a1d51786a7b02, type: 2}
+  - {fileID: 11400000, guid: 1446eb3989f43414999955cdb0581483, type: 2}
   - {fileID: 11400000, guid: 4079997669e8c46a1b9f350379439142, type: 2}
   - {fileID: 11400000, guid: 11d547bdf82ea40a6bb9489dfa7bc540, type: 2}
   - {fileID: 11400000, guid: d524e37dbc266464d9db1b6cd6373cd1, type: 2}
   - {fileID: 11400000, guid: 52ec23c52d69a42a78c89448e237699c, type: 2}
   - {fileID: 11400000, guid: ff6877cdeb9b347f098e69c4075bbcf5, type: 2}
+  - {fileID: 11400000, guid: 175bfacf141264a8e86422fbb2b0b8e4, type: 2}
   enableDebugLogs: 0
 --- !u!114 &2105213807
 MonoBehaviour:
