@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1941079209474793570}
   - component: {fileID: 7858051381920438281}
   m_Layer: 0
-  m_Name: Cheesy Fries
+  m_Name: Cheese Pizza Done
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,4 +103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e3f79363f2be44e83e923a8d89dbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
-  recipe: {fileID: 11400000, guid: 855fd8e891e2c483c869eb89287398f8, type: 2}
+  recipe: {fileID: 11400000, guid: 9c259e246dffa4ffdbec18d1f0ba43e8, type: 2}

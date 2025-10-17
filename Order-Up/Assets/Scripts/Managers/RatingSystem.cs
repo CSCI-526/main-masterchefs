@@ -36,34 +36,16 @@ public class RatingSystem : MonoBehaviour
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
 
-        UpdateAverageDisplays();
+        // UpdateAverageDisplays();
         DisplayEvaluation(stars);
-
         Invoke("TransitionToCustomerScene", 2f);
     }
     
     void UpdateAverageDisplays()
     {
-        // Calculate average time
-        float avgTime = completionTimes.Average();
-        
-        // Calculate average score
-        float avgScore = (float)starRatings.Average();
-
-        // Update the text displays
-        // Format time as minutes:seconds
-        int minutes = Mathf.FloorToInt(avgTime / 60f);
-        int seconds = Mathf.FloorToInt(avgTime % 60f);
-        averageTimeText.text = $"Average Time: {minutes:00}:{seconds:00}";
-
-        // Format score to 1 decimal place
-        averageScoreText.text = $"Average Stars: {avgScore:F1}";
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[RatingSystem] Average Time: {avgTime:F2}s, Average Score: {avgScore:F2} stars");
-            Debug.Log($"[RatingSystem] Total Orders: {starRatings.Count}");
-        }
+        // TODO: Update the average time after every round
+        // TODO: Update the average score after every round
+        evaluationPanel.SetActive(false);
     }
 
     int CalculateRating()
@@ -71,48 +53,49 @@ public class RatingSystem : MonoBehaviour
         // Get the current dish ID from GameData
         int expectedDishId = GameData.currentDishId;
 
-        if (enableDebugLogs)
-            Debug.Log($"[RatingSystem] Expected Dish ID: {expectedDishId}");
+        // if (enableDebugLogs)
+        //     Debug.Log($"[RatingSystem] Expected Dish ID: {expectedDishId}");
 
-        // Find the dish that was created on the plate
-        GameObject createdDish = FindDishOnPlate();
+        // // Find the dish that was created on the plate
+        // GameObject createdDish = FindDishOnPlate();
 
-        if (createdDish == null)
-        {
-            if (enableDebugLogs)
-                Debug.LogWarning("[RatingSystem] No dish found on plate!");
-            return 1; // No dish = 1 star
-        }
+        // if (createdDish == null)
+        // {
+        //     if (enableDebugLogs)
+        //         Debug.LogWarning("[RatingSystem] No dish found on plate!");
+        //     return 1; // No dish = 1 star
+        // }
 
-        // Get the Dish component and its recipe
-        Dish dishComponent = createdDish.GetComponent<Dish>();
-        if (dishComponent == null || dishComponent.recipe == null)
-        {
-            if (enableDebugLogs)
-                Debug.LogWarning("[RatingSystem] Dish has no Recipe component!");
-            return 1; // No recipe = 1 star
-        }
+        // // Get the Dish component and its recipe
+        // Dish dishComponent = createdDish.GetComponent<Dish>();
+        // if (dishComponent == null || dishComponent.recipe == null)
+        // {
+        //     if (enableDebugLogs)
+        //         Debug.LogWarning("[RatingSystem] Dish has no Recipe component!");
+        //     return 1; // No recipe = 1 star
+        // }
 
-        // Compare IDs
-        string dishRecipeId = dishComponent.recipe.ID;
+        // // Compare IDs
+        // string dishRecipeId = dishComponent.recipe.ID;
 
-        if (enableDebugLogs)
-            Debug.Log($"[RatingSystem] Created Dish ID: {dishRecipeId}, Expected: {expectedDishId}");
+        // if (enableDebugLogs)
+        //     Debug.Log($"[RatingSystem] Created Dish ID: {dishRecipeId}, Expected: {expectedDishId}");
 
-        // Check if the dish ID matches the expected ID
-        // Convert expected ID to string for comparison (assuming Recipe.ID is string)
-        if (dishRecipeId == expectedDishId.ToString())
-        {
-            if (enableDebugLogs)
-                Debug.Log("[RatingSystem] Perfect match! 3 stars!");
-            return 3; // Perfect match = 3 stars
-        }
-        else
-        {
-            if (enableDebugLogs)
-                Debug.Log("[RatingSystem] Wrong dish! 1 star.");
-            return 1; // Wrong dish = 1 star
-        }
+        // // Check if the dish ID matches the expected ID
+        // // Convert expected ID to string for comparison (assuming Recipe.ID is string)
+        // if (dishRecipeId == expectedDishId.ToString())
+        // {
+        //     if (enableDebugLogs)
+        //         Debug.Log("[RatingSystem] Perfect match! 3 stars!");
+        //     return 3; // Perfect match = 3 stars
+        // }
+        // else
+        // {
+        //     if (enableDebugLogs)
+        //         Debug.Log("[RatingSystem] Wrong dish! 1 star.");
+        //     return 1; // Wrong dish = 1 star
+        // }
+        return 3;
     }
 
     GameObject FindDishOnPlate()

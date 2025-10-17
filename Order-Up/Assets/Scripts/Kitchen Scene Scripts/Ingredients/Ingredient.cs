@@ -7,6 +7,7 @@ using UnityEditor;
 [ExecuteInEditMode] // Runs in editor without Play
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(DraggableIngredient))]
 public class Ingredient : MonoBehaviour
 {

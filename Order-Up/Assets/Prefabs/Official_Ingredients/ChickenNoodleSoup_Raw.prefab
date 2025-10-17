@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2642706157516231807}
   - component: {fileID: 2155390468507035687}
   - component: {fileID: 6433463896962595822}
+  - component: {fileID: 994551441977013479}
   m_Layer: 0
   m_Name: ChickenNoodleSoup_Raw
   m_TagString: Untagged
@@ -109,6 +110,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
+  cookedResult: {fileID: 0}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2155390468507035687
@@ -190,3 +192,30 @@ PolygonCollider2D:
       - {x: 0.615, y: -0.31}
       - {x: 0.545, y: -0.19}
   m_UseDelaunayMesh: 0
+--- !u!50 &994551441977013479
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067546338238620997}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

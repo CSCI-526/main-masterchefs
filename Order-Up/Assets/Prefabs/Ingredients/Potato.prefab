@@ -57,7 +57,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -79,15 +79,15 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 41873933
+  m_SortingLayer: 2
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 1392620ff6b49f94da7e6a9228fc0dac, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
+  m_Color: {r: 0.7735849, g: 0.53877425, b: 0.31016377, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -131,8 +131,8 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 20.48, y: 20.48}
+    oldSize: {x: 8.533334, y: 17.066668}
+    newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -609,8 +609,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
   dropZoneLayerMask:
     serializedVersion: 2
+<<<<<<< HEAD
+    m_Bits: 8
+  potLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+=======
     m_Bits: 4294967295
+>>>>>>> dave-branch
   dragOffset: 0.1
+  cookedResult: {fileID: 6690192005403807941, guid: 51c2e0194ee40436697e3c9f7fc270a7, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4313088342142861366

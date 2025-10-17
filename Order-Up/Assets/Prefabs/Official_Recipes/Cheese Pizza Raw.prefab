@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5437214523277798847}
   - component: {fileID: 2181744005581183404}
   m_Layer: 0
-  m_Name: Chicken Noodle Soup_Raw
+  m_Name: Cheese Pizza Raw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: 3342090361184808959, guid: 824c8743d5bc245a29fe6277a19e413f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8431373, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,4 +103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e3f79363f2be44e83e923a8d89dbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
-  recipe: {fileID: 11400000, guid: 175bfacf141264a8e86422fbb2b0b8e4, type: 2}
+  recipe: {fileID: 11400000, guid: 027194f120c3642f084685112432da4a, type: 2}
