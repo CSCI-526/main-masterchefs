@@ -5,12 +5,16 @@ public class CookwareMaintenance : MonoBehaviour
     [Header("Dirt Settings")]
     [SerializeField] private int maxDirtLevel = 5;
     [SerializeField] private Color cleanColor = Color.white;
-    [SerializeField] private Color dirtyColor = new Color(0.3f, 0.2f, 0.1f); // Dark brown
+
+    // Dark brown
+    [SerializeField] private Color dirtyColor = new Color(0.3f, 0.2f, 0.1f); 
 
     [Header("References")]
     [SerializeField] private Renderer cookwareRenderer;
-    [SerializeField] private string materialColorProperty = "_Color"; // Or "_BaseColor" for URP
-    [SerializeField] private TrashBin trashBin; // Reference to trash bin
+    [SerializeField] private string materialColorProperty = "_Color";
+
+    // Reference to trash bin
+    [SerializeField] private TrashBin trashBin; 
 
     private int currentDirtLevel = 0;
     private Material cookwareMaterial;
@@ -52,10 +56,8 @@ public class CookwareMaintenance : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// Call this method when adding items to the cookware
     /// Color gets progressively darker with each item
-    /// </summary>
     public void AddDirt(int amount = 1)
     {
         currentDirtLevel = Mathf.Min(currentDirtLevel + amount, maxDirtLevel);
@@ -64,10 +66,8 @@ public class CookwareMaintenance : MonoBehaviour
         Debug.Log($"{gameObject.name} dirt level: {currentDirtLevel}/{maxDirtLevel}");
     }
 
-    /// <summary>
     /// Call this when items are removed from cookware
     /// Color stays dirty until player presses C to clean
-    /// </summary>
     public void RemoveItem()
     {
         // Color does NOT change when removing items
@@ -75,11 +75,9 @@ public class CookwareMaintenance : MonoBehaviour
         Debug.Log($"{gameObject.name} item removed, but still dirty (Level: {currentDirtLevel})");
     }
 
-    /// <summary>
     /// Fully clean the cookware - press C
     /// Returns color to completely clean state
     /// Transfers dirt to trash bin
-    /// </summary>
     public void CleanCookware()
     {
         if (isDirty && currentDirtLevel > 0)
@@ -109,9 +107,7 @@ public class CookwareMaintenance : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// Update the visual appearance based on dirt level
-    /// </summary>
     private void UpdateCookwareColor()
     {
         if (cookwareMaterial == null) return;
@@ -130,48 +126,35 @@ public class CookwareMaintenance : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// Get current dirt level
-    /// </summary>
     public int GetDirtLevel()
     {
         return currentDirtLevel;
     }
 
-    /// <summary>
     /// Check if cookware is dirty
-    /// </summary>
     public bool IsDirty()
     {
         return isDirty;
     }
 
-    /// <summary>
     /// Check if cookware is at maximum dirt
-    /// </summary>
     public bool IsMaxDirty()
     {
         return currentDirtLevel >= maxDirtLevel;
     }
 
-    /// <summary>
     /// Check if cookware is clean
-    /// </summary>
     public bool IsClean()
     {
         return !isDirty && currentDirtLevel == 0;
     }
 
-    // Optional: Visualize dirt level in Scene view
     void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
 
         Gizmos.color = isDirty ? Color.red : Color.green;
         Vector3 pos = transform.position + Vector3.up * 2f;
-
-#if UNITY_EDITOR
-        UnityEditor.Handles.Label(pos, $"Dirt: {currentDirtLevel}/{maxDirtLevel} {(isDirty ? "DIRTY" : "CLEAN")}");
-#endif
     }
 }

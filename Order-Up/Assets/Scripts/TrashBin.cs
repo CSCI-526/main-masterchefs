@@ -1,20 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI; // Add this for UI
-using TMPro; // Add this for TextMeshPro
+using UnityEngine.UI;
+using TMPro;
 
 public class TrashBin : MonoBehaviour
 {
     [Header("Trash Bin Settings")]
-    [SerializeField] private int maxCapacity = 20;
     [SerializeField] private Color emptyColor = Color.white;
     [SerializeField] private Color fullColor = new Color(0.2f, 0.2f, 0.2f); // Dark gray
 
     [Header("References")]
-    [SerializeField] private Image trashBinImage; // For UI Image
-    [SerializeField] private Renderer trashBinRenderer; // For Sprite Renderer
+    [SerializeField] private Image trashBinImage; 
+    [SerializeField] private Renderer trashBinRenderer; 
     [SerializeField] private string materialColorProperty = "_Color";
-    [SerializeField] private TextMeshProUGUI statusText; // For "I am full!" message
-    [SerializeField] private Text legacyStatusText; // For legacy UI Text (if using old UI system)
 
     private int currentTrashLevel = 0;
     private Material trashBinMaterial;
@@ -50,57 +47,53 @@ public class TrashBin : MonoBehaviour
                 Debug.LogError("No Image or Renderer found on " + gameObject.name);
             }
         }
-
-        // Hide status text at start
-        UpdateStatusText();
     }
 
-    /// <summary>
+    void Update()
+    {
+        // Press C to reset trash bin color to original
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ResetColor();
+        }
+    }
+
     /// Add trash to the bin (called when cleaning cookware)
-    /// </summary>
+    /// Unlimited capacity
     public bool AddTrash(int amount)
     {
-        // Check if trash bin is full
-        if (currentTrashLevel >= maxCapacity)
-        {
-            Debug.Log("I am full!");
-            UpdateStatusText(); // Update UI
-            return false;
-        }
-
-        // Add trash and update color
-        currentTrashLevel = Mathf.Min(currentTrashLevel + amount, maxCapacity);
+        // Add trash and update color (unlimited capacity)
+        currentTrashLevel += amount;
         UpdateTrashBinColor();
-        UpdateStatusText(); // Update UI
-        Debug.Log($"Trash bin: {currentTrashLevel}/{maxCapacity}");
-
-        // Check if just became full
-        if (currentTrashLevel >= maxCapacity)
-        {
-            Debug.Log("I am full!");
-        }
+        Debug.Log($"Trash bin: {currentTrashLevel} items");
 
         return true;
     }
 
-    /// <summary>
+
     /// Empty the trash bin
-    /// </summary>
     public void EmptyTrash()
     {
         currentTrashLevel = 0;
         UpdateTrashBinColor();
-        UpdateStatusText(); // Update UI
         Debug.Log("Trash bin emptied!");
     }
 
-    /// <summary>
+    /// Reset the trash bin color back to original (empty color)
+    public void ResetColor()
+    {
+        currentTrashLevel = 0;
+        UpdateTrashBinColor();
+        Debug.Log("Trash bin color reset to original!");
+    }
+
     /// Update trash bin color based on fill level
-    /// </summary>
+    /// Uses a logarithmic scale so color changes more gradually
     private void UpdateTrashBinColor()
     {
-        // Calculate fill percentage (0 = empty, 1 = full)
-        float fillPercentage = (float)currentTrashLevel / maxCapacity;
+        // Use logarithmic scale for unlimited capacity
+        // This prevents the color from getting too dark too quickly
+        float fillPercentage = Mathf.Clamp01(Mathf.Log(currentTrashLevel + 1) / 5f);
 
         // Lerp between empty and full color
         Color targetColor = Color.Lerp(emptyColor, fullColor, fillPercentage);
@@ -118,73 +111,29 @@ public class TrashBin : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Update status text to show "I am full!" or capacity
-    /// </summary>
-    private void UpdateStatusText()
-    {
-        string message = "";
-
-        if (currentTrashLevel >= maxCapacity)
-        {
-            message = "I am full!";
-        }
-        else if (currentTrashLevel > maxCapacity * 0.75f)
-        {
-            message = $"Almost full! ({currentTrashLevel}/{maxCapacity})";
-        }
-        else
-        {
-            message = ""; // Hide text when not full
-        }
-
-        // Update TextMeshPro
-        if (statusText != null)
-        {
-            statusText.text = message;
-        }
-
-        // Update legacy Text
-        if (legacyStatusText != null)
-        {
-            legacyStatusText.text = message;
-        }
-    }
-
-    /// <summary>
-    /// Check if trash bin is full
-    /// </summary>
+    /// Check if trash bin is full (always false for unlimited capacity)
     public bool IsFull()
     {
-        return currentTrashLevel >= maxCapacity;
+        return false;
     }
 
-    /// <summary>
     /// Get current trash level
-    /// </summary>
     public int GetTrashLevel()
     {
         return currentTrashLevel;
     }
 
-    /// <summary>
-    /// Get remaining capacity
-    /// </summary>
+    /// Get remaining capacity (unlimited)
     public int GetRemainingCapacity()
     {
-        return maxCapacity - currentTrashLevel;
+        return int.MaxValue;
     }
 
-    // Optional: Visualize trash level in Scene view
     void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
 
-        Gizmos.color = IsFull() ? Color.red : Color.yellow;
+        Gizmos.color = Color.yellow;
         Vector3 pos = transform.position + Vector3.up * 2f;
-
-#if UNITY_EDITOR
-        UnityEditor.Handles.Label(pos, $"Trash: {currentTrashLevel}/{maxCapacity}");
-#endif
     }
 }
