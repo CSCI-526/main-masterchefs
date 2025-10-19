@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
     public void GoToKitchen()
     {
         // Load Kitchen scene
-        SceneManager.LoadScene("Kitchen 2");
+        SceneManager.LoadScene("KitchenScene");
     }
 
     public void EndGame()
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         IsGameInProgress = false;
         GameData.ResetGameData();
         Debug.Log("Game Over!");
-        SceneManager.LoadScene("Kitchen 2");
+        SceneManager.LoadScene("KitchenScene");
     }
     // e.g., player progress, score tracking, etc.
 }

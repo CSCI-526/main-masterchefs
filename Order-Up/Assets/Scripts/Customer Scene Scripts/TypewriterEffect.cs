@@ -90,7 +90,7 @@ public class TypewriterEffect : MonoBehaviour
     public void GoToKitchen()
     {
         GameData.currentDishId = currentDialogue.dishId;
-        SceneManager.LoadScene("Kitchen 2");
+        SceneManager.LoadScene("KitchenScene");
         Debug.Log("dishid:" + GameData.currentDishId);
     }
 
