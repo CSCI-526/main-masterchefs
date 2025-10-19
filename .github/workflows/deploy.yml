@@ -36,6 +36,9 @@ jobs:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
           customImage: unityci/editor:ubuntu-6000.2.6f1-webgl-3
+          buildScenes: |
+            Assets/Scenes/KitchenScene.unity
+            Assets/Scenes/CustomerScene.unity
 
       # Step 4: Upload build output as artifact (optional)
       - name: Upload WebGL artifact
