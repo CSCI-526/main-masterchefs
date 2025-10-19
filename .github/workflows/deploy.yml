@@ -1,64 +1,72 @@
-name: Build and Deploy WebGL to GitHub Pages
+name: Build and Deploy Unity WebGL
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Build WebGL
+    name: Build Unity WebGL
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
+      # Step 1: Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Cache the Unity library folder (optional but speeds up builds)
-      - name: Cache Unity Library
-        uses: actions/cache@v3
+      # Step 2: Cache Unity Library (optional but speeds up builds)
+      - name: Cache Library
+        uses: actions/cache@v4
         with:
-          path: Order-Up/Library
-          key: Library-${{ runner.os }}-${{ hashFiles('Order-Up/Assets/**', 'Order-Up/Packages/**', 'Order-Up/ProjectSettings/**') }}
+          path: Library
+          key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
           restore-keys: |
             Library-${{ runner.os }}-
 
-      # Run Unity build
-      - name: Build project for WebGL
+      # Step 3: Build Unity project
+      - name: Build Unity project for WebGL
         uses: game-ci/unity-builder@v4
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
         with:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
-          projectPath: Order-Up
-          buildName: WebGL
-          buildsPath: build
-          versioning: Semantic
 
-      - name: Upload WebGL build artifact
+      # Step 4: Upload build output as artifact (optional)
+      - name: Upload WebGL artifact
         uses: actions/upload-artifact@v4
         with:
           name: WebGL-Build
           path: build/WebGL
 
   deploy:
-    name: Deploy WebGL to GitHub Pages
+    name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required for pushing to gh-pages
+
     steps:
+      # Step 1: Checkout repo again
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download WebGL build artifact
+      # Step 2: Download build artifact from previous job
+      - name: Download WebGL build
         uses: actions/download-artifact@v4
         with:
           name: WebGL-Build
           path: build/WebGL
 
+      # Step 3: Deploy to gh-pages branch
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/WebGL
+          publish_dir: ./build/WebGL
+          publish_branch: gh-pages
+          force_orphan: true
