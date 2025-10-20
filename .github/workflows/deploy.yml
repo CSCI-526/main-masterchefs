@@ -18,7 +18,7 @@ jobs:
 
       # Step 1.2: Show EditorBuildSettings.asset for debugging
       - name: Show EditorBuildSettings.asset
-        run: cat ./ProjectSettings/EditorBuildSettings.asset
+        run: cat ./Order-Up/ProjectSettings/EditorBuildSettings.asset
 
       # Step 2: Cache Unity Library (optional but speeds up builds)
       - name: Cache Library
