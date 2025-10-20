@@ -70,5 +70,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/WebGL
-          publish_branch: gh-pages
+          publish_branch: gh-page
           force_orphan: true
