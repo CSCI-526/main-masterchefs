@@ -16,14 +16,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Cache Unity Library (optional but speeds up builds)
-      - name: Cache Library
-        uses: actions/cache@v4
-        with:
-          path: Library
-          key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
-          restore-keys: |
-            Library-${{ runner.os }}-
+      # # Step 2: Cache Unity Library (optional but speeds up builds)
+      # - name: Cache Library
+      #   uses: actions/cache@v4
+      #   with:
+      #     path: Library
+      #     key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
+      #     restore-keys: |
+      #       Library-${{ runner.os }}-
 
       # Step 3: Build Unity project
       - name: Build Unity project for WebGL
@@ -36,9 +36,6 @@ jobs:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
           customImage: unityci/editor:ubuntu-6000.2.6f1-webgl-3
-          buildScenes: |
-            Assets/Scenes/KitchenScene.unity
-            Assets/Scenes/CustomerScene.unity
 
       # Step 4: Upload build output as artifact (optional)
       - name: Upload WebGL artifact
