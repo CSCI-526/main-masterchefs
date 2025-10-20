@@ -16,10 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 1.2: Show EditorBuildSettings.asset for debugging
-      - name: Show EditorBuildSettings.asset
-        run: cat ./Order-Up/ProjectSettings/EditorBuildSettings.asset
-
       # Step 2: Cache Unity Library (optional but speeds up builds)
       - name: Cache Library
         uses: actions/cache@v4
@@ -40,6 +36,7 @@ jobs:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
           customImage: unityci/editor:ubuntu-6000.2.6f1-webgl-3
+          projectPath: ./Order-Up
 
       # Step 4: Upload build output as artifact (optional)
       - name: Upload WebGL artifact
