@@ -16,14 +16,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # # Step 2: Cache Unity Library (optional but speeds up builds)
-      # - name: Cache Library
-      #   uses: actions/cache@v4
-      #   with:
-      #     path: Library
-      #     key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
-      #     restore-keys: |
-      #       Library-${{ runner.os }}-
+      # Step 1.2: Show EditorBuildSettings.asset for debugging
+      - name: Show EditorBuildSettings.asset
+        run: cat ./ProjectSettings/EditorBuildSettings.asset
+
+      # Step 2: Cache Unity Library (optional but speeds up builds)
+      - name: Cache Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
+          restore-keys: |
+            Library-${{ runner.os }}-
 
       # Step 3: Build Unity project
       - name: Build Unity project for WebGL
