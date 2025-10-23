@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1510993249801507395}
   - component: {fileID: 9145703149347527784}
   - component: {fileID: 4262880259563109038}
+  - component: {fileID: 3354250131017455306}
   m_Layer: 0
   m_Name: Cheese Cooked
   m_TagString: Untagged
@@ -161,13 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
-  plateLayerMask:
+  dropZoneLayerMask:
     serializedVersion: 2
-    m_Bits: 8
-  potLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
   dragOffset: 0.1
+  cookedResult: {fileID: 0}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &4262880259563109038
@@ -183,3 +182,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: b7f7a2c8ff2d846d8a2f235b2e1db1b5, type: 2}
+  currentState: 0
+  currentCookware: 0
+--- !u!50 &3354250131017455306
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5019135914713170762}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
