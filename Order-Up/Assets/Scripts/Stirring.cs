@@ -10,7 +10,7 @@ public class Stirring : MonoBehaviour
 
     private Vector3 lastMousePosition;
     private float stirIntensity = 0f;
-    private Pot potBelow;
+    private oldPot potBelow;
 
     private bool isDragging = false;
     private Camera mainCamera;
@@ -40,7 +40,7 @@ public class Stirring : MonoBehaviour
         Collider2D hit = Physics2D.OverlapPoint(mouseWorld, cookwareLayer); // Check if spoon is moving over object 
         if (hit != null)
         {
-            Pot cookware = hit.GetComponent<Pot>();
+            oldPot cookware = hit.GetComponent<oldPot>();
             if (cookware != null)
             {
                 potBelow = cookware;
@@ -77,7 +77,7 @@ public class Stirring : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Pot cookware = other.GetComponent<Pot>();  // To check if spoon is colliding with pot
+        oldPot cookware = other.GetComponent<oldPot>();  // To check if spoon is colliding with pot
         if (cookware != null)
         {
             potBelow = cookware;
@@ -87,7 +87,7 @@ public class Stirring : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        Pot cookware = other.GetComponent<Pot>(); // To check if spoon leaves pot
+        oldPot cookware = other.GetComponent<oldPot>(); // To check if spoon leaves pot
         if (cookware != null && cookware == potBelow)
         {
             potBelow.StopStirring();
