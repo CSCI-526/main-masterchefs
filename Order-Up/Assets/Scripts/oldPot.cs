@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System;
 
-public class Pot : MonoBehaviour
+public class oldPot : MonoBehaviour
 {
     [Header("Pot Settings")]
     public Transform ingredientParent; // Where ingredients will be parented (optional)
