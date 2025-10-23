@@ -36,6 +36,7 @@ jobs:
           unityVersion: 6000.2.6f1
           targetPlatform: WebGL
           customImage: unityci/editor:ubuntu-6000.2.6f1-webgl-3
+          customParameters: -executeMethod WebGLBuildSettings.DisableCompression
           projectPath: ./Order-Up
 
       # Step 4: Upload build output as artifact (optional)
