@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Spoon : MonoBehaviour
+public class PanSpoon : MonoBehaviour
 {
     public LayerMask cookwareLayer;
     public float stirSensitivity = 1.5f;
@@ -9,7 +9,7 @@ public class Spoon : MonoBehaviour
     private bool isDragging = false;
     private Camera mainCamera;
     private Vector3 mouseOffset;
-    private Pot potBelow;
+    private Pan panBelow;
     private float stirIntensity = 0f;
 
     void Start()
@@ -34,26 +34,26 @@ public class Spoon : MonoBehaviour
         Collider2D hit = Physics2D.OverlapPoint(mouseWorld, cookwareLayer); // Check if spoon is moving over object 
         if (hit != null)
         {
-            Pot cookware = hit.GetComponent<Pot>();
+            Pan cookware = hit.GetComponent<Pan>();
             if (cookware != null)
             {
-                potBelow = cookware;
-                
+                panBelow = cookware;
+
                 if (stirIntensity > 0.05f)
                 {
-                    potBelow.StartStirring();
+                    panBelow.StartStirring();
                 }
-          
+
             }
         }
         else
         {
-            if (potBelow != null)
+            if (panBelow != null)
             {
-                potBelow.StopStirring();
+                panBelow.StopStirring();
             }
-            potBelow = null;
-            
+            panBelow = null;
+
         }
         lastMousePosition = mouseWorld;
     }
@@ -73,30 +73,30 @@ public class Spoon : MonoBehaviour
         // Stop dragging when mouse released
         isDragging = false;
         stirIntensity = 0f; // Reset stirring intensity if spoon stops moving 
-        if (potBelow != null)
-        {
-            potBelow.StopStirring();
-        }
 
+        if (panBelow != null)
+        {
+            panBelow.StopStirring();
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        Pot cookware = other.GetComponent<Pot>();  // To check if spoon is colliding with pot
+        Pan cookware = other.GetComponent<Pan>();  // To check if spoon is colliding with pan
         if (cookware != null)
         {
-            potBelow = cookware;
+            panBelow = cookware;
             Debug.Log($"[{gameObject.name}] Entered cookware {cookware.name}");
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        Pot cookware = other.GetComponent<Pot>(); // To check if spoon leaves pot
-        if (cookware != null && cookware == potBelow)
+        Pan cookware = other.GetComponent<Pan>(); // To check if spoon leaves pan
+        if (cookware != null && cookware == panBelow)
         {
-            potBelow = null;
+            panBelow = null;
             Debug.Log($"[{gameObject.name}] Left cookware {cookware.name}");
-            
-                
+
+
         }
     }
 }
