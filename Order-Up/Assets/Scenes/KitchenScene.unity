@@ -1689,7 +1689,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   autoStartOnKitchenScene: 1
-  kitchenSceneName: Kitchen 2
+  kitchenSceneName: KitchenScene
   useUnscaledDeltaTime: 0
   timerText: {fileID: 615152722}
   enableDebugLogs: 0
