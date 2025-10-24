@@ -9,8 +9,11 @@ public static class GameData
 
     public static void ResetGameData()
     {
-        currentDishId = -1;
-        currentLevel = 0;
+        //currentDishId = -1;
+        //currentLevel = 0;
+
+        currentDishId = 0;  
+        currentLevel = 1;   
         Debug.Log("[GameData] Game data reset.");
     }
 

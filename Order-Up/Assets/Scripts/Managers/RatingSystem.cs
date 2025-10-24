@@ -27,6 +27,21 @@ public class RatingSystem : MonoBehaviour
     // if it is then 3 stars 
     // if not 1 stars
 
+    //public void SubmitDish()
+    //{
+    //    int stars = CalculateRating();
+    //    Debug.Log("Rating: " + stars + " Stars!");
+
+    //    float timeTaken = Timer.Instance.StopTimer();
+    //    completionTimes.Add(timeTaken);
+    //    starRatings.Add(stars);
+
+    //    // UpdateAverageDisplays();
+    //    DisplayEvaluation(stars);
+    //    Invoke("TransitionToCustomerScene", 2f);
+    //}
+
+
     public void SubmitDish()
     {
         int stars = CalculateRating();
@@ -38,9 +53,24 @@ public class RatingSystem : MonoBehaviour
 
         // UpdateAverageDisplays();
         DisplayEvaluation(stars);
+
+        // Only progress to next challenge if player got 3 stars
+        if (stars == 3)
+        {
+            GameData.currentDishId++;
+            GameData.CheckAndIncrementLevel();
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Perfect! Moving to next dish. Current dish ID: {GameData.currentDishId}");
+        }
+        else
+        {
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Less than 3 stars. Retry same dish. Current dish ID: {GameData.currentDishId}");
+        }
+
         Invoke("TransitionToCustomerScene", 2f);
     }
-    
+
     void UpdateAverageDisplays()
     {
         // TODO: Update the average time after every round
