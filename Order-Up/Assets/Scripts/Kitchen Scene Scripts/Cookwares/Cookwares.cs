@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using System;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PolygonCollider2D))]
@@ -33,6 +34,8 @@ public class Cookwares : MonoBehaviour, IDropZone
     private PolygonCollider2D polygonCollider;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb2D;
+    public System.Action<DraggableIngredient> OnItemDropped;
+    public System.Action OnCookwareClicked;
     
     void Start()
     {
@@ -97,6 +100,7 @@ public class Cookwares : MonoBehaviour, IDropZone
     
     void OnMouseDown()
     {
+        OnCookwareClicked?.Invoke();
         if (sliderPanel != null)
         {
             sliderPanel.SetActive(!sliderPanel.activeSelf);
@@ -122,7 +126,9 @@ public class Cookwares : MonoBehaviour, IDropZone
             if (!ingredientsInside.Contains(other.gameObject))
             {
                 ingredientsInside.Add(other.gameObject);
-                
+
+                OnItemDropped?.Invoke(draggable);
+
                 // Keep ingredient draggable when it enters (unless cooking)
                 if (!isCooking)
                 {

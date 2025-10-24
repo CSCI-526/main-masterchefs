@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Manages pantry slots that spawn unlimited ingredients.
@@ -18,6 +19,8 @@ public class PantryIngredient : MonoBehaviour
     private GameObject currentIngredient;
     private DraggableIngredient draggableComponent;
     private Vector3 slotPosition;
+
+    public System.Action<DraggableIngredient> OnPantryIngredientDragged;
 
     void Start()
     {
@@ -85,6 +88,8 @@ public class PantryIngredient : MonoBehaviour
 
         if (enableDebugLogs)
             Debug.Log($"[Pantry:{name}] Ingredient started dragging");
+            
+        OnPantryIngredientDragged?.Invoke(ingredient);
     }
 
     void OnIngredientDroppedOnPlate(DraggableIngredient ingredient, Plate plate)
