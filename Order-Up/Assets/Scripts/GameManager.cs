@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
     public bool IsGameInProgress { get; private set; } = false;
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
+ 
+
+    //Control tuitorial
+    [SerializeField] private GameObject tutorialPanelPrefab;
+    private GameObject tutorialInstance;
+
     private void Awake()
     {
         // Ensure only one instance exists
@@ -22,11 +28,20 @@ public class GameManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject); // Make it persistent across scenes
     }
+
+
     public void StartSession()
     {
         SessionID = DateTime.Now.Ticks;
-        CurrentLevel = 1;
+        CurrentLevel = 1; 
         Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
+
+        //instantiate tutorialPanel on level 1
+        if (CurrentLevel == 1 && tutorialPanelPrefab != null && tutorialInstance == null)
+        {
+            tutorialInstance = Instantiate(tutorialPanelPrefab);
+            DontDestroyOnLoad(tutorialInstance);
+        }
     }
     
     public void GoToNextLevel()
@@ -34,6 +49,39 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Advanced to Level: {CurrentLevel}");
         CurrentLevel++;
     }
+
+    // Only show tutorial on level 1 and in the kitchen scene
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    { 
+        if (tutorialInstance == null) return;
+ 
+        if (CurrentLevel == 1)
+        {
+            if (scene.name == "KitchenScene")
+            {
+                tutorialInstance.SetActive(true);
+            }
+            else
+            {
+                tutorialInstance.SetActive(false);
+            }
+        }
+        else
+        {
+            tutorialInstance.SetActive(false);
+        }
+    }
+ 
 
     // --- SCENE MANAGEMENT ---
     public void StartGame()
@@ -51,7 +99,7 @@ public class GameManager : MonoBehaviour
         // Load Kitchen scene
         SceneManager.LoadScene("KitchenScene");
     }
-
+ 
     public void EndGame()
     {
         // Handle game end logic

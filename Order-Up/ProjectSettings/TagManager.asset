@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ingredient
+  - Fryer
+  - SubmitButton
+  - TrashButton
+  - PlayButton
+  - Potato
+  - Plate
   layers:
   - Default
   - TransparentFX
