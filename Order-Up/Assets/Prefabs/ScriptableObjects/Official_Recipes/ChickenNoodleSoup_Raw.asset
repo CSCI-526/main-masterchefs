@@ -15,8 +15,11 @@ MonoBehaviour:
   dishName: Chicken Noodle Soup_Raw
   ID: 8
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: e3c9824ae37c74c77997afb07c306dda, type: 2}
-    requiredState: 1
-    requiredCookware: 2
+  - ingredient: {fileID: 11400000, guid: 0f1029261c49049539992e58df6c7658, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+  - ingredient: {fileID: 11400000, guid: ff08345f8d22d41d78f601be5920d22e, type: 2}
+    requiredState: 0
+    requiredCookware: 0
   dishPrefab: {fileID: 4067546338238620997, guid: 44ea6073b18e2450d9fe93d940ed1686, type: 3}
   icon: {fileID: 3342090361184808959, guid: 824c8743d5bc245a29fe6277a19e413f, type: 3}

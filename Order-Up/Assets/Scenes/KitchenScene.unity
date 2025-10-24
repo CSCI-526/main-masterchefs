@@ -5853,7 +5853,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RatingSystem
   plateTransform: {fileID: 1616915303}
-  enableDebugLogs: 0
+  enableDebugLogs: 1
   evaluationPanel: {fileID: 272241942}
   evaluationResults: {fileID: 2105497272}
   starDisplay:
