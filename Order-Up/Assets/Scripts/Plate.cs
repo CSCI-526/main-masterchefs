@@ -196,6 +196,12 @@ public class Plate : MonoBehaviour, IDropZone
         {
             RemoveIngredient(ingredientsOnPlate[0]);
         }
+
+        // remove every child under plate, even if they aren't ingredients
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public List<string> GetIngredientNames()
