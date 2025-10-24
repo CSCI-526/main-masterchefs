@@ -4,7 +4,7 @@
       "id": 1,
       "dishId": 0,
       "dishName": "French Fries",
-      "sentenceTemplate": "Ugh, I just need something crispy and salty right now... can you make me some {dish}?",
+      "sentenceTemplate": "Ugh, I just need something crispy right now... can you make me some {dish} with TWO potatos?",
       "color": "orange",
       "image": "dish"
     },
