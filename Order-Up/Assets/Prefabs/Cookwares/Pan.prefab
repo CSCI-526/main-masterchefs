@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6934007558376742196}
   - component: {fileID: 4436756005626162914}
   - component: {fileID: 3655311659805228808}
+  - component: {fileID: -2773114622957947469}
   m_Layer: 5
   m_Name: Pan
   m_TagString: Untagged
@@ -76,6 +77,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-2773114622957947469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427088447033119535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da924befc3452d8d8481dc301498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookwareMaintenance
+  maxDirtLevel: 5
+  cleanColor: {r: 1, g: 1, b: 1, a: 1}
+  dirtyColor: {r: 0.3, g: 0.2, b: 0.1, a: 1}
+  meshRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  uiImage: {fileID: 3655311659805228808}
+  materialColorProperty: _Color
+  trashBin: {fileID: 0}
 --- !u!1 &3099368779079125575
 GameObject:
   m_ObjectHideFlags: 0

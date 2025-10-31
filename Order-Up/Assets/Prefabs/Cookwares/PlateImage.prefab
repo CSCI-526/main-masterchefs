@@ -147,6 +147,9 @@ MonoBehaviour:
   comboSystem: {fileID: 0}
   highlightEffect: {fileID: 0}
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  emptyPlateColor: {r: 1, g: 1, b: 1, a: 1}
+  fullPlateColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+  useGradualColorChange: 1
 --- !u!1 &6209994867955020384
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +161,8 @@ GameObject:
   - component: {fileID: 6480908811634787438}
   - component: {fileID: 3968065185434805491}
   - component: {fileID: 8088975262626576886}
+  - component: {fileID: 998306386452443307}
+  - component: {fileID: 6384555093498297855}
   m_Layer: 5
   m_Name: PlateImage
   m_TagString: Untagged
@@ -183,7 +188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1.35, y: -1.26}
+  m_AnchoredPosition: {x: -1.3499756, y: -1.26}
   m_SizeDelta: {x: 3.5, y: 3.5}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3968065185434805491
@@ -207,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8627452, g: 0.07843138, b: 0.2352941, a: 0}
+  m_Color: {r: 1, g: 0.995283, b: 0.99622643, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -224,6 +229,48 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &998306386452443307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209994867955020384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da924befc3452d8d8481dc301498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookwareMaintenance
+  maxDirtLevel: 5
+  cleanColor: {r: 1, g: 1, b: 1, a: 1}
+  dirtyColor: {r: 0.3, g: 0.2, b: 0.1, a: 1}
+  meshRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  uiImage: {fileID: 8088975262626576886}
+  materialColorProperty: _Color
+  trashBin: {fileID: 0}
+--- !u!114 &6384555093498297855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6209994867955020384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57d0809d16e6b024eb30f7c1e049d1fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Plate
+  ingredientParent: {fileID: 0}
+  maxIngredients: 5
+  allowDuplicates: 1
+  ingredientSpacing: 0.2
+  comboSystem: {fileID: 0}
+  highlightEffect: {fileID: 0}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  emptyPlateColor: {r: 1, g: 1, b: 1, a: 1}
+  fullPlateColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+  useGradualColorChange: 1
 --- !u!1 &6473986533262251911
 GameObject:
   m_ObjectHideFlags: 0
