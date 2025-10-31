@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-/// <summary>
-///     Call clearplate method from Plate script to clear all ingredients on plate
-/// </summary>
+
 public class Trash : MonoBehaviour
 {
     [SerializeField] private Plate plate;
@@ -18,7 +16,6 @@ public class Trash : MonoBehaviour
 
     public void ClearPlate()
     {
-        // Call the ClearPlate method from the Plate script
         if (plate != null)
         {
             plate.ClearPlate();
