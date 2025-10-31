@@ -24,7 +24,7 @@ public class TypewriterEffect : MonoBehaviour
         takeOrderBtn.SetActive(false);
 
         // Get the random dialogue data from the DialogueManager
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
 
         if (dialogueManager == null) Debug.Log("No DialogueManager Found.");
         currentDialogue = dialogueManager.GetNextDialogue();
