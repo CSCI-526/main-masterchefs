@@ -23,17 +23,21 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Step 4: Cook Item")]
     // public CookingPopup cookingPopup; // Your existing script
-    public Button startCookButton; // The "Start" button in the popup
-    public Button stopCookButton; // The "Stop" button in the popup
+    public Button startCookButton; // The "Start" button in the popup 
 
     [Header("Step 5: Drag to Dish")]
     public PantryIngredient cookedPotato; // The item that comes from the fryer
-    public IDropZone dishZone; // Your existing script
+    //public IDropZone dishZone; // Your existing script
 
     [Header("Step 6: Submit Order")]
     public Button submitOrderButton;
+    public Plate plate;
+    public Button trashButton;
 
     private int currentStep = 0;
+
+    private bool potatoCooked = false;
+    private bool friesDone = false;
 
     void Start()
     {
@@ -57,21 +61,24 @@ public class TutorialManager : MonoBehaviour
         currentStep = step;
         Debug.Log($"current step: {currentStep}");
 
+        RemoveAllListeners();
+
         switch (currentStep)
         {
             case 1:
-                instructionText.text = "Step 1: Select the potato from the pantry.";
+                instructionText.text = "Grab a potato and toss it into the air fryer.";
                 // Highlight the pantry ingredient
                 // HighlightUI(potatoIngredient.GetComponent<RectTransform>());
                 // Subscribe to the new event on the PantryIngredient script
-                potatoIngredient.OnPantryIngredientDragged += HandleItemBeginDrag;
+                // potatoIngredient.OnPantryIngredientDragged += HandleItemBeginDrag;
+                potatoIngredient.OnIngredientDroppedToCookware += HandlePotatoDroppedToFryer;
                 break;
 
             case 2:
-                instructionText.text = "Step 2: Drag the potato to the air fryer.";
+                instructionText.text = "Start Cooking and be careful with the time.";
                 //     HighlightUI(airFryer.GetComponent<RectTransform>());
                 //     // Assumes your DropZone has an event. See guide below.
-                airFryer.OnItemDropped += OnStepCompleted;
+               // airFryer.OnItemDropped += OnStepCompleted;
                 break;
 
             case 3:
@@ -110,19 +117,27 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void HandleItemBeginDrag(DraggableIngredient item)
+    // private void HandleItemBeginDrag(DraggableIngredient item)
+    // {
+    //     Debug.Log($"ingredient name:{item.name}");
+    //     if (currentStep == 1 && item.name == "Potato_Raw")
+    //     {
+    //         OnStepCompleted(); // Go to next step
+    //     }
+    //     else if (currentStep == 5 && item == cookedPotato)
+    //     {
+    //         OnStepCompleted(); // Go to next step
+    //     }
+    // }
+
+    private void HandlePotatoDroppedToFryer(DraggableIngredient ingredient, Cookwares cookware)
     {
-        Debug.Log($"ingredient name:{item.name}");
-        if (currentStep == 1 && item.name == "Potato_Raw")
+        if (currentStep == 1 && ingredient.name.Contains("Potato"))
         {
-            OnStepCompleted(); // Go to next step
-        }
-        else if (currentStep == 5 && item == cookedPotato)
-        {
-            OnStepCompleted(); // Go to next step
+            Debug.Log("[Tutorial] Potato dropped into fryer!");
+            GoToStep(2);
         }
     }
-
     private void OnStepCompleted()
     {
         // Un-register all listeners to prevent double-firing
@@ -169,9 +184,13 @@ public class TutorialManager : MonoBehaviour
     /// Helper function to clean up listeners so we don't call a step twice.
     private void RemoveAllListeners()
     {
-         // Use -= to unsubscribe from System.Actions
+        // Use -= to unsubscribe from System.Actions
+        // if (potatoIngredient != null)
+        //     potatoIngredient.OnPantryIngredientDragged -= HandleItemBeginDrag;
         if (potatoIngredient != null)
-            potatoIngredient.OnPantryIngredientDragged -= HandleItemBeginDrag;
+            potatoIngredient.OnIngredientDroppedToCookware -= HandlePotatoDroppedToFryer;
+
+
         // if (airFryer != null)
             airFryer.OnItemDropped -= OnStepCompleted;
         // if (cookingPopup != null)

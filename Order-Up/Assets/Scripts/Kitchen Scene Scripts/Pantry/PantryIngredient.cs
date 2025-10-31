@@ -20,7 +20,8 @@ public class PantryIngredient : MonoBehaviour
     private DraggableIngredient draggableComponent;
     private Vector3 slotPosition;
 
-    public System.Action<DraggableIngredient> OnPantryIngredientDragged;
+    //public System.Action<DraggableIngredient> OnPantryIngredientDragged;
+    public System.Action<DraggableIngredient, Cookwares> OnIngredientDroppedToCookware;
 
     void Start()
     {
@@ -89,7 +90,7 @@ public class PantryIngredient : MonoBehaviour
         if (enableDebugLogs)
             Debug.Log($"[Pantry:{name}] Ingredient started dragging");
             
-        OnPantryIngredientDragged?.Invoke(ingredient);
+        //OnPantryIngredientDragged?.Invoke(ingredient);
     }
 
     void OnIngredientDroppedOnPlate(DraggableIngredient ingredient, Plate plate)
@@ -118,6 +119,8 @@ public class PantryIngredient : MonoBehaviour
         {
             SpawnIngredient();
         }
+ 
+        OnIngredientDroppedToCookware?.Invoke(draggableComponent, cookware);
     }
 
     void CleanupCurrentIngredient()
