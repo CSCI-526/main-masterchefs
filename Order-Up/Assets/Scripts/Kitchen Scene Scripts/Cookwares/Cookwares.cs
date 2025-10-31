@@ -66,7 +66,7 @@ public class Cookwares : MonoBehaviour, IDropZone
 
         if (sliderPanel != null)
         {
-            sliderPanel.SetActive(false);
+            sliderPanel.SetActive(true);
         }
         
         UpdateSliderState();
