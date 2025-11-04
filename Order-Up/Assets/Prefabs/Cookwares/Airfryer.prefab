@@ -73,7 +73,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2.01, y: 0.16}
+  m_AnchoredPosition: {x: 2, y: 0}
   m_SizeDelta: {x: 103.5863, y: 65.441}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5237862676981609094
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3812e947118e974c83902b4c96aab58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CookwareUI
-  cookware: {fileID: 0}
+  cookware: {fileID: 3272276017913267873}
   startCookingButton: {fileID: 8641912625614996889}
   stopCookingButton: {fileID: 3468845468306713006}
 --- !u!1 &1955547385959628367
@@ -679,6 +679,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cookwares
   cookwareName: Airfryer
+  cookwareType: 0
   sliderPanel: {fileID: 2335898806087856789}
   cookingTimeSlider: {fileID: 6773559171703618276}
   timerDisplayText: {fileID: 4207584873471744672}
@@ -963,7 +964,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stop cooking
+  m_text: Stop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1356,7 +1357,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start cooking
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

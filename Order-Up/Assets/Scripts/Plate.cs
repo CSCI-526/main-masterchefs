@@ -48,7 +48,6 @@ public class Plate : MonoBehaviour, IDropZone
         UpdateDishDisplay(); // Initialize display
     }
 
-    // IDropZone implementation
     public GameObject GetGameObject()
     {
         return gameObject;
@@ -218,9 +217,6 @@ public class Plate : MonoBehaviour, IDropZone
         UpdateDishDisplay(); // Update display after clearing
     }
 
-    /// <summary>
-    /// Updates the dish display text to show current ingredients or recipe name
-    /// </summary>
     public void UpdateDishDisplay()
     {
         if (dishIngredientsText == null)
@@ -228,7 +224,7 @@ public class Plate : MonoBehaviour, IDropZone
 
         // Check if a recipe is formed
         Recipe matchedRecipe = GetMatchingRecipe();
-        
+
         if (matchedRecipe != null)
         {
             // Show recipe name if found
@@ -249,10 +245,7 @@ public class Plate : MonoBehaviour, IDropZone
             AdjustTextSize(displayText);
         }
     }
-
-    /// <summary>
-    /// Gets a display string of all ingredient names separated by " + "
-    /// </summary>
+    
     private string GetIngredientsDisplayText()
     {
         if (IsEmpty())

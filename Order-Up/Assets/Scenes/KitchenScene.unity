@@ -889,7 +889,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1154,7 +1154,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2365,7 +2365,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2707,7 +2707,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2870,17 +2870,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951246157}
   m_CullTransparentMesh: 1
---- !u!114 &953909641 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3272276017913267873, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-  m_PrefabInstance: {fileID: 1553047130}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc1ace4e1c884d4fa3447c527b5a3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookwares
 --- !u!224 &969749973 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2121326510076526696, guid: edf4cdd13b48aa343acb8723d104cf04, type: 3}
@@ -2983,7 +2972,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3110,7 +3099,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3439,7 +3428,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3475,6 +3464,7 @@ GameObject:
   - component: {fileID: 1187021522}
   - component: {fileID: 1187021524}
   - component: {fileID: 1187021523}
+  - component: {fileID: 1187021525}
   m_Layer: 5
   m_Name: Trash
   m_TagString: Untagged
@@ -3540,6 +3530,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1187021521}
   m_CullTransparentMesh: 1
+--- !u!114 &1187021525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187021521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da924befc3452d8d8481dc301498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookwareMaintenance
+  cookwareImage: {fileID: 1187021523}
+  listenForKeyboardInput: 1
+  cleanOneStepKey: 99
+  cleanColor: {r: 1, g: 1, b: 1, a: 1}
+  mildlyDirtyColor: {r: 1, g: 0.9, b: 0.6, a: 1}
+  dirtyColor: {r: 1, g: 0.7, b: 0.3, a: 1}
+  veryDirtyColor: {r: 0.9, g: 0.4, b: 0.2, a: 1}
+  extremeDirtyColor: {r: 0.8, g: 0.2, b: 0.2, a: 1}
+  thresholds: 0000000001000000030000000500000007000000
+  usageCount: 2
 --- !u!1 &1373516153
 GameObject:
   m_ObjectHideFlags: 0
@@ -4258,24 +4270,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 684924761}
     m_Modifications:
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.03
       objectReference: {fileID: 0}
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: -0.72
       objectReference: {fileID: 0}
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4309,29 +4309,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2343644444911068513, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_Name
       value: Airfryer
-      objectReference: {fileID: 0}
-    - target: {fileID: 3272276017913267873, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: cookwareType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3613707912862123946, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: cookware
-      value: 
-      objectReference: {fileID: 953909641}
-    - target: {fileID: 4583648682119431391, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 2.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4583648682119431391, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 4612976752448573724, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4354,8 +4334,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+      propertyPath: m_Color.b
+      value: 0.83189744
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+      propertyPath: m_Color.g
+      value: 0.83189744
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4835,7 +4827,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 29.7, y: 3}
+  m_SizeDelta: {x: 34, y: 3}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1673827597
 MonoBehaviour:
@@ -4961,7 +4953,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5423,7 +5415,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0.43137255}
+  m_Color: {r: 0.1, g: 0.1, b: 0.1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5483,7 +5475,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 29.7, y: 13}
+  m_SizeDelta: {x: 34, y: 13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1912219787
 MonoBehaviour:
@@ -5585,7 +5577,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6054,7 +6046,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 29.7, y: 13}
+  m_SizeDelta: {x: 34, y: 13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053573383
 MonoBehaviour:

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ChickenNoodleSoup_Overcooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: ChickenNoodleSoup_Overcooked
-  icon: {fileID: -5577747794823148241, guid: f3f5c6e5f76b84ca1a7fbd3c23d86a2f, type: 3}
+  icon: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
   cookedResult: {fileID: 0}
   overcookedResult: {fileID: 0}
