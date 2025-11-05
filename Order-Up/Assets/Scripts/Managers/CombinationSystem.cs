@@ -13,6 +13,18 @@ public class CombinationSystem : MonoBehaviour
     * Combination system should allow players to select which ingredient to combine.
     * For simplicity, this example checks all ingredients on the plate and tries to match any recipe.
     */
+
+ 
+
+    void Start()
+    {
+        // load all recipes
+        Recipe[] loadedRecipes = Resources.LoadAll<Recipe>("Recipes");
+        allRecipes.AddRange(loadedRecipes);
+
+        Debug.Log("Loaded recipes: " + allRecipes.Count);
+    }
+
     public void CheckForCombinations()
     {
         // Get all ingredient children on the plate
@@ -29,10 +41,6 @@ public class CombinationSystem : MonoBehaviour
             }
         }
 
-        // Need at least 2 ingredients to combine
-        if (ingredients.Count < 2)
-            return;
-
         // Check all recipes to find a match
         foreach (Recipe recipe in allRecipes)
         {
@@ -41,7 +49,6 @@ public class CombinationSystem : MonoBehaviour
                 if (enableDebugLogs)
                     Debug.Log("Recipe found: " + recipe.dishName);
                 CombineIntoDish(ingredientObjects, recipe);
-                Debug.Log($"{GameData.currentDishId} is the current dish id");
                 return; // Stop after first match
             }
         }

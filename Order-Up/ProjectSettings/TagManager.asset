@@ -12,8 +12,8 @@ TagManager:
   - DropZone
   - Water
   - UI
-  - 
-  - 
+  - potLayerMask
+  - cookwareLayer
   - 
   - 
   - 
@@ -41,6 +41,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Prefabs
+    uniqueID: 2351144051
+    locked: 0
+  - name: UI
+    uniqueID: 41873933
     locked: 0
   m_RenderingLayers:
   - Default

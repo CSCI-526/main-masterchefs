@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1723622304770497353}
   - component: {fileID: 9211686672026327020}
   - component: {fileID: 3980813072201152152}
-  - component: {fileID: -3621991037440954440}
+  - component: {fileID: 1378936552535829731}
   m_Layer: 0
   m_Name: Bread
-  m_TagString: Ingredient
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.37766, y: 0.75119, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.10000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -58,7 +58,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -80,18 +80,18 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 41873933
+  m_SortingLayer: 2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 0c5a32181054fdb48a933bd6c110d5de, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9137255, g: 0.5921569, b: 0.77959436, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 20.48, y: 20.48}
+  m_Size: {x: 1, y: 2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!60 &1723622304770497353
@@ -133,7 +133,7 @@ PolygonCollider2D:
     border: {x: 2.6399999, y: 5.06, z: 2.35, w: 6.81}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 20.48, y: 20.48}
-    newSize: {x: 20.48, y: 20.48}
+    newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -189,6 +189,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   dragOffset: 0.1
+  cookedResult: {fileID: 9211686672026327020, guid: b643758db7a7e4989a6ec4dedcad683b, type: 3}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &3980813072201152152
@@ -205,7 +206,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientData: {fileID: 11400000, guid: 9d4cd8094de741946a6bf16ed542e0fe, type: 2}
   currentState: 0
---- !u!50 &-3621991037440954440
+  currentCookware: 0
+--- !u!50 &1378936552535829731
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0

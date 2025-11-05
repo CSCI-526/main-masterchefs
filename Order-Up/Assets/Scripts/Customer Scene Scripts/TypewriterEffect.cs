@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class TypewriterEffect : MonoBehaviour
 {
-    public TextMeshProUGUI dialogueText; 
+    public TextMeshProUGUI dialogueText;
 
     float typeSpeed = 0.05f;
 
@@ -18,23 +18,23 @@ public class TypewriterEffect : MonoBehaviour
     private DialogueData currentDialogue;
 
     private void Start()
-    { 
-    // Hide the image and button in the beginning
-    foodImage.SetActive(false);
-    takeOrderBtn.SetActive(false);
+    {
+        // Hide the image and button in the beginning
+        foodImage.SetActive(false);
+        takeOrderBtn.SetActive(false);
 
-    // Get the random dialogue data from the DialogueManager
-    dialogueManager = FindObjectOfType<DialogueManager>();
+        // Get the random dialogue data from the DialogueManager
+        dialogueManager = FindAnyObjectByType<DialogueManager>();
 
-    if(dialogueManager == null) Debug.Log("No DialogueManager Found.");
-    currentDialogue = dialogueManager.GetRandomDialogue();
-    
-    string fullText = currentDialogue.sentenceTemplate.Replace("{dish}", $"<color={currentDialogue.color}>{currentDialogue.dishName}</color>");
-    dialogueText.text = fullText;
- 
-    dialogueText.ForceMeshUpdate();
-      
-    StartCoroutine(ShowText()); 
+        if (dialogueManager == null) Debug.Log("No DialogueManager Found.");
+        currentDialogue = dialogueManager.GetNextDialogue();
+
+        string fullText = currentDialogue.sentenceTemplate.Replace("{dish}", $"<color={currentDialogue.color}>{currentDialogue.dishName}</color>");
+        dialogueText.text = fullText;
+
+        dialogueText.ForceMeshUpdate();
+
+        StartCoroutine(ShowText());
     }
 
     // Show text with Typewriter effect, then show the food image and button
@@ -57,15 +57,17 @@ public class TypewriterEffect : MonoBehaviour
         }
 
         yield return new WaitForSeconds(0.5f);
- 
-        
+
+
         // load food image
         Sprite sprite = Resources.Load<Sprite>("FoodImages/" + currentDialogue.image);
         if (sprite != null)
         {
             foodImage.GetComponent<UnityEngine.UI.Image>().sprite = sprite;
             foodImage.SetActive(true);
-        } else{
+        }
+        else
+        {
             Debug.Log("Sprite not found:" + currentDialogue.image);
         }
 
@@ -88,7 +90,7 @@ public class TypewriterEffect : MonoBehaviour
     public void GoToKitchen()
     {
         GameData.currentDishId = currentDialogue.dishId;
-        SceneManager.LoadScene("Kitchen");
+        SceneManager.LoadScene("KitchenScene");
         Debug.Log("dishid:" + GameData.currentDishId);
     }
 
