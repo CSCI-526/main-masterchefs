@@ -1,97 +1,160 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CookwareMaintenance : MonoBehaviour
 {
-    public enum DirtLevel { Clean = 0, Mild = 1, Dirty = 2, VeryDirty = 3, Extreme = 4 }
+    [Header("Dirt Settings")]
+    [SerializeField] private int maxDirtLevel = 5;
+    [SerializeField] private Color cleanColor = Color.white;
 
-    [Header("Refs")]
-    public Image cookwareImage;
-    public bool listenForKeyboardInput = true;
-    public KeyCode cleanOneStepKey = KeyCode.C;
+    // Dark brown
+    [SerializeField] private Color dirtyColor = new Color(0.3f, 0.2f, 0.1f); 
 
-    [Header("Colors per level")]
-    public Color cleanColor = Color.white;
-    public Color mildlyDirtyColor = new Color(1f, 0.9f, 0.6f);
-    public Color dirtyColor = new Color(1f, 0.7f, 0.3f);
-    public Color veryDirtyColor = new Color(0.9f, 0.4f, 0.2f);
-    public Color extremeDirtyColor = new Color(0.8f, 0.2f, 0.2f);
+    [Header("References")]
+    [SerializeField] private Renderer cookwareRenderer;
+    [SerializeField] private string materialColorProperty = "_Color";
 
-    [Header("Usage thresholds (inclusive lower bounds)")]
-    // Level jumps at these usage counts: 0→Clean, 1→Mild, 3→Dirty, 5→VeryDirty, 7→Extreme
-    public int[] thresholds = { 0, 1, 3, 5, 7 };
+    // Reference to trash bin
+    [SerializeField] private TrashBin trashBin; 
 
-    [Tooltip("Total times this cookware has been used.")]
-    public int usageCount = 0;
-
-    public DirtLevel CurrentLevel { get; private set; } = DirtLevel.Clean;
+    private int currentDirtLevel = 0;
+    private Material cookwareMaterial;
+    private bool isDirty = false;
 
     void Start()
     {
-        RecomputeLevelFromUsage();
-        ApplyLevelColor();
+        // Get or create material instance
+        if (cookwareRenderer == null)
+            cookwareRenderer = GetComponent<Renderer>();
+
+        if (cookwareRenderer != null)
+        {
+            cookwareMaterial = cookwareRenderer.material;
+            UpdateCookwareColor();
+        }
+        else
+        {
+            Debug.LogError("No Renderer found on " + gameObject.name);
+        }
+
+        // Auto-find trash bin if not assigned
+        if (trashBin == null)
+        {
+            trashBin = FindObjectOfType<TrashBin>();
+            if (trashBin == null)
+            {
+                Debug.LogWarning("No TrashBin found in scene! Cleaning will work but won't update trash bin.");
+            }
+        }
     }
 
     void Update()
     {
-        if (listenForKeyboardInput && Input.GetKeyDown(cleanOneStepKey))
+        // Press C to fully clean the cookware
+        if (Input.GetKeyDown(KeyCode.C))
         {
-            CleanOneStep();
+            CleanCookware();
         }
     }
 
-    // Call this when the cookware is used in an order
-    public void IncrementUsage()
+    /// Call this method when adding items to the cookware
+    /// Color gets progressively darker with each item
+    public void AddDirt(int amount = 1)
     {
-        usageCount++;
-        RecomputeLevelFromUsage();
-        ApplyLevelColor();
+        currentDirtLevel = Mathf.Min(currentDirtLevel + amount, maxDirtLevel);
+        isDirty = true;
+        UpdateCookwareColor();
+        Debug.Log($"{gameObject.name} dirt level: {currentDirtLevel}/{maxDirtLevel}");
     }
 
-    // Pressing C: go back exactly one level (cannot go below Clean)
-    public void CleanOneStep()
+    /// Call this when items are removed from cookware
+    /// Color stays dirty until player presses C to clean
+    public void RemoveItem()
     {
-        if (CurrentLevel == DirtLevel.Clean) return;
-
-        CurrentLevel -= 1;
-
-        // Optionally align usageCount to the start of the new level
-        usageCount = thresholds[(int)CurrentLevel];
-
-        ApplyLevelColor();
+        // Color does NOT change when removing items
+        // Dirt stays until player cleans with C
+        Debug.Log($"{gameObject.name} item removed, but still dirty (Level: {currentDirtLevel})");
     }
 
-    // Full reset (if you still want a button that makes it brand new)
-    public void CleanAll()
+    /// Fully clean the cookware - press C
+    /// Returns color to completely clean state
+    /// Transfers dirt to trash bin
+    public void CleanCookware()
     {
-        usageCount = 0;
-        CurrentLevel = DirtLevel.Clean;
-        ApplyLevelColor();
-    }
-
-    void RecomputeLevelFromUsage()
-    {
-        // Determine highest level whose threshold <= usageCount
-        int level = 0;
-        for (int i = 0; i < thresholds.Length; i++)
+        if (isDirty && currentDirtLevel > 0)
         {
-            if (usageCount >= thresholds[i]) level = i;
+            // Try to put dirt in trash bin
+            if (trashBin != null)
+            {
+                bool trashAdded = trashBin.AddTrash(currentDirtLevel);
+
+                if (!trashAdded)
+                {
+                    // Trash bin is full, cannot clean
+                    Debug.Log($"Cannot clean {gameObject.name} - trash bin is full!");
+                    return;
+                }
+            }
+
+            // Clean the cookware
+            currentDirtLevel = 0;
+            isDirty = false;
+            UpdateCookwareColor();
+            Debug.Log($"{gameObject.name} is now completely clean!");
         }
-        CurrentLevel = (DirtLevel)Mathf.Clamp(level, 0, thresholds.Length - 1);
+        else
+        {
+            Debug.Log($"{gameObject.name} is already clean!");
+        }
     }
 
-    void ApplyLevelColor()
+    /// Update the visual appearance based on dirt level
+    private void UpdateCookwareColor()
     {
-        if (cookwareImage == null) return;
+        if (cookwareMaterial == null) return;
 
-        switch (CurrentLevel)
+        if (!isDirty || currentDirtLevel == 0)
         {
-            case DirtLevel.Clean: cookwareImage.color = cleanColor; break;
-            case DirtLevel.Mild: cookwareImage.color = mildlyDirtyColor; break;
-            case DirtLevel.Dirty: cookwareImage.color = dirtyColor; break;
-            case DirtLevel.VeryDirty: cookwareImage.color = veryDirtyColor; break;
-            case DirtLevel.Extreme: cookwareImage.color = extremeDirtyColor; break;
+            // Completely clean - original color
+            cookwareMaterial.SetColor(materialColorProperty, cleanColor);
         }
+        else
+        {
+            // Dirty - color gets darker based on dirt level
+            float dirtPercentage = (float)currentDirtLevel / maxDirtLevel;
+            Color targetColor = Color.Lerp(cleanColor, dirtyColor, dirtPercentage);
+            cookwareMaterial.SetColor(materialColorProperty, targetColor);
+        }
+    }
+
+    /// Get current dirt level
+    public int GetDirtLevel()
+    {
+        return currentDirtLevel;
+    }
+
+    /// Check if cookware is dirty
+    public bool IsDirty()
+    {
+        return isDirty;
+    }
+
+    /// Check if cookware is at maximum dirt
+    public bool IsMaxDirty()
+    {
+        return currentDirtLevel >= maxDirtLevel;
+    }
+
+    /// Check if cookware is clean
+    public bool IsClean()
+    {
+        return !isDirty && currentDirtLevel == 0;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+
+        Gizmos.color = isDirty ? Color.red : Color.green;
+        Vector3 pos = transform.position + Vector3.up * 2f;
     }
 }
-
