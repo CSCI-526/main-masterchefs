@@ -11,16 +11,11 @@ public static class GameData
     {
         currentDishId = -1;
         currentLevel = 0;
-        Debug.Log("[GameData] Game data reset.");
     }
 
-    public static void CheckAndIncrementLevel()
+    public static void IncrementLevel()
     {
-        if (currentDishId == 2 || currentDishId == 5 || currentDishId == 8)
-        {
-            currentLevel++;
-            Debug.Log($"[GameData] Level increased to: {currentLevel}");
-        }
+        currentLevel++;
     }
 }
 
