@@ -12,11 +12,13 @@ public class DraggableIngredient : MonoBehaviour
     public Color hoverColor = Color.yellow;
 
     private Camera mainCamera;
-    private Vector3 originalPosition;
+    private Vector3 originalPosition; 
     private Vector3 mouseOffset;
     private bool isDragging = false;
     private bool isHovering = false;
+
     private Collider2D col2D;
+    private Rigidbody2D rb2D;
     private int originalSortingOrder;
     private SpriteRenderer spriteRenderer;
     private Color originalColor;
@@ -36,6 +38,7 @@ public class DraggableIngredient : MonoBehaviour
         originalPosition = transform.position;
         col2D = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb2D = GetComponent<Rigidbody2D>();
 
         if (spriteRenderer != null)
         {
@@ -43,10 +46,6 @@ public class DraggableIngredient : MonoBehaviour
             originalColor = spriteRenderer.color;
         }
 
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] DraggableIngredient initialized. Camera: {(mainCamera != null ? mainCamera.name : "NULL")}, Collider: {(col2D != null ? "Found" : "NULL")}, SpriteRenderer: {(spriteRenderer != null ? "Found" : "NULL")}");
-        }
     }
 
     void Update()
@@ -88,6 +87,7 @@ public class DraggableIngredient : MonoBehaviour
 
         Vector3 newPosition = mouseWorldPos + mouseOffset;
         transform.position = newPosition;
+        rb2D.MovePosition(newPosition);
 
         if (enableDebugLogs)
         {
@@ -152,7 +152,7 @@ public class DraggableIngredient : MonoBehaviour
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[{gameObject.name}] Started dragging!");
+            Debug.Log($"[{gameObject.name}] Started dragging (fixed position: {originalPosition})");
         }
 
         OnStartDrag?.Invoke(this);
@@ -170,11 +170,12 @@ public class DraggableIngredient : MonoBehaviour
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[{gameObject.name}] Stopped dragging!");
+            Debug.Log($"[{gameObject.name}] Stopped dragging at position: {transform.position}");
         }
 
         // Check what's below using the unified layer mask
         IDropZone dropZone = GetDropZoneBelow();
+        Debug.Log($"[{dropZone} found below {gameObject.name}]");
 
         if (dropZone != null)
         {
@@ -182,30 +183,67 @@ public class DraggableIngredient : MonoBehaviour
             {
                 Debug.Log($"[{gameObject.name}] Dropped on: {dropZone.GetGameObject().name}");
             }
-            
+
             // Handle based on type
             if (dropZone is Plate plate)
             {
                 plate.AddIngredient(this);
                 OnDroppedOnPlate?.Invoke(this, plate);
+                // Note: originalPosition stays the same - never updated
             }
             else if (dropZone is Cookwares cookware)
             {
-                // Position ingredient inside cookware bounds
-                transform.position = dropZone.GetGameObject().transform.position;
-                OnDroppedOnCookware?.Invoke(this, cookware);
+                // Check if cookware can accept this ingredient
+                //if (cookware.CanAcceptIngredient())
+                //{
+                    // Position ingredient inside cookware bounds
+                    transform.position = dropZone.GetGameObject().transform.position;
+                    OnDroppedOnCookware?.Invoke(this, cookware);
+                    // Note: originalPosition stays the same - never updated
+
+                    if (enableDebugLogs)
+                    {
+                        Debug.Log($"[{gameObject.name}] Successfully dropped in cookware (original position unchanged: {originalPosition})");
+                    }
+                //}
+                else
+                {
+                    if (enableDebugLogs)
+                    {
+                        Debug.Log($"[{gameObject.name}] Cookware is full, returning to fixed position: {originalPosition}");
+                    }
+                    ReturnToOriginalPosition();
+                }
+            }
+            else if (dropZone is Trash trash)
+            {
+                if (enableDebugLogs)
+                {
+                    Debug.Log($"[{gameObject.name}] Dropped on Trash: {trash.GetGameObject().name}");
+                }
+
+                // Notify trash and let it handle the destruction
+                trash.OnIngredientDropped(this);
+                // Note: Trash will destroy this object, so no need to continue
+                return;
+            }
+            else
+            {
+                if (enableDebugLogs)
+                    Debug.LogWarning($"[{gameObject.name}] Dropped on unknown drop zone type: {dropZone.GetType().Name}, returning to fixed position: {originalPosition}");
+                ReturnToOriginalPosition();
             }
         }
         else
         {
             if (enableDebugLogs)
-            {
-                Debug.Log($"[{gameObject.name}] No drop zone found, returning to original position");
-            }
+                Debug.Log($"[{gameObject.name}] No drop zone found, returning to fixed position: {originalPosition}");
             ReturnToOriginalPosition();
         }
 
         OnEndDrag?.Invoke(this);
+        Physics2D.SyncTransforms();
+
     }
 
     Vector3 GetMouseWorldPosition()
@@ -294,7 +332,7 @@ public class DraggableIngredient : MonoBehaviour
     {
         // Check using OverlapPoint with the unified layer mask
         Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position, dropZoneLayerMask);
-        
+
         foreach (Collider2D collider in colliders)
         {
             if (collider.gameObject != gameObject)
@@ -311,31 +349,56 @@ public class DraggableIngredient : MonoBehaviour
 
     void ReturnToOriginalPosition()
     {
+        if (enableDebugLogs)
+        {
+            Debug.Log($"[{gameObject.name}] Returning from {transform.position} to FIXED original position: {originalPosition}");
+        }
+
         StartCoroutine(ReturnToPositionCoroutine());
     }
 
     System.Collections.IEnumerator ReturnToPositionCoroutine()
     {
         Vector3 startPos = transform.position;
+        Vector3 targetPos = originalPosition; // Always return to the fixed original position
         float elapsed = 0f;
         float duration = 0.3f;
+
+        if (enableDebugLogs)
+        {
+            Debug.Log($"[{gameObject.name}] Starting return animation: From {startPos} to {targetPos}");
+        }
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
-            t = 1f - (1f - t) * (1f - t);
+            t = 1f - (1f - t) * (1f - t); // Ease out
 
-            transform.position = Vector3.Lerp(startPos, originalPosition, t);
+            transform.position = Vector3.Lerp(startPos, targetPos, t);
             yield return null;
         }
 
-        transform.position = originalPosition;
+        // Ensure we end exactly at the target position
+        transform.position = targetPos;
+
+        if (enableDebugLogs)
+        {
+            Debug.Log($"[{gameObject.name}] Return animation complete. Final position: {transform.position}");
+        }
     }
 
+    /// <summary>
+    /// Sets the original position - should only be called once during initialization (e.g., by PantryIngredient)
+    /// </summary>
     public void SetNewOriginalPosition()
     {
         originalPosition = transform.position;
+
+        if (enableDebugLogs)
+        {
+            Debug.Log($"[{gameObject.name}] FIXED original position set to: {originalPosition}");
+        }
     }
 
     public Vector3 GetOriginalPosition()

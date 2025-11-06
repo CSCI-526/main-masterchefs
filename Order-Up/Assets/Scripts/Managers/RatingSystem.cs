@@ -62,7 +62,7 @@ public class RatingSystem : MonoBehaviour
         */
         
         // Get the expected dish ID from GameData
-        int expectedDishId = GameData.currentDishId;
+        int expectedDishId = GameData.CurrentDishId;
 
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Expected Dish ID: {expectedDishId}");

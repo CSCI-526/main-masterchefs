@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bread_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Bread_Raw
-  icon: {fileID: 21300000, guid: b65cdfbe69323ad41a51221538a521dc, type: 3}
+  icon: {fileID: -712631045867808456, guid: c1d5d64293de649958641cb5657ede08, type: 3}
   cookedResult: {fileID: 11400000, guid: 5cc4004c2f2104978a735620bfde3831, type: 2}
   overcookedResult: {fileID: 11400000, guid: 8bb83700787c84bf5a57176e399c2475, type: 2}

@@ -171,7 +171,6 @@ public class oldPot : MonoBehaviour
 
         // spawn cooked ingredient
         DraggableIngredient cookedIngredient = Instantiate(ingredient.cookedResult, pos, rot, parent);
-        cookedIngredient.SetNewOriginalPosition();
         AddIngredient(cookedIngredient);
         isCooking = false;
 

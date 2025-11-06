@@ -39,7 +39,7 @@ public class CookwareMaintenance : MonoBehaviour
         // Auto-find trash bin if not assigned
         if (trashBin == null)
         {
-            trashBin = FindObjectOfType<TrashBin>();
+            trashBin = FindFirstObjectByType<TrashBin>();
             if (trashBin == null)
             {
                 Debug.LogWarning("No TrashBin found in scene! Cleaning will work but won't update trash bin.");

@@ -1,34 +1,54 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class LevelDesignManager : MonoBehaviour
 {
-
     [Header("Level Data Settings")]
     public List<LevelData> levels;
 
+    [Header("Game Data")]
+    public int Level;
+
     [Header("Pantry Grid")]
-    public Transform pantryGrid; // Parent object that contains PantryIngredient slots
+    public Transform pantryGrid;
 
     [Header("Debug Settings")]
     [SerializeField] bool enableDebugLogs = false;
 
-    [Header("Pantry")]
     private PantryIngredient[] pantrySlots;
 
     private void Start()
     {
+        GameData.CurrentLevel = Level;
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
-        LoadLevel(GameData.currentLevel);
+        StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
 
     private void Update()
     {
         if (enableDebugLogs)
+            Debug.Log($"[LevelDesignManager] Current Level: {GameData.CurrentLevel}");
+    }
+
+    private IEnumerator LoadLevelWithLayoutDelay(int level)
+    {
+        LoadLevel(level);
+
+        yield return null;
+        Canvas.ForceUpdateCanvases();
+        yield return new WaitForEndOfFrame();
+
+        foreach (var slot in pantrySlots)
         {
-            Debug.Log($"[LevelDesignManager] Current Level: {GameData.currentLevel}");
+            if (slot.gameObject.activeSelf)
+            {
+                slot.RefreshSlot();
+            }
         }
+
+        if (enableDebugLogs)
+            Debug.Log($"[LevelDesignManager] Finished layout update, pantry refreshed for Level {level}");
     }
 
     public void LoadLevel(int level)
@@ -36,27 +56,25 @@ public class LevelDesignManager : MonoBehaviour
         int index = Mathf.Clamp(level - 1, 0, levels.Count - 1);
         LevelData data = levels[index];
 
-        Debug.Log($"[LevelDesignManager] Loading level {level}: {data.levelName}");
+        if (enableDebugLogs)
+            Debug.Log($"[LevelDesignManager] Loading level {level}: {data.levelName}");
 
-        // Step 1: Disable all pantry slots
+        // Disable all slots first
         foreach (var slot in pantrySlots)
-        {
             slot.gameObject.SetActive(false);
-        }
 
-        // Step 2: Enable only the slots corresponding to this level’s ingredients
+        // Enable only required slots
         for (int i = 0; i < data.activeIngredients.Length && i < pantrySlots.Length; i++)
         {
             var slot = pantrySlots[i];
             slot.ingredientPrefab = data.activeIngredients[i];
             slot.gameObject.SetActive(true);
-            slot.RefreshSlot();
         }
     }
 
     public void OnRecipeComplete()
     {
         GameData.IncrementLevel();
-        LoadLevel(GameData.currentLevel);
+        StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
 }

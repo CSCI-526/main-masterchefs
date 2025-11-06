@@ -16,11 +16,11 @@ public class Plate : MonoBehaviour, IDropZone
     public GameObject highlightEffect;
     public Color highlightColor;
     [Header("Dish Display Settings")]
-    public TextMeshProUGUI dishIngredientsText;
+    public TextMeshProUGUI dishIngredientsText; // Text component to show dish ingredients
     public float maxTextWidth = 200f; // Maximum width for text box
     public float minFontSize = 12f;
     public float maxFontSize = 24f;
-    private List<DraggableIngredient> ingredientsOnPlate; 
+    private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
     private SpriteRenderer plateRenderer;
     private Color originalColor;
 
@@ -59,7 +59,7 @@ public class Plate : MonoBehaviour, IDropZone
             return false;
 
         ingredientsOnPlate.Add(ingredient);
-        PositionIngredientOnPlate(ingredient);
+        //PositionIngredientOnPlate(ingredient);
 
         if (ingredientParent != null)
             ingredient.transform.SetParent(ingredientParent);
@@ -90,7 +90,7 @@ public class Plate : MonoBehaviour, IDropZone
         ingredient.transform.SetParent(null);
 
         Destroy(ingredient.gameObject);
-        RepositionIngredients();
+        //RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
 
@@ -127,6 +127,10 @@ public class Plate : MonoBehaviour, IDropZone
         return true;
     }
 
+    /// <summary>
+    /// Should rearrange the ingredients from top down left right in a circular pattern
+    /// no more than 4 ingredients on the plate, so the position shouldn't be overlapping
+    /// </summary>
     void PositionIngredientOnPlate(DraggableIngredient ingredient)
     {
         Vector3 plateCenter = transform.position;
@@ -165,7 +169,6 @@ public class Plate : MonoBehaviour, IDropZone
                 );
 
                 ingredientsOnPlate[i].transform.position = plateCenter + offset;
-                ingredientsOnPlate[i].SetNewOriginalPosition();
             }
         }
     }
