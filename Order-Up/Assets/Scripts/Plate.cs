@@ -16,14 +16,13 @@ public class Plate : MonoBehaviour, IDropZone
     public GameObject highlightEffect;
     public Color highlightColor;
     [Header("Dish Display Settings")]
-    public TextMeshProUGUI dishIngredientsText;
+    public TextMeshProUGUI dishIngredientsText; // Text component to show dish ingredients
     public float maxTextWidth = 200f; // Maximum width for text box
     public float minFontSize = 12f;
     public float maxFontSize = 24f;
-    private List<DraggableIngredient> ingredientsOnPlate;
+    private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
     private SpriteRenderer plateRenderer;
     private Color originalColor;
-    private CookwareMaintenance maintenance; // Add this
 
     // Events
     public System.Action<DraggableIngredient> OnIngredientAdded;
@@ -46,9 +45,6 @@ public class Plate : MonoBehaviour, IDropZone
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
 
-        // Get the maintenance component
-        maintenance = GetComponent<CookwareMaintenance>();
-
         UpdateDishDisplay(); // Initialize display
     }
 
@@ -63,16 +59,10 @@ public class Plate : MonoBehaviour, IDropZone
             return false;
 
         ingredientsOnPlate.Add(ingredient);
-        PositionIngredientOnPlate(ingredient);
+        //PositionIngredientOnPlate(ingredient);
 
         if (ingredientParent != null)
             ingredient.transform.SetParent(ingredientParent);
-
-        // ADD THIS LINE: Make the dish dirty when ingredient is added
-        if (maintenance != null)
-        {
-            maintenance.AddDirt(1);
-        }
 
         OnIngredientAdded?.Invoke(ingredient);
 
@@ -100,13 +90,7 @@ public class Plate : MonoBehaviour, IDropZone
         ingredient.transform.SetParent(null);
 
         Destroy(ingredient.gameObject);
-        RepositionIngredients();
-
-        // Optional: Call RemoveItem() to log that item was removed (color stays dirty)
-        if (maintenance != null)
-        {
-            maintenance.RemoveItem();
-        }
+        //RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
 
@@ -143,6 +127,10 @@ public class Plate : MonoBehaviour, IDropZone
         return true;
     }
 
+    /// <summary>
+    /// Should rearrange the ingredients from top down left right in a circular pattern
+    /// no more than 4 ingredients on the plate, so the position shouldn't be overlapping
+    /// </summary>
     void PositionIngredientOnPlate(DraggableIngredient ingredient)
     {
         Vector3 plateCenter = transform.position;
@@ -181,7 +169,6 @@ public class Plate : MonoBehaviour, IDropZone
                 );
 
                 ingredientsOnPlate[i].transform.position = plateCenter + offset;
-                ingredientsOnPlate[i].SetNewOriginalPosition();
             }
         }
     }

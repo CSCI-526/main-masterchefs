@@ -393,7 +393,17 @@ public class Cookwares : MonoBehaviour, IDropZone
             Debug.Log($"[{cookwareName}] ✅ EnableIngredients completed. Final count: {ingredientsInside.Count}");
         }
     }
-    
+
+    /// <summary>
+    /// Check if there is already ingredient inside, if yes, return false, if not true
+    /// </summary>
+    /// <returns></returns>
+    public bool CanAcceptIngredient()
+    {
+        return true;
+    }
+
+
     public bool IsCooking() => isCooking;
     public int GetIngredientCount() => ingredientsInside.Count;
     public float GetCurrentCookingTime() => currentCookingTime;

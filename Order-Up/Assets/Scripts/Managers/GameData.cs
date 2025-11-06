@@ -4,12 +4,15 @@ using UnityEngine;
 // Storing the order data
 public static class GameData
 {
-    public static int currentDishId = 0;
-    public static int currentLevel = 2;
+    private static int currentDishId = 0;
+    private static int currentLevel = 0;
+
+    public static int CurrentDishId { get => currentDishId; set => currentDishId = value; }
+    public static int CurrentLevel { get => currentLevel; set => currentLevel = value; }
 
     public static void ResetGameData()
     {
-        currentDishId = -1;
+        CurrentDishId = -1;
         currentLevel = 0;
     }
 

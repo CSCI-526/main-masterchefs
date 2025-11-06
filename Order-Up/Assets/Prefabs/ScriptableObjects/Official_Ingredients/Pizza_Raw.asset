@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pizza_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Pizza_Raw
-  icon: {fileID: 21300000, guid: 46807622f1959447b8ac6ce8e3c7f950, type: 3}
+  icon: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
   cookedResult: {fileID: 11400000, guid: 006193c77a1854c2b8d767e6cd1c4f9d, type: 2}
   overcookedResult: {fileID: 11400000, guid: 9668fed853f344a428cf206e305f6d34, type: 2}

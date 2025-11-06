@@ -89,9 +89,9 @@ public class TypewriterEffect : MonoBehaviour
     // Jump to kitchen scene
     public void GoToKitchen()
     {
-        GameData.currentDishId = currentDialogue.dishId;
+        GameData.CurrentDishId = currentDialogue.dishId;
         SceneManager.LoadScene("KitchenScene");
-        Debug.Log("dishid:" + GameData.currentDishId);
+        Debug.Log("dishid:" + GameData.CurrentDishId);
     }
 
 }

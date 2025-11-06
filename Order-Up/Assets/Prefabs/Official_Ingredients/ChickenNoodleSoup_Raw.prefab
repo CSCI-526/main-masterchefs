@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
-  m_Color: {r: 0.972549, g: 0.13544264, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -111,7 +111,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   dragOffset: 0.1
   cookedResult: {fileID: 0}
-  enableDebugLogs: 1
+  enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &2155390468507035687
 MonoBehaviour:
