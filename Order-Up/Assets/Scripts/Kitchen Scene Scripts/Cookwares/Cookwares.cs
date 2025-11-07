@@ -26,7 +26,7 @@ public class Cookwares : MonoBehaviour, IDropZone
     private List<GameObject> ingredientsInside = new List<GameObject>();
     private bool isCooking = false;
     private float currentCookingTime = 0f;
-    private float selectedCookingTime = 10f;
+    private float selectedCookingTime = 3f;
 
     [Header("Debug Settings")]
     public bool enableDebugLogs = false;
@@ -36,6 +36,8 @@ public class Cookwares : MonoBehaviour, IDropZone
     private Rigidbody2D rb2D;
     public System.Action<DraggableIngredient> OnItemDropped;
     public System.Action OnCookwareClicked;
+
+    public System.Action<DraggableIngredient> OnCooked;
     
     void Start()
     {
@@ -273,6 +275,9 @@ public class Cookwares : MonoBehaviour, IDropZone
                         ing.ingredientData = ing.ingredientData.cookedResult;
                     }
                     Debug.Log($"[{cookwareType}] {ing.ingredientData.ingredientName} is now Cooked!");
+                    
+                    // Notify listeners that an ingredient has been cooked
+                    OnCooked?.Invoke(ingredient.GetComponent<DraggableIngredient>());   
                 }
             else if (ing.currentState == IngredientState.Cooked)
             { 
