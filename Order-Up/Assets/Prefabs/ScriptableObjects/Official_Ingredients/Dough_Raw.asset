@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Dough_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Dough_Raw
-  icon: {fileID: -9107184221809037925, guid: c1d0c6515734845a18bcc27125309fd0, type: 3}
+  icon: {fileID: 3625043607559282579, guid: 11d33a8f6143b4ba2adcd54ce068c76b, type: 3}
   cookedResult: {fileID: 11400000, guid: 7807ed4edfb184b9689e073e1a54a955, type: 2}
   overcookedResult: {fileID: 11400000, guid: 0abd52367bad243cf928611e75474f9a, type: 2}

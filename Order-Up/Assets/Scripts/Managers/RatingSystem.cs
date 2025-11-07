@@ -465,7 +465,19 @@ public class RatingSystem : MonoBehaviour
 
     int CalculateRating()
     {
-        int expectedDishId = GameData.currentDishId;
+        /**
+        * 0 stars - no correct ingredient on plate
+        * percentages of correct ingredients = number of correct ingredients / total ingredients used
+        * 0 star - 0-25% correct ingredients
+        * 1 star - 26-50% correct ingredients
+        * 2 stars - 51-75% correct ingredients
+        * 3 stars - 76-100% correct ingredients
+        * -10% deduction for every overcooked ingredient used
+        * no double deduction
+        */
+        
+        // Get the expected dish ID from GameData
+        int expectedDishId = GameData.CurrentDishId;
 
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Expected Dish ID: {expectedDishId}");

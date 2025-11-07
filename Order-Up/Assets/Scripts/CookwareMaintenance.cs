@@ -410,7 +410,6 @@
 
 
 using UnityEngine;
-using UnityEngine.UI;
 
 /// Attach to each cookware (pan, pot, oven, airfryer, plate etc.).
 /// Tints a SpriteRenderer/Image/Renderer based on dirt level.

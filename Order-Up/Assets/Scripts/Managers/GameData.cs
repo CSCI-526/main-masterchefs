@@ -4,26 +4,21 @@ using UnityEngine;
 // Storing the order data
 public static class GameData
 {
-    public static int currentDishId = 0;
-    public static int currentLevel = 1;
+    private static int currentDishId = 0;
+    private static int currentLevel = 0;
+
+    public static int CurrentDishId { get => currentDishId; set => currentDishId = value; }
+    public static int CurrentLevel { get => currentLevel; set => currentLevel = value; }
 
     public static void ResetGameData()
     {
-        //currentDishId = -1;
-        //currentLevel = 0;
-
-        currentDishId = 0;  
-        currentLevel = 1;   
-        Debug.Log("[GameData] Game data reset.");
+        CurrentDishId = -1;
+        currentLevel = 0;
     }
 
-    public static void CheckAndIncrementLevel()
+    public static void IncrementLevel()
     {
-        if (currentDishId == 2 || currentDishId == 5 || currentDishId == 8)
-        {
-            currentLevel++;
-            Debug.Log($"[GameData] Level increased to: {currentLevel}");
-        }
+        currentLevel++;
     }
 }
 

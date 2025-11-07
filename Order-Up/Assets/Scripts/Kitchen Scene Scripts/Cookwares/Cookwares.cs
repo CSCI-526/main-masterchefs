@@ -460,7 +460,11 @@ public class Cookwares : MonoBehaviour, IDropZone
             cookingTimeSlider.onValueChanged.AddListener(OnSliderValueChanged);
         }
 
-        if (sliderPanel != null) sliderPanel.SetActive(false);
+        if (sliderPanel != null)
+        {
+            sliderPanel.SetActive(true);
+        }
+        
         UpdateSliderState();
     }
 
@@ -621,6 +625,16 @@ public class Cookwares : MonoBehaviour, IDropZone
             if (sr != null) sr.color = Color.white;
         }
     }
+
+    /// <summary>
+    /// Check if there is already ingredient inside, if yes, return false, if not true
+    /// </summary>
+    /// <returns></returns>
+    public bool CanAcceptIngredient()
+    {
+        return true;
+    }
+
 
     public bool IsCooking() => isCooking;
     public int GetIngredientCount() => ingredientsInside.Count;

@@ -1,7 +1,8 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
-/// Manages pantry slots that spawn unlimited ingredients.
+/// Manages pantry slots that spawn only 1 ingredient at a time.
 /// Works with Unity's Grid Layout Group component.
 /// Each child GameObject with this component acts as a slot.
 /// </summary>
@@ -12,9 +13,9 @@ public class PantryIngredient : MonoBehaviour
     public GameObject ingredientPrefab;
 
     [Header("Settings")]
-    public bool isUnlimitedSlot = true; // If true, respawns ingredient after dragging
     [SerializeField] private bool enableDebugLogs = false;
 
+    private bool hasActiveIngredient = false;
     private GameObject currentIngredient;
     private DraggableIngredient draggableComponent;
     private Vector3 slotPosition;
@@ -27,15 +28,27 @@ public class PantryIngredient : MonoBehaviour
 
     System.Collections.IEnumerator DelayedSpawn()
     {
-        // Wait for layout to complete
+        yield return null;
+        Canvas.ForceUpdateCanvases();
         yield return new WaitForEndOfFrame();
+        Canvas.ForceUpdateCanvases();
+
+        SpawnIngredient();
+    }
+
+    public void OnIngredientTrashed()
+    {
+        if (enableDebugLogs)
+            Debug.Log($"[Pantry:{name}] Ingredient trashed - respawning");
+
+        hasActiveIngredient = false;
         SpawnIngredient();
     }
 
     void SpawnIngredient()
     {
         // Don't spawn if we already have an ingredient
-        if (currentIngredient != null)
+        if (hasActiveIngredient == true)
         {
             if (enableDebugLogs)
                 Debug.LogWarning($"[Pantry:{name}] Already has an ingredient");
@@ -49,10 +62,12 @@ public class PantryIngredient : MonoBehaviour
         }
 
         slotPosition = transform.position;
+        Debug.Log($"[Pantry:{name}] Spawning ingredient at position: {slotPosition}");
         
         // Instantiate at slot position
         currentIngredient = Instantiate(ingredientPrefab, slotPosition, Quaternion.identity);
-        currentIngredient.transform.SetParent(transform);
+        currentIngredient.transform.SetParent(transform, worldPositionStays: true);
+
 
         // Get DraggableIngredient component
         draggableComponent = currentIngredient.GetComponent<DraggableIngredient>();
@@ -63,9 +78,6 @@ public class PantryIngredient : MonoBehaviour
             return;
         }
 
-        // Set original position
-        draggableComponent.SetNewOriginalPosition();
-
         // Subscribe to events
         draggableComponent.OnStartDrag += OnIngredientStartDrag;
         draggableComponent.OnDroppedOnPlate += OnIngredientDroppedOnPlate;
@@ -73,6 +85,9 @@ public class PantryIngredient : MonoBehaviour
 
         if (enableDebugLogs)
             Debug.Log($"[Pantry:{name}] Spawned ingredient: {currentIngredient.name}");
+
+        draggableComponent.SetNewOriginalPosition();
+        hasActiveIngredient = true;
     }
 
     void OnIngredientStartDrag(DraggableIngredient ingredient)
@@ -81,6 +96,14 @@ public class PantryIngredient : MonoBehaviour
         if (currentIngredient != null)
         {
             currentIngredient.transform.SetParent(null);
+
+            if (draggableComponent != null)
+            {
+                draggableComponent.OnStartDrag -= OnIngredientStartDrag;
+            }
+
+            currentIngredient = null;
+            draggableComponent = null;
         }
 
         if (enableDebugLogs)
@@ -95,10 +118,6 @@ public class PantryIngredient : MonoBehaviour
 
         CleanupCurrentIngredient();
 
-        if (isUnlimitedSlot)
-        {
-            SpawnIngredient();
-        }
     }
 
     void OnIngredientDroppedOnCookware(DraggableIngredient ingredient, Cookwares cookware)
@@ -108,11 +127,6 @@ public class PantryIngredient : MonoBehaviour
             Debug.Log($"[Pantry:{name}] Ingredient dropped on cookware: {cookware.name}");
 
         CleanupCurrentIngredient();
-
-        if (isUnlimitedSlot)
-        {
-            SpawnIngredient();
-        }
     }
 
     void CleanupCurrentIngredient()

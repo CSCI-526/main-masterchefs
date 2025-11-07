@@ -1029,6 +1029,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI;
 
 public class Plate : MonoBehaviour, IDropZone
@@ -1043,17 +1044,13 @@ public class Plate : MonoBehaviour, IDropZone
 
     [Header("Visual Feedback")]
     public GameObject highlightEffect;
-    public Color highlightColor = Color.yellow;
-
-    [Header("Color Change Settings")]
-    [Tooltip("Color when plate is empty")]
-    public Color emptyPlateColor = Color.white;
-    [Tooltip("Color when plate is full")]
-    public Color fullPlateColor = new Color(0.3f, 0.6f, 1f);
-    [Tooltip("If true, color gradually changes. If false, changes instantly when food is added")]
-    public bool useGradualColorChange = true;
-
-    private List<DraggableIngredient> ingredientsOnPlate;
+    public Color highlightColor;
+    [Header("Dish Display Settings")]
+    public TextMeshProUGUI dishIngredientsText; // Text component to show dish ingredients
+    public float maxTextWidth = 200f; // Maximum width for text box
+    public float minFontSize = 12f;
+    public float maxFontSize = 24f;
+    private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
     private SpriteRenderer plateRenderer;
     private Image plateImage;
     private Color originalColor;
@@ -1093,22 +1090,20 @@ public class Plate : MonoBehaviour, IDropZone
         else if (plateRenderer != null)
         {
             originalColor = plateRenderer.color;
-            emptyPlateColor = originalColor;
-            isUIPlate = false;
-            Debug.Log($"[Plate] Using SpriteRenderer, original color: {originalColor}");
-        }
-        else
-        {
-            Debug.LogWarning($"[Plate] No SpriteRenderer or Image component found on {gameObject.name}! Color changes won't work.");
-        }
 
-        if (ingredientParent == null) ingredientParent = transform;
-        if (highlightEffect != null) highlightEffect.SetActive(false);
+        if (ingredientParent == null)
+            ingredientParent = transform;
 
-        Debug.Log($"[Plate] Initialized. Empty color: {emptyPlateColor}, Full color: {fullPlateColor}, Max ingredients: {maxIngredients}");
+        if (highlightEffect != null)
+            highlightEffect.SetActive(false);
+
+        UpdateDishDisplay(); // Initialize display
     }
 
-    public GameObject GetGameObject() => gameObject;
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
 
     public bool AddIngredient(DraggableIngredient ingredient)
     {
@@ -1119,17 +1114,18 @@ public class Plate : MonoBehaviour, IDropZone
         }
 
         ingredientsOnPlate.Add(ingredient);
-        PositionIngredientOnPlate(ingredient);
+        //PositionIngredientOnPlate(ingredient);
 
-        if (ingredientParent != null) ingredient.transform.SetParent(ingredientParent);
-
-        // ✅ Change plate color when ingredient is added
-        UpdatePlateColor();
+        if (ingredientParent != null)
+            ingredient.transform.SetParent(ingredientParent);
 
         OnIngredientAdded?.Invoke(ingredient);
         if (IsFull()) OnPlateFull?.Invoke();
         if (ingredientsOnPlate.Count > 1 && comboSystem != null) comboSystem.CheckForCombinations();
 
+        UpdateDishDisplay(); // Update display after adding ingredient
+
+        Debug.Log($"Added {ingredient.name} to plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
     }
 
@@ -1141,13 +1137,16 @@ public class Plate : MonoBehaviour, IDropZone
         ingredientsOnPlate.Remove(ingredient);
         ingredient.transform.SetParent(null);
         Destroy(ingredient.gameObject);
-        RepositionIngredients();
-
-        // ✅ Update plate color after removal
-        UpdatePlateColor();
+        //RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
-        if (!wasEmpty && IsEmpty()) OnPlateEmpty?.Invoke();
+
+        if (!wasEmpty && IsEmpty())
+            OnPlateEmpty?.Invoke();
+
+        UpdateDishDisplay(); // Update display after removing ingredient
+
+        Debug.Log($"Removed {ingredient.name} from plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
     }
 
@@ -1221,6 +1220,10 @@ public class Plate : MonoBehaviour, IDropZone
         return true;
     }
 
+    /// <summary>
+    /// Should rearrange the ingredients from top down left right in a circular pattern
+    /// no more than 4 ingredients on the plate, so the position shouldn't be overlapping
+    /// </summary>
     void PositionIngredientOnPlate(DraggableIngredient ingredient)
     {
         Vector3 plateCenter = transform.position;
@@ -1244,8 +1247,8 @@ public class Plate : MonoBehaviour, IDropZone
             float radius = 0.3f + (i / 6f) * 0.2f;
             Vector3 offset = new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, -0.1f);
 
-            ingredientsOnPlate[i].transform.position = plateCenter + offset;
-            ingredientsOnPlate[i].SetNewOriginalPosition();
+                ingredientsOnPlate[i].transform.position = plateCenter + offset;
+            }
         }
     }
 
@@ -1298,8 +1301,123 @@ public class Plate : MonoBehaviour, IDropZone
             Destroy(child.gameObject);
         }
 
-        UpdatePlateColor();
-        Debug.Log($"[Plate] Plate cleared");
+        UpdateDishDisplay(); // Update display after clearing
+    }
+
+    public void UpdateDishDisplay()
+    {
+        if (dishIngredientsText == null)
+            return;
+
+        // Check if a recipe is formed
+        Recipe matchedRecipe = GetMatchingRecipe();
+
+        if (matchedRecipe != null)
+        {
+            // Show recipe name if found
+            dishIngredientsText.text = matchedRecipe.dishName;
+            AdjustTextSize(matchedRecipe.dishName);
+        }
+        else if (IsEmpty())
+        {
+            // Show "Dish Empty" when no ingredients
+            dishIngredientsText.text = "Dish Empty";
+            dishIngredientsText.fontSize = maxFontSize;
+        }
+        else
+        {
+            // Show ingredient names separated by " + "
+            string displayText = GetIngredientsDisplayText();
+            dishIngredientsText.text = displayText;
+            AdjustTextSize(displayText);
+        }
+    }
+    
+    private string GetIngredientsDisplayText()
+    {
+        if (IsEmpty())
+            return "Dish Empty";
+
+        List<string> ingredientNames = new List<string>();
+        
+        // Get ingredient names from the plate
+        foreach (Transform child in ingredientParent)
+        {
+            Ingredient ingredient = child.GetComponent<Ingredient>();
+            if (ingredient != null && ingredient.ingredientData != null)
+            {
+                ingredientNames.Add(ingredient.ingredientData.ingredientName);
+            }
+            else
+            {
+                // Fallback to object name if no Ingredient component
+                ingredientNames.Add(child.gameObject.name);
+            }
+        }
+
+        return string.Join(" + ", ingredientNames);
+    }
+
+    /// <summary>
+    /// Adjusts text size to fit within the specified width
+    /// </summary>
+    private void AdjustTextSize(string text)
+    {
+        if (dishIngredientsText == null)
+            return;
+
+        // Start with max font size
+        dishIngredientsText.fontSize = maxFontSize;
+        dishIngredientsText.text = text;
+
+        // Force update to calculate size
+        dishIngredientsText.ForceMeshUpdate();
+
+        // Get the preferred width of the text
+        float textWidth = dishIngredientsText.preferredWidth;
+
+        // If text is too wide, reduce font size
+        if (textWidth > maxTextWidth)
+        {
+            float scaleFactor = maxTextWidth / textWidth;
+            float newFontSize = Mathf.Max(minFontSize, maxFontSize * scaleFactor);
+            dishIngredientsText.fontSize = newFontSize;
+        }
+    }
+
+    /// <summary>
+    /// Checks if current ingredients match any recipe
+    /// </summary>
+    private Recipe GetMatchingRecipe()
+    {
+        if (comboSystem == null || ingredientParent == null)
+            return null;
+
+        List<Ingredient> ingredients = new List<Ingredient>();
+
+        // Get all ingredients from the plate
+        foreach (Transform child in ingredientParent)
+        {
+            Ingredient ing = child.GetComponent<Ingredient>();
+            if (ing != null)
+            {
+                ingredients.Add(ing);
+            }
+        }
+
+        if (ingredients.Count == 0)
+            return null;
+
+        // Check all recipes to find a match
+        foreach (Recipe recipe in comboSystem.allRecipes)
+        {
+            if (recipe.MatchesIngredients(ingredients))
+            {
+                return recipe;
+            }
+        }
+
+        return null;
     }
 
     public List<string> GetIngredientNames()
