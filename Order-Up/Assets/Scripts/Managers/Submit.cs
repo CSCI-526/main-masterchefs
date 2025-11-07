@@ -14,14 +14,24 @@ public class SubmitButton : MonoBehaviour
             float total = Timer.Instance.StopTimer();
             Debug.Log($"[Submit] Timer stopped at {total:F2}s ({Timer.Instance.FormattedElapsedTime}).");
 
-            // Send current level and time spent to google form
-            long sessionID = GameManager.Instance.SessionID;
-            int level = GameManager.Instance.CurrentLevel;
-            AnalyticsManager.Instance.Send(sessionID, level, total);
-            GameManager.Instance.GoToNextLevel();
+            sendTimeData(total);
         }
 
         ratingSystem.SubmitDish();
+    }
+
+    private void sendTimeData(float total)
+    {
+        // Send current level and time spent to google form
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameManager.Instance.CurrentLevel;
+        AnalyticsManager.Instance.SendLevelTimeData(sessionID, level, total);
+        GameManager.Instance.GoToNextLevel();
+    }
+
+    private void sendLevelCompleteData()
+    {
+        return;
     }
     
 }
