@@ -16,7 +16,6 @@ public class TypewriterEffect : MonoBehaviour
 
     private DialogueManager dialogueManager;
     private DialogueData currentDialogue;
-
     private void Start()
     {
         // Hide the image and button in the beginning
@@ -26,14 +25,16 @@ public class TypewriterEffect : MonoBehaviour
         // Get the random dialogue data from the DialogueManager
         dialogueManager = FindAnyObjectByType<DialogueManager>();
 
+        // Get the dialogue based on the CURRENT dish ID from GameData
+        dialogueManager = FindObjectOfType<DialogueManager>();
         if (dialogueManager == null) Debug.Log("No DialogueManager Found.");
-        currentDialogue = dialogueManager.GetNextDialogue();
+
+        // Get dialogue for the current dish ID (which was set by RatingSystem)
+        currentDialogue = dialogueManager.GetDialogueForDish(GameData.currentDishId);
 
         string fullText = currentDialogue.sentenceTemplate.Replace("{dish}", $"<color={currentDialogue.color}>{currentDialogue.dishName}</color>");
         dialogueText.text = fullText;
-
         dialogueText.ForceMeshUpdate();
-
         StartCoroutine(ShowText());
     }
 

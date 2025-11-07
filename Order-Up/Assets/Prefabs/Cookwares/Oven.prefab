@@ -972,6 +972,7 @@ GameObject:
   - component: {fileID: 226425726617089477}
   - component: {fileID: 2621015176284495081}
   - component: {fileID: 2718937403221895430}
+  - component: {fileID: 1477748619979219051}
   m_Layer: 3
   m_Name: Oven
   m_TagString: Untagged
@@ -1144,12 +1145,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Cookwares
   cookwareName: 
+  cookwareType: 0
   sliderPanel: {fileID: 2276123678364862653}
   cookingTimeSlider: {fileID: 835799840917441949}
   timerDisplayText: {fileID: 4895351755656400589}
   minCookingTime: 1
   maxCookingTime: 10
   enableDebugLogs: 0
+--- !u!114 &1477748619979219051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6229101973072947677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b19da924befc3452d8d8481dc301498d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CookwareMaintenance
+  maxDirtLevel: 5
+  cleanColor: {r: 1, g: 1, b: 1, a: 1}
+  dirtyColor: {r: 0.3, g: 0.2, b: 0.1, a: 1}
+  meshRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 3460992456762872273}
+  uiImage: {fileID: 0}
+  materialColorProperty: _Color
+  trashBin: {fileID: 0}
 --- !u!1 &7027756867873473240
 GameObject:
   m_ObjectHideFlags: 0
