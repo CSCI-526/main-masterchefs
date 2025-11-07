@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameInProgress { get; private set; } = false;
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
+    public int CurrentRound { get; private set; }
     private void Awake()
     {
         // Ensure only one instance exists
@@ -26,7 +27,13 @@ public class GameManager : MonoBehaviour
     {
         SessionID = DateTime.Now.Ticks;
         CurrentLevel = 1;
-        Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
+        CurrentRound = 1;
+        Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}, Round: {CurrentRound}");
+    }
+    public void GoToNextRound()
+    {   
+        Debug.Log($"Advanced to Round: {CurrentRound}");
+        CurrentRound++;
     }
     
     public void GoToNextLevel()

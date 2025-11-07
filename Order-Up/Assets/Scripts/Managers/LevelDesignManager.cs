@@ -9,6 +9,7 @@ public class LevelDesignManager : MonoBehaviour
 
     [Header("Game Data")]
     public int Level;
+    public int Round;
 
     [Header("Pantry Grid")]
     public Transform pantryGrid;
@@ -20,6 +21,7 @@ public class LevelDesignManager : MonoBehaviour
 
     private void Start()
     {
+        GameData.CurrentRound = Round;
         GameData.CurrentLevel = Level;
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
@@ -74,7 +76,11 @@ public class LevelDesignManager : MonoBehaviour
 
     public void OnRecipeComplete()
     {
-        GameData.IncrementLevel();
+        GameData.IncrementRound();
+        if ((GameData.CurrentRound == 3 && GameData.CurrentLevel < 3) || (GameData.CurrentRound == 4))
+        {
+            GameData.IncrementLevel();
+        }
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
 }
