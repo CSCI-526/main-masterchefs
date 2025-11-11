@@ -3,16 +3,15 @@ using UnityEngine;
 public class DraggableIngredient : MonoBehaviour
 {
     [Header("Drag Settings")]
-    public LayerMask dropZoneLayerMask = -1; // Layer mask for both plates AND cookwares
+    public LayerMask dropZoneLayerMask = -1;
     public float dragOffset = 0.1f;
-    [Header("Cooked Result")]
-    public DraggableIngredient cookedResult; // What this ingredient becomes when cooked
+
     [Header("Debug Settings")]
     public bool enableDebugLogs = false;
     public Color hoverColor = Color.yellow;
 
     private Camera mainCamera;
-    private Vector3 originalPosition; 
+    private Vector3 originalPosition;
     private Vector3 mouseOffset;
     private bool isDragging = false;
     private bool isHovering = false;
@@ -27,7 +26,7 @@ public class DraggableIngredient : MonoBehaviour
     public System.Action<DraggableIngredient> OnStartDrag;
     public System.Action<DraggableIngredient> OnEndDrag;
     public System.Action<DraggableIngredient, Plate> OnDroppedOnPlate;
-    public System.Action<DraggableIngredient, Cookwares> OnDroppedOnCookware;
+    public System.Action<DraggableIngredient, BaseCookware> OnDroppedOnCookware;
 
     void Start()
     {
@@ -45,16 +44,6 @@ public class DraggableIngredient : MonoBehaviour
             originalSortingOrder = spriteRenderer.sortingOrder;
             originalColor = spriteRenderer.color;
         }
-
-    }
-
-    void Update()
-    {
-        if (enableDebugLogs && Input.GetMouseButtonDown(0))
-        {
-            Vector3 mouseWorldPos = GetMouseWorldPosition();
-            Debug.Log($"[MOUSE DEBUG] Screen: {Input.mousePosition}, World: {mouseWorldPos}");
-        }
     }
 
     void OnMouseDown()
@@ -70,11 +59,6 @@ public class DraggableIngredient : MonoBehaviour
         mouseWorldPos.z = transform.position.z;
         mouseOffset = transform.position - mouseWorldPos;
 
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Mouse World Pos: {mouseWorldPos}, Object Pos: {transform.position}, Offset: {mouseOffset}");
-        }
-
         StartDragging();
     }
 
@@ -88,11 +72,6 @@ public class DraggableIngredient : MonoBehaviour
         Vector3 newPosition = mouseWorldPos + mouseOffset;
         transform.position = newPosition;
         rb2D.MovePosition(newPosition);
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Dragging - Mouse: {mouseWorldPos}, New Pos: {newPosition}");
-        }
     }
 
     void OnMouseUp()
@@ -116,12 +95,6 @@ public class DraggableIngredient : MonoBehaviour
         {
             spriteRenderer.color = hoverColor;
         }
-
-        if (enableDebugLogs)
-        {
-            Vector3 mouseWorldPos = GetMouseWorldPosition();
-            Debug.Log($"[{gameObject.name}] Mouse ENTERED - Mouse World Pos: {mouseWorldPos}, Object Pos: {transform.position}");
-        }
     }
 
     void OnMouseExit()
@@ -132,11 +105,6 @@ public class DraggableIngredient : MonoBehaviour
         if (spriteRenderer != null && !isDragging)
         {
             spriteRenderer.color = originalColor;
-        }
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Mouse EXITED");
         }
     }
 
@@ -152,7 +120,7 @@ public class DraggableIngredient : MonoBehaviour
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[{gameObject.name}] Started dragging (fixed position: {originalPosition})");
+            Debug.Log($"[{gameObject.name}] Started dragging");
         }
 
         OnStartDrag?.Invoke(this);
@@ -175,7 +143,7 @@ public class DraggableIngredient : MonoBehaviour
 
         // Check what's below using the unified layer mask
         IDropZone dropZone = GetDropZoneBelow();
-        Debug.Log($"[{dropZone} found below {gameObject.name}]");
+        
 
         if (dropZone != null)
         {
@@ -189,28 +157,27 @@ public class DraggableIngredient : MonoBehaviour
             {
                 plate.AddIngredient(this);
                 OnDroppedOnPlate?.Invoke(this, plate);
-                // Note: originalPosition stays the same - never updated
             }
-            else if (dropZone is Cookwares cookware)
+            else if (dropZone is BaseCookware cookware)
             {
-                // Check if cookware can accept this ingredient
-                //if (cookware.CanAcceptIngredient())
-                //{
+                // Check if cookware can accept this ingredient (only one at a time)
+                if (cookware.CanAcceptIngredient())
+                {
                     // Position ingredient inside cookware bounds
                     transform.position = dropZone.GetGameObject().transform.position;
                     OnDroppedOnCookware?.Invoke(this, cookware);
-                    // Note: originalPosition stays the same - never updated
+                    cookware.ManuallyAcceptIngredient(gameObject);
 
                     if (enableDebugLogs)
                     {
-                        Debug.Log($"[{gameObject.name}] Successfully dropped in cookware (original position unchanged: {originalPosition})");
+                        Debug.Log($"[{gameObject.name}] Successfully dropped in {cookware.GetCookwareType()}");
                     }
-                //}
+                }
                 else
                 {
                     if (enableDebugLogs)
                     {
-                        Debug.Log($"[{gameObject.name}] Cookware is full, returning to fixed position: {originalPosition}");
+                        Debug.Log($"[{gameObject.name}] Cookware is full or cooking, returning to original position");
                     }
                     ReturnToOriginalPosition();
                 }
@@ -222,28 +189,25 @@ public class DraggableIngredient : MonoBehaviour
                     Debug.Log($"[{gameObject.name}] Dropped on Trash: {trash.GetGameObject().name}");
                 }
 
-                // Notify trash and let it handle the destruction
                 trash.OnIngredientDropped(this);
-                // Note: Trash will destroy this object, so no need to continue
                 return;
             }
             else
             {
                 if (enableDebugLogs)
-                    Debug.LogWarning($"[{gameObject.name}] Dropped on unknown drop zone type: {dropZone.GetType().Name}, returning to fixed position: {originalPosition}");
+                    Debug.LogWarning($"[{gameObject.name}] Dropped on unknown drop zone type, returning to original position");
                 ReturnToOriginalPosition();
             }
         }
         else
         {
             if (enableDebugLogs)
-                Debug.Log($"[{gameObject.name}] No drop zone found, returning to fixed position: {originalPosition}");
+                Debug.Log($"[{gameObject.name}] No drop zone found, returning to original position");
             ReturnToOriginalPosition();
         }
 
         OnEndDrag?.Invoke(this);
         Physics2D.SyncTransforms();
-
     }
 
     Vector3 GetMouseWorldPosition()
@@ -252,23 +216,13 @@ public class DraggableIngredient : MonoBehaviour
 
         if (!IsValidMousePosition(mousePos))
         {
-            Debug.LogWarning($"[{gameObject.name}] Invalid mouse position detected: {mousePos}. Using fallback.");
+            Debug.LogWarning($"[{gameObject.name}] Invalid mouse position detected. Using fallback.");
             mousePos = new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0f);
-        }
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Raw Mouse Position: {mousePos}");
         }
 
         Canvas canvas = GetComponentInParent<Canvas>();
         if (canvas != null && canvas.renderMode == RenderMode.WorldSpace)
         {
-            if (enableDebugLogs)
-            {
-                Debug.Log($"[{gameObject.name}] Using World Space Canvas: {canvas.name}");
-            }
-
             RectTransform canvasRect = canvas.GetComponent<RectTransform>();
             Vector2 localPoint;
 
@@ -277,24 +231,16 @@ public class DraggableIngredient : MonoBehaviour
             {
                 Vector3 worldPos = canvasRect.TransformPoint(localPoint);
 
-                if (!IsValidWorldPosition(worldPos))
+                if (IsValidWorldPosition(worldPos))
                 {
-                    Debug.LogWarning($"[{gameObject.name}] Invalid world position from canvas: {worldPos}. Using transform position.");
-                    return transform.position;
+                    return worldPos;
                 }
-
-                if (enableDebugLogs)
-                {
-                    Debug.Log($"[{gameObject.name}] Canvas Local Point: {localPoint}, World Pos: {worldPos}");
-                }
-
-                return worldPos;
             }
         }
 
         if (mainCamera == null)
         {
-            Debug.LogError($"[{gameObject.name}] No camera found for ScreenToWorldPoint!");
+            Debug.LogError($"[{gameObject.name}] No camera found!");
             return transform.position;
         }
 
@@ -303,13 +249,7 @@ public class DraggableIngredient : MonoBehaviour
 
         if (!IsValidWorldPosition(fallbackWorldPos))
         {
-            Debug.LogWarning($"[{gameObject.name}] Invalid fallback world position: {fallbackWorldPos}. Using transform position.");
             return transform.position;
-        }
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Using fallback ScreenToWorldPoint: {fallbackWorldPos}");
         }
 
         return fallbackWorldPos;
@@ -330,20 +270,31 @@ public class DraggableIngredient : MonoBehaviour
 
     IDropZone GetDropZoneBelow()
     {
-        // Check using OverlapPoint with the unified layer mask
-        Collider2D[] colliders = Physics2D.OverlapPointAll(transform.position, dropZoneLayerMask);
+        // Get ingredient collider bounds
+        Collider2D myCollider = GetComponent<Collider2D>();
+        Bounds bounds = myCollider.bounds;
 
-        foreach (Collider2D collider in colliders)
+        // Start the ray just below the ingredient’s collider
+        Vector2 origin = new Vector2(bounds.center.x, bounds.min.y - 0.01f);
+        Vector2 direction = Vector2.down;
+        float rayDistance = 1f;
+        Debug.DrawRay(origin, direction * rayDistance, Color.green, 1f);
+        // Raycast only against DropZone layers
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, rayDistance, dropZoneLayerMask);
+
+        foreach (RaycastHit2D hit in hits)
         {
-            if (collider.gameObject != gameObject)
-            {
-                // Try to get any component that implements IDropZone
-                IDropZone dropZone = collider.GetComponent<IDropZone>();
-                if (dropZone != null)
-                    return dropZone;
-            }
+            if (hit.collider.gameObject == gameObject)
+                continue; // skip self-hit
+
+            Debug.Log($"[DEBUG] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+
+            IDropZone dropZone = hit.collider.GetComponent<IDropZone>();
+            if (dropZone != null)
+                return dropZone;
         }
 
+        Debug.Log($"[{gameObject.name}] No DropZone detected by raycast");
         return null;
     }
 
@@ -351,7 +302,7 @@ public class DraggableIngredient : MonoBehaviour
     {
         if (enableDebugLogs)
         {
-            Debug.Log($"[{gameObject.name}] Returning from {transform.position} to FIXED original position: {originalPosition}");
+            Debug.Log($"[{gameObject.name}] Returning to original position: {originalPosition}");
         }
 
         StartCoroutine(ReturnToPositionCoroutine());
@@ -360,14 +311,9 @@ public class DraggableIngredient : MonoBehaviour
     System.Collections.IEnumerator ReturnToPositionCoroutine()
     {
         Vector3 startPos = transform.position;
-        Vector3 targetPos = originalPosition; // Always return to the fixed original position
+        Vector3 targetPos = originalPosition;
         float elapsed = 0f;
         float duration = 0.3f;
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Starting return animation: From {startPos} to {targetPos}");
-        }
 
         while (elapsed < duration)
         {
@@ -379,25 +325,16 @@ public class DraggableIngredient : MonoBehaviour
             yield return null;
         }
 
-        // Ensure we end exactly at the target position
         transform.position = targetPos;
-
-        if (enableDebugLogs)
-        {
-            Debug.Log($"[{gameObject.name}] Return animation complete. Final position: {transform.position}");
-        }
     }
 
-    /// <summary>
-    /// Sets the original position - should only be called once during initialization (e.g., by PantryIngredient)
-    /// </summary>
     public void SetNewOriginalPosition()
     {
         originalPosition = transform.position;
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[{gameObject.name}] FIXED original position set to: {originalPosition}");
+            Debug.Log($"[{gameObject.name}] Original position set to: {originalPosition}");
         }
     }
 
@@ -410,4 +347,7 @@ public class DraggableIngredient : MonoBehaviour
     {
         enabled = true;
     }
+
+    public bool IsDragging => isDragging;
+
 }

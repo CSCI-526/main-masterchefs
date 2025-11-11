@@ -48,7 +48,6 @@ GameObject:
   - component: {fileID: 5237862676981609094}
   - component: {fileID: 3396458671134871661}
   - component: {fileID: 5095193158636949180}
-  - component: {fileID: 3613707912862123946}
   m_Layer: 3
   m_Name: CanvasCookware
   m_TagString: Untagged
@@ -73,8 +72,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 2, y: 0}
-  m_SizeDelta: {x: 103.5863, y: 65.441}
+  m_AnchoredPosition: {x: 0, y: -1.2}
+  m_SizeDelta: {x: 80, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5237862676981609094
 Canvas:
@@ -97,7 +96,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3396458671134871661
 MonoBehaviour:
@@ -139,21 +138,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3613707912862123946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1919756923588234057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3812e947118e974c83902b4c96aab58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CookwareUI
-  cookware: {fileID: 3272276017913267873}
-  startCookingButton: {fileID: 8641912625614996889}
-  stopCookingButton: {fileID: 3468845468306713006}
 --- !u!1 &1955547385959628367
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +340,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0.0000038146973, y: 0}
-  m_SizeDelta: {x: 50, y: 30}
+  m_SizeDelta: {x: 40, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &7515962069859085327
 CanvasRenderer:
@@ -439,7 +423,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2651179600964840582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859785039161376495}
+        m_TargetAssemblyTypeName: TimerBasedCookware, Assembly-CSharp
+        m_MethodName: StartCooking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2335898806087856789
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,8 +526,8 @@ GameObject:
   - component: {fileID: 775214879835566078}
   - component: {fileID: 7189761509980134900}
   - component: {fileID: 3285540464976143012}
-  - component: {fileID: 3272276017913267873}
   - component: {fileID: 3566032703296840543}
+  - component: {fileID: 859785039161376495}
   m_Layer: 3
   m_Name: Airfryer
   m_TagString: Untagged
@@ -666,26 +662,6 @@ PolygonCollider2D:
       - {x: 0.5, y: 0}
       - {x: 0.25, y: 0.43359375}
   m_UseDelaunayMesh: 0
---- !u!114 &3272276017913267873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2343644444911068513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc1ace4e1c884d4fa3447c527b5a3d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookwares
-  cookwareName: Airfryer
-  cookwareType: 0
-  sliderPanel: {fileID: 2335898806087856789}
-  cookingTimeSlider: {fileID: 6773559171703618276}
-  timerDisplayText: {fileID: 4207584873471744672}
-  minCookingTime: 1
-  maxCookingTime: 10
-  enableDebugLogs: 0
 --- !u!50 &3566032703296840543
 Rigidbody2D:
   serializedVersion: 5
@@ -713,6 +689,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &859785039161376495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2343644444911068513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a183a07232d21841bc355bd834f4ed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimerBasedCookware
+  cookwareName: Air Fryer
+  cookwareType: 1
+  timerDisplayText: {fileID: 4207584873471744672}
+  enableDebugLogs: 1
+  sliderPanel: {fileID: 2335898806087856789}
+  cookingTimeSlider: {fileID: 6773559171703618276}
+  minCookingTime: 1
+  maxCookingTime: 10
 --- !u!1 &3178218886028117059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,7 +1068,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -0.0000038146973, y: 0}
-  m_SizeDelta: {x: 50, y: 30}
+  m_SizeDelta: {x: 40, y: 30}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &8877415154813943423
 CanvasRenderer:
@@ -1155,7 +1151,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1759064886961054608}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 859785039161376495}
+        m_TargetAssemblyTypeName: TimerBasedCookware, Assembly-CSharp
+        m_MethodName: StopCooking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6458922473110928492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1199,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: 80, y: 20}
+  m_SizeDelta: {x: 80, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2612324548746001582
 CanvasRenderer:
@@ -1255,7 +1263,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

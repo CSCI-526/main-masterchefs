@@ -256,7 +256,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1836858671628052041}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8622223696547448276}
+        m_TargetAssemblyTypeName: TimerBasedCookware, Assembly-CSharp
+        m_MethodName: StartCooking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2276123678364862653
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +983,7 @@ GameObject:
   - component: {fileID: 3460992456762872273}
   - component: {fileID: 226425726617089477}
   - component: {fileID: 2621015176284495081}
-  - component: {fileID: 2718937403221895430}
+  - component: {fileID: 8622223696547448276}
   m_Layer: 3
   m_Name: Oven
   m_TagString: Untagged
@@ -1131,7 +1143,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2718937403221895430
+--- !u!114 &8622223696547448276
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1140,16 +1152,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 6229101973072947677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbc1ace4e1c884d4fa3447c527b5a3d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a183a07232d21841bc355bd834f4ed6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cookwares
-  cookwareName: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimerBasedCookware
+  cookwareName: Oven
+  cookwareType: 3
+  timerDisplayText: {fileID: 4895351755656400589}
+  enableDebugLogs: 0
   sliderPanel: {fileID: 2276123678364862653}
   cookingTimeSlider: {fileID: 835799840917441949}
-  timerDisplayText: {fileID: 4895351755656400589}
   minCookingTime: 1
   maxCookingTime: 10
-  enableDebugLogs: 0
 --- !u!1 &7027756867873473240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1306,7 +1319,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5292517330577664290}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8622223696547448276}
+        m_TargetAssemblyTypeName: TimerBasedCookware, Assembly-CSharp
+        m_MethodName: StopCooking
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8947946821084629569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,7 +1344,6 @@ GameObject:
   - component: {fileID: 8357418458168285234}
   - component: {fileID: 6300685799693046078}
   - component: {fileID: 2001640589007233664}
-  - component: {fileID: 6964499042294097777}
   m_Layer: 3
   m_Name: CanvasCookware
   m_TagString: Untagged
@@ -1410,18 +1434,3 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6964499042294097777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8947946821084629569}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3812e947118e974c83902b4c96aab58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CookwareUI
-  cookware: {fileID: 2718937403221895430}
-  startCookingButton: {fileID: 2780089680960910210}
-  stopCookingButton: {fileID: 8673328286490701569}
