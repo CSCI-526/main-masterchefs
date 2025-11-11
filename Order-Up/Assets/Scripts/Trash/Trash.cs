@@ -61,6 +61,8 @@ public class Trash : MonoBehaviour, IDropZone
                 string prefabName = pantry.ingredientPrefab.name;
                 string ingredientName = ingredient.name.Replace("(Clone)", "").Trim();
 
+                // FLAG: Change this to ingredient type
+                ingredientName = ingredient.name.Replace("_Cooked", "_Raw").Replace("_Overcooked", "_Raw").Trim();
                 if (ingredientName == prefabName)
                 {
                     return pantry;

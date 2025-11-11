@@ -62,7 +62,6 @@ public class PantryIngredient : MonoBehaviour
         }
 
         slotPosition = transform.position;
-        Debug.Log($"[Pantry:{name}] Spawning ingredient at position: {slotPosition}");
         
         // Instantiate at slot position
         currentIngredient = Instantiate(ingredientPrefab, slotPosition, Quaternion.identity);
@@ -120,7 +119,7 @@ public class PantryIngredient : MonoBehaviour
 
     }
 
-    void OnIngredientDroppedOnCookware(DraggableIngredient ingredient, Cookwares cookware)
+    void OnIngredientDroppedOnCookware(DraggableIngredient ingredient, BaseCookware cookware)
     {
         // Successfully dropped on cookware - respawn if unlimited
         if (enableDebugLogs)

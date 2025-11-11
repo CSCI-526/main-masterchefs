@@ -112,7 +112,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
-  cookedResult: {fileID: 0}
   enableDebugLogs: 1
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &735725617039516531
@@ -224,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::IngredientHeartbeatHover
   scaleMultiplier: 1.3
   animationSpeed: 8
-  ingredientText: {fileID: 8090753727254311066}
+  ingredientText: {fileID: 0}
   textFadeSpeed: 5
 --- !u!1 &6099378322739332714
 GameObject:
