@@ -109,5 +109,5 @@ Thumbs.db
 # Visual Studio Code settings
 .vscode/
 
-# Rider config
-/.idea/
+#Rider config
+.idea/
