@@ -112,7 +112,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
-  enableDebugLogs: 1
+  enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &735725617039516531
 MonoBehaviour:
@@ -216,7 +216,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 720147643003493700}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ae6b1632c12d4e8dbdb7804708cc2e7, type: 3}
   m_Name: 

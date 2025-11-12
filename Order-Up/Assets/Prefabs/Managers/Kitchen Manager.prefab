@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1726366149094698622}
   - component: {fileID: 75623357186445953}
   - component: {fileID: 8218621305344121061}
+  - component: {fileID: 490384840820894745}
   m_Layer: 0
   m_Name: Kitchen Manager
   m_TagString: Untagged
@@ -159,4 +160,18 @@ MonoBehaviour:
   - levelName: 
     activeIngredients: []
     activeCookwares: []
+  Level: 0
   pantryGrid: {fileID: 0}
+  enableDebugLogs: 0
+--- !u!114 &490384840820894745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8051779419566099034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a7ee773e908534fb76c59c48f2021a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Attempts

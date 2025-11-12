@@ -25,14 +25,15 @@ public class GameManager : MonoBehaviour
     public void StartSession()
     {
         SessionID = DateTime.Now.Ticks;
-        CurrentLevel = 1;
+        CurrentLevel = GameData.CurrentLevel;
         Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
     }
     
     public void GoToNextLevel()
     {   
         Debug.Log($"Advanced to Level: {CurrentLevel}");
-        CurrentLevel++;
+        GameData.IncrementLevel();
+        CurrentLevel = GameData.CurrentLevel;
     }
 
     // --- SCENE MANAGEMENT ---

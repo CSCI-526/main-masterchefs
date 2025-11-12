@@ -28,12 +28,14 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
     protected Collider2D cookwareCollider;
     protected SpriteRenderer spriteRenderer;
     protected Rigidbody2D rb2D;
+    protected Transform cookwareParent;
 
     protected virtual void Awake()
     {
         cookwareCollider = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
+        cookwareParent = transform.parent;
 
         // Configure Rigidbody2D to be static
         rb2D.bodyType = RigidbodyType2D.Static;
@@ -59,6 +61,12 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
     public GameObject GetGameObject()
     {
         return gameObject;
+    }
+
+    // set Cookware the parent of the ingredient
+    public void SetIngredientParent(GameObject ingredient)
+    {
+        ingredient.transform.SetParent(cookwareParent);
     }
 
     /// <summary>

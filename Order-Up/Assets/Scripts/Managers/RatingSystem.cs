@@ -9,26 +9,34 @@ public class RatingSystem : MonoBehaviour
 {
     [Header("Rating Settings")]
     public Transform plateTransform; // Reference to the plate where dishes are created
+    
+    [Header("Debug Settings")]
     public bool enableDebugLogs = true;
+
+    [Header("UI References")]
     public GameObject evaluationPanel;
     public TMPro.TextMeshProUGUI evaluationResults;
     public Image[] starDisplay = new Image[3];
     public Sprite filledStar;
     public Sprite emptyStar;
-    public TMPro.TextMeshProUGUI averageTimeText;
-    public TMPro.TextMeshProUGUI averageScoreText;
+    [SerializeField] private Button submitButton;
 
     // Tracking variables
     private static List<float> completionTimes = new List<float>();
     private static List<int> starRatings = new List<int>();
 
 
-    // compare gameData with the Dish.recipe id to see if it is a match
-    // if it is then 3 stars 
-    // if not 1 stars
-
+    /// <summary>
+    /// Submits the current dish for evaluation, calculates its rating, and handles the subsequent game flow based on
+    /// the result.
+    /// </summary>
+    /// <remarks>This method evaluates the dish by calculating its star rating and recording the time taken to
+    /// complete the task. The results are stored for future reference, and the player's attempt is recorded if
+    /// applicable. Depending on the remaining attempts, the method either transitions to the next scene or allows the
+    /// player to retry.</remarks>
     public void SubmitDish()
     {
+        submitButton.interactable = false; // Prevent multiple submissions
         int stars = CalculateRating();
         Debug.Log("Rating: " + stars + " Stars!");
 
@@ -36,11 +44,28 @@ public class RatingSystem : MonoBehaviour
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
 
-        // UpdateAverageDisplays();
+        // Record the attempt
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.RecordAttempt(stars);
+        }
+
         DisplayEvaluation(stars);
-        Invoke("TransitionToCustomerScene", 2f);
+
+        // Only transition if there are no attempts remaining
+        if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
+        {
+            // Reset for next level
+            Attempts.Instance.CompleteLevel();
+            Invoke("TransitionToCustomerScene", 2f);
+        }
+        else
+        {
+            Invoke("HideEvaluationPanel", 2f);
+            submitButton.interactable = true; // Re-enable the button for retry
+        }
     }
-    
+
     void UpdateAverageDisplays()
     {
         // TODO: Update the average time after every round
@@ -315,6 +340,14 @@ public class RatingSystem : MonoBehaviour
 
         // 3. Show the panel
         evaluationPanel.SetActive(true);
+    }
+
+    private void HideEvaluationPanel()
+    {
+        if (evaluationPanel != null)
+        {
+            evaluationPanel.SetActive(false);
+        }
     }
 
 }

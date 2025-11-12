@@ -5,16 +5,19 @@ using TMPro;
 /// <summary>
 /// Cookware that uses a timer slider (Oven, Air Fryer)
 /// </summary>
+/// <upgrade>
+/// maxCookingTime decrements from 15 to 10 to 5 seconds as appliance is upgraded
+/// </upgrade>
 public class TimerBasedCookware : BaseCookware
 {
-    [Header("Timer UI")]
+    [Header("UI")]
     [SerializeField] private GameObject sliderPanel;
-    [SerializeField] private Slider cookingTimeSlider;
+    [SerializeField] private Slider cookingTimeSlider; // from timer to progress bar
 
     [Header("Timer Settings")]
-    [SerializeField] private float minCookingTime = 1f;
-    [SerializeField] private float maxCookingTime = 10f;
-    private float selectedCookingTime = 5f;
+    [SerializeField] private float minCookingTime = 5f;
+    [SerializeField] private float maxCookingTime = 15f;
+    private float selectedCookingTime = 15f; // default value, can decrement if they upgrade the appliance
 
     protected override void Start()
     {
@@ -30,12 +33,10 @@ public class TimerBasedCookware : BaseCookware
     {
         if (cookingTimeSlider != null)
         {
-            cookingTimeSlider.minValue = minCookingTime;
+            cookingTimeSlider.minValue = 0f;
             cookingTimeSlider.maxValue = maxCookingTime;
-            cookingTimeSlider.value = selectedCookingTime;
+            cookingTimeSlider.value = 0f;
             cookingTimeSlider.interactable = false;
-
-            cookingTimeSlider.onValueChanged.AddListener(OnSliderValueChanged);
 
             if (enableDebugLogs)
             {
@@ -43,13 +44,21 @@ public class TimerBasedCookware : BaseCookware
             }
         }
 
-        UpdateTimerDisplay();
+        //UpdateTimerDisplay();
     }
 
     protected override void UpdateCookingLogic()
     {
         currentCookingTime += Time.deltaTime;
-        UpdateTimerDisplay();
+        Debug.Log($"[{cookwareName}] Cooking time updated: {currentCookingTime:F2}s / {selectedCookingTime:F2}s");
+        // only show the slider progress for now
+        //UpdateTimerDisplay();
+
+        // Update progress bar
+        if (cookingTimeSlider != null)
+        {
+            cookingTimeSlider.value = Mathf.Clamp(currentCookingTime, 0f, selectedCookingTime);
+        }
 
         if (currentCookingTime >= selectedCookingTime)
         {
@@ -64,8 +73,6 @@ public class TimerBasedCookware : BaseCookware
         {
             Debug.Log($"[{cookwareName}] Ingredient entered: {ingredient.name}");
         }
-
-        UpdateSliderState();
     }
 
     protected override void OnIngredientExited(GameObject ingredient)
@@ -73,18 +80,6 @@ public class TimerBasedCookware : BaseCookware
         if (enableDebugLogs)
         {
             Debug.Log($"[{cookwareName}] Ingredient exited: {ingredient.name}");
-        }
-
-        UpdateSliderState();
-    }
-
-    private void OnSliderValueChanged(float value)
-    {
-        selectedCookingTime = value;
-
-        if (!isCooking)
-        {
-            UpdateTimerDisplay();
         }
     }
 
@@ -109,7 +104,6 @@ public class TimerBasedCookware : BaseCookware
         if (cookingTimeSlider != null)
         {
             bool hasIngredient = ingredientInside != null;
-            cookingTimeSlider.interactable = hasIngredient && !isCooking;
 
             // Visual feedback
             ColorBlock colors = cookingTimeSlider.colors;
@@ -149,14 +143,14 @@ public class TimerBasedCookware : BaseCookware
     {
         base.StopCooking();
         UpdateSliderState();
-        UpdateTimerDisplay();
+        //UpdateTimerDisplay();
     }
 
     protected override void FinishCooking()
     {
         base.FinishCooking();
         UpdateSliderState();
-        UpdateTimerDisplay();
+        //UpdateTimerDisplay();
     }
 
     public float GetSelectedCookingTime() => selectedCookingTime;

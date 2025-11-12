@@ -167,6 +167,7 @@ public class DraggableIngredient : MonoBehaviour
                     transform.position = dropZone.GetGameObject().transform.position;
                     OnDroppedOnCookware?.Invoke(this, cookware);
                     cookware.ManuallyAcceptIngredient(gameObject);
+                    cookware.SetIngredientParent(gameObject);
 
                     if (enableDebugLogs)
                     {
