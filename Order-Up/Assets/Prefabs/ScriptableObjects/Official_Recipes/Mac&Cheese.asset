@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
-  m_Name: ChickenNoodleSoup_Done
+  m_Name: Mac&Cheese
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  dishName: Chicken Noodle Soup_Done
-  ID: 8
+  dishName: Mac & Cheese
+  ID: 3
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: e3c9824ae37c74c77997afb07c306dda, type: 2}
+  - ingredient: {fileID: 11400000, guid: 66d8a5c607b2948fea5b84935ceec93b, type: 2}
     requiredState: 1
     requiredCookware: 2
-  dishPrefab: {fileID: 2080741474404420042, guid: eda4f03702cc0473b8154aefc16807d9, type: 3}
+    requiredChoppingState: 0
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
+    requiredState: 1
+    requiredCookware: 1
+    requiredChoppingState: 0
+  dishPrefab: {fileID: 7139325336945739568, guid: 1130144770a314fff8bda6627ac65c75, type: 3}
   icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

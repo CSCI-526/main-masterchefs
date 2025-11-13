@@ -6707,6 +6707,14 @@ PrefabInstance:
       propertyPath: plate
       value: 
       objectReference: {fileID: 1616915303}
+    - target: {fileID: 4723629672639730609, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: allRecipes.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723629672639730609, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'allRecipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: playButton
       value: 
@@ -6757,7 +6765,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: Level
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: pantryGrid
