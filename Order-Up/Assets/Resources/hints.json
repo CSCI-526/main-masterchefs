@@ -1,0 +1,124 @@
+{
+    "recipes": [
+        {
+            "id": 0,
+            "currentRecipe": "Cheesy Fries",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Potato (Chopped → Cooked), Cheese (Raw)"
+                },
+                "hint02": {
+                    "cookware": "Cut Board, Fryer"
+                },
+                "hint03": {
+                    "instructions": "1) Chop Potato in the Cut Board. 2) Cook Potato and Cheese in the Fryer."
+                }
+            }
+        },
+        {
+            "id": 1,
+            "currentRecipe": "Cheese Dough Bites",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Dough (Cooked), Cheese (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Oven, Fryer"
+                },
+                "hint03": {
+                    "instructions": "1) Bake Dough in Oven. 2) Cook Cheese in Fryer."
+                }
+            }
+        },
+        {
+            "id": 2,
+            "currentRecipe": "Cheese Pizza",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Dough (Cooked), Cheese (Cooked), Tomato (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Oven, Fryer"
+                },
+                "hint03": {
+                    "instructions": "1) Cook Dough in Oven. 2) Cook Cheese in Fryer. 3) Cook Tomato in Oven."
+                }
+            }
+        },
+        {
+            "id": 3,
+            "currentRecipe": "Mac & Cheese",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Pasta (Cooked), Cheese (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Pot, Fryer"
+                },
+                "hint03": {
+                    "instructions": "1) Boil Pasta in pot. 2) Melt Cheese in the Fryer."
+                }
+            }
+        },
+        {
+            "id": 4,
+            "currentRecipe": "Spaghetti with Tomato Sauce",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Pasta (Cooked), Tomato (Cooked), Cheese (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Pot, Oven, Fryer"
+                },
+                "hint03": {
+                    "instructions": "1) Boil Pasta in the Pot. 2) Cook Cheese in the Fryer. 3) Cook Tomato in the Oven."
+                }
+            }
+        },
+        {
+            "id": 5,
+            "currentRecipe": "Omelette Sandwich",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Bread (Raw), Egg (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Cut Board"
+                },
+                "hint03": {
+                    "instructions": "1) Cut Bread in the Cut Board. 2) Combine Bread and Eggs Together."
+                }
+            }
+        },
+        {
+            "id": 6,
+            "currentRecipe": "Chicken Cheesy Melt",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Bread (Raw), Chicken (Cooked), Cheese (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Cut Board, Fryer, Oven"
+                },
+                "hint03": {
+                    "instructions": "1) Cook Chicken in the Oven. 2) Cut Bread in the Cut Board. 3) Cook Cheese in the Fryer."
+                }
+            }
+        },
+        {
+            "id": 7,
+            "currentRecipe": "Chicken Sandwich",
+            "hints": {
+                "hint01": {
+                    "ingredients": "Bread (Raw), Chicken (Cooked), Lettuce (Raw), Tomato (Cooked)"
+                },
+                "hint02": {
+                    "cookware": "Cut Board, Oven"
+                },
+                "hint03": {
+                    "instructions": "1) Cook Chicken in the Oven. 2) Cut Bread in the Cut Board 3) Cook Tomato in the Oven. 4) Add Lettuce to complete the sandwich. "
+                }
+            }
+        }
+    ]
+}
