@@ -15,7 +15,13 @@ MonoBehaviour:
   dishName: Cheese Pizza Done
   ID: 2
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: 006193c77a1854c2b8d767e6cd1c4f9d, type: 2}
+  - ingredient: {fileID: 11400000, guid: 7807ed4edfb184b9689e073e1a54a955, type: 2}
+    requiredState: 1
+    requiredCookware: 3
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
+    requiredState: 1
+    requiredCookware: 3
+  - ingredient: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
     requiredState: 1
     requiredCookware: 3
   dishPrefab: {fileID: 1332861967603227936, guid: 2d04ba47d720a4bfda86f88f752c8287, type: 3}

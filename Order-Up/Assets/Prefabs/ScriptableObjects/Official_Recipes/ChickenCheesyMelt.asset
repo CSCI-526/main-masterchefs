@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
-  m_Name: SpaghettiWithTomatoSauce
+  m_Name: ChickenCheesyMelt
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  dishName: Spaghetti With Tomato Sauce
-  ID: 4
+  dishName: Chicken Cheesy Melt
+  ID: 6
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: 66d8a5c607b2948fea5b84935ceec93b, type: 2}
-    requiredState: 1
-    requiredCookware: 2
-  - ingredient: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
+  - ingredient: {fileID: 11400000, guid: cce1943473bcb44b390a723afd38332f, type: 2}
     requiredState: 1
     requiredCookware: 4
+  - ingredient: {fileID: 11400000, guid: ebab5fec761fb4a30945e8ddf9bcc330, type: 2}
+    requiredState: 0
+    requiredCookware: 0
   - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
     requiredState: 1
     requiredCookware: 4
-  dishPrefab: {fileID: 7206586088922438145, guid: 22caa9c80a06d46a69cd9a3dbb7a07a4, type: 3}
+  dishPrefab: {fileID: 9162137006038502844, guid: fb8cd1ec829ec4d4087ce874911b68f9, type: 3}
   icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

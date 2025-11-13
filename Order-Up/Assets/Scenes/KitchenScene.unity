@@ -2649,6 +2649,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PantryIngredient
   ingredientPrefab: {fileID: 1048782522944264842, guid: d2f25143d8ee24750ba2179450eeae1d, type: 3}
   enableDebugLogs: 0
+--- !u!1 &981790937 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5148992416158093061, guid: a2168c0a5d76cfe45ae4b9645afc2b07, type: 3}
+  m_PrefabInstance: {fileID: 8513117624255767836}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1054111229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5368284701439756160, guid: a108381e42fa943449f20a6d9ce351c3, type: 3}
+  m_PrefabInstance: {fileID: 2413072439145525571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1139075299
 GameObject:
   m_ObjectHideFlags: 0
@@ -3852,6 +3862,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523609944}
   m_CullTransparentMesh: 1
+--- !u!1 &1544820359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2343644444911068513, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+  m_PrefabInstance: {fileID: 1553047130}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1553047130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4137,6 +4152,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597994250}
   m_CullTransparentMesh: 1
+--- !u!1 &1607794273 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6229101973072947677, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
+  m_PrefabInstance: {fileID: 1696092497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616915302
 GameObject:
   m_ObjectHideFlags: 0
@@ -6703,6 +6723,34 @@ PrefabInstance:
       propertyPath: submitButton
       value: 
       objectReference: {fileID: 1481423359}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: dishPrefabs.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1942979368881940726, guid: 5fa97fa5935c04a268f0f8aeefad06dd, type: 3}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1332861967603227936, guid: 0f1abee0e426b4f278f83cf779c784e1, type: 3}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 7206586088922438145, guid: 22caa9c80a06d46a69cd9a3dbb7a07a4, type: 3}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[5]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: fb8cd1ec829ec4d4087ce874911b68f9, type: 3}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[6]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: a1673c4ca3002433082c8541d2a8c5f1, type: 3}
+    - target: {fileID: 5781193577824429994, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'dishPrefabs.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8873301173016745754, guid: 6ffd582eebd4946428ab211d169be54b, type: 3}
     - target: {fileID: 8051779419566099034, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: m_Name
       value: Kitchen Manager
@@ -6715,6 +6763,10 @@ PrefabInstance:
       propertyPath: pantryGrid
       value: 
       objectReference: {fileID: 251901432}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[0].levelName
       value: Potato Fryer Level
@@ -6729,19 +6781,107 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[3].levelName
-      value: Chicken Level
+      value: Sandwich Level
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[4].levelName
-      value: Sandwiches Level
+      value: Chicken Level
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[5].levelName
       value: All out Level
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[6].levelName
+      value: All out Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[0].recipes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[1].recipes.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[2].recipes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[3].recipes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[0].recipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1942979368881940726, guid: 5fa97fa5935c04a268f0f8aeefad06dd, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[1].recipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1942979368881940726, guid: 5fa97fa5935c04a268f0f8aeefad06dd, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[1].recipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1332861967603227936, guid: 0f1abee0e426b4f278f83cf779c784e1, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[1].recipes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1332861967603227936, guid: 2d04ba47d720a4bfda86f88f752c8287, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].recipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7139325336945739568, guid: 1130144770a314fff8bda6627ac65c75, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].recipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1332861967603227936, guid: 2d04ba47d720a4bfda86f88f752c8287, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].recipes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 7206586088922438145, guid: 22caa9c80a06d46a69cd9a3dbb7a07a4, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].recipes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 7139325336945739568, guid: 1130144770a314fff8bda6627ac65c75, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].recipes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: fb8cd1ec829ec4d4087ce874911b68f9, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].recipes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1942979368881940726, guid: 5fa97fa5935c04a268f0f8aeefad06dd, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].recipes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: a1673c4ca3002433082c8541d2a8c5f1, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].recipes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: fb8cd1ec829ec4d4087ce874911b68f9, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[0].activeCookwares.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[1].activeCookwares.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[2].activeCookwares.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[3].activeCookwares.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[4].activeCookwares.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[5].activeCookwares.Array.size
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[0].activeIngredients.Array.size
@@ -6753,18 +6893,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[2].activeIngredients.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
-      propertyPath: levels.Array.data[3].activeIngredients.Array.size
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[3].activeIngredients.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[4].activeIngredients.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.data[5].activeIngredients.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: levels.Array.data[6].activeIngredients.Array.size
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
@@ -6775,6 +6919,82 @@ PrefabInstance:
       propertyPath: 'levels.Array.data[0].activeCookwares.Array.data[1]'
       value: 
       objectReference: {fileID: 2343644444911068513, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[1].activeCookwares.Array.data[0]'
+      value: 
+      objectReference: {fileID: 6229101973072947677, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[1].activeCookwares.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2343644444911068513, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1054111229}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1607794273}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[2]'
+      value: 
+      objectReference: {fileID: 981790937}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1544820359}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1544820359}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1054111229}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[1]'
+      value: 
+      objectReference: {fileID: 981790937}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1544820359}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1607794273}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeCookwares.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8873301173016745754, guid: 6ffd582eebd4946428ab211d169be54b, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeCookwares.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1332861967603227936, guid: 0f1abee0e426b4f278f83cf779c784e1, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeCookwares.Array.data[2]'
+      value: 
+      objectReference: {fileID: 9162137006038502844, guid: a1673c4ca3002433082c8541d2a8c5f1, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeCookwares.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8873301173016745754, guid: 6ffd582eebd4946428ab211d169be54b, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1165192922}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[1]'
+      value: 
+      objectReference: {fileID: 981790937}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1607794273}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1544820359}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[0].activeIngredients.Array.data[0]'
       value: 
@@ -6816,6 +7036,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 929218343861168974, guid: 6e62322e3544947518e3f919ea8395ee, type: 3}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[2].activeIngredients.Array.data[4]'
+      value: 
+      objectReference: {fileID: 720147643003493700, guid: 9149b0aa00f7c4097ab9a05482471f79, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[3].activeIngredients.Array.data[0]'
       value: 
       objectReference: {fileID: 720147643003493700, guid: 9149b0aa00f7c4097ab9a05482471f79, type: 3}
@@ -6835,6 +7059,18 @@ PrefabInstance:
       propertyPath: 'levels.Array.data[3].activeIngredients.Array.data[4]'
       value: 
       objectReference: {fileID: 3041373705656863090, guid: 09d786583812148abbb0c3a5ab6fa8e9, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeIngredients.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2368142599297456033, guid: 619e96df5499d437c9326f8d41efbbcb, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeIngredients.Array.data[6]'
+      value: 
+      objectReference: {fileID: 929218343861168974, guid: 6e62322e3544947518e3f919ea8395ee, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[3].activeIngredients.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8299595938189812437, guid: 5253a7bd7de104bea8e09103e5755141, type: 3}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[4].activeIngredients.Array.data[0]'
       value: 
@@ -6859,6 +7095,18 @@ PrefabInstance:
       propertyPath: 'levels.Array.data[4].activeIngredients.Array.data[5]'
       value: 
       objectReference: {fileID: 3041373705656863090, guid: 09d786583812148abbb0c3a5ab6fa8e9, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeIngredients.Array.data[6]'
+      value: 
+      objectReference: {fileID: 3128275385009244990, guid: a848b195c3fa54a44acd157cd50279be, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeIngredients.Array.data[7]'
+      value: 
+      objectReference: {fileID: 720147643003493700, guid: 9149b0aa00f7c4097ab9a05482471f79, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[4].activeIngredients.Array.data[8]'
+      value: 
+      objectReference: {fileID: 8299595938189812437, guid: 5253a7bd7de104bea8e09103e5755141, type: 3}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[5].activeIngredients.Array.data[0]'
       value: 
@@ -6893,6 +7141,42 @@ PrefabInstance:
       objectReference: {fileID: 3128275385009244990, guid: a848b195c3fa54a44acd157cd50279be, type: 3}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[5].activeIngredients.Array.data[8]'
+      value: 
+      objectReference: {fileID: 3968348579794098679, guid: 2fb093920bfa24bbd9ff697ee013819f, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[0]'
+      value: 
+      objectReference: {fileID: 720147643003493700, guid: 9149b0aa00f7c4097ab9a05482471f79, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3041373705656863090, guid: 09d786583812148abbb0c3a5ab6fa8e9, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2368142599297456033, guid: 619e96df5499d437c9326f8d41efbbcb, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[3]'
+      value: 
+      objectReference: {fileID: 929218343861168974, guid: 6e62322e3544947518e3f919ea8395ee, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[4]'
+      value: 
+      objectReference: {fileID: 1527650880155211762, guid: d77f83909fd3b4211883d965dd28a7dc, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[5]'
+      value: 
+      objectReference: {fileID: 1048782522944264842, guid: d2f25143d8ee24750ba2179450eeae1d, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8299595938189812437, guid: 5253a7bd7de104bea8e09103e5755141, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[7]'
+      value: 
+      objectReference: {fileID: 3128275385009244990, guid: a848b195c3fa54a44acd157cd50279be, type: 3}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: 'levels.Array.data[6].activeIngredients.Array.data[8]'
       value: 
       objectReference: {fileID: 3968348579794098679, guid: 2fb093920bfa24bbd9ff697ee013819f, type: 3}
     m_RemovedComponents: []

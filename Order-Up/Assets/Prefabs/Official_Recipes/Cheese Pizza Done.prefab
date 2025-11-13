@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   recipe: {fileID: 11400000, guid: 9c259e246dffa4ffdbec18d1f0ba43e8, type: 2}
+  ID: 2

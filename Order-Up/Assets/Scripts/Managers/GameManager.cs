@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameInProgress { get; private set; } = false;
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
+    public int CurrentRound { get; private set; }
     private void Awake()
     {
         // Ensure only one instance exists
@@ -34,6 +35,12 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Advanced to Level: {CurrentLevel}");
         GameData.IncrementLevel();
         CurrentLevel = GameData.CurrentLevel;
+    }
+    public void GoToNextRound()
+    {   
+        Debug.Log($"Advanced to Level: {CurrentRound}");
+        GameData.IncrementRound();
+        CurrentRound = GameData.CurrentRound;
     }
 
     // --- SCENE MANAGEMENT ---

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CheesePizza_Raw
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
   dishName: Cheese Pizza Raw
-  ID: 2
+  ID: 10
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: af7a8bedfa0264fb593c14d426c60c78, type: 2}
     requiredState: 0

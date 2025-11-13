@@ -6,6 +6,7 @@ public class Dish : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Recipe recipe;
+    public string ID;
     void OnValidate()
     {
         ApplyData();

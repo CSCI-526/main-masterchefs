@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}
-  m_Color: {r: 0.9056604, g: 0.20932718, b: 0.20932718, a: 1}
+  m_Color: {r: 0.5849056, g: 0.19037023, b: 0.19037023, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,3 +104,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   recipe: {fileID: 11400000, guid: d524e37dbc266464d9db1b6cd6373cd1, type: 2}
+  ID: 4

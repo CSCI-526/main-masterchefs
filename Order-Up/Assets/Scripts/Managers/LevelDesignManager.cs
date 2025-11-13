@@ -9,6 +9,8 @@ public class LevelDesignManager : MonoBehaviour
 
     [Header("Game Data")]
     public int Level;
+    public int Round;
+    public GameObject currRecipe;
 
     [Header("Pantry Grid")]
     public Transform pantryGrid;
@@ -21,6 +23,8 @@ public class LevelDesignManager : MonoBehaviour
     private void Start()
     {
         Level = GameData.CurrentLevel;
+        Round = GameData.CurrentRound;
+        currRecipe = 
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
@@ -28,7 +32,7 @@ public class LevelDesignManager : MonoBehaviour
     private void Update()
     {
         if (enableDebugLogs)
-            Debug.Log($"[LevelDesignManager] Current Level: {GameData.CurrentLevel}");
+            Debug.Log($"[LevelDesignManager] Current Level: {GameData.CurrentLevel}, Current Round: {GameData.CurrentRound}");
     }
 
     private IEnumerator LoadLevelWithLayoutDelay(int level)
@@ -72,8 +76,23 @@ public class LevelDesignManager : MonoBehaviour
         }
     }
 
+    public void LoadRound(int level, int round)
+    {
+        int index = Mathf.Clamp(level - 1, 0, levels.Count - 1);
+        LevelData data = levels[index];
+
+        if (enableDebugLogs)
+            Debug.Log($"[LevelDesignManager] Loading level {level}, round {round}");
+
+        // Set recipe
+        currRecipe = data.recipes[round];
+    }
+
     public void OnRecipeComplete()
     {
+        GameData.IncrementRound();
+
+
         GameData.IncrementLevel();
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
