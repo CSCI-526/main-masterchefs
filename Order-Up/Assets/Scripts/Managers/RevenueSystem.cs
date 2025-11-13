@@ -25,6 +25,9 @@ public class RevenueSystem : MonoBehaviour
             case 2:
                 coinsEarned = 15; // 15 for 2 star
                 break;
+            case 1:
+                coinsEarned = 5;
+                break;
             default:
                 coinsEarned = 0;
                 break;
