@@ -20,6 +20,7 @@ public class LevelDesignManager : MonoBehaviour
     [SerializeField] bool enableDebugLogs = false;
 
     private PantryIngredient[] pantrySlots;
+    [SerializeField] GameObject stirFrypan;
 
     private void Start()
     {
@@ -45,9 +46,18 @@ public class LevelDesignManager : MonoBehaviour
             // round was completed → go straight to ReviewScene
             SceneManager.LoadScene("ReviewScene");
             return;
-    }
+        }
 
-    GameData.allLevels = levels;
+        // dont show pan until  3rd level
+        GameData.allLevels = levels;
+        if (GameData.CurrentLevel >= 3)
+        {
+            stirFrypan.SetActive(true);
+        }
+        else
+        {
+            stirFrypan.SetActive(false);
+        }
     }
 
     private void Update()

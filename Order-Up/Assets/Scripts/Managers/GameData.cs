@@ -13,6 +13,8 @@ public static class GameData
     private static int currentDialogId = 0;
     private static GameObject currentRecipe = null;
     public static List<LevelData> allLevels;
+    public static int numberToSkipToReview = 0;
+    private static int totalCoin = 0;
 
     public static int CurrentDishId { get => currentDishId; set => currentDishId = value; }
     public static int CurrentLevel { get => currentLevel; set => currentLevel = value; }
@@ -20,6 +22,7 @@ public static class GameData
     public static int CurrentDialogId { get => currentDialogId; set => currentDialogId = value; }
     public static GameObject CurrentRecipe { get => currentRecipe; set => currentRecipe = value; }
     public static List<LevelData> AllLevels { get => allLevels; set => allLevels = value; }
+    public static int TotalCoin { get => totalCoin; set => totalCoin = value; }
 
     public static void ResetGameData()
     {
@@ -31,7 +34,7 @@ public static class GameData
 
     public static void IncrementLevel()
     {
-        Debug.Log("Level INCREMENTED!: " + new System.Diagnostics.StackTrace());
+        Debug.Log($"Level INCREMENTED!: {CurrentLevel} " + new System.Diagnostics.StackTrace());
         currentLevel++;
         currentRound = 0;
     }

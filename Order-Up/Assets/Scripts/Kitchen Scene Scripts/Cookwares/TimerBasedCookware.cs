@@ -16,8 +16,8 @@ public class TimerBasedCookware : BaseCookware
 
     [Header("Timer Settings")]
     [SerializeField] private float minCookingTime = 5f;
-    [SerializeField] private float maxCookingTime = 15f;
-    private float selectedCookingTime = 15f; // default value, can decrement if they upgrade the appliance
+    [SerializeField] private float maxCookingTime = 10f;
+    private float selectedCookingTime = 10f; // default value, can decrement if they upgrade the appliance
 
     protected override void Start()
     {

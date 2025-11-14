@@ -61,8 +61,12 @@ public class RatingSystem : MonoBehaviour
             if (enableDebugLogs)
                 Debug.Log($"[RatingSystem] Round complete. PerfectScore: {isPerfectScore}, HasAttempts: {hasAttemptsLeft}");
             
-            Attempts.Instance.CompleteLevel(); 
-            Invoke("TransitionToCustomerScene", 2f); 
+            Attempts.Instance.CompleteLevel();
+            if (GameData.CurrentLevel == 3)
+            {
+                Invoke("TransitionToReviewScene", 2f);
+            }
+            Invoke("TransitionToCustomerScene", 2f);
         }
         // Player retries (Score < 3 AND has attempts left)
         else
@@ -220,7 +224,12 @@ public class RatingSystem : MonoBehaviour
 
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Rating: {stars} stars!");
-
+        if (Attempts.Instance.GetAttemptsRemaining() == 1 && stars == 0)
+        {
+            stars = 3; 
+            if (enableDebugLogs)
+                Debug.Log("[RatingSystem] Last attempt bonus: Upgraded to 1 star!");
+        }
         return stars;
     }
 
@@ -365,6 +374,13 @@ public class RatingSystem : MonoBehaviour
             Debug.Log("[RatingSystem] Transitioning to CustomerScene...");
 
         SceneManager.LoadScene("CustomerScene");
+    }
+
+    void TransitionToReviewScene()
+    {
+        if (enableDebugLogs)
+            Debug.Log("[RatingSystem] Transitioning to ReviewScene...");
+        SceneManager.LoadScene("ReviewScene");
     }
 
     // void DisplayStars(int stars)

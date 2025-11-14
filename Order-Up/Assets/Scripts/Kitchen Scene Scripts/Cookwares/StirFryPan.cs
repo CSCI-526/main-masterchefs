@@ -129,7 +129,7 @@ public class StirFryPan : BaseCookware
         // Check if time ran out (overcooked)
         else if (currentCookingTime >= maxCookingTime)
         {
-            //OvercookIngredient();
+            OvercookIngredient();
             StopCooking();
         }
 

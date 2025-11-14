@@ -48,5 +48,10 @@ public class RevenueSystem : MonoBehaviour
     {
         PlayerPrefs.SetInt("TotalCoins", totalCoins);
         PlayerPrefs.Save();
+        GameData.TotalCoin = totalCoins;
+    }
+    public int GetTotalCoins()
+    {
+        return totalCoins;
     }
 }

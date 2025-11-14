@@ -73,8 +73,13 @@ public class DialogueManager : MonoBehaviour
         {
             if (!usedIds.Contains(dialogueList.dialogues[i].id))
             {
+                Debug.Log($"Dialogue ID: {dialogueList.dialogues[i].id} selected.");
                 usedIds.Add(dialogueList.dialogues[i].id);
-                GameData.CurrentDialogId = dialogueList.dialogues[i].id; // Update current level
+                GameData.CurrentDialogId = dialogueList.dialogues[i].id;
+                if (dialogueList.dialogues[i].id == 2 || dialogueList.dialogues[i].id == 5 || dialogueList.dialogues[i].id == 9 || dialogueList.dialogues[i].id == 13 || dialogueList.dialogues[i].id == 16 )
+                {
+                    GameManager.Instance.GoToNextLevel();
+                }
                 return dialogueList.dialogues[i];
             }
         }

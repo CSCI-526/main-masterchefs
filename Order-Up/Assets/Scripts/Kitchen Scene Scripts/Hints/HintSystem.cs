@@ -8,6 +8,7 @@ public class HintSystem : MonoBehaviour
     [Header("UI References")]
     public Button hintButton;               // button to use a hint
     public GameObject hintPopup;            // popup window
+    public Button closeHintButton;
     public TextMeshProUGUI hintPopupText;   // text inside popup
     public TextMeshProUGUI hintsLeftText;   // text showing hints left
 
@@ -28,9 +29,13 @@ public class HintSystem : MonoBehaviour
         // connect hint button
         if (hintButton != null)
             hintButton.onClick.AddListener(ShowNextHint);
+        if (closeHintButton != null)
+            closeHintButton.onClick.AddListener(CloseHintPopup);
 
         UpdateHintsLeftUI();
         hintPopup.SetActive(false); // hide popup at start
+
+        
     }
 
     private void LoadHints()
