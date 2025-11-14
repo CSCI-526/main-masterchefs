@@ -21,6 +21,11 @@ public class SubmitButton : MonoBehaviour
             //AnalyticsManager.Instance.Send(sessionID, level, total);
 
         }
+        
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.OnOrderUpClicked();
+        }
 
         ratingSystem.SubmitDish();
     }
