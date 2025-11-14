@@ -5,6 +5,9 @@ using TMPro;
 public class Attempts : MonoBehaviour
 {
     public static Attempts Instance { get; private set; }
+    
+    [Header("Component References")]
+    [SerializeField] private RatingSystem ratingSystem;
 
     [Header("Attempt Settings")]
     [SerializeField] private int maxAttempts = 3;
@@ -19,6 +22,7 @@ public class Attempts : MonoBehaviour
 
     [Header("Debug")]
     public bool enableDebugLogs = true;
+    
 
     private void Awake()
     {
@@ -147,6 +151,25 @@ public class Attempts : MonoBehaviour
         
         // Note: Transitions are now handled by RatingSystem.TransitionToNextRound()
         // This method is kept for backwards compatibility
+    }
+    
+    public void PrepareNextAttempt()
+    {
+        if (enableDebugLogs)
+            Debug.Log($"[Attempts] Preparing for attempt {currentAttempt + 1}/{maxAttempts}");
+
+        // TODO: add level reset logic
+        // Do we clear the plate and cookware reset ingredients?
+        
+        // After everything is reset, tell the RatingSystem to re-enable the button.
+        if (ratingSystem != null)
+        {
+            ratingSystem.EnableSubmitButton();
+        }
+        else
+        {
+            Debug.LogError("[Attempts] RatingSystem reference is not set! Cannot re-enable submit button.");
+        }
     }
 
     /// <summary>

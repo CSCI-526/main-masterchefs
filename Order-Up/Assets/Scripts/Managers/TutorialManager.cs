@@ -13,6 +13,8 @@ public class TutorialManager : MonoBehaviour
     
     private bool isWaitingForCookingToEnd = false;
     
+    public Button orderUpButton;
+    
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -26,16 +28,16 @@ public class TutorialManager : MonoBehaviour
     }
     void Start()
     {
-        // Ensure all tutorial steps are hidden when we begin
-        if (Steps != null)
+        // Debug.Log($"Current Level: {GameData.CurrentLevel}, Current Round: {GameData.CurrentRound}");
+        if (GameData.CurrentLevel == 1 && GameData.CurrentRound == 0)
         {
-            foreach (GameObject stepPopup in Steps)
-            {
-                if (stepPopup != null)
-                {
-                    stepPopup.SetActive(false);
-                }
-            }
+            // Run the tutorial on Level 1 Round 0
+            InitializeTutorial();
+        }
+        else
+        {
+            // It's not Level 1 Round 0. Disable tutorial GameObject.
+            gameObject.SetActive(false);
         }
     }
 
@@ -78,36 +80,28 @@ public class TutorialManager : MonoBehaviour
         //     // Debug.Log($"Step {currentStep + 1}: plate the ingredient");
         //     // increment step when plate receives the Potato_Cooked ingredient (see OnIngredientDroppedOnPlate)
         // }
-        else if (currentStep == 4)
-        {
-            // Debug.Log($"Step {currentStep + 1}: show player where the trash can is and how to use it, tell player to click anywhere to continue");
-            // increment when player clicks anywhere on canvas
-            if (Input.GetMouseButtonDown(0))
-            {
-                currentStep++;
-            }
-        }
-        // else if (currentStep == 5)
+
+        // else if (currentStep == 4)
         // {
         //     // Debug.Log($"Step {currentStep + 1}: show player second ingredient and drag and drop onto cookware");
         //     // increment step when player drags and drops cheese on fryer (see OnIngredientDroppedOnCookware)
         // }
-        // else if (currentStep == 6)
+        // else if (currentStep == 5)
         // {
         //     // Debug.Log($"Step {currentStep + 1}: show player how to use cookware");
         //     // increment step when player presses start button on cookware and progress bar finishes (see OnCookwareStarted and OnCookingFinished)
         // }
-        // else if (currentStep == 7)
+        // else if (currentStep == 6)
         // {
         //     // Debug.Log($"Step {currentStep + 1}: drag second ingredient onto plate to combine");
         //     // increment step when plate receives the Cheese_Cooked ingredient (see OnIngredientDroppedOnPlate)
         // }
-        // else if (currentStep == 8)
+        // else if (currentStep == 7)
         // {
         //     // Debug.Log($"Step {currentStep + 1}: submit dish by clicking order up btn");
         //     // increment step when Order Up button is clicked  (see OnOrderUpClicked)
         // }
-        else if (currentStep == 9)
+        else if (currentStep == 8)
         {
             // Debug.Log($"Step {currentStep + 1}: tell player the goal of the game and click anywhere to end tutorial");
             // end tutorial when player clicks anywhere
@@ -117,6 +111,27 @@ public class TutorialManager : MonoBehaviour
             }
         }
         
+    }
+    
+    void InitializeTutorial()
+    {
+        // Ensure all tutorial steps are hidden when we begin
+        if (Steps != null)
+        {
+            foreach (GameObject stepPopup in Steps)
+            {
+                if (stepPopup != null)
+                {
+                    stepPopup.SetActive(false);
+                }
+            }
+        }
+
+        // Disable the Order Up button at the start
+        if (orderUpButton != null)
+        {
+            orderUpButton.interactable = false;
+        }
     }
     void EnterStep(int step)
     {
@@ -140,36 +155,38 @@ public class TutorialManager : MonoBehaviour
         switch (step)
         {
             case 0:
-                Debug.Log($"Step {step}: show player dish window...");
+                // Debug.Log($"Step {step}: show player dish window...");
                 break;
             case 1:
-                Debug.Log($"Step {step}: show player first ingredient and tell them to drag and drop onto cookware");
+                // Debug.Log($"Step {step}: show player first ingredient and tell them to drag and drop onto cookware");
                 break;
             case 2:
-                Debug.Log($"Step {step}: show player how to use the cookware (press start button on fryer and wait for progress bar to finish)");
+                // Debug.Log($"Step {step}: show player how to use the cookware (press start button on fryer and wait for progress bar to finish)");
                 isWaitingForCookingToEnd = false; // reset the flag
                 break;
             case 3:
-                Debug.Log($"Step {step}: plate the ingredient");
+                // Debug.Log($"Step {step}: plate the ingredient");
                 break;
             case 4:
-                Debug.Log($"Step {step}: show player where the trash can is...");
+                // Debug.Log($"Step {step}: show player second ingredient...");
                 break;
             case 5:
-                Debug.Log($"Step {step}: show player second ingredient...");
-                break;
-            case 6:
-                Debug.Log($"Step {step}: show player how to use cookware");
+                // Debug.Log($"Step {step}: show player how to use cookware");
                 isWaitingForCookingToEnd = false; // reset the flag
                 break;
+            case 6:
+                // Debug.Log($"Step {step}: drag second ingredient onto plate to combine with first");
+                break;
             case 7:
-                Debug.Log($"Step {step}: drag second ingredient onto plate to combine with first");
+                // Debug.Log($"Step {step}: submit dish by clicking order up btn");
+                // Enable Order Up button
+                if (orderUpButton != null)
+                {
+                    orderUpButton.interactable = true;
+                }
                 break;
             case 8:
-                Debug.Log($"Step {step}: submit dish by clicking order up btn");
-                break;
-            case 9:
-                Debug.Log($"Step {step}: tell player the goal of the game");
+                // Debug.Log($"Step {step}: tell player the goal of the game");
                 break;
             
             default:
@@ -200,7 +217,7 @@ public class TutorialManager : MonoBehaviour
                 currentStep++; // Advance to step 2
             }
         }
-        else if (currentStep == 5)
+        else if (currentStep == 4)
         {
             // Check if it's the correct cookware
             bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
@@ -215,7 +232,7 @@ public class TutorialManager : MonoBehaviour
         
             if (isCorrectCookware && isCorrectIngredient)
             {
-                currentStep++; // Advance to step 6
+                currentStep++; // Advance to step 5
             }
         }
         else
@@ -238,7 +255,7 @@ public class TutorialManager : MonoBehaviour
                 isWaitingForCookingToEnd = true;
             }
         }
-        else if (currentStep == 6)
+        else if (currentStep == 5)
         {
             // Check if it's the correct cookware (the fryer)
             if (cookware.GetCookwareType() == CookwareType.Fryer)
@@ -290,7 +307,7 @@ public class TutorialManager : MonoBehaviour
                 Debug.Log($"OnCookingFinished: Ignored {ingredient.ingredientData.ingredientName} finishing in {cookware.name}. Waiting for Potato_Raw.");
             }
         }
-        else if (currentStep == 6)
+        else if (currentStep == 5)
         {
             bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
         
@@ -304,7 +321,7 @@ public class TutorialManager : MonoBehaviour
             if (isCorrectCookware && isCorrectIngredient)
             {
                 Debug.Log("OnCookingFinished: Cooking finished!");
-                currentStep++; // Advance to Step 7
+                currentStep++; // Advance to Step 6
                 isWaitingForCookingToEnd = false;
             }
             else
@@ -323,7 +340,7 @@ public class TutorialManager : MonoBehaviour
     
     public void OnIngredientDroppedOnPlate(DraggableIngredient draggable, Plate plate)
     {
-        // Check if we are on Step 3 or Step 7
+        // Check if we are on Step 3 or Step 6
         if (currentStep == 3)
         {
             // Check if it's the correct ingredient (Cooked Potato)
@@ -340,7 +357,7 @@ public class TutorialManager : MonoBehaviour
                 }
             }
         }
-        else if (currentStep == 7)
+        else if (currentStep == 6)
         {
             // Check if it's the correct ingredient (Cooked Cheese)
             Ingredient ing = draggable.GetComponent<Ingredient>();
@@ -352,7 +369,7 @@ public class TutorialManager : MonoBehaviour
                 if (isCorrectIngredient && isCooked)
                 {
                     Debug.Log("OnIngredientDroppedOnPlate: Cooked ingredient plated!");
-                    currentStep++; // Advance to Step 8
+                    currentStep++; // Advance to Step 7
                 }
             }
         }
@@ -366,14 +383,14 @@ public class TutorialManager : MonoBehaviour
     
     public void OnOrderUpClicked()
     {
-        // Check if we are on Step 8
-        if (currentStep != 8)
+        // Check if we are on Step 7
+        if (currentStep != 7)
         {
             return;
         }
 
         Debug.Log("OnOrderUpClicked: Dish submitted!");
-        currentStep++; // Advance to the step 9
+        currentStep++; // Advance to the step 8
     }
     
     void EndTutorial()
@@ -383,6 +400,7 @@ public class TutorialManager : MonoBehaviour
         {
             Steps[currentStep].SetActive(false);
         }
+
         // this.enabled = false;
         gameObject.SetActive(false);
     }
