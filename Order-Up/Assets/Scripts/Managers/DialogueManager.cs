@@ -55,7 +55,7 @@ public class DialogueManager : MonoBehaviour
 
         DialogueData randomDialogue = dialogueList.dialogues[randomIndex];
         usedIds.Add(randomDialogue.id);
-        GameData.CurrentLevel = randomDialogue.id; // Update current level
+        GameData.CurrentDialogId = randomDialogue.id; // Update current level
         return randomDialogue;
     }
 
@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour
             if (!usedIds.Contains(dialogueList.dialogues[i].id))
             {
                 usedIds.Add(dialogueList.dialogues[i].id);
-                GameData.CurrentLevel = dialogueList.dialogues[i].id; // Update current level
+                GameData.CurrentDialogId = dialogueList.dialogues[i].id; // Update current level
                 return dialogueList.dialogues[i];
             }
         }

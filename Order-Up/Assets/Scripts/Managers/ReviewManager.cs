@@ -18,11 +18,12 @@ public class ReviewSceneManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject uiListItemPrefab;
+    public GameObject takeOrderBtn;
 
     [Header("Level Data Source")]
-    public LevelDesignManager levelDesignManager;
+    private LevelDesignManager ldm;
 
-    private void Start()
+    void Start()
     {
         LoadReviewData();
     }
@@ -30,7 +31,8 @@ public class ReviewSceneManager : MonoBehaviour
     private void LoadReviewData()
     {
         int level = GameData.CurrentLevel;
-        var levels = levelDesignManager.levels;
+        var levels = GameData.allLevels;
+        Debug.Log($"[ReviewManager] At level {level}. Moving to CustomerScene.");
 
         LevelData current = levels[level - 1];
 
@@ -92,8 +94,6 @@ public class ReviewSceneManager : MonoBehaviour
 
         return newOnes;
     }
-
-
 
     public void Continue()
     {
