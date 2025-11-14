@@ -16,9 +16,7 @@ public class SubmitButton : MonoBehaviour
             Debug.Log($"[Submit] Timer stopped at {total:F2}s ({Timer.Instance.FormattedElapsedTime}).");
             // Send current level and time spent to google form
             long sessionID = GameManager.Instance.SessionID;
-            int level = GameManager.Instance.CurrentLevel;
-            int round = GameManager.Instance.CurrentRound;
-            Debug.Log($"[Submit] Game Session ID: {sessionID}, Level: {level}, Round: {round}");
+            Debug.Log($"[Submit] Game Session ID: {sessionID}, Level: {GameData.CurrentLevel}, Round: {GameData.CurrentRound}");
             //AnalyticsManager.Instance.Send(sessionID, level, total);
 
         }

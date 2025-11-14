@@ -144,8 +144,7 @@ public class Attempts : MonoBehaviour
     {
         if (enableDebugLogs)
             Debug.Log($"[Attempts] All attempts used! Best rating: {starsEarned} stars. Transition handled by RatingSystem.");
-        
-        // Note: Transitions are now handled by RatingSystem.TransitionToNextRound()
+            
         // This method is kept for backwards compatibility
     }
 

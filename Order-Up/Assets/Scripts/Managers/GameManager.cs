@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
     {
         SessionID = DateTime.Now.Ticks;
         CurrentLevel = GameData.CurrentLevel;
-        Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
+        CurrentRound = GameData.CurrentRound;
+        Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}, Round: {CurrentRound}");
     }
     
     public void GoToNextLevel()
@@ -62,7 +63,7 @@ public class GameManager : MonoBehaviour
 
     public void EndLevel()
     {
-        // Load Kitchen scene
+        // Load Review scene
         SceneManager.LoadScene("ReviewScene");
     }
 
