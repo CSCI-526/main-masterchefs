@@ -10,18 +10,13 @@ public class SubmitButton : MonoBehaviour
     public void OnSubmitClicked()
     {
         // Stop the global timer when the dish is submitted
-        if (Timer.Instance != null)
-        {
-            float total = Timer.Instance.StopTimer();
-            Debug.Log($"[Submit] Timer stopped at {total:F2}s ({Timer.Instance.FormattedElapsedTime}).");
-            // Send current level and time spent to google form
-            long sessionID = GameManager.Instance.SessionID;
-            int level = GameManager.Instance.CurrentLevel;
-            int round = GameManager.Instance.CurrentRound;
-            Debug.Log($"[Submit] Game Session ID: {sessionID}, Level: {level}, Round: {round}");
-            //AnalyticsManager.Instance.Send(sessionID, level, total);
-
-        }
+        // if (Timer.Instance != null)
+        // {
+        //     float total = Timer.Instance.StopTimer();
+        //     Debug.Log($"[Submit] Timer stopped at {total:F2}s ({Timer.Instance.FormattedElapsedTime}).");
+        //     
+        //
+        // } // logic moved to rating system
         
         if (TutorialManager.Instance != null)
         {
@@ -30,5 +25,6 @@ public class SubmitButton : MonoBehaviour
 
         ratingSystem.SubmitDish();
     }
+    
     
 }

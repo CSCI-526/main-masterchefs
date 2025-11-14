@@ -74,7 +74,7 @@ public class DialogueManager : MonoBehaviour
             if (!usedIds.Contains(dialogueList.dialogues[i].id))
             {
                 usedIds.Add(dialogueList.dialogues[i].id);
-                GameData.CurrentLevel = dialogueList.dialogues[i].id; // Update current level
+                // GameData.CurrentLevel = dialogueList.dialogues[i].id; // Update current level
                 return dialogueList.dialogues[i];
             }
         }
