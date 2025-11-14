@@ -51,19 +51,39 @@ public class RatingSystem : MonoBehaviour
         }
 
         DisplayEvaluation(stars);
-
-        // Only transition if there are no attempts remaining
-        if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
+        
+        bool hasAttemptsLeft = Attempts.Instance.HasAttemptsRemaining();
+        bool isPerfectScore = (stars == 3);
+        // Player moves on if they have perfect score or out of attempts
+        if (isPerfectScore || !hasAttemptsLeft)
         {
-            // Reset for next level
-            Attempts.Instance.CompleteLevel();
-            Invoke("TransitionToCustomerScene", 2f);
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Round complete. PerfectScore: {isPerfectScore}, HasAttempts: {hasAttemptsLeft}");
+            
+            Attempts.Instance.CompleteLevel(); 
+            Invoke("TransitionToCustomerScene", 2f); 
         }
+        // Player retries (Score < 3 AND has attempts left)
         else
         {
-            Invoke("HideEvaluationPanel", 2f);
-            submitButton.interactable = true; // Re-enable the button for retry
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Imperfect score. Retrying round.");
+            
+            Invoke("PrepareForRetry", 2f); 
         }
+
+        // // Only transition if there are no attempts remaining
+        // if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
+        // {
+        //     // Reset for next level
+        //     Attempts.Instance.CompleteLevel();
+        //     Invoke("TransitionToCustomerScene", 2f);
+        // }
+        // else
+        // {
+        //     Invoke("HideEvaluationPanel", 2f);
+        //     submitButton.interactable = true; // Re-enable the button for retry
+        // }
     }
 
     void UpdateAverageDisplays()
@@ -347,6 +367,25 @@ public class RatingSystem : MonoBehaviour
         if (evaluationPanel != null)
         {
             evaluationPanel.SetActive(false);
+        }
+    }
+    
+    private void PrepareForRetry()
+    {
+        // 1. Hide the panel
+        HideEvaluationPanel();
+
+        // 2. Tell the Attempts script to reset the level
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.PrepareNextAttempt();
+        }
+    }
+    public void EnableSubmitButton()
+    {
+        if (submitButton != null)
+        {
+            submitButton.interactable = true;
         }
     }
 
