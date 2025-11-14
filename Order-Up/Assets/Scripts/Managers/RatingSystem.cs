@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System.Linq;
-using TMPro;
 
 public class RatingSystem : MonoBehaviour
 {
@@ -60,13 +58,46 @@ public class RatingSystem : MonoBehaviour
         {
             if (enableDebugLogs)
                 Debug.Log($"[RatingSystem] Round complete. PerfectScore: {isPerfectScore}, HasAttempts: {hasAttemptsLeft}");
+     
+            // Send level data to Analytics manager
+            sendTimeData(timeTaken);
+            sendLevelCompleteData(isPerfectScore, Attempts.Instance.GetCurrentAttempt(), stars);
             
-            Attempts.Instance.CompleteLevel();
-            if (GameData.CurrentLevel == 3)
+            
+            // TODO: what is this function used for?
+            Attempts.Instance.CompleteLevel(); 
+            
+            // TODO: temp sol
+            // Increment round or level
+            // if (GameManager.Instance.CurrentLevel == 0)
+            // {
+            //     GameManager.Instance.GoToNextLevel();
+            // }
+            // else if (GameManager.Instance.CurrentLevel == 5 && GameManager.Instance.CurrentRound == 3)
+            // {
+            //     Debug.Log($"Player has gone through all levels");
+            // }
+            // else
+            // {
+            //     if (GameManager.Instance.CurrentRound < 3)
+            //     {
+            //         GameManager.Instance.GoToNextRound();
+            //     }
+            //     else
+            //     {
+            //         GameManager.Instance.GoToNextLevel(); 
+            //     }
+            // }
+            if (GameManager.Instance.CurrentRound <= 15)
             {
-                Invoke("TransitionToReviewScene", 2f);
+                GameManager.Instance.GoToNextLevel();
             }
-            Invoke("TransitionToCustomerScene", 2f);
+            else
+            {
+                Debug.Log("Player has completed all levels");
+            }
+
+            Invoke("TransitionToCustomerScene", 2f); 
         }
         // Player retries (Score < 3 AND has attempts left)
         else
@@ -450,6 +481,46 @@ public class RatingSystem : MonoBehaviour
         {
             submitButton.interactable = true;
         }
+    }
+    
+    private void sendTimeData(float total)
+    {
+        // Send current level and time spent to google form
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameManager.Instance.CurrentLevel;
+        // int level = GameData.CurrentLevel;
+        int round = GameManager.Instance.CurrentRound;
+        // int round = GameData.CurrentRound;
+        
+        
+        
+        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, Time(s): {total}");
+        
+        AnalyticsManager.Instance.SendLevelTimeData(sessionID, level, round, total);
+    }
+
+    private void sendLevelCompleteData(bool pass, int attempts, int rating)
+    {
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameManager.Instance.CurrentLevel;
+        // int level = GameData.CurrentLevel;
+        int round = GameManager.Instance.CurrentRound;
+        // int round = GameData.CurrentRound;
+        string status = pass ? "pass" : "fail";
+        string reason = getReason(pass);
+        
+        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}. Round: {round}, Status: {status}, Attempts: {attempts}, Rating: {rating}, Reason: {reason}");
+        
+        AnalyticsManager.Instance.SendLevelComplete(sessionID, level, round, status, attempts, rating, reason);
+    }
+
+    private string getReason(bool pass)
+    {
+        int randomIndex = Random.Range(0, 3);
+        string[] reasons = {"wrong combination", "wrong state", "both"};
+        string reason = pass? "N/A" : reasons[randomIndex];
+
+        return reason;
     }
 
 }

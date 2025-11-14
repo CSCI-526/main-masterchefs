@@ -34,14 +34,14 @@ public class GameManager : MonoBehaviour
     public void GoToNextLevel()
     {   
         GameData.IncrementLevel();
-        Debug.Log($"Advanced to Level: {CurrentLevel}");
         CurrentLevel = GameData.CurrentLevel;
+        Debug.Log($"Advanced to Level: {CurrentLevel}");
     }
     public void GoToNextRound()
     {   
         GameData.IncrementRound();
-        Debug.Log($"Advanced to Round: {CurrentRound}");
         CurrentRound = GameData.CurrentRound;
+        Debug.Log($"Advanced to Round: {CurrentRound}");
     }
 
     // --- SCENE MANAGEMENT ---
