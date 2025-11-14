@@ -40,6 +40,7 @@ public class RatingSystem : MonoBehaviour
         int stars = CalculateRating();
         Debug.Log("Rating: " + stars + " Stars!");
 
+        FindAnyObjectByType<RevenueSystem>().AddRevenue(stars);
         float timeTaken = Timer.Instance.StopTimer();
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
