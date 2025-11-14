@@ -43,6 +43,19 @@ public static class GameData
         Debug.Log("Round INCREMENTED!: " + new System.Diagnostics.StackTrace());
         currentRound++;
     }
+
+    public static bool HasCompletedTutorial
+    {
+        get
+        {
+            return PlayerPrefs.GetInt("HasCompletedTutorial", 0) == 1;
+        }
+        set
+        {
+            PlayerPrefs.SetInt("HasCompletedTutorial", value ? 1 : 0);
+            PlayerPrefs.Save();
+        }
+    }
 }
 
 

@@ -22,8 +22,17 @@ public class LevelDesignManager : MonoBehaviour
     private PantryIngredient[] pantrySlots;
     [SerializeField] GameObject stirFrypan;
 
+    public GameObject tutorialManager;
     private void Start()
     {
+        if (!GameData.HasCompletedTutorial)
+        {
+            tutorialManager.SetActive(true);
+        }
+        else
+        {
+            tutorialManager.SetActive(false);
+        }
         Level = GameData.CurrentLevel;
         Round = GameData.CurrentRound;
         currRecipe = null;

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
     public int CurrentRound { get; private set; }
+
+    public GameObject TutorialManager;
     private void Awake()
     {
         // Ensure only one instance exists
@@ -19,7 +21,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        if (TutorialManager != null)
+        {
+            if (GameData.HasCompletedTutorial)
+                TutorialManager.SetActive(false);
+            else
+                TutorialManager.SetActive(true);
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject); // Make it persistent across scenes
     }

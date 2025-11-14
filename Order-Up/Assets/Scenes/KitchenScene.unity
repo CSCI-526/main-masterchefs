@@ -8725,6 +8725,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 758017497046541ad964f29ff10c66a0, type: 3}
+--- !u!1 &293447465279164176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4577979213025185221, guid: 758017497046541ad964f29ff10c66a0, type: 3}
+  m_PrefabInstance: {fileID: 293447465279164175}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1334938804554786590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9040,6 +9045,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6221891125016995609, guid: ebc939085a3296e49ba5552be58ca304, type: 3}
+      propertyPath: TutorialManager
+      value: 
+      objectReference: {fileID: 293447465279164176}
     - target: {fileID: 8817286665155774545, guid: ebc939085a3296e49ba5552be58ca304, type: 3}
       propertyPath: m_Name
       value: Game Manager
@@ -9241,6 +9250,10 @@ PrefabInstance:
       propertyPath: stirFrypan
       value: 
       objectReference: {fileID: 1018632196}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: tutorialManager
+      value: 
+      objectReference: {fileID: 293447465279164176}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: levels.Array.size
       value: 4
