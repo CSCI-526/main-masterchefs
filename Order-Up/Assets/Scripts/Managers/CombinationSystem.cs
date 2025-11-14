@@ -21,8 +21,6 @@ public class CombinationSystem : MonoBehaviour
         // load all recipes
         Recipe[] loadedRecipes = Resources.LoadAll<Recipe>("Recipes");
         allRecipes.AddRange(loadedRecipes);
-
-        Debug.Log("Loaded recipes: " + allRecipes.Count);
     }
 
     public void CheckForCombinations()

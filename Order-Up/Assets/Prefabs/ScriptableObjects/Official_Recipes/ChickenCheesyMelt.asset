@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
+  m_Name: ChickenCheesyMelt
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  dishName: Chicken Cheesy Melt
+  ID: 6
+  requiredIngredients:
+  - ingredient: {fileID: 11400000, guid: cce1943473bcb44b390a723afd38332f, type: 2}
+    requiredState: 1
+    requiredCookware: 3
+    requiredChoppingState: 0
+  - ingredient: {fileID: 11400000, guid: ebab5fec761fb4a30945e8ddf9bcc330, type: 2}
+    requiredState: 0
+    requiredCookware: 0
+    requiredChoppingState: 1
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
+    requiredState: 1
+    requiredCookware: 1
+    requiredChoppingState: 0
+  dishPrefab: {fileID: 9162137006038502844, guid: a1673c4ca3002433082c8541d2a8c5f1, type: 3}
+  icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

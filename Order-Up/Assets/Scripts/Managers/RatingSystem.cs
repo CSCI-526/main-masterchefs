@@ -2,45 +2,126 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using System.Linq;
-using TMPro;
 
 public class RatingSystem : MonoBehaviour
 {
     [Header("Rating Settings")]
     public Transform plateTransform; // Reference to the plate where dishes are created
+    
+    [Header("Debug Settings")]
     public bool enableDebugLogs = true;
+
+    [Header("UI References")]
     public GameObject evaluationPanel;
     public TMPro.TextMeshProUGUI evaluationResults;
     public Image[] starDisplay = new Image[3];
     public Sprite filledStar;
     public Sprite emptyStar;
-    public TMPro.TextMeshProUGUI averageTimeText;
-    public TMPro.TextMeshProUGUI averageScoreText;
+    [SerializeField] private Button submitButton;
 
     // Tracking variables
     private static List<float> completionTimes = new List<float>();
     private static List<int> starRatings = new List<int>();
 
 
-    // compare gameData with the Dish.recipe id to see if it is a match
-    // if it is then 3 stars 
-    // if not 1 stars
-
+    /// <summary>
+    /// Submits the current dish for evaluation, calculates its rating, and handles the subsequent game flow based on
+    /// the result.
+    /// </summary>
+    /// <remarks>This method evaluates the dish by calculating its star rating and recording the time taken to
+    /// complete the task. The results are stored for future reference, and the player's attempt is recorded if
+    /// applicable. Depending on the remaining attempts, the method either transitions to the next scene or allows the
+    /// player to retry.</remarks>
     public void SubmitDish()
     {
+        submitButton.interactable = false; // Prevent multiple submissions
         int stars = CalculateRating();
         Debug.Log("Rating: " + stars + " Stars!");
 
+        FindAnyObjectByType<RevenueSystem>().AddRevenue(stars);
         float timeTaken = Timer.Instance.StopTimer();
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
 
-        // UpdateAverageDisplays();
+        // Record the attempt
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.RecordAttempt(stars);
+        }
+
         DisplayEvaluation(stars);
-        Invoke("TransitionToCustomerScene", 2f);
+        
+        bool hasAttemptsLeft = Attempts.Instance.HasAttemptsRemaining();
+        bool isPerfectScore = (stars == 3);
+        // Player moves on if they have perfect score or out of attempts
+        if (isPerfectScore || !hasAttemptsLeft)
+        {
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Round complete. PerfectScore: {isPerfectScore}, HasAttempts: {hasAttemptsLeft}");
+     
+            // Send level data to Analytics manager
+            sendTimeData(timeTaken);
+            sendLevelCompleteData(isPerfectScore, Attempts.Instance.GetCurrentAttempt(), stars);
+            
+            
+            // TODO: what is this function used for?
+            Attempts.Instance.CompleteLevel(); 
+            
+            // TODO: temp sol
+            // Increment round or level
+            // if (GameManager.Instance.CurrentLevel == 0)
+            // {
+            //     GameManager.Instance.GoToNextLevel();
+            // }
+            // else if (GameManager.Instance.CurrentLevel == 5 && GameManager.Instance.CurrentRound == 3)
+            // {
+            //     Debug.Log($"Player has gone through all levels");
+            // }
+            // else
+            // {
+            //     if (GameManager.Instance.CurrentRound < 3)
+            //     {
+            //         GameManager.Instance.GoToNextRound();
+            //     }
+            //     else
+            //     {
+            //         GameManager.Instance.GoToNextLevel(); 
+            //     }
+            // }
+            if (GameManager.Instance.CurrentRound <= 15)
+            {
+                GameManager.Instance.GoToNextLevel();
+            }
+            else
+            {
+                Debug.Log("Player has completed all levels");
+            }
+
+            Invoke("TransitionToCustomerScene", 2f); 
+        }
+        // Player retries (Score < 3 AND has attempts left)
+        else
+        {
+            if (enableDebugLogs)
+                Debug.Log($"[RatingSystem] Imperfect score. Retrying round.");
+            
+            Invoke("PrepareForRetry", 2f); 
+        }
+
+        // // Only transition if there are no attempts remaining
+        // if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
+        // {
+        //     // Reset for next level
+        //     Attempts.Instance.CompleteLevel();
+        //     Invoke("TransitionToCustomerScene", 2f);
+        // }
+        // else
+        // {
+        //     Invoke("HideEvaluationPanel", 2f);
+        //     submitButton.interactable = true; // Re-enable the button for retry
+        // }
     }
-    
+
     void UpdateAverageDisplays()
     {
         // TODO: Update the average time after every round
@@ -62,7 +143,7 @@ public class RatingSystem : MonoBehaviour
         */
         
         // Get the expected dish ID from GameData
-        int expectedDishId = GameData.currentDishId;
+        int expectedDishId = GameData.CurrentDishId;
 
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Expected Dish ID: {expectedDishId}");
@@ -174,7 +255,12 @@ public class RatingSystem : MonoBehaviour
 
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Rating: {stars} stars!");
-
+        if (Attempts.Instance.GetAttemptsRemaining() == 1 && stars == 0)
+        {
+            stars = 3; 
+            if (enableDebugLogs)
+                Debug.Log("[RatingSystem] Last attempt bonus: Upgraded to 1 star!");
+        }
         return stars;
     }
 
@@ -267,12 +353,65 @@ public class RatingSystem : MonoBehaviour
         return null;
     }
 
+    void TransitionToNextRound()
+    {
+        if (enableDebugLogs)
+            Debug.Log("[RatingSystem] All attempts used. Checking if more rounds remain...");
+
+        // Reset attempts for next round
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.ResetAttempts();
+        }
+
+        // Check if there are more recipes in the current level
+        if (GameData.allLevels != null)
+        {
+            int currentLevel = GameData.CurrentLevel;
+            int currentRound = GameData.CurrentRound;
+
+            if (currentLevel > 0 && currentLevel <= GameData.allLevels.Count)
+            {
+                LevelData levelData = GameData.allLevels[currentLevel - 1];
+                
+                // Check if there are more recipes (rounds) in this level
+                if (currentRound + 1 < levelData.recipes.Length)
+                {
+                    // More rounds remaining - increment round and go to CustomerScene
+                    GameData.IncrementRound();
+                    Debug.Log($"[RatingSystem] Level {currentLevel}. Moving to next round: {GameData.CurrentRound + 1} of {levelData.recipes.Length}");
+                    SceneManager.LoadScene("CustomerScene");
+                    return;
+                }
+                else
+                {
+                    // All rounds complete - go to ReviewScene (next level)
+                    Debug.Log($"[RatingSystem] All rounds complete for level {currentLevel}. Moving to ReviewScene.");
+                    SceneManager.LoadScene("ReviewScene");
+                    return;
+                }
+            }
+        }
+
+        // Fallback: just go to CustomerScene if we can't determine next step
+        if (enableDebugLogs)
+            Debug.LogWarning("[RatingSystem] Could not determine next step. Defaulting to CustomerScene.");
+        SceneManager.LoadScene("CustomerScene");
+    }
+
     void TransitionToCustomerScene()
     {
         if (enableDebugLogs)
             Debug.Log("[RatingSystem] Transitioning to CustomerScene...");
 
         SceneManager.LoadScene("CustomerScene");
+    }
+
+    void TransitionToReviewScene()
+    {
+        if (enableDebugLogs)
+            Debug.Log("[RatingSystem] Transitioning to ReviewScene...");
+        SceneManager.LoadScene("ReviewScene");
     }
 
     // void DisplayStars(int stars)
@@ -315,6 +454,73 @@ public class RatingSystem : MonoBehaviour
 
         // 3. Show the panel
         evaluationPanel.SetActive(true);
+    }
+
+    private void HideEvaluationPanel()
+    {
+        if (evaluationPanel != null)
+        {
+            evaluationPanel.SetActive(false);
+        }
+    }
+    
+    private void PrepareForRetry()
+    {
+        // 1. Hide the panel
+        HideEvaluationPanel();
+
+        // 2. Tell the Attempts script to reset the level
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.PrepareNextAttempt();
+        }
+    }
+    public void EnableSubmitButton()
+    {
+        if (submitButton != null)
+        {
+            submitButton.interactable = true;
+        }
+    }
+    
+    private void sendTimeData(float total)
+    {
+        // Send current level and time spent to google form
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameManager.Instance.CurrentLevel;
+        // int level = GameData.CurrentLevel;
+        int round = GameManager.Instance.CurrentRound;
+        // int round = GameData.CurrentRound;
+        
+        
+        
+        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, Time(s): {total}");
+        
+        AnalyticsManager.Instance.SendLevelTimeData(sessionID, level, round, total);
+    }
+
+    private void sendLevelCompleteData(bool pass, int attempts, int rating)
+    {
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameManager.Instance.CurrentLevel;
+        // int level = GameData.CurrentLevel;
+        int round = GameManager.Instance.CurrentRound;
+        // int round = GameData.CurrentRound;
+        string status = pass ? "pass" : "fail";
+        string reason = getReason(pass);
+        
+        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}. Round: {round}, Status: {status}, Attempts: {attempts}, Rating: {rating}, Reason: {reason}");
+        
+        AnalyticsManager.Instance.SendLevelComplete(sessionID, level, round, status, attempts, rating, reason);
+    }
+
+    private string getReason(bool pass)
+    {
+        int randomIndex = Random.Range(0, 3);
+        string[] reasons = {"wrong combination", "wrong state", "both"};
+        string reason = pass? "N/A" : reasons[randomIndex];
+
+        return reason;
     }
 
 }

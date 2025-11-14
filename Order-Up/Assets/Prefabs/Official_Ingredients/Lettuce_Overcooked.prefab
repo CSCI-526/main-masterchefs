@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 579444459093048138}
   - component: {fileID: 6705565656514939014}
   - component: {fileID: 2001762170603997978}
+  - component: {fileID: -7256366108273496895}
   m_Layer: 0
   m_Name: Lettuce_Overcooked
   m_TagString: Untagged
@@ -83,12 +84,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -5577747794823148241, guid: f3f5c6e5f76b84ca1a7fbd3c23d86a2f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.23, y: 0.98}
+  m_Size: {x: 2.048, y: 2.048}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 1
   m_WasSpriteAssigned: 1
@@ -110,7 +111,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   dragOffset: 0.1
-  cookedResult: {fileID: 0}
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!114 &579444459093048138
@@ -166,34 +166,36 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.41, y: 1.12}
-    newSize: {x: 1.23, y: 0.98}
+    oldSize: {x: 0.85333335, y: 1.7066667}
+    newSize: {x: 2.048, y: 2.048}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 1
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.695, y: -0.35999998}
-      - {x: 0.685, y: -0.29999998}
-      - {x: 0.555, y: -0.07}
-      - {x: 0.49499997, y: 0.02}
-      - {x: 0.265, y: 0.37}
-      - {x: 0.145, y: 0.53999996}
-      - {x: 0.105, y: 0.55}
-      - {x: -0.005, y: 0.55}
-      - {x: -0.275, y: 0.28}
-      - {x: -0.49499997, y: -0.01}
-      - {x: -0.685, y: -0.32999998}
-      - {x: -0.705, y: -0.35999998}
-      - {x: -0.705, y: -0.47}
-      - {x: -0.655, y: -0.51}
-      - {x: -0.625, y: -0.53}
-      - {x: -0.315, y: -0.55}
-      - {x: 0.285, y: -0.55}
-      - {x: 0.555, y: -0.53}
-      - {x: 0.645, y: -0.51}
-      - {x: 0.695, y: -0.45}
+    - - {x: 0, y: 0.85333335}
+      - {x: -0.13000001, y: 0.83000004}
+      - {x: -0.25, y: 0.77000004}
+      - {x: -0.34333333, y: 0.6766667}
+      - {x: -0.40333334, y: 0.5566667}
+      - {x: -0.42666668, y: 0.42666668}
+      - {x: -0.42666668, y: -0.42666668}
+      - {x: -0.40333334, y: -0.5566667}
+      - {x: -0.34333333, y: -0.6766667}
+      - {x: -0.25, y: -0.77000004}
+      - {x: -0.13000001, y: -0.83000004}
+      - {x: 0, y: -0.85333335}
+      - {x: 0.13000001, y: -0.83000004}
+      - {x: 0.25, y: -0.77000004}
+      - {x: 0.34333333, y: -0.6766667}
+      - {x: 0.40333334, y: -0.5566667}
+      - {x: 0.42666668, y: -0.42666668}
+      - {x: 0.42666668, y: 0.42666668}
+      - {x: 0.40333334, y: 0.5566667}
+      - {x: 0.34333333, y: 0.6766667}
+      - {x: 0.25, y: 0.77000004}
+      - {x: 0.13000001, y: 0.83000004}
   m_UseDelaunayMesh: 0
 --- !u!50 &2001762170603997978
 Rigidbody2D:
@@ -222,3 +224,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-7256366108273496895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421316903264226710}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae6b1632c12d4e8dbdb7804708cc2e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IngredientHeartbeatHover
+  scaleMultiplier: 1.3
+  animationSpeed: 8
+  ingredientText: {fileID: 0}
+  textFadeSpeed: 5

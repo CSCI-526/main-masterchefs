@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pizza_Cooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Pizza_Cooked
-  icon: {fileID: 6335219767335263639, guid: c16cbe53e88a746038307dd715ef5956, type: 3}
+  icon: {fileID: -9095717837082945937, guid: 86603ba61a8204cc381c824bfcc45328, type: 3}
   cookedResult: {fileID: 0}
   overcookedResult: {fileID: 11400000, guid: 9668fed853f344a428cf206e305f6d34, type: 2}

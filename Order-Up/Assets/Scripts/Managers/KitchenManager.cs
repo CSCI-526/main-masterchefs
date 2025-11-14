@@ -21,7 +21,7 @@ public class KitchenManager : MonoBehaviour
     void Start()
     {
         // retrieve currentDishId
-        currentDishId = GameData.currentDishId; // todo: uncomment
+        currentDishId = GameData.CurrentDishId; // todo: uncomment
         Debug.Log("Current Dish ID in KitchenManager: " + currentDishId);
         if (currentDishId >= 0 && currentDishId < dishPrefabs.Length)
             DisplayDishPrefab(currentDishId);
@@ -35,7 +35,7 @@ public class KitchenManager : MonoBehaviour
             customizeButton.onClick.AddListener(OnCustomizeClicked);
 
         UpdatePlayButtonState();
-        GameData.CheckAndIncrementLevel();
+        //GameData.CheckAndIncrementLevel();
     }
 
 

@@ -1,0 +1,76 @@
+{
+  "recipes": [
+    {
+      "id": 0,
+      "currentRecipe": "Cheesy Fries",
+      "hints": [
+        "Potato (Chopped → Cooked), Cheese (Raw)",
+        "Cut Board, Fryer",
+        "1) Chop Potato in the Cut Board. 2) Cook Potato and Cheese in the Fryer."
+      ]
+    },
+    {
+      "id": 1,
+      "currentRecipe": "Cheese Dough Bites",
+      "hints": [
+        "Dough (Cooked), Cheese (Cooked)",
+        "Oven, Fryer",
+        "1) Bake Dough in Oven. 2) Cook Cheese in Fryer."
+      ]
+    },
+    {
+      "id": 2,
+      "currentRecipe": "Cheese Pizza",
+      "hints": [
+        "Dough (Cooked), Cheese (Cooked), Tomato (Cooked)",
+        "Oven, Fryer",
+        "1) Cook Dough in Oven. 2) Cook Cheese in Fryer. 3) Cook Tomato in Oven."
+      ]
+    },
+    {
+      "id": 3,
+      "currentRecipe": "Mac & Cheese",
+      "hints": [
+        "Pasta (Cooked), Cheese (Cooked)",
+        "Pot, Fryer",
+        "1) Boil Pasta in Pot. 2) Melt Cheese in the Fryer."
+      ]
+    },
+    {
+      "id": 4,
+      "currentRecipe": "Spaghetti with Tomato Sauce",
+      "hints": [
+        "Pasta (Cooked), Tomato (Cooked), Cheese (Cooked)",
+        "Pot, Oven, Fryer",
+        "1) Boil Pasta in the Pot. 2) Cook Cheese in the Fryer. 3) Cook Tomato in the Oven."
+      ]
+    },
+    {
+      "id": 5,
+      "currentRecipe": "Omelette Sandwich",
+      "hints": [
+        "Bread (Raw), Egg (Cooked)",
+        "Cut Board",
+        "1) Cut Bread in the Cut Board. 2) Combine Bread and Eggs Together."
+      ]
+    },
+    {
+      "id": 6,
+      "currentRecipe": "Chicken Cheesy Melt",
+      "hints": [
+        "Bread (Raw), Chicken (Cooked), Cheese (Cooked)",
+        "Cut Board, Fryer, Oven",
+        "1) Cook Chicken in the Oven. 2) Cut Bread in the Cut Board. 3) Cook Cheese in the Fryer."
+      ]
+    },
+    {
+      "id": 7,
+      "currentRecipe": "Chicken Sandwich",
+      "hints": [
+        "Bread (Raw), Chicken (Cooked), Lettuce (Raw), Tomato (Cooked)",
+        "Cut Board, Oven",
+        "1) Cook Chicken in the Oven. 2) Cut Bread in the Cut Board. 3) Cook Tomato in the Oven. 4) Add Lettuce."
+      ]
+    }
+  ]
+}
