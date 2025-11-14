@@ -5,6 +5,9 @@ using TMPro;
 public class Attempts : MonoBehaviour
 {
     public static Attempts Instance { get; private set; }
+    
+    [Header("Component References")]
+    [SerializeField] private RatingSystem ratingSystem;
 
     [Header("Attempt Settings")]
     [SerializeField] private int maxAttempts = 3;
@@ -19,6 +22,7 @@ public class Attempts : MonoBehaviour
 
     [Header("Debug")]
     public bool enableDebugLogs = true;
+    
 
     private void Awake()
     {
@@ -54,7 +58,7 @@ public class Attempts : MonoBehaviour
         if (currentAttempt >= maxAttempts)
         {
             if (enableDebugLogs)
-                Debug.Log($"[Attempts] All attempts used! Moving to next level...");
+                Debug.Log($"[Attempts] All attempts used! Moving to next round...");
         }
     }
 
@@ -137,25 +141,35 @@ public class Attempts : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when all attempts are used - moves to next level
+    /// Called when all attempts are used - transitions are now handled by RatingSystem
+    /// This method is kept for backwards compatibility but no longer handles transitions
     /// </summary>
     public void CompleteLevel()
     {
         if (enableDebugLogs)
-            Debug.Log($"[Attempts] Level complete! Best rating: {starsEarned} stars");
+            Debug.Log($"[Attempts] All attempts used! Best rating: {starsEarned} stars. Transition handled by RatingSystem.");
+        
+        // Note: Transitions are now handled by RatingSystem.TransitionToNextRound()
+        // This method is kept for backwards compatibility
+    }
+    
+    public void PrepareNextAttempt()
+    {
+        if (enableDebugLogs)
+            Debug.Log($"[Attempts] Preparing for attempt {currentAttempt + 1}/{maxAttempts}");
 
-        // Advance to next level using GameManager
-        if (GameManager.Instance != null)
+        // TODO: add level reset logic
+        // Do we clear the plate and cookware reset ingredients?
+        
+        // After everything is reset, tell the RatingSystem to re-enable the button.
+        if (ratingSystem != null)
         {
-            GameManager.Instance.GoToNextLevel();
+            ratingSystem.EnableSubmitButton();
         }
         else
         {
-            Debug.LogError("[Attempts] GameManager instance not found!");
+            Debug.LogError("[Attempts] RatingSystem reference is not set! Cannot re-enable submit button.");
         }
-
-        // Reset for next level
-        ResetAttempts();
     }
 
     /// <summary>

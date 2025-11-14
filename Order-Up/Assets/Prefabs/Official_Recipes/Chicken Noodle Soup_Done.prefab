@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3427915614938937016}
   - component: {fileID: 1925126017334408044}
   - component: {fileID: 504985652909646184}
+  - component: {fileID: 8038462535820821086}
   m_Layer: 0
   m_Name: Chicken Noodle Soup_Done
   m_TagString: Untagged
@@ -105,3 +106,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   recipe: {fileID: 11400000, guid: ff6877cdeb9b347f098e69c4075bbcf5, type: 2}
   ID: 
+--- !u!114 &8038462535820821086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2080741474404420042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4df87001277177479095e60058b1174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableDish
+  dropZoneLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  dragOffset: 0.1
+  enableDebugLogs: 0
+  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

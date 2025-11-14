@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelDesignManager : MonoBehaviour
 {
@@ -84,16 +85,29 @@ public class LevelDesignManager : MonoBehaviour
         if (enableDebugLogs)
             Debug.Log($"[LevelDesignManager] Loading level {level}, round {round}");
 
-        // Set recipe
+        // Get new recipe
         currRecipe = data.recipes[round];
+        GameData.CurrentRecipe = currRecipe;
+
+        LoadLevel(level);
     }
 
     public void OnRecipeComplete()
     {
+        int levelIndex = GameData.CurrentLevel - 1;
+        LevelData data = levels[levelIndex];
+
         GameData.IncrementRound();
 
+        // If still more recipes, load next round
+        if (GameData.CurrentRound < data.recipes.Length)
+        {
+            LoadRound(GameData.CurrentLevel, GameData.CurrentRound);
+            return;
+        }
 
-        GameData.IncrementLevel();
+        // LEVEL COMPLETE → Go to Review Scene
+        SceneManager.LoadScene("ReviewScene");
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
 }

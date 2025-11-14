@@ -141,6 +141,29 @@ public class PantryIngredient : MonoBehaviour
         draggableComponent = null;
     }
 
+    /// <summary>
+    /// go through the pantry slots and reset them to spawn new ingredients
+    /// if they have ingredient, leave it, if not spawn a new one
+    /// </summary>
+    public void ResetSlots()
+    {
+        // Check if we already have an active ingredient
+        if (hasActiveIngredient && currentIngredient != null)
+        {
+            // Already has ingredient, leave it
+            if (enableDebugLogs)
+                Debug.Log($"[Pantry:{name}] Slot already has ingredient, skipping spawn");
+            return;
+        }
+
+        // No ingredient present, spawn a new one
+        if (enableDebugLogs)
+            Debug.Log($"[Pantry:{name}] Slot empty, spawning new ingredient");
+        
+        hasActiveIngredient = false;
+        SpawnIngredient();
+    }
+
     public void RefreshSlot()
     {
         ClearIngredient();

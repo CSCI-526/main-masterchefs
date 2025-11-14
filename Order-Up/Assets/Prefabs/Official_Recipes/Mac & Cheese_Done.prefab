@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6631245282633311217}
   - component: {fileID: 2156197450254102498}
   - component: {fileID: 4918367419905816078}
+  - component: {fileID: -6273763148672330950}
   m_Layer: 0
   m_Name: Mac & Cheese
   m_TagString: Untagged
@@ -105,3 +106,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   recipe: {fileID: 11400000, guid: f55e904ae5f2142ca83a1d51786a7b02, type: 2}
   ID: 3
+--- !u!114 &-6273763148672330950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7139325336945739568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4df87001277177479095e60058b1174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableDish
+  dropZoneLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  dragOffset: 0.1
+  enableDebugLogs: 0
+  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

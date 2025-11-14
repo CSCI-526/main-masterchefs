@@ -9,6 +9,8 @@ using UnityEngine;
 public class Trash : MonoBehaviour, IDropZone
 {
     [SerializeField] private bool enableDebugLogs = false;
+    [SerializeField] private Transform pantryGrid;
+    private PantryIngredient[] pantrySlots;
 
     /// <summary>
     /// Called when an ingredient is dropped on the trash
@@ -45,6 +47,23 @@ public class Trash : MonoBehaviour, IDropZone
         // Destroy the ingredient
         Destroy(ingredient.gameObject);
     }
+
+    /// <summary>
+    /// Called when an dish is dropped on the trash
+    /// This notifies the pantry slots to respawn its ingredients
+    /// by going through each one of them to see if they are empty
+    /// </summary>
+    public void OnDishDropped(DraggableDish dish)
+    {
+        pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
+
+        foreach (PantryIngredient pantry in pantrySlots)
+        {
+            pantry.ResetSlots();
+        }
+        Destroy(dish.gameObject);
+    }
+
 
     /// <summary>
     /// Finds which pantry spawned this ingredient by checking the ingredient prefab
