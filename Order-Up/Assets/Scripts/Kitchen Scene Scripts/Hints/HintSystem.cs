@@ -12,11 +12,13 @@ public class HintSystem : MonoBehaviour
     public TextMeshProUGUI hintsLeftText;   // text showing hints left
 
     [Header("Settings")]
-    public int maxHintsPerRound = 3; // hints per round
+    public int maxHintsPerRound = 3; // hints per round 
+    public int freeHintsPerLevel = 3; // free hints per level
+    public int hintCost = 5;          // cost after free hints
 
     private HintDatabase hintDB; // hints from json file
     private int currentRecipeID = 0; // to track the ID of the recipe
-    private int hintsUsed = 0; // to track hints player has used on round
+    private int levelHintsUsed = 0;  // total hints used this level
 
     private void Awake()
     {
@@ -49,21 +51,31 @@ public class HintSystem : MonoBehaviour
     public void SetCurrentRecipe(int recipeID)
     {
         currentRecipeID = recipeID;
-        ResetHintCount();
+        hintPopup.SetActive(false);
     }
 
-    private void ResetHintCount() // reset used hints for round
+    public void ResetFreeHintsForLevel() // reset used hints for level
     {
-        hintsUsed = 0;
+        levelHintsUsed = 0;
         UpdateHintsLeftUI();
         hintPopup.SetActive(false);
     }
 
+    private int GetHintCost()
+    {
+        if (levelHintsUsed < freeHintsPerLevel)
+            return 0;
+
+        return hintCost;
+    }
+
     public void ShowNextHint()
     {
-        if (hintsUsed >= maxHintsPerRound)
+        int cost = GetHintCost();
+
+        if (cost > 0 && RevenueSystem.totalCoins < cost)
         {
-            hintPopupText.text = "No more hints available";
+            hintPopupText.text = "Not enough coins!";
             hintPopup.SetActive(true);
             return;
         }
@@ -77,13 +89,22 @@ public class HintSystem : MonoBehaviour
             return;
         }
 
-        if (hintsUsed < r.hints.Length) // if there are hints available
+        int hintIndex = Mathf.Min(levelHintsUsed, r.hints.Length - 1);
+
+        if (hintIndex < r.hints.Length) // if there are hints available
         {
-            hintPopupText.text = r.hints[hintsUsed];  // show hints in different indices
+            hintPopupText.text = r.hints[hintIndex];  // show hints in different indices
             hintPopup.SetActive(true);
         }
 
-        hintsUsed++; 
+        if (cost > 0)
+        {
+            RevenueSystem.totalCoins -= cost;
+            PlayerPrefs.SetInt("TotalCoins", RevenueSystem.totalCoins);
+            PlayerPrefs.Save();
+        }
+
+        levelHintsUsed++;
         UpdateHintsLeftUI();
     }
 
@@ -94,7 +115,7 @@ public class HintSystem : MonoBehaviour
 
     private void UpdateHintsLeftUI() // to show how many hints left
     {
-        int left = maxHintsPerRound - hintsUsed;
+        int left = Mathf.Max(0, freeHintsPerLevel - levelHintsUsed);
         hintsLeftText.text = "Hints Left: " + left;
     }
 }
