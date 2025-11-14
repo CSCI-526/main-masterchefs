@@ -27,7 +27,27 @@ public class LevelDesignManager : MonoBehaviour
         Round = GameData.CurrentRound;
         currRecipe = null;
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
-        StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
+        Debug.Log($"[LevelDesignManager.Start] Scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name} | GameData.Level={GameData.CurrentLevel} GameData.Round={GameData.CurrentRound}");
+
+        int levelIndex = Mathf.Clamp(Level - 1, 0, levels.Count - 1);
+        LevelData data = levels[levelIndex];
+        bool roundIsValid = Round < data.recipes.Length;
+
+        if (roundIsValid)
+        {
+            // normal behavior
+            Debug.Log($"[LevelDesignManager.Start] Scene: Reload with level={GameData.CurrentLevel} GameData.Round={GameData.CurrentRound}");
+
+            StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
+        }
+        else
+        {
+            // round was completed → go straight to ReviewScene
+            SceneManager.LoadScene("ReviewScene");
+            return;
+    }
+
+    GameData.allLevels = levels;
     }
 
     private void Update()
@@ -51,9 +71,7 @@ public class LevelDesignManager : MonoBehaviour
                 slot.RefreshSlot();
             }
         }
-
-        if (enableDebugLogs)
-            Debug.Log($"[LevelDesignManager] Finished layout update, pantry refreshed for Level {level}");
+        Debug.Log($"[LevelDesignManager] Finished layout update, pantry refreshed for Level {level}");
     }
 
     public void LoadLevel(int level)
@@ -61,8 +79,7 @@ public class LevelDesignManager : MonoBehaviour
         int index = Mathf.Clamp(level - 1, 0, levels.Count - 1);
         LevelData data = levels[index];
 
-        if (enableDebugLogs)
-            Debug.Log($"[LevelDesignManager] Loading level {level}: {data.levelName}");
+        Debug.Log($"[LevelDesignManager] Loading level {level}: {data.levelName}");
 
         // Disable all slots first
         foreach (var slot in pantrySlots)
@@ -82,8 +99,7 @@ public class LevelDesignManager : MonoBehaviour
         int index = Mathf.Clamp(level - 1, 0, levels.Count - 1);
         LevelData data = levels[index];
 
-        if (enableDebugLogs)
-            Debug.Log($"[LevelDesignManager] Loading level {level}, round {round}");
+        Debug.Log($"[LevelDesignManager] Loading level {level}, round {round}");
 
         // Get new recipe
         currRecipe = data.recipes[round];
@@ -98,6 +114,7 @@ public class LevelDesignManager : MonoBehaviour
         LevelData data = levels[levelIndex];
 
         GameData.IncrementRound();
+        Debug.Log($"[LevelDesignManager] Completed level {Level}, round {Round}");
 
         // If still more recipes, load next round
         if (GameData.CurrentRound < data.recipes.Length)
@@ -108,6 +125,6 @@ public class LevelDesignManager : MonoBehaviour
 
         // LEVEL COMPLETE → Go to Review Scene
         SceneManager.LoadScene("ReviewScene");
-        StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
+        // StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
     }
 }

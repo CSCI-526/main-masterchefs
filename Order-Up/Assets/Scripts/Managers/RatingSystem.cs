@@ -303,33 +303,28 @@ public class RatingSystem : MonoBehaviour
         }
 
         // Check if there are more recipes in the current level
-        LevelDesignManager levelDesignManager = FindFirstObjectByType<LevelDesignManager>();
-        if (levelDesignManager != null && levelDesignManager.levels != null)
+        if (GameData.allLevels != null)
         {
             int currentLevel = GameData.CurrentLevel;
             int currentRound = GameData.CurrentRound;
 
-            if (currentLevel > 0 && currentLevel <= levelDesignManager.levels.Count)
+            if (currentLevel > 0 && currentLevel <= GameData.allLevels.Count)
             {
-                LevelData levelData = levelDesignManager.levels[currentLevel - 1];
+                LevelData levelData = GameData.allLevels[currentLevel - 1];
                 
                 // Check if there are more recipes (rounds) in this level
                 if (currentRound + 1 < levelData.recipes.Length)
                 {
                     // More rounds remaining - increment round and go to CustomerScene
                     GameData.IncrementRound();
-                    if (enableDebugLogs)
-                        Debug.Log($"[RatingSystem] Moving to next round: {GameData.CurrentRound + 1} of {levelData.recipes.Length}");
-                    
+                    Debug.Log($"[RatingSystem] Level {currentLevel}. Moving to next round: {GameData.CurrentRound + 1} of {levelData.recipes.Length}");
                     SceneManager.LoadScene("CustomerScene");
                     return;
                 }
                 else
                 {
                     // All rounds complete - go to ReviewScene (next level)
-                    if (enableDebugLogs)
-                        Debug.Log($"[RatingSystem] All rounds complete for level {currentLevel}. Moving to ReviewScene.");
-                    
+                    Debug.Log($"[RatingSystem] All rounds complete for level {currentLevel}. Moving to ReviewScene.");
                     SceneManager.LoadScene("ReviewScene");
                     return;
                 }
