@@ -23,6 +23,7 @@ public class Recipe : ScriptableObject
     public List<RecipeIngredientRequirement> requiredIngredients;
     public GameObject dishPrefab; // The final food item to spawn
     public Sprite icon;
+    
 
     public bool MatchesIngredients(List<Ingredient> provided)
     {
@@ -53,4 +54,5 @@ public class Recipe : ScriptableObject
         }
         return true;
     }
+
 }

@@ -3227,8 +3227,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 1
-  m_Children:
-  - {fileID: 1526550937}
+  m_Children: []
   m_Father: {fileID: 1008320548}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4412,6 +4411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Trash
   enableDebugLogs: 1
+  pantryGrid: {fileID: 251901432}
 --- !u!60 &1187021526
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -8905,11 +8905,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: Level
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: pantryGrid
@@ -9082,7 +9082,7 @@ PrefabInstance:
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[0]'
       value: 
-      objectReference: {fileID: 1054111229}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[1]'
       value: 
@@ -9090,27 +9090,27 @@ PrefabInstance:
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[2]'
       value: 
-      objectReference: {fileID: 981790937}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[3]'
       value: 
-      objectReference: {fileID: 1544820359}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[2].activeCookwares.Array.data[4]'
       value: 
-      objectReference: {fileID: 1544820359}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[0]'
       value: 
-      objectReference: {fileID: 1054111229}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[1]'
       value: 
-      objectReference: {fileID: 981790937}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[2]'
       value: 
-      objectReference: {fileID: 1544820359}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[3].activeCookwares.Array.data[3]'
       value: 
@@ -9138,7 +9138,7 @@ PrefabInstance:
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[1]'
       value: 
-      objectReference: {fileID: 981790937}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[2]'
       value: 
@@ -9146,7 +9146,7 @@ PrefabInstance:
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[5].activeCookwares.Array.data[3]'
       value: 
-      objectReference: {fileID: 1544820359}
+      objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: 'levels.Array.data[0].activeIngredients.Array.data[0]'
       value: 
