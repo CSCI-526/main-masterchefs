@@ -54,7 +54,7 @@ public class Attempts : MonoBehaviour
         if (currentAttempt >= maxAttempts)
         {
             if (enableDebugLogs)
-                Debug.Log($"[Attempts] All attempts used! Moving to next level...");
+                Debug.Log($"[Attempts] All attempts used! Moving to next round...");
         }
     }
 
@@ -137,25 +137,16 @@ public class Attempts : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when all attempts are used - moves to next level
+    /// Called when all attempts are used - transitions are now handled by RatingSystem
+    /// This method is kept for backwards compatibility but no longer handles transitions
     /// </summary>
     public void CompleteLevel()
     {
         if (enableDebugLogs)
-            Debug.Log($"[Attempts] Level complete! Best rating: {starsEarned} stars");
-
-        // Advance to next level using GameManager
-        if (GameManager.Instance != null)
-        {
-            GameManager.Instance.GoToNextLevel();
-        }
-        else
-        {
-            Debug.LogError("[Attempts] GameManager instance not found!");
-        }
-
-        // Reset for next level
-        ResetAttempts();
+            Debug.Log($"[Attempts] All attempts used! Best rating: {starsEarned} stars. Transition handled by RatingSystem.");
+        
+        // Note: Transitions are now handled by RatingSystem.TransitionToNextRound()
+        // This method is kept for backwards compatibility
     }
 
     /// <summary>

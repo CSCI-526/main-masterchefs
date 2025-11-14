@@ -32,14 +32,14 @@ public class GameManager : MonoBehaviour
     
     public void GoToNextLevel()
     {   
-        Debug.Log($"Advanced to Level: {CurrentLevel}");
         GameData.IncrementLevel();
+        Debug.Log($"Advanced to Level: {CurrentLevel}");
         CurrentLevel = GameData.CurrentLevel;
     }
     public void GoToNextRound()
     {   
-        Debug.Log($"Advanced to Level: {CurrentRound}");
         GameData.IncrementRound();
+        Debug.Log($"Advanced to Round: {CurrentRound}");
         CurrentRound = GameData.CurrentRound;
     }
 
@@ -58,6 +58,12 @@ public class GameManager : MonoBehaviour
     {
         // Load Kitchen scene
         SceneManager.LoadScene("KitchenScene");
+    }
+
+    public void EndLevel()
+    {
+        // Load Kitchen scene
+        SceneManager.LoadScene("ReviewScene");
     }
 
     public void EndGame()
