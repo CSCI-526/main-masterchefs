@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameInProgress { get; private set; } = false;
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
+    public int CurrentRound { get; private set; }
     private void Awake()
     {
         // Ensure only one instance exists
@@ -31,9 +32,15 @@ public class GameManager : MonoBehaviour
     
     public void GoToNextLevel()
     {   
-        Debug.Log($"Advanced to Level: {CurrentLevel}");
         GameData.IncrementLevel();
+        Debug.Log($"Advanced to Level: {CurrentLevel}");
         CurrentLevel = GameData.CurrentLevel;
+    }
+    public void GoToNextRound()
+    {   
+        GameData.IncrementRound();
+        Debug.Log($"Advanced to Round: {CurrentRound}");
+        CurrentRound = GameData.CurrentRound;
     }
 
     // --- SCENE MANAGEMENT ---
@@ -51,6 +58,12 @@ public class GameManager : MonoBehaviour
     {
         // Load Kitchen scene
         SceneManager.LoadScene("KitchenScene");
+    }
+
+    public void EndLevel()
+    {
+        // Load Kitchen scene
+        SceneManager.LoadScene("ReviewScene");
     }
 
     public void EndGame()

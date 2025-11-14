@@ -17,9 +17,15 @@ public class SubmitButton : MonoBehaviour
             // Send current level and time spent to google form
             long sessionID = GameManager.Instance.SessionID;
             int level = GameManager.Instance.CurrentLevel;
-            Debug.Log($"[Submit] Game Session ID: {sessionID}, Level: {level}");
+            int round = GameManager.Instance.CurrentRound;
+            Debug.Log($"[Submit] Game Session ID: {sessionID}, Level: {level}, Round: {round}");
             //AnalyticsManager.Instance.Send(sessionID, level, total);
 
+        }
+        
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.OnOrderUpClicked();
         }
 
         ratingSystem.SubmitDish();

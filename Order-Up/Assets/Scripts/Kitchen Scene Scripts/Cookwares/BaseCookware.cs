@@ -155,6 +155,12 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
 
         isCooking = true;
         currentCookingTime = 0f;
+        
+        // Notify tutorial manager that cooking has started
+        if (TutorialManager.Instance != null)
+        {
+            TutorialManager.Instance.OnCookwareStarted(this);
+        }
 
         // Make ingredient semi-transparent while cooking
         SetIngredientOpacity(0.5f);
@@ -189,9 +195,17 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
         {
             Debug.Log($"[{cookwareName}] Cooking finished!");
         }
-
-        // Process the ingredient
+        
+        // Get the ingredient component before processing
         Ingredient ing = ingredientInside.GetComponent<Ingredient>();
+        
+        // Notify the TutorialManager that cooking is finished
+        if (TutorialManager.Instance != null)
+        {
+            // We pass the cookware and the ingredient that just finished
+            TutorialManager.Instance.OnCookingFinished(this, ing);
+        }
+        
         if (ing != null)
         {
             ProcessIngredient(ing);

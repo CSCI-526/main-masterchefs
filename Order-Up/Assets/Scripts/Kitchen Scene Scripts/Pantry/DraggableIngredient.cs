@@ -157,6 +157,12 @@ public class DraggableIngredient : MonoBehaviour
             {
                 plate.AddIngredient(this);
                 OnDroppedOnPlate?.Invoke(this, plate);
+                
+                // Notify the TutorialManager that ingredient has been dropped on plate
+                if (TutorialManager.Instance != null)
+                {
+                    TutorialManager.Instance.OnIngredientDroppedOnPlate(this, plate); 
+                }
             }
             else if (dropZone is BaseCookware cookware)
             {
@@ -168,6 +174,12 @@ public class DraggableIngredient : MonoBehaviour
                     OnDroppedOnCookware?.Invoke(this, cookware);
                     cookware.ManuallyAcceptIngredient(gameObject);
                     cookware.SetIngredientParent(gameObject);
+                    
+                    // Notify TutorialManager that ingredient has been dropped on cookware
+                    if (TutorialManager.Instance != null)
+                    {
+                        TutorialManager.Instance.OnIngredientDroppedOnCookware(this, cookware);
+                    }
 
                     if (enableDebugLogs)
                     {
@@ -275,7 +287,7 @@ public class DraggableIngredient : MonoBehaviour
         Collider2D myCollider = GetComponent<Collider2D>();
         Bounds bounds = myCollider.bounds;
 
-        // Start the ray just below the ingredient’s collider
+        // Start the ray just below the ingredientï¿½s collider
         Vector2 origin = new Vector2(bounds.center.x, bounds.min.y - 0.01f);
         Vector2 direction = Vector2.down;
         float rayDistance = 1f;
@@ -288,7 +300,7 @@ public class DraggableIngredient : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
                 continue; // skip self-hit
 
-            Debug.Log($"[DEBUG] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+            //Debug.Log($"[DEBUG] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
 
             IDropZone dropZone = hit.collider.GetComponent<IDropZone>();
             if (dropZone != null)

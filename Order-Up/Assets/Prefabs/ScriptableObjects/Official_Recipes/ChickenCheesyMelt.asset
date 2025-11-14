@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
-  m_Name: ChickenSaladWithoutCheese
+  m_Name: ChickenCheesyMelt
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  dishName: Chicken Salad Without Cheese
-  ID: 7
+  dishName: Chicken Cheesy Melt
+  ID: 6
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: cce1943473bcb44b390a723afd38332f, type: 2}
     requiredState: 1
-    requiredCookware: 2
-  - ingredient: {fileID: 11400000, guid: ae620c216a5db472ea1f3416addae4b0, type: 2}
+    requiredCookware: 3
+    requiredChoppingState: 0
+  - ingredient: {fileID: 11400000, guid: ebab5fec761fb4a30945e8ddf9bcc330, type: 2}
     requiredState: 0
     requiredCookware: 0
-  - ingredient: {fileID: 11400000, guid: 6cc5f1d366d2e4775b91fbaace310b92, type: 2}
-    requiredState: 0
-    requiredCookware: 0
-  - ingredient: {fileID: 11400000, guid: b65e2e468026f4bddb1444b02f41fd29, type: 2}
+    requiredChoppingState: 1
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
     requiredState: 1
-    requiredCookware: 0
-  dishPrefab: {fileID: 3755099817112370921, guid: a9b2c2d6968e141c4b5b260752697b8d, type: 3}
+    requiredCookware: 1
+    requiredChoppingState: 0
+  dishPrefab: {fileID: 9162137006038502844, guid: a1673c4ca3002433082c8541d2a8c5f1, type: 3}
   icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

@@ -10,16 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f02e6298a668194d95cac2858859f8d, type: 3}
-  m_Name: FrenchFries
+  m_Name: CheesePizza
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  dishName: French Fries
-  ID: 0
+  dishName: Cheese Pizza
+  ID: 2
   requiredIngredients:
-  - ingredient: {fileID: 11400000, guid: 53974216dea4b4536b33b61defb314e7, type: 2}
+  - ingredient: {fileID: 11400000, guid: 7807ed4edfb184b9689e073e1a54a955, type: 2}
+    requiredState: 1
+    requiredCookware: 3
+    requiredChoppingState: 0
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
     requiredState: 1
     requiredCookware: 1
-  - ingredient: {fileID: 11400000, guid: 53974216dea4b4536b33b61defb314e7, type: 2}
+    requiredChoppingState: 0
+  - ingredient: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
     requiredState: 1
-    requiredCookware: 1
-  dishPrefab: {fileID: 2642886787612810088, guid: 0a3223a0ca63c4207938f5904ca55bfc, type: 3}
+    requiredCookware: 3
+    requiredChoppingState: 0
+  dishPrefab: {fileID: 1332861967603227936, guid: 2d04ba47d720a4bfda86f88f752c8287, type: 3}
   icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

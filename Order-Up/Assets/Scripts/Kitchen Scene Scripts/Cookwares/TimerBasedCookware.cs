@@ -50,7 +50,7 @@ public class TimerBasedCookware : BaseCookware
     protected override void UpdateCookingLogic()
     {
         currentCookingTime += Time.deltaTime;
-        Debug.Log($"[{cookwareName}] Cooking time updated: {currentCookingTime:F2}s / {selectedCookingTime:F2}s");
+        //Debug.Log($"[{cookwareName}] Cooking time updated: {currentCookingTime:F2}s / {selectedCookingTime:F2}s");
         // only show the slider progress for now
         //UpdateTimerDisplay();
 
@@ -68,7 +68,7 @@ public class TimerBasedCookware : BaseCookware
 
     protected override void OnIngredientEntered(GameObject ingredient)
     {
-        Debug.Log($"[{cookwareName}] OnIngredientEntered called.");
+        //Debug.Log($"[{cookwareName}] OnIngredientEntered called.");
         if (enableDebugLogs)
         {
             Debug.Log($"[{cookwareName}] Ingredient entered: {ingredient.name}");

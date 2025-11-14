@@ -55,9 +55,8 @@ public class RatingSystem : MonoBehaviour
         // Only transition if there are no attempts remaining
         if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
         {
-            // Reset for next level
-            Attempts.Instance.CompleteLevel();
-            Invoke("TransitionToCustomerScene", 2f);
+            // All attempts used for this round - move to next round or level
+            Invoke("TransitionToNextRound", 2f);
         }
         else
         {
@@ -290,6 +289,57 @@ public class RatingSystem : MonoBehaviour
         }
 
         return null;
+    }
+
+    void TransitionToNextRound()
+    {
+        if (enableDebugLogs)
+            Debug.Log("[RatingSystem] All attempts used. Checking if more rounds remain...");
+
+        // Reset attempts for next round
+        if (Attempts.Instance != null)
+        {
+            Attempts.Instance.ResetAttempts();
+        }
+
+        // Check if there are more recipes in the current level
+        LevelDesignManager levelDesignManager = FindFirstObjectByType<LevelDesignManager>();
+        if (levelDesignManager != null && levelDesignManager.levels != null)
+        {
+            int currentLevel = GameData.CurrentLevel;
+            int currentRound = GameData.CurrentRound;
+
+            if (currentLevel > 0 && currentLevel <= levelDesignManager.levels.Count)
+            {
+                LevelData levelData = levelDesignManager.levels[currentLevel - 1];
+                
+                // Check if there are more recipes (rounds) in this level
+                if (currentRound + 1 < levelData.recipes.Length)
+                {
+                    // More rounds remaining - increment round and go to CustomerScene
+                    GameData.IncrementRound();
+                    if (enableDebugLogs)
+                        Debug.Log($"[RatingSystem] Moving to next round: {GameData.CurrentRound + 1} of {levelData.recipes.Length}");
+                    
+                    SceneManager.LoadScene("CustomerScene");
+                    return;
+                }
+                else
+                {
+                    // All rounds complete - go to ReviewScene (next level)
+                    if (enableDebugLogs)
+                        Debug.Log($"[RatingSystem] All rounds complete for level {currentLevel}. Moving to ReviewScene.");
+                    
+                    SceneManager.LoadScene("ReviewScene");
+                    return;
+                }
+            }
+        }
+
+        // Fallback: just go to CustomerScene if we can't determine next step
+        if (enableDebugLogs)
+            Debug.LogWarning("[RatingSystem] Could not determine next step. Defaulting to CustomerScene.");
+        SceneManager.LoadScene("CustomerScene");
     }
 
     void TransitionToCustomerScene()
