@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2156197450254102498}
   - component: {fileID: 4918367419905816078}
   m_Layer: 0
-  m_Name: Mac & Cheese_Done
+  m_Name: Mac & Cheese
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

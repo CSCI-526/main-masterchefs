@@ -288,7 +288,7 @@ public class DraggableIngredient : MonoBehaviour
             if (hit.collider.gameObject == gameObject)
                 continue; // skip self-hit
 
-            Debug.Log($"[DEBUG] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+            //Debug.Log($"[DEBUG] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
 
             IDropZone dropZone = hit.collider.GetComponent<IDropZone>();
             if (dropZone != null)
