@@ -2,7 +2,7 @@ using UnityEngine;
 
 [ExecuteInEditMode] // run in edit mode to update visuals
 [RequireComponent(typeof(SpriteRenderer))] // ensure there's a SpriteRenderer
-public class Dish : MonoBehaviour
+public class Dish : Ingredient
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Recipe recipe;

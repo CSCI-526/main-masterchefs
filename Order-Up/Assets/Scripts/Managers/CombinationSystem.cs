@@ -25,18 +25,16 @@ public class CombinationSystem : MonoBehaviour
 
     public void CheckForCombinations()
     {
-        // Get all ingredient children on the plate
+        // Get ALL Ingredient components inside the plate hierarchy
+        Ingredient[] ingredientsArray = plate.GetComponentsInChildren<Ingredient>();
+
         List<GameObject> ingredientObjects = new List<GameObject>();
         List<Ingredient> ingredients = new List<Ingredient>();
 
-        foreach (Transform child in plate)
+        foreach (Ingredient ing in ingredientsArray)
         {
-            Ingredient ing = child.GetComponent<Ingredient>();
-            if (ing != null)
-            {
-                ingredientObjects.Add(child.gameObject);
-                ingredients.Add(ing);
-            }
+            ingredientObjects.Add(ing.gameObject);
+            ingredients.Add(ing);
         }
 
         // Check all recipes to find a match
@@ -46,8 +44,9 @@ public class CombinationSystem : MonoBehaviour
             {
                 if (enableDebugLogs)
                     Debug.Log("Recipe found: " + recipe.dishName);
+
                 CombineIntoDish(ingredientObjects, recipe);
-                return; // Stop after first match
+                return;
             }
         }
 
@@ -56,6 +55,16 @@ public class CombinationSystem : MonoBehaviour
 
     void CombineIntoDish(List<GameObject> ingredientsToRemove, Recipe recipe)
     {
+        Plate plateScript = plate.GetComponent<Plate>();
+        // Remove from plate list before destroy
+        foreach (GameObject ing in ingredientsToRemove)
+        {
+            var drag = ing.GetComponent<DraggableIngredient>();
+            if (drag != null)
+                plateScript.RemoveIngredient(drag);
+        }
+
+
         // Remove all ingredient GameObjects
         foreach (GameObject ing in ingredientsToRemove)
         {
@@ -68,8 +77,22 @@ public class CombinationSystem : MonoBehaviour
             GameObject dish = Instantiate(recipe.dishPrefab, plate.position, Quaternion.identity);
             dish.transform.SetParent(plate);
             dish.transform.localPosition = Vector3.zero;
+
+
+            DraggableIngredient dragComp = dish.GetComponent<DraggableIngredient>();
+
+            if (plateScript != null && dragComp != null)
+            {
+                plateScript.AddIngredient(dragComp);
+            }
+            else
+            {
+                Debug.LogWarning("CombineIntoDish: missing Plate or DraggableIngredient component on dish.");
+            }
+
             if (enableDebugLogs)
-                Debug.Log("Created dish: " + recipe.dishName);
+                Debug.Log("Created dish: " + recipe.dishName); 
+
         }
         else
         {

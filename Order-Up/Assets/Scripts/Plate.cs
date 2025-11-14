@@ -55,6 +55,13 @@ public class Plate : MonoBehaviour, IDropZone
 
     public bool AddIngredient(DraggableIngredient ingredient)
     {
+        // Clean up null entries
+        ingredientsOnPlate.RemoveAll(item => item == null || item.gameObject == null);
+
+
+        // prevent duplicate block when repositioning ingredient
+        ingredientsOnPlate.Remove(ingredient);
+
         if (!CanAddIngredient(ingredient))
             return false;
 
@@ -100,11 +107,19 @@ public class Plate : MonoBehaviour, IDropZone
         UpdateDishDisplay(); // Update display after removing ingredient
 
         Debug.Log($"Removed {ingredient.name} from plate. Total ingredients: {ingredientsOnPlate.Count}");
+
+        // Clean up null entries
+        ingredientsOnPlate.RemoveAll(item => item == null || item.gameObject == null);
+
         return true;
     }
 
     bool CanAddIngredient(DraggableIngredient ingredient)
     {
+        // Remove null entries first
+        ingredientsOnPlate.RemoveAll(item => item == null || item.gameObject == null);
+
+
         if (IsFull())
         {
             Debug.Log("Plate is full!");

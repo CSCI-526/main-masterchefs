@@ -66,7 +66,7 @@ public class LevelDesignManager : MonoBehaviour
 
         // Disable all slots first
         foreach (var slot in pantrySlots)
-            slot.gameObject.SetActive(false);
+            slot.gameObject.SetActive(true);
 
         // Enable only required slots
         for (int i = 0; i < data.activeIngredients.Length && i < pantrySlots.Length; i++)

@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 4287253255675042115}
   - component: {fileID: 6034298057220676974}
   - component: {fileID: 6410322376125371850}
+  - component: {fileID: 4083768722627367489}
+  - component: {fileID: 1263222773268953757}
+  - component: {fileID: 9208582495715652736}
   m_Layer: 0
   m_Name: French Fries
   m_TagString: Untagged
@@ -104,6 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e3f79363f2be44e83e923a8d89dbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
+  ingredientData: {fileID: 0}
+  currentState: 0
+  currentCookware: 0
   recipe: {fileID: 11400000, guid: 7a5f14e4951194fcaa32e6bc6c92d145, type: 2}
   ID: 
 --- !u!114 &6410322376125371850
@@ -118,6 +124,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4df87001277177479095e60058b1174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DraggableDish
+  dropZoneLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  dragOffset: 0.1
+  enableDebugLogs: 0
+  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!60 &4083768722627367489
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642886787612810088}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 9.1875, y: 9.1875}
+    newSize: {x: 1.47, y: 1.47}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.40625, y: -1.34375}
+      - {x: 4.59375, y: -0.78125}
+      - {x: 4.59375, y: 0.59375}
+      - {x: 4.34375, y: 1.53125}
+      - {x: 4.09375, y: 2.28125}
+      - {x: 2.84375, y: 3.71875}
+      - {x: 1.84375, y: 4.28125}
+      - {x: 1.40625, y: 4.46875}
+      - {x: 0.34375, y: 4.59375}
+      - {x: -0.78125, y: 4.59375}
+      - {x: -1.40625, y: 4.46875}
+      - {x: -2.46875, y: 3.96875}
+      - {x: -3.65625, y: 2.90625}
+      - {x: -4.40625, y: 1.71875}
+      - {x: -4.59375, y: 0.59375}
+      - {x: -4.59375, y: -0.46875}
+      - {x: -4.53125, y: -1.09375}
+      - {x: -4.40625, y: -1.71875}
+      - {x: -3.59375, y: -2.96875}
+      - {x: -2.90625, y: -3.65625}
+      - {x: -1.71875, y: -4.40625}
+      - {x: -0.59375, y: -4.59375}
+      - {x: 0.34375, y: -4.59375}
+      - {x: 1.15625, y: -4.46875}
+      - {x: 1.96875, y: -4.15625}
+      - {x: 2.90625, y: -3.59375}
+      - {x: 3.84375, y: -2.65625}
+  m_UseDelaunayMesh: 0
+--- !u!50 &1263222773268953757
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642886787612810088}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!114 &9208582495715652736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2642886787612810088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32084c6acb841a48ab9487aa31c4554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableIngredient
   dropZoneLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
