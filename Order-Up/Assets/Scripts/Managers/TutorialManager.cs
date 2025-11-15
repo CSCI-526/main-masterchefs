@@ -29,7 +29,7 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         // Debug.Log($"Current Level: {GameData.CurrentLevel}, Current Round: {GameData.CurrentRound}");
-        if (GameData.CurrentLevel == 0 && GameData.CurrentRound == 0)
+        if (GameData.CurrentLevel == 1 && GameData.CurrentRound == 0)
         {
             // Run the tutorial on Level 1 Round 0
             InitializeTutorial();

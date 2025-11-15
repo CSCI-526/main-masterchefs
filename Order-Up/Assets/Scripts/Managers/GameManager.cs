@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public void StartSession()
     {
         SessionID = DateTime.Now.Ticks;
+        GameData.IncrementLevel();
         CurrentLevel = GameData.CurrentLevel;
         Debug.Log($"New session started. ID: {SessionID}, Level: {CurrentLevel}");
     }

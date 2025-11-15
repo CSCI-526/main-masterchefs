@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameData
 {
     private static int currentDishId = 0;
-    private static int currentLevel = 0;
+    private static int currentLevel = 1;
     private static int currentRound = 0;
     private static GameObject currentRecipe = null;
 
@@ -17,7 +17,7 @@ public static class GameData
     public static void ResetGameData()
     {
         CurrentDishId = -1;
-        currentLevel = 0;
+        currentLevel = 1;
         currentRound = 0;
         CurrentRecipe = null;
     }
