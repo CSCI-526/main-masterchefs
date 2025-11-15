@@ -168,7 +168,7 @@ public class Attempts : MonoBehaviour
             if (enableDebugLogs)
                 Debug.Log("[Attempts] Perfect score achieved! Player can choose to continue or advance.");
 
-            // You could add UI here to let player choose to:
+            // You could add UI here to let player choose to: 
             // - Continue practicing (use remaining attempts)
             // - Move to next level immediately
         }
