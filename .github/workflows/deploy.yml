@@ -54,31 +54,30 @@ jobs:
         with:
           name: WebGL-Build
           path: build/WebGL
-
+          
   deploy:
     name: Deploy to GitHub Pages
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Required for pushing to gh-pages
-
+      contents: write
+      pages: write
+      id-token: write
+  
     steps:
-      # Step 1: Checkout repo again
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-
-      # Step 2: Download build artifact from previous job
-      - name: Download WebGL build
+  
+      - name: Download WebGL build artifact
         uses: actions/download-artifact@v4
         with:
           name: WebGL-Build
           path: build/WebGL
-
-      # Step 3: Deploy to gh-pages branch
+  
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/WebGL/WebGL
-          publish_branch: gh-page
+          publish_dir: ./build/WebGL    
+          publish_branch: gh-pages      
           force_orphan: true
