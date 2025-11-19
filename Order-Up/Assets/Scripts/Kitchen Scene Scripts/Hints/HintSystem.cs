@@ -6,17 +6,19 @@ using System.Linq;
 public class HintSystem : MonoBehaviour
 {
     [Header("UI References")]
-    public Button hintButton;               // button to use a hint
-    public GameObject hintPopup;            // popup window
-    public TextMeshProUGUI hintPopupText;   // text inside popup
-    public TextMeshProUGUI hintsLeftText;   // text showing hints left
+    public Button hintButton;               // Button to request a hint
+    public GameObject hintPanel;            // Panel that shows the hint
+    public TextMeshProUGUI hintText;        // Text that displays the hint
+    public Button closeButton;              // Button to close the panel
 
     [Header("Settings")]
-    public int maxHintsPerRound = 3; // hints per round
+    public int hintCost = 3;                // Cost per hint in dollars
 
-    private HintDatabase hintDB; // hints from json file
-    private int currentRecipeID = 0; // to track the ID of the recipe
-    private int hintsUsed = 0; // to track hints player has used on round
+    [Header("Debug")]
+    public bool enableDebugLogs = true;
+
+    private HintDatabase hintDB;
+    private int currentHintIndex = 0;       // Tracks which hint to show next (0, 1, or 2)
 
     private void Awake()
     {
@@ -25,76 +27,128 @@ public class HintSystem : MonoBehaviour
 
     private void Start()
     {
-        // connect hint button
+        // Connect buttons
         if (hintButton != null)
-            hintButton.onClick.AddListener(ShowNextHint);
+            hintButton.onClick.AddListener(OnHintButtonClicked);
 
-        UpdateHintsLeftUI();
-        hintPopup.SetActive(false); // hide popup at start
+        if (closeButton != null)
+            closeButton.onClick.AddListener(CloseHintPanel);
+
+        // Hide panel at start
+        if (hintPanel != null)
+            hintPanel.SetActive(false);
+
+        ResetForNewRecipe();
     }
 
     private void LoadHints()
     {
-        TextAsset jsonFile = Resources.Load<TextAsset>("hints"); // load in hints from json file
+        TextAsset jsonFile = Resources.Load<TextAsset>("hints");
 
         if (jsonFile == null)
         {
-            Debug.LogError("json not found");
+            Debug.LogError("[HintSystem] hints.json not found in Resources folder!");
             return;
         }
 
         hintDB = JsonUtility.FromJson<HintDatabase>(jsonFile.text);
+
+        if (enableDebugLogs)
+            Debug.Log($"[HintSystem] Loaded {hintDB.recipes.Length} recipes with hints");
     }
 
-    public void SetCurrentRecipe(int recipeID)
+    /// <summary>
+    /// Call this when starting a new recipe/round
+    /// </summary>
+    public void ResetForNewRecipe()
     {
-        currentRecipeID = recipeID;
-        ResetHintCount();
+        currentHintIndex = 0;
+
+        if (hintPanel != null)
+            hintPanel.SetActive(false);
+
+        if (enableDebugLogs)
+            Debug.Log("[HintSystem] Reset for new recipe");
     }
 
-    private void ResetHintCount() // reset used hints for round
+    private void OnHintButtonClicked()
     {
-        hintsUsed = 0;
-        UpdateHintsLeftUI();
-        hintPopup.SetActive(false);
-    }
+        // Get the current dish ID from GameData
+        int currentDishId = GameData.CurrentDishId;
 
-    public void ShowNextHint()
-    {
-        if (hintsUsed >= maxHintsPerRound)
+        if (enableDebugLogs)
+            Debug.Log($"[HintSystem] Hint requested for Dish ID: {currentDishId}");
+
+        // Find the recipe with matching ID
+        RecipeHint recipe = hintDB.recipes.FirstOrDefault(r => r.id == currentDishId);
+
+        if (recipe == null)
         {
-            hintPopupText.text = "No more hints available";
-            hintPopup.SetActive(true);
+            if (enableDebugLogs)
+                Debug.LogError($"[HintSystem] No hints found for Dish ID: {currentDishId}");
+
+            ShowHintPanel("No hints available for this recipe.");
             return;
         }
 
-        RecipeHint r = hintDB.recipes.FirstOrDefault(rec => rec.id == currentRecipeID); // to access recipe in json
-
-        if (r == null) // no recipe found
+        // Check if we've run out of hints
+        if (currentHintIndex >= recipe.hints.Length)
         {
-            hintPopupText.text = "Recipe not found";
-            hintPopup.SetActive(true);
+            if (enableDebugLogs)
+                Debug.Log("[HintSystem] No more hints available");
+
+            ShowHintPanel("No more hints available!");
             return;
         }
 
-        if (hintsUsed < r.hints.Length) // if there are hints available
+        // Check if player can afford the hint
+        if (RevenueSystem.Instance != null)
         {
-            hintPopupText.text = r.hints[hintsUsed];  // show hints in different indices
-            hintPopup.SetActive(true);
+            if (!RevenueSystem.Instance.CanAfford(hintCost))
+            {
+                if (enableDebugLogs)
+                    Debug.LogWarning($"[HintSystem] Player cannot afford hint. Cost: ${hintCost}, Has: ${RevenueSystem.Instance.GetCurrentMoney()}");
+
+                ShowHintPanel($"Not enough money! Hints cost ${hintCost}.");
+                return;
+            }
+
+            // Charge the player
+            if (RevenueSystem.Instance.SpendMoney(hintCost))
+            {
+                // Show the hint
+                string hint = recipe.hints[currentHintIndex];
+                ShowHintPanel(hint);
+
+                if (enableDebugLogs)
+                    Debug.Log($"[HintSystem] Showing hint {currentHintIndex + 1}/{recipe.hints.Length}: {hint}");
+
+                currentHintIndex++;
+            }
         }
+        else
+        {
+            Debug.LogError("[HintSystem] RevenueSystem.Instance not found!");
 
-        hintsUsed++; 
-        UpdateHintsLeftUI();
+            // Show hint anyway for testing
+            string hint = recipe.hints[currentHintIndex];
+            ShowHintPanel(hint);
+            currentHintIndex++;
+        }
     }
 
-    public void CloseHintPopup() // to have button to close popup
+    private void ShowHintPanel(string message)
     {
-        hintPopup.SetActive(false);
+        if (hintText != null)
+            hintText.text = message;
+
+        if (hintPanel != null)
+            hintPanel.SetActive(true);
     }
 
-    private void UpdateHintsLeftUI() // to show how many hints left
+    public void CloseHintPanel()
     {
-        int left = maxHintsPerRound - hintsUsed;
-        hintsLeftText.text = "Hints Left: " + left;
+        if (hintPanel != null)
+            hintPanel.SetActive(false);
     }
 }

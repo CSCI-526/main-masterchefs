@@ -36,12 +36,12 @@ public class RatingSystem : MonoBehaviour
     {
         submitButton.interactable = false; // Disable the button to prevent multiple submissions
         int stars = CalculateRating();
-        Debug.Log("Rating: " + stars + " Stars!");
-
-        FindAnyObjectByType<RevenueSystem>().AddRevenue(stars);
+        if (enableDebugLogs)
+            Debug.Log($"[RatingSystem] Dish submitted. Calculated Rating: {stars} stars.");
         float timeTaken = Timer.Instance.StopTimer();
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
+        RevenueSystem.Instance.AddRevenue(stars);
 
         // Record the attempt
         if (Attempts.Instance != null)
