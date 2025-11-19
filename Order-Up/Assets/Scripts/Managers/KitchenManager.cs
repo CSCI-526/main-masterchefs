@@ -22,7 +22,7 @@ public class KitchenManager : MonoBehaviour
     {
         // retrieve currentDishId
         currentDishId = GameData.CurrentDishId; // todo: uncomment
-        Debug.Log("Current Dish ID in KitchenManager: " + currentDishId);
+        //Debug.Log("Current Dish ID in KitchenManager: " + currentDishId);
         if (currentDishId >= 0 && currentDishId < dishPrefabs.Length)
             DisplayDishPrefab(currentDishId);
         else

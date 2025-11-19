@@ -28,6 +28,7 @@ public class LevelDesignManager : MonoBehaviour
         currRecipe = null;
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
+        GameData.AllLevels = levels;
     }
 
     private void Update()

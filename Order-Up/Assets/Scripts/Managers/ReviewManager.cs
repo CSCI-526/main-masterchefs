@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;   // Required for TextMeshPro
+using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,11 +18,9 @@ public class ReviewSceneManager : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject uiListItemPrefab;
+    public GameObject takeOrderBtn;
 
-    [Header("Level Data Source")]
-    public LevelDesignManager levelDesignManager;
-
-    private void Start()
+    void Start()
     {
         LoadReviewData();
     }
@@ -30,7 +28,8 @@ public class ReviewSceneManager : MonoBehaviour
     private void LoadReviewData()
     {
         int level = GameData.CurrentLevel;
-        var levels = levelDesignManager.levels;
+        var levels = GameData.AllLevels;
+        Debug.Log($"[ReviewManager] At level {level}. Moving to CustomerScene.");
 
         LevelData current = levels[level - 1];
 
@@ -92,8 +91,6 @@ public class ReviewSceneManager : MonoBehaviour
 
         return newOnes;
     }
-
-
 
     public void Continue()
     {

@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(PolygonCollider2D))]
 public class Trash : MonoBehaviour, IDropZone
 {
+    [SerializeField] private Plate plate;
     [SerializeField] private bool enableDebugLogs = false;
     [SerializeField] private Transform pantryGrid;
     private PantryIngredient[] pantrySlots;
@@ -26,6 +27,9 @@ public class Trash : MonoBehaviour, IDropZone
 
         if (enableDebugLogs)
             Debug.Log($"[Trash] Ingredient dropped: {ingredient.name}");
+
+        // Take the draggable ingredient out of the list on plate
+        plate.RemoveIngredient(ingredient);
 
         // Find which pantry this ingredient came from
         PantryIngredient sourcePantry = FindPantryForIngredient(ingredient);

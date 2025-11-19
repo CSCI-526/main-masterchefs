@@ -1,77 +1,144 @@
 {
-  "dialogues": [
-    {
-      "id": 1,
-      "dishId": 0,
-      "dishName": "French Fries",
-      "sentenceTemplate": "Ugh, I just need something crispy right now... can you make me some {dish} with TWO potatos?",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 2,
-      "dishId": 1,
-      "dishName": "Cheesy Fries",
-      "sentenceTemplate": "I was going to eat healthy today, but then I remembered {dish} exists. Worth it.",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 3,
-      "dishId": 2,
-      "dishName": "Cheese Pizza",
-      "sentenceTemplate": "My friends are coming over for movie night. No {dish}, no friendship. You know the rule.",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 4,
-      "dishId": 3,
-      "dishName": "Mac & Cheese",
-      "sentenceTemplate": "Life’s tough, but a bowl of {dish} makes it better. Can you make it extra creamy?",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 5,
-      "dishId": 4,
-      "dishName": "Chicken Sandwich",
-      "sentenceTemplate": "Lunch break in 10 minutes! I need a {dish} before my coworker steals the last one again.",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 6,
-      "dishId": 5,
-      "dishName": "Omelette Sandwich",
-      "sentenceTemplate": "I overslept again… can you make me an {dish} so it at least looks like I have my life together?",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 7,
-      "dishId": 6,
-      "dishName": "Spaghetti with Tomato Sauce",
-      "sentenceTemplate": "Date night disaster! I promised homemade {dish}, can you save my love life?",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 8,
-      "dishId": 7,
-      "dishName": "Chicken Salad without cheese",
-      "sentenceTemplate": "Trying to be healthy for once... Can you make a {dish} that doesn’t taste like sadness?",
-      "color": "orange",
-      "image": "dish"
-    },
-    {
-      "id": 9,
-      "dishId": 8,
-      "dishName": "Chicken Noodle Soup",
-      "sentenceTemplate": "I caught a cold and need comfort food ASAP. Only {dish} can fix my soul.",
-      "color": "orange",
-      "image": "dish"
-    }
-  ]
-}
+	"dialogues": [
+		{ 
+			"id": 1,
+			"dishId": 0,
+			"dishName": "Cheesy Fries",
+			"sentenceTemplate": "I promised myself I’d eat healthy today but then I remembered {dish}. Oops.",
+			"color": "orange",
+			"image": "CheesyFries"
+		},
 
+
+		{
+			"id": 2,
+			"dishId": 1,
+			"dishName": "Cheese Dough Bites",
+			"sentenceTemplate": "Okay but why are {dish} living in my head rent free today?",
+			"color": "orange",
+			"image": "CheeseDoughBites"
+		},
+		{
+			"id": 3,
+			"dishId": 0,
+			"dishName": "Cheesy Fries",
+			"sentenceTemplate": "Real question. How many {dish} is too many? Asking for a friend.",
+			"color": "orange",
+			"image": "CheesyFries"
+		},
+		{
+			"id": 4,
+			"dishId": 2,
+			"dishName": "Cheese Pizza",
+			"sentenceTemplate": "My day is mid. Your {dish} could change that.",
+			"color": "orange",
+			"image": "CheesePizza"
+		},
+
+
+
+		{
+			"id": 5,
+			"dishId": 3,
+			"dishName": "Mac & Cheese",
+			"sentenceTemplate": "I’m not saying {dish} is my weakness but I am saying I’d marry one.",
+			"color": "orange",
+			"image": "MacAndCheese"
+		},
+		{
+			"id": 6,
+			"dishId": 2,
+			"dishName": "Cheese Pizza",
+			"sentenceTemplate": "Look, all I want is {dish}. Is that too much to ask?",
+			"color": "orange",
+			"image": "CheesePizza"
+		},
+		{
+			"id": 7,
+			"dishId": 4,
+			"dishName": "Spaghetti with Tomato Sauce",
+			"sentenceTemplate": "{dish} is the reason I haven’t fully given up on life.",
+			"color": "orange",
+			"image": "Spaghetti"
+		},
+		{
+			"id": 8,
+			"dishId": 3,
+			"dishName": "Mac & Cheese",
+			"sentenceTemplate": "Be honest, chef. Do you put extra cheese in your {dish}? I need to know.",
+			"color": "orange",
+			"image": "Spaghetti"
+		},
+
+
+
+		{
+			"id": 9,
+			"dishId": 5,
+			"dishName": "Omelette Sandwich",
+			"sentenceTemplate": "I woke up craving {dish} and absolutely no one is surprised.",
+			"color": "orange",
+			"image": "OmeletteSandwich"
+		},
+		{
+			"id": 10,
+			"dishId": 0,
+			"dishName": "Cheesy Fries",
+			"sentenceTemplate": "{dish} just feels like the right move today.",
+			"color": "orange",
+			"image": "CheesyFries"
+		},
+		{
+			"id": 11,
+			"dishId": 6,
+			"dishName": "Chicken Cheesy Melt",
+			"sentenceTemplate": "I didn’t know what I wanted until I thought about {dish}. Now I’m sure.",
+			"color": "orange",
+			"image": "ChickenCheesyMelt"
+		},
+		{
+			"id": 12,
+			"dishId": 5,
+			"dishName": "Omelette Sandwich",
+			"sentenceTemplate": "Tell me you still have {dish}. I need good news today.",
+			"color": "orange",
+			"image": "OmeletteSandwich"
+		},
+
+
+
+		{
+			"id": 13,
+			"dishId": 7,
+			"dishName": "Chicken Sandwich",
+			"sentenceTemplate": "Someone stole my {dish} from the office fridge. Can you save my lunch?",
+			"color": "orange",
+			"image": "ChickenSandwich"
+		},
+		{
+			"id": 14,
+			"dishId": 1,
+			"dishName": "Cheese Dough Bites",
+			"sentenceTemplate": "Everything is better with a {dish}. That’s just science.",
+			"color": "orange",
+			"image": "CheeseDoughBites"
+		},
+    {
+      "id": 15,
+			"dishId": 6,
+			"dishName": "Chicken Cheesy Melt",
+			"sentenceTemplate": "Everything is better with a {dish}. That’s just science.",
+			"color": "orange",
+			"image": "ChickenCheesyMelt"
+    },
+		{
+			"id": 16,
+			"dishId": 7,
+			"dishName": "Chicken Sandwich",
+			"sentenceTemplate": "I’ve been thinking about {dish} for like an hour. Please put me out of my misery.",
+			"color": "orange",
+			"image": "ChickenSandwich"
+		}
+	],
+  "version": "1.0"
+}

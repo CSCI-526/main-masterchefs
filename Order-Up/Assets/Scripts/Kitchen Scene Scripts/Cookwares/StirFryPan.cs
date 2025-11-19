@@ -30,6 +30,7 @@ public class StirFryPan : BaseCookware
     [SerializeField] private float ingredientBounciness = 0.6f; // How bouncy ingredients are
     [SerializeField] private float ingredientFriction = 0.3f; // Friction on pan surface
     [SerializeField] private float panPushForce = 5f; // How much pan movement affects ingredient
+    [SerializeField] private bool fireOn = false;
 
     private bool isBeingHeld = false;
     private Vector3 lastPanPosition;
@@ -192,7 +193,11 @@ public class StirFryPan : BaseCookware
             ingredientRb.linearVelocity = Vector2.zero;
         }
 
-        StartCooking();
+        if (fireOn)
+            StartCooking();
+        else
+            CenterIngredient();
+
     }
 
     protected override void OnIngredientExited(GameObject ingredient)
@@ -260,6 +265,10 @@ public class StirFryPan : BaseCookware
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = transform.position.z;
         transform.position = mousePos;
+        if (!fireOn && ingredientInside != null)
+        {
+            CenterIngredient();
+        }
     }
 
     private void OnMouseUp()
@@ -319,7 +328,26 @@ public class StirFryPan : BaseCookware
         {
             ingredientRb.AddTorque(panVelocity.magnitude * 5f, ForceMode2D.Force);
         }
+
+        EnforcePanBoundary();
     }
+
+    private void EnforcePanBoundary()
+    {
+        if (ingredientRb == null) return;
+
+        Vector2 panCenter = transform.position;
+        Vector2 ingredientPos = ingredientRb.position;
+        float dist = Vector2.Distance(ingredientPos, panCenter);
+
+        if (dist > boundaryRadius)
+        {
+            Vector2 clamped = panCenter + (ingredientPos - panCenter).normalized * (boundaryRadius - 0.05f);
+            ingredientRb.position = clamped;
+            ingredientRb.linearVelocity = Vector2.zero;
+        }
+    }
+
 
     public override void StartCooking()
     {
@@ -337,6 +365,33 @@ public class StirFryPan : BaseCookware
             Debug.Log($"[{cookwareName}] Start stir-frying! Move pan around!");
         }
     }
+
+    private void CenterIngredient()
+    {
+        if (ingredientRb == null) return;
+
+        ingredientRb.bodyType = RigidbodyType2D.Kinematic;
+        ingredientRb.linearVelocity = Vector2.zero;
+        ingredientRb.angularVelocity = 0f;
+        ingredientInside.transform.position = transform.position;
+    }
+
+    public void ToggleFire(bool on)
+    {
+        fireOn = on;
+
+        if (!fireOn)
+        {
+            StopCooking();
+            CenterIngredient();
+        }
+
+        if (fireOn && ingredientInside != null)
+        {
+            StartCooking();
+        }
+    }
+
 
     public override void StopCooking()
     {
@@ -376,6 +431,9 @@ public class StirFryPan : BaseCookware
         {
             progressBar.value = 0f;
         }
+
+        fireOn = false;
+        CenterIngredient();
 
         if (enableDebugLogs)
         {

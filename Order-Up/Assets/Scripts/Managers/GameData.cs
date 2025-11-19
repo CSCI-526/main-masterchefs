@@ -1,5 +1,6 @@
 using UnityEngine;
-
+using System.Collections;
+using System.Collections.Generic;
 
 // Storing the order data
 public static class GameData
@@ -8,11 +9,12 @@ public static class GameData
     private static int currentLevel = 1;
     private static int currentRound = 0;
     private static GameObject currentRecipe = null;
-
+    private static List<LevelData> allLevels;
     public static int CurrentDishId { get => currentDishId; set => currentDishId = value; }
     public static int CurrentLevel { get => currentLevel; set => currentLevel = value; }
     public static int CurrentRound { get => currentRound; set => currentRound = value; }
     public static GameObject CurrentRecipe { get => currentRecipe; set => currentRecipe = value; }
+    public static List<LevelData> AllLevels { get => allLevels; set => allLevels = value; }
 
     public static void ResetGameData()
     {
