@@ -39,11 +39,11 @@ public class ReviewSceneManager : MonoBehaviour
         coinsText.text = $"Total Coins: 0";
         // HARDCODE FOR NOW
 
-        // Determine previous level data (if level == 1, nothing is new)
-        LevelData previous = (level > 1) ? levels[level - 2] : null;
+        // Determine next level data (if level == 1, nothing is new)
+        LevelData next = (level < levels.Count) ? levels[level] : null;
 
         // -------- NEW INGREDIENTS --------
-        var newIngredients = GetNewItems(previous?.activeIngredients, current.activeIngredients);
+        var newIngredients = GetNewItems(current.activeIngredients, next?.activeIngredients);
 
         foreach (var ingredient in newIngredients)
         {
@@ -52,7 +52,7 @@ public class ReviewSceneManager : MonoBehaviour
         }
 
         // -------- NEW COOKWARE --------
-        var newCookwares = GetNewItems(previous?.activeCookwares, current.activeCookwares);
+        var newCookwares = GetNewItems(current.activeCookwares, next?.activeCookwares);
 
         foreach (var cookware in newCookwares)
         {
@@ -61,36 +61,36 @@ public class ReviewSceneManager : MonoBehaviour
         }
     }
 
-    private List<GameObject> GetNewItems(GameObject[] previous, GameObject[] current)
+    private List<GameObject> GetNewItems(GameObject[] oldItems, GameObject[] newItems)
     {
-        List<GameObject> newOnes = new List<GameObject>();
+        List<GameObject> result = new List<GameObject>();
 
-        // No previous level → everything is new
-        if (previous == null)
-        {
-            newOnes.AddRange(current);
-            return newOnes;
-        }
+        if (newItems == null)
+            return result;
 
-        foreach (var obj in current)
+        foreach (var item in newItems)
         {
             bool alreadyHad = false;
 
-            foreach (var prev in previous)
+            if (oldItems != null)
             {
-                if (prev == obj)
+                foreach (var old in oldItems)
                 {
-                    alreadyHad = true;
-                    break;
+                    if (old == item)
+                    {
+                        alreadyHad = true;
+                        break;
+                    }
                 }
             }
 
             if (!alreadyHad)
-                newOnes.Add(obj);
+                result.Add(item);
         }
 
-        return newOnes;
+        return result;
     }
+
 
     public void Continue()
     {
