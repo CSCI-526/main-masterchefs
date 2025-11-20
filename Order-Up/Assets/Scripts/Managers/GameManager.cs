@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         IsGameInProgress = false;
         GameData.ResetGameData();
         Debug.Log("Game Over!");
-        SceneManager.LoadScene("KitchenScene");
+        SceneManager.LoadScene("IntroScene");
     }
     // e.g., player progress, score tracking, etc.
 }

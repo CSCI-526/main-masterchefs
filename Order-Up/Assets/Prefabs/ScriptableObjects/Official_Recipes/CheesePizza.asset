@@ -19,9 +19,13 @@ MonoBehaviour:
     requiredState: 1
     requiredCookware: 3
     requiredChoppingState: 0
-  - ingredient: {fileID: 11400000, guid: 4c4ec9bcfff5e8e49ab563404aa83ee0, type: 2}
+  - ingredient: {fileID: 11400000, guid: 7807ed4edfb184b9689e073e1a54a955, type: 2}
     requiredState: 0
-    requiredCookware: 0
+    requiredCookware: 3
     requiredChoppingState: 0
-  dishPrefab: {fileID: 720147643003493700, guid: 67c9d25eed7e713469c113041592e424, type: 3}
+  - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
+    requiredState: 1
+    requiredCookware: 1
+    requiredChoppingState: 0
+  dishPrefab: {fileID: 1332861967603227936, guid: 2d04ba47d720a4bfda86f88f752c8287, type: 3}
   icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}

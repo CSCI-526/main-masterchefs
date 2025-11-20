@@ -72,16 +72,46 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
     /// <summary>
     /// Check if cookware can accept an ingredient (only one at a time)
     /// </summary>
-    public virtual bool CanAcceptIngredient()
+    public virtual bool CanAcceptIngredient(GameObject ingredientObj = null)
     {
-        bool canAccept = ingredientInside == null && !isCooking;
+        // First check if cookware is available
+        if (ingredientInside != null || isCooking)
+        {
+            if (enableDebugLogs)
+            {
+                Debug.Log($"[{cookwareName}] Cannot accept - already has ingredient or is cooking");
+            }
+            return false;
+        }
+
+        // If no ingredient provided, just check availability
+        if (ingredientObj == null)
+        {
+            return true;
+        }
+
+        // Check if ingredient's cookware type matches this cookware
+        Ingredient ingredient = ingredientObj.GetComponent<Ingredient>();
+        if (ingredient == null)
+        {
+            if (enableDebugLogs)
+            {
+                Debug.Log($"[{cookwareName}] Object has no Ingredient component");
+            }
+            return false;
+        }
+
+        bool cookwareMatches = ingredient.CheckAllowedCookware(cookwareType);
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[{cookwareName}] CanAcceptIngredient: {canAccept} (HasIngredient: {ingredientInside != null}, IsCooking: {isCooking})");
+            Debug.Log($"[{cookwareName}] CanAcceptIngredient: {cookwareMatches} " +
+                      $"(Ingredient: {ingredient.IngredientName}, " +
+                      $"Ingredient's Cookware: {ingredient.currentCookware}, " +
+                      $"This Cookware: {cookwareType})");
         }
 
-        return canAccept;
+        return cookwareMatches;
     }
 
     // Trigger detection for ingredients
@@ -92,7 +122,7 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
             Debug.Log($"[{cookwareName}] Trigger Entered by: {other.gameObject.name}");
         }
 
-        // Check for DraggableIngredient component
+        //    // Check for DraggableIngredient component
         DraggableIngredient draggable = other.GetComponent<DraggableIngredient>();
 
         if (draggable == null) return;
@@ -101,7 +131,7 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
 
 
         // Only accept if we can
-        if (!CanAcceptIngredient())
+        if (!CanAcceptIngredient(other.gameObject))
         {
             if (enableDebugLogs)
             {

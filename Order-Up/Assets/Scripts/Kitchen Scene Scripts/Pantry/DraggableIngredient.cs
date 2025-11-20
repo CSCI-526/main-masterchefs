@@ -167,7 +167,7 @@ public class DraggableIngredient : MonoBehaviour
             else if (dropZone is BaseCookware cookware)
             {
                 // Check if cookware can accept this ingredient (only one at a time)
-                if (cookware.CanAcceptIngredient())
+                if (cookware.CanAcceptIngredient(this.gameObject))
                 {
                     // Position ingredient inside cookware bounds
                     transform.position = dropZone.GetGameObject().transform.position;

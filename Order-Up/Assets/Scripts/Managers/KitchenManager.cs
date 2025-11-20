@@ -15,8 +15,6 @@ public class KitchenManager : MonoBehaviour
 
     // Play/Customize Button
     [Header("Play/Customize Button")]
-    public Button playButton;
-    public Button customizeButton;
     public Button submitButton;
     void Start()
     {
@@ -28,11 +26,6 @@ public class KitchenManager : MonoBehaviour
         else
             Debug.LogError("Invalid Dish ID: " + currentDishId +
                            ". Make sure the ID is within the range of the dishPrefabs array size.");
-
-        // Add button listeners
-        playButton.onClick.AddListener(OnPlayClicked);
-        if (customizeButton != null)
-            customizeButton.onClick.AddListener(OnCustomizeClicked);
 
         UpdatePlayButtonState();
         //GameData.CheckAndIncrementLevel();
@@ -64,12 +57,9 @@ public class KitchenManager : MonoBehaviour
     {
         if (GameManager.Instance == null)
             Debug.LogError("GameManager.Instance is NULL!");
-        if (playButton == null)
-            Debug.LogError("playButton is NULL!");
         if (submitButton == null)
             Debug.LogError("submitButton is NULL!");
 
-        playButton.gameObject.SetActive(!GameManager.Instance.IsGameInProgress);
         submitButton.gameObject.SetActive(GameManager.Instance.IsGameInProgress);
     }
 }

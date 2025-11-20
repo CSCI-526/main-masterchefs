@@ -39,7 +39,8 @@ public class RevenueSystem : MonoBehaviour
     private void Start()
     {
         // Load saved money or use starting amount
-        currentMoney = PlayerPrefs.GetInt("PlayerMoney", startingMoney);
+        //currentMoney = PlayerPrefs.GetInt("PlayerMoney", startingMoney);
+        currentMoney = startingMoney; // Temporarily disable saving for testing
         FindMoneyUI();
         UpdateMoneyUI();
 
