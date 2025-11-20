@@ -13,11 +13,11 @@ public class StirBasedCookware : BaseCookware
 
     [Header("Cooking Settings")]
     [SerializeField] private float properCookingTime = 5f;
-    [SerializeField] private float maxCookingTime = 10f;
+    [SerializeField] private float maxCookingTime = 7f;
 
     [Header("Stirring Detection")]
     [SerializeField] private string spatulaTag = "Spatula";
-    [SerializeField] private float stirSpeedThreshold = 0.5f; // Minimum speed to count as stirring
+    [SerializeField] private float stirSpeedThreshold = 0.3f; // Minimum speed to count as stirring
     [SerializeField] private float circularMotionThreshold = 0.3f; // How circular the motion needs to be
     [SerializeField] private int motionSampleSize = 10; // Number of positions to track
 
@@ -57,7 +57,7 @@ public class StirBasedCookware : BaseCookware
         // Only progress time if stirring
         if (isStirring)
         {
-            currentCookingTime += Time.deltaTime;
+            currentCookingTime += Time.deltaTime * 10;
 
             if (progressBar != null)
             {
