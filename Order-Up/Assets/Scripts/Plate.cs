@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
+//using System.Numerics;
 
 public class Plate : MonoBehaviour, IDropZone
 {
@@ -55,7 +56,7 @@ public class Plate : MonoBehaviour, IDropZone
 
     public bool AddIngredient(DraggableIngredient ingredient)
     {
-        if (!CanAddIngredient(ingredient))
+        if (!CanAddIngredient(ingredient)) 
             return false;
 
         ingredientsOnPlate.Add(ingredient);
@@ -73,6 +74,9 @@ public class Plate : MonoBehaviour, IDropZone
             comboSystem.CheckForCombinations();
 
         UpdateDishDisplay(); // Update display after adding ingredient
+
+         
+        PopupManager.Instance.ShowPopup("Plate is full!", this.transform);
 
         Debug.Log($"Added {ingredient.name} to plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
@@ -108,6 +112,7 @@ public class Plate : MonoBehaviour, IDropZone
         if (IsFull())
         {
             Debug.Log("Plate is full!");
+
             return false;
         }
 
