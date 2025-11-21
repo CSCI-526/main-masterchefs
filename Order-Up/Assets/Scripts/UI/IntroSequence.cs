@@ -1,32 +1,22 @@
-
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
 
-public class IntroManager : MonoBehaviour
+public class IntroSequence : MonoBehaviour
 {
-    public Button button;
     public RectTransform background;
     public TextMeshProUGUI introText;
-    public Image introPanel; 
 
-    private void Awake()
+    public void PlayIntro()
     {
-        button.onClick.AddListener(PlayIntroSequence);
-    }
-
-    private void PlayIntroSequence()
-    {
-        button.interactable = false;  // Disable button to prevent multiple clicks
         StartCoroutine(IntroRoutine());
     }
 
     IEnumerator IntroRoutine()
     {
-        // Background zoom-in 
+        // Step 1: Zoom in background
         Vector3 startScale = background.localScale;
         Vector3 endScale = startScale * 1.08f;
         float time = 0f;
@@ -38,20 +28,8 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
 
-        // Fade-in panel
-        Color p = introPanel.color;
-
-        time = 0f;
-        while (time < 0.4f)   
-        {
-            time += Time.deltaTime;
-            p.a = Mathf.Lerp(0, 1, time / 0.4f);
-            introPanel.color = p;
-            yield return null;
-}
-
-
-        // Fade-in text 
+        // Step 2: Fade in text
+        introText.text = "Welcome to Café Bear.\nYour first customer is almost here...";
         Color c = introText.color;
 
         time = 0f;
@@ -63,10 +41,10 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
 
-        //  Hold for 2.5 seconds
-        yield return new WaitForSeconds(2.5f);
+        // Step 3: Hold for 1 second
+        yield return new WaitForSeconds(1f);
 
- 
-        GameManager.Instance.StartGame();
+        // Step 4: Load next scene
+        SceneManager.LoadScene("Level1");
     }
 }
