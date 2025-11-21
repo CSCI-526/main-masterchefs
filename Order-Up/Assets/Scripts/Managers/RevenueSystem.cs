@@ -64,10 +64,8 @@ public class RevenueSystem : MonoBehaviour
         FindMoneyUI();
         UpdateMoneyUI();
     }
-
-    /// <summary>
+    
     /// Finds the money text UI in the current scene
-    /// </summary>
     private void FindMoneyUI()
     {
         if (moneyText == null)
@@ -87,10 +85,8 @@ public class RevenueSystem : MonoBehaviour
             }
         }
     }
-
-    /// <summary>
+    
     /// Awards money based on star rating from the rating system
-    /// </summary>
     public void AddRevenue(int stars)
     {
         int moneyEarned = 0;
@@ -113,6 +109,12 @@ public class RevenueSystem : MonoBehaviour
         }
 
         currentMoney += moneyEarned;
+        
+        // Send transaction data to Analytics Manager
+        if (stars > 0)
+        {
+            sendEarnData(moneyEarned, GameData.CurrentDishId, stars);
+        }
 
         if (enableDebugLogs)
             Debug.Log($"[RevenueSystem] Earned ${moneyEarned} for {stars} stars. Total: ${currentMoney}");
@@ -120,10 +122,8 @@ public class RevenueSystem : MonoBehaviour
         UpdateMoneyUI();
         SaveMoney();
     }
-
-    /// <summary>
+    
     /// Attempts to spend money. Returns true if successful, false if not enough money
-    /// </summary>
     public bool SpendMoney(int amount)
     {
         if (currentMoney >= amount)
@@ -145,18 +145,14 @@ public class RevenueSystem : MonoBehaviour
             return false;
         }
     }
-
-    /// <summary>
+    
     /// Returns the current amount of money the player has
-    /// </summary>
     public int GetCurrentMoney()
     {
         return currentMoney;
     }
-
-    /// <summary>
+    
     /// Checks if player can afford a purchase
-    /// </summary>
     public bool CanAfford(int amount)
     {
         return currentMoney >= amount;
@@ -173,10 +169,8 @@ public class RevenueSystem : MonoBehaviour
         PlayerPrefs.SetInt("PlayerMoney", currentMoney);
         PlayerPrefs.Save();
     }
-
-    /// <summary>
+    
     /// Resets money to starting amount (useful for testing)
-    /// </summary>
     public void ResetMoney()
     {
         currentMoney = startingMoney;
@@ -185,5 +179,17 @@ public class RevenueSystem : MonoBehaviour
 
         if (enableDebugLogs)
             Debug.Log($"[RevenueSystem] Money reset to ${startingMoney}");
+    }
+    
+    private void sendEarnData(int amount, int dishID, int rating)
+    {
+        // Retrieve sessionID, current level, and current round
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameData.CurrentLevel;
+        int round = GameData.CurrentRound;
+        
+        Debug.Log($"[RevenueSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount},  dishID: {dishID}, rating: {rating}");
+        
+        AnalyticsManager.Instance.SendEarn(sessionID, level, round, amount, dishID, rating);
     }
 }

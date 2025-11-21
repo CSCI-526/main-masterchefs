@@ -9139,6 +9139,10 @@ PrefabInstance:
       value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSdidx0_d1qGaOH4E5F4mZ2KmOM3uBSEcFlE8BaiSFzND4Gmtw/formResponse
       objectReference: {fileID: 0}
     - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: failureURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSdAUuiBzNX2n56qDU28YgA1ZA0c8wVKFyiiIG2OQ4lra-wfMQ/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
       propertyPath: levelStartURL
       value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSe5ZVTN38ucgr2-n3485AArBWwlDTZHp0gYU2VsxVOibbJT_A/formResponse
       objectReference: {fileID: 0}
