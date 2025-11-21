@@ -131,7 +131,10 @@ public class HintSystem : MonoBehaviour
                 ShowHintPanel(combinedHints);
                 if (enableDebugLogs)
                     Debug.Log($"[HintSystem] Showing hint {currentHintIndex + 1}/{recipe.hints.Length}: {hint}");
-
+                
+                // Send transaction data to Analytics Manager
+                sendSpendData(hintCost, currentDishId, currentHintIndex);
+                
                 currentHintIndex++;
             }
         }
@@ -159,5 +162,18 @@ public class HintSystem : MonoBehaviour
     {
         if (hintPanel != null)
             hintPanel.SetActive(false);
+    }
+    
+    private void sendSpendData(int amount, int dishID, int hintIndex)
+    {
+        // Retrieve sessionID, current level, and current round
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameData.CurrentLevel;
+        int round = GameData.CurrentRound;
+        string purchaseType = "hint";
+        
+        Debug.Log($"[HintSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount}, purchaseType: {purchaseType}, dishID: {dishID}, hintIndex: {hintIndex}");
+        
+        AnalyticsManager.Instance.SendSpend(sessionID, level, round, amount, purchaseType, dishID: dishID, hintIndex: hintIndex);
     }
 }

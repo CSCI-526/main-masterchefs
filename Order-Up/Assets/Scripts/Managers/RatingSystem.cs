@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Linq;
 
 public class RatingSystem : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class RatingSystem : MonoBehaviour
     // Tracking variables
     private static List<float> completionTimes = new List<float>();
     private static List<int> starRatings = new List<int>();
+
+    private static List<string> failureReasons = new List<string>();
 
 
     /// <summary>
@@ -51,8 +54,21 @@ public class RatingSystem : MonoBehaviour
 
         DisplayEvaluation(stars);
         
+
+        
         bool hasAttemptsLeft = Attempts.Instance.HasAttemptsRemaining();
         bool isPerfectScore = (stars == 3);
+        // if player did not get 3 stars send failure analytics data 
+        if (!isPerfectScore)
+        {
+            string failureReasonsString = string.Join(", ", failureReasons);
+            sendFailureData(Attempts.Instance.GetCurrentAttempt(), GameData.CurrentDishId, failureReasonsString);
+        }
+       
+        // clear failure reason list for next round
+        failureReasons.Clear();
+        
+        
         // Player moves on if they have perfect score or out of attempts
         if (isPerfectScore || !hasAttemptsLeft)
         {
@@ -60,43 +76,12 @@ public class RatingSystem : MonoBehaviour
                 Debug.Log($"[RatingSystem] Round complete. PerfectScore: {isPerfectScore}, HasAttempts: {hasAttemptsLeft}");
      
             // Send level data to Analytics manager
-            sendTimeData(timeTaken);
-            sendLevelCompleteData(isPerfectScore, Attempts.Instance.GetCurrentAttempt(), stars);
+            // sendTimeData(timeTaken);
+            sendLevelCompleteData(isPerfectScore, timeTaken, Attempts.Instance.GetCurrentAttempt(), stars);
             
             
-            // TODO: what is this function used for?
             //Attempts.Instance.CompleteLevel(); 
             
-            // TODO: temp sol
-            // Increment round or level
-            // if (GameManager.Instance.CurrentLevel == 0)
-            // {
-            //     GameManager.Instance.GoToNextLevel();
-            // }
-            // else if (GameManager.Instance.CurrentLevel == 5 && GameManager.Instance.CurrentRound == 3)
-            // {
-            //     Debug.Log($"Player has gone through all levels");
-            // }
-            // else
-            // {
-            //     if (GameManager.Instance.CurrentRound < 3)
-            //     {
-            //         GameManager.Instance.GoToNextRound();
-            //     }
-            //     else
-            //     {
-            //         GameManager.Instance.GoToNextLevel(); 
-            //     }
-            // }
-            //if (GameManager.Instance.CurrentRound <= 15)
-            //{
-            //    GameManager.Instance.GoToNextLevel();
-            //    Invoke("TransitionToNextRound", 2f);
-            //}
-            //else
-            //{
-            //    Debug.Log("Player has completed all levels");
-            //}
             Invoke("TransitionToNextRound", 2f);
 
         }
@@ -108,19 +93,7 @@ public class RatingSystem : MonoBehaviour
             
             Invoke("PrepareForRetry", 2f); 
         }
-
-        // // Only transition if there are no attempts remaining
-        // if (Attempts.Instance != null && !Attempts.Instance.HasAttemptsRemaining())
-        // {
-        //     // Reset for next level
-        //     Attempts.Instance.CompleteLevel();
-        //     Invoke("TransitionToCustomerScene", 2f);
-        // }
-        // else
-        // {
-        //     Invoke("HideEvaluationPanel", 2f);
-        //     submitButton.interactable = true; // Re-enable the button for retry
-        // }
+        
     }
 
     void UpdateAverageDisplays()
@@ -176,6 +149,8 @@ public class RatingSystem : MonoBehaviour
                 {
                     if (enableDebugLogs)
                         Debug.Log($"[RatingSystem] Wrong dish! Got {dishComponent.recipe.dishName}, expected recipe ID {expectedDishId}");
+                    // log reason of failure
+                    failureReasons.Add("wrong dish:" + dishComponent.recipe.dishName);
                     return 1; // Wrong dish = 1 star
                 }
             }
@@ -186,6 +161,8 @@ public class RatingSystem : MonoBehaviour
         
         if (ingredientsOnPlate.Count == 0)
         {
+            // log reason of failure
+            failureReasons.Add("no ingredients");
             if (enableDebugLogs)
                 Debug.LogWarning("[RatingSystem] No ingredients or dish found on plate!");
             return 0;
@@ -196,24 +173,96 @@ public class RatingSystem : MonoBehaviour
         int totalIngredientsUsed = ingredientsOnPlate.Count;
         int overcookedCount = 0;
         HashSet<Ingredient> matchedIngredients = new HashSet<Ingredient>();
-
+        
+        // record reasons of failure
+        string missingIngredients = "";
+        string wrongIngredients = "";
+        string overcookedIngredients = "";
+        string wrongCookware = "";
+        string rawIngredients = "";
+        HashSet<Ingredient> processedIngredients = new HashSet<Ingredient>(); // list to keep track of correct ingredient(regardless of state) we have seen so far
+        
         foreach (RecipeIngredientRequirement requirement in expectedRecipe.requiredIngredients)
         {
+            bool perfectMatchFound = false; // perfect match flag
+            Ingredient bestPartialMatch = null; // Stores an ingredient that matches name but not state
             foreach (Ingredient ingredient in ingredientsOnPlate)
             {
-                if (matchedIngredients.Contains(ingredient))
-                    continue; // Already matched this ingredient
-
-                if (ingredient.ingredientData == requirement.ingredient && 
-                    ingredient.currentState == requirement.requiredState &&
-                    (requirement.requiredCookware == CookwareType.None || ingredient.currentCookware == requirement.requiredCookware))
+                if (processedIngredients.Contains(ingredient))
+                    continue; // Already processed this ingredient
+                string plateIngredient = ingredient.ingredientData.ingredientName.Split('_')[0];
+                string requiredIngredient = requirement.ingredient.ingredientName.Split('_')[0];
+                if (plateIngredient == requiredIngredient)
                 {
-                    correctIngredients++;
-                    matchedIngredients.Add(ingredient);
-                    if (enableDebugLogs)
-                        Debug.Log($"[RatingSystem] Matched ingredient: {ingredient.ingredientData.ingredientName} ({ingredient.currentState})");
-                    break;
+                    bool isStateCorrect = (ingredient.currentState == requirement.requiredState);
+                    bool isCookwareCorrect = (requirement.requiredCookware == CookwareType.None || ingredient.currentCookware == requirement.requiredCookware);
+                    if (isStateCorrect && isCookwareCorrect)
+                    {
+                        // perfect match
+                        correctIngredients++;
+                        matchedIngredients.Add(ingredient);
+                        processedIngredients.Add(ingredient);
+                        perfectMatchFound = true;
+                        if (enableDebugLogs)
+                            Debug.Log($"[RatingSystem] Matched ingredient: {ingredient.ingredientData.ingredientName} ({ingredient.currentState})");
+                        break;
+                    }
+                    else
+                    {
+                        if (bestPartialMatch == null)
+                        { 
+                            bestPartialMatch = ingredient;     
+                        }
+
+                    }
+        
                 }
+                
+            }
+            //
+            if (!perfectMatchFound)
+            {
+                if (bestPartialMatch != null)
+                {
+                    // found the ingredient, but it was in the wrong state.
+                    processedIngredients.Add(bestPartialMatch);
+                    bool cookwareMismatch = (requirement.requiredCookware != CookwareType.None && 
+                                             bestPartialMatch.currentCookware != requirement.requiredCookware);
+                    if (cookwareMismatch)
+                    {
+                        wrongCookware += name + "/";
+                    }
+                    else if (bestPartialMatch.currentState == IngredientState.Raw)
+                    {
+                        // it's raw
+                        rawIngredients += bestPartialMatch.ingredientData.ingredientName + "/";
+                    }
+                    else if (bestPartialMatch.currentState == IngredientState.Overcooked)
+                    {
+                        // it's overcooked
+                        overcookedIngredients += bestPartialMatch.ingredientData.ingredientName + "/";
+                    }
+                    else
+                    {
+                        // not sure why the ingredient is not matching
+                        Debug.Log("Correct ingredient but not matching, please check");
+                    }
+                }
+                else
+                {
+                    // no match for ingredient is found, this ingredient is missing
+                    missingIngredients += requirement.ingredient.ingredientName + "/";
+                } 
+            }
+        }
+        
+        // Record wrong ingredients
+        foreach (Ingredient ingredient in ingredientsOnPlate)
+        {
+            // check if the ingredient was used for either a perfect match or a partial match error
+            if (!processedIngredients.Contains(ingredient))
+            {
+                wrongIngredients += ingredient.ingredientData.ingredientName + "/";
             }
         }
 
@@ -253,9 +302,32 @@ public class RatingSystem : MonoBehaviour
             stars = 1;
         else
             stars = 0;
+        
+        // populate failure reasons list
+        if (!string.IsNullOrEmpty(missingIngredients))
+        {
+            failureReasons.Add("Missing Ingredients: " + missingIngredients);
+        }
 
-        if (enableDebugLogs)
-            Debug.Log($"[RatingSystem] Rating: {stars} stars!");
+        if (!string.IsNullOrEmpty(wrongIngredients))
+        {
+            failureReasons.Add("Wrong Ingredients: " + wrongIngredients);
+        }
+
+        if (!string.IsNullOrEmpty(overcookedIngredients))
+        {
+            failureReasons.Add("Overcooked Ingredients: " + overcookedIngredients);
+        }
+
+        if (!string.IsNullOrEmpty(rawIngredients))
+        {
+            failureReasons.Add("Raw Ingredients: " + rawIngredients);
+        }
+
+        if (!string.IsNullOrEmpty(wrongCookware))
+        {
+            failureReasons.Add("Wrong Cookware: " + wrongCookware);
+        }
 
         return stars;
     }
@@ -478,44 +550,39 @@ public class RatingSystem : MonoBehaviour
         }
     }
     
-    private void sendTimeData(float total)
-    {
-        // Send current level and time spent to google form
-        long sessionID = GameManager.Instance.SessionID;
-        int level = GameManager.Instance.CurrentLevel;
-        // int level = GameData.CurrentLevel;
-        int round = GameManager.Instance.CurrentRound;
-        // int round = GameData.CurrentRound;
-        
-        
-        
-        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, Time(s): {total}");
-        
-        AnalyticsManager.Instance.SendLevelTimeData(sessionID, level, round, total);
-    }
+    // private void sendTimeData(float total)
+    // {
+    //     // Send current level and time spent to google form
+    //     long sessionID = GameManager.Instance.SessionID;
+    //     int level = GameData.CurrentLevel;
+    //     int round = GameData.CurrentRound;
+    //     
+    //     Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, Time(s): {total}");
+    //     
+    //     AnalyticsManager.Instance.SendLevelTimeData(sessionID, level, round, total);
+    // }
 
-    private void sendLevelCompleteData(bool pass, int attempts, int rating)
+    private void sendLevelCompleteData(bool pass, float time, int attempts, int rating)
     {
         long sessionID = GameManager.Instance.SessionID;
-        int level = GameManager.Instance.CurrentLevel;
-        // int level = GameData.CurrentLevel;
-        int round = GameManager.Instance.CurrentRound;
-        // int round = GameData.CurrentRound;
+        int level = GameData.CurrentLevel;
+        int round = GameData.CurrentRound;
         string status = pass ? "pass" : "fail";
-        string reason = getReason(pass);
         
-        Debug.Log($"[RatingSystem] Game Session ID: {sessionID}, Level: {level}. Round: {round}, Status: {status}, Attempts: {attempts}, Rating: {rating}, Reason: {reason}");
+        Debug.Log($"[RatingSystem] Send level complete data...Game Session ID: {sessionID}, Level: {level}. Round: {round}, Status: {status}, Attempts: {attempts}, Rating: {rating}");
         
-        AnalyticsManager.Instance.SendLevelComplete(sessionID, level, round, status, attempts, rating, reason);
+        AnalyticsManager.Instance.SendLevelComplete(sessionID, level, round, status, time, attempts, rating);
     }
-
-    private string getReason(bool pass)
+    private void sendFailureData(int attempt, int dishID, string reason)
     {
-        int randomIndex = Random.Range(0, 3);
-        string[] reasons = {"wrong combination", "wrong state", "both"};
-        string reason = pass? "N/A" : reasons[randomIndex];
-
-        return reason;
+        long sessionID = GameManager.Instance.SessionID;
+        int level = GameData.CurrentLevel;
+        int round = GameData.CurrentRound;
+        
+        Debug.Log($"[RatingSystem] Sending failure data...Game Session ID: {sessionID}, Level: {level}. Round: {round}, Attempt: {attempt}, Reason: {reason}");
+        
+        AnalyticsManager.Instance.SendFailureData(sessionID, level, round, attempt, dishID, reason);
     }
+    
 
 }
