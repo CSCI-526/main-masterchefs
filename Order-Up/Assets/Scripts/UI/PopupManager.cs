@@ -21,7 +21,7 @@ public class PopupManager : MonoBehaviour
         SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
         float spriteHeight = (sr != null) ? sr.bounds.size.y : 1f;
 
-        Vector3 offset = new Vector3(0, spriteHeight * 0.7f, 0);    
+        Vector3 offset = new Vector3(0, spriteHeight * 1.7f, 0);    
         popup.transform.position = target.position + offset;
  
 

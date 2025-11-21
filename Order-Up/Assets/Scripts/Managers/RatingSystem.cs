@@ -34,14 +34,14 @@ public class RatingSystem : MonoBehaviour
     /// player to retry.</remarks>
     public void SubmitDish()
     {
-        submitButton.interactable = false; // Prevent multiple submissions
+        submitButton.interactable = false; // Disable the button to prevent multiple submissions
         int stars = CalculateRating();
-        Debug.Log("Rating: " + stars + " Stars!");
-
-        FindAnyObjectByType<RevenueSystem>().AddRevenue(stars);
+        if (enableDebugLogs)
+            Debug.Log($"[RatingSystem] Dish submitted. Calculated Rating: {stars} stars.");
         float timeTaken = Timer.Instance.StopTimer();
         completionTimes.Add(timeTaken);
         starRatings.Add(stars);
+        RevenueSystem.Instance.AddRevenue(stars);
 
         // Record the attempt
         if (Attempts.Instance != null)
@@ -65,7 +65,7 @@ public class RatingSystem : MonoBehaviour
             
             
             // TODO: what is this function used for?
-            Attempts.Instance.CompleteLevel(); 
+            //Attempts.Instance.CompleteLevel(); 
             
             // TODO: temp sol
             // Increment round or level
@@ -88,16 +88,17 @@ public class RatingSystem : MonoBehaviour
             //         GameManager.Instance.GoToNextLevel(); 
             //     }
             // }
-            if (GameManager.Instance.CurrentRound <= 15)
-            {
-                GameManager.Instance.GoToNextLevel();
-            }
-            else
-            {
-                Debug.Log("Player has completed all levels");
-            }
+            //if (GameManager.Instance.CurrentRound <= 15)
+            //{
+            //    GameManager.Instance.GoToNextLevel();
+            //    Invoke("TransitionToNextRound", 2f);
+            //}
+            //else
+            //{
+            //    Debug.Log("Player has completed all levels");
+            //}
+            Invoke("TransitionToNextRound", 2f);
 
-            Invoke("TransitionToCustomerScene", 2f); 
         }
         // Player retries (Score < 3 AND has attempts left)
         else
@@ -369,6 +370,7 @@ public class RatingSystem : MonoBehaviour
         {
             int currentLevel = GameData.CurrentLevel;
             int currentRound = GameData.CurrentRound;
+            Debug.Log($"[RatingSystem] Current Level: {currentLevel}, Current Round: {currentRound}");
 
             if (currentLevel > 0 && currentLevel <= GameData.allLevels.Count)
             {

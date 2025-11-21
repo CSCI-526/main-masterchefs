@@ -76,6 +76,16 @@ public class Ingredient : MonoBehaviour
         }
     }
 
+    // public method to declare the only cookware type this ingredient can interact with
+    public bool CheckAllowedCookware(CookwareType cookwareType)
+    {
+        if (currentCookware == cookwareType)
+            return true;
+        else
+            return false;
+    }
+
+
     // Public API for runtime sprite swaps
     public void SetSprite(Sprite newSprite, Color color, string newName = null)
     {

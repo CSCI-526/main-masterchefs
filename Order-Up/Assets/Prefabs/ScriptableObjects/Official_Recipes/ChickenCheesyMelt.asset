@@ -17,7 +17,7 @@ MonoBehaviour:
   requiredIngredients:
   - ingredient: {fileID: 11400000, guid: cce1943473bcb44b390a723afd38332f, type: 2}
     requiredState: 1
-    requiredCookware: 3
+    requiredCookware: 4
     requiredChoppingState: 0
   - ingredient: {fileID: 11400000, guid: ebab5fec761fb4a30945e8ddf9bcc330, type: 2}
     requiredState: 0

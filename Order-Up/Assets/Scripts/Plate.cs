@@ -8,22 +8,25 @@ public class Plate : MonoBehaviour, IDropZone
 {
     [Header("Plate Settings")]
     public Transform ingredientParent;
-    public float maxIngredients = 100f;
-    public bool allowDuplicates = true;
+    public float maxIngredients = 4f;
+    public bool allowDuplicates = false;
     public float ingredientSpacing = 0.2f;
-    public CombinationSystem comboSystem;
 
     [Header("Visual Feedback")]
     public GameObject highlightEffect;
     public Color highlightColor;
+    private SpriteRenderer plateRenderer;
+
     [Header("Dish Display Settings")]
     public TextMeshProUGUI dishIngredientsText; // Text component to show dish ingredients
     public float maxTextWidth = 200f; // Maximum width for text box
     public float minFontSize = 12f;
     public float maxFontSize = 24f;
-    private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
-    private SpriteRenderer plateRenderer;
     private Color originalColor;
+
+    [Header("CombinationSystem")]
+    private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
+    public CombinationSystem comboSystem;
 
     // Events
     public System.Action<DraggableIngredient> OnIngredientAdded;
@@ -48,12 +51,14 @@ public class Plate : MonoBehaviour, IDropZone
 
         UpdateDishDisplay(); // Initialize display
     }
-
+    #region IDropZone Implementation
     public GameObject GetGameObject()
     {
         return gameObject;
     }
+    #endregion
 
+    #region Ingredient Management
     public bool AddIngredient(DraggableIngredient ingredient)
     {
         if (!CanAddIngredient(ingredient)) 
@@ -131,7 +136,9 @@ public class Plate : MonoBehaviour, IDropZone
 
         return true;
     }
+    #endregion
 
+    #region Positioning
     /// <summary>
     /// Should rearrange the ingredients from top down left right in a circular pattern
     /// no more than 4 ingredients on the plate, so the position shouldn't be overlapping
@@ -177,7 +184,9 @@ public class Plate : MonoBehaviour, IDropZone
             }
         }
     }
+    #endregion
 
+    #region Visual Feedback
     void OnMouseEnter()
     {
         ShowHighlight();
@@ -203,11 +212,8 @@ public class Plate : MonoBehaviour, IDropZone
         else if (plateRenderer != null)
             plateRenderer.color = originalColor;
     }
+    #endregion
 
-    public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;
-    public bool IsEmpty() => ingredientsOnPlate.Count == 0;
-    public int GetIngredientCount() => ingredientsOnPlate.Count;
-    public List<DraggableIngredient> GetIngredients() => new List<DraggableIngredient>(ingredientsOnPlate);
 
     public void ClearPlate()
     {
@@ -365,4 +371,8 @@ public class Plate : MonoBehaviour, IDropZone
 
         return "";
     }
+    public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;
+    public bool IsEmpty() => ingredientsOnPlate.Count == 0;
+    public int GetIngredientCount() => ingredientsOnPlate.Count;
+    public List<DraggableIngredient> GetIngredients() => new List<DraggableIngredient>(ingredientsOnPlate);
 }

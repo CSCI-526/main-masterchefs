@@ -127,7 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ingredientData: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
   currentState: 1
-  currentCookware: 0
+  currentCookware: 3
 --- !u!60 &4585888499034227368
 PolygonCollider2D:
   m_ObjectHideFlags: 0
