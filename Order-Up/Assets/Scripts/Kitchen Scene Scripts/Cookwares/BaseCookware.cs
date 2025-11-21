@@ -21,6 +21,9 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
     protected bool isCooking = false;
     protected float currentCookingTime = 0f;
 
+    [Header("Fire State")]
+    [SerializeField] protected bool fireOn = false;
+
     [Header("Debug Settings")]
     public bool enableDebugLogs = false;
 
@@ -182,7 +185,7 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
     // Virtual methods - can be overridden
     public virtual void StartCooking()
     {
-        if (ingredientInside == null || isCooking) return;
+        if (ingredientInside == null || isCooking || !fireOn) return;
 
         isCooking = true;
         currentCookingTime = 0f;
@@ -215,6 +218,16 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
         if (enableDebugLogs)
         {
             Debug.Log($"[{cookwareName}] Stopped cooking");
+        }
+    }
+    public virtual void SetFire(bool on)
+    {
+        fireOn = on;
+
+        // fire turns off, stop cooking 
+        if (!fireOn && isCooking)
+        {
+            StopCooking();
         }
     }
 

@@ -30,7 +30,6 @@ public class StirFryPan : BaseCookware
     [SerializeField] private float ingredientBounciness = 0.6f; // How bouncy ingredients are
     [SerializeField] private float ingredientFriction = 0.3f; // Friction on pan surface
     [SerializeField] private float panPushForce = 5f; // How much pan movement affects ingredient
-    [SerializeField] private bool fireOn = false;
 
     private bool isBeingHeld = false;
     private Vector3 lastPanPosition;
@@ -198,6 +197,16 @@ public class StirFryPan : BaseCookware
         else
             CenterIngredient();
 
+    }
+    public override void SetFire(bool on)
+    {
+        fireOn = on;
+
+        if (!fireOn)
+        {
+            StopCooking();
+            isStirring = false;
+        }
     }
 
     protected override void OnIngredientExited(GameObject ingredient)
