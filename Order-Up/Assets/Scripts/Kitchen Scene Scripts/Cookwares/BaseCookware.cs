@@ -81,6 +81,7 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
             {
                 Debug.Log($"[{cookwareName}] Cannot accept - already has ingredient or is cooking");
             }
+            PopupManager.Instance.ShowPopup("Already Cooking", this.transform);
             return false;
         }
 
