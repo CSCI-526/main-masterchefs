@@ -48,6 +48,8 @@ public class StirBasedCookware : BaseCookware
 
     protected override void UpdateCookingLogic()
     {
+        if (!fireOn) return; // can't cook without fire
+
         // Detect stirring motion if spatula is in pot
         if (spatulaInPot != null && isCooking)
         {
