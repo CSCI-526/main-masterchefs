@@ -1821,11 +1821,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4777875832560477655, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1
+      value: 1.264
       objectReference: {fileID: 0}
     - target: {fileID: 4777875832560477655, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.144
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4829104574990905438, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_LocalScale.x
@@ -6026,11 +6026,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.35
+      value: -0.71
       objectReference: {fileID: 0}
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.79
+      value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 775214879835566078, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6082,7 +6082,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4583648682119431391, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.5
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 4583648682119431391, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -1.57
       objectReference: {fileID: 0}
     - target: {fileID: 4612976752448573724, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_AnchorMax.x
@@ -6100,6 +6104,10 @@ PrefabInstance:
       propertyPath: m_MaxValue
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1256194179761896547, guid: 5f13e985eeba24c77969c9e728bfddc8, type: 3}
     - target: {fileID: 7189761509980134900, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -7106,7 +7114,7 @@ Camera:
   m_GameObject: {fileID: 1913804011}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -7130,7 +7138,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 89
   orthographic: 1
   orthographic size: 10
   m_Depth: -1
