@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Tomato_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Tomato_Raw
-  icon: {fileID: -2413806693520163455, guid: bda853ef10fd84f33b0adfdfa8139739, type: 3}
+  icon: {fileID: 4989963310750054913, guid: 81c0d809f845e4625a27e6e83469156d, type: 3}
   cookedResult: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
   overcookedResult: {fileID: 11400000, guid: ec8262e1615ed46fd902d12fba1f4d0a, type: 2}

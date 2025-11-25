@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Egg_Cooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Egg_Cooked
-  icon: {fileID: -2413806693520163455, guid: bda853ef10fd84f33b0adfdfa8139739, type: 3}
+  icon: {fileID: -5646451658060689384, guid: e66ca0674793548bdaa5fb7240c09c59, type: 3}
   cookedResult: {fileID: 0}
   overcookedResult: {fileID: 11400000, guid: cc66264ecee6b4619a1452aa9e867d8f, type: 2}

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cheese_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Cheese_Raw
-  icon: {fileID: 3625043607559282579, guid: 11d33a8f6143b4ba2adcd54ce068c76b, type: 3}
+  icon: {fileID: 104970494338439520, guid: 44eed3143a6684c08b1da613f05ae4a9, type: 3}
   cookedResult: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
   overcookedResult: {fileID: 11400000, guid: 6a78b394320b048c6896f05842d8dad9, type: 2}
