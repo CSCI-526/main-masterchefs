@@ -108,3 +108,7 @@ Thumbs.db
 
 # Visual Studio Code settings
 .vscode/
+
+
+#Font and material
+/[Aa]ssets/TextMesh Pro/Resources/Fonts & Materials/
