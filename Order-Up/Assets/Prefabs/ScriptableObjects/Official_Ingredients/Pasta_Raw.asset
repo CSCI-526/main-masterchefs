@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Pasta_Raw
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Pasta_Raw
-  icon: {fileID: 7482667652216324306, guid: f2bfbebac206b4c64a5738ab7c55d9bd, type: 3}
+  icon: {fileID: 5009946596235004655, guid: f1d8e6f247f7e4d61bcf5356a400decc, type: 3}
   cookedResult: {fileID: 11400000, guid: 66d8a5c607b2948fea5b84935ceec93b, type: 2}
   overcookedResult: {fileID: 11400000, guid: 6731b5dd1c9ee4db38bfaee0bf63042b, type: 2}
