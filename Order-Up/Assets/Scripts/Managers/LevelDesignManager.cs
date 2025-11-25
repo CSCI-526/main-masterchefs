@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class LevelDesignManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class LevelDesignManager : MonoBehaviour
     [SerializeField] bool enableDebugLogs = false;
 
     private PantryIngredient[] pantrySlots;
+    public TextMeshProUGUI levelText;
 
     private void Start()
     {
@@ -29,6 +31,8 @@ public class LevelDesignManager : MonoBehaviour
         pantrySlots = pantryGrid.GetComponentsInChildren<PantryIngredient>(true);
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
         GameData.AllLevels = levels;
+
+        UpdateLevelText();
     }
 
     private void Update()
@@ -110,5 +114,11 @@ public class LevelDesignManager : MonoBehaviour
         // LEVEL COMPLETE → Go to Review Scene
         SceneManager.LoadScene("ReviewScene");
         StartCoroutine(LoadLevelWithLayoutDelay(GameData.CurrentLevel));
+    }
+
+    // Display round and level info
+    public void UpdateLevelText()
+    {
+        levelText.text = $"Level {GameData.CurrentLevel} - Round {GameData.CurrentRound + 1}";
     }
 }
