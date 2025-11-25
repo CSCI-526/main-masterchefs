@@ -220,14 +220,27 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
             Debug.Log($"[{cookwareName}] Stopped cooking");
         }
     }
+
+
     public virtual void SetFire(bool on)
     {
         fireOn = on;
 
-        // fire turns off, stop cooking 
-        if (!fireOn && isCooking)
+        if (fireOn)
         {
-            StopCooking();
+            // Fire turned ON
+            if (ingredientInside != null && !isCooking)
+            {
+                StartCooking();
+            }
+        }
+        else
+        {
+            // Fire turned OFF
+            if (isCooking)
+            {
+                StopCooking();
+            }
         }
     }
 
