@@ -1,0 +1,36 @@
+{
+    "Dishnames": [
+        {
+            "id": 0,
+            "name": "Cheesy Fries"
+        },
+        {
+            "id": 1,
+            "name": "Cheese Dough Bites"
+        },
+        {
+            "id": 2,
+            "name": "Cheese Pizza"
+        },
+        {
+            "id": 3,
+            "name": "Mac & Cheese"
+        },
+        {
+            "id": 4,
+            "name": "Spaghetti with Tomato Sauce"
+        },
+        {
+            "id": 5,
+            "name": "Omelette Sandwich"
+        },
+        {
+            "id": 6,
+            "name": "Chicken Cheesy Melt"
+        },
+        {
+            "id": 7,
+            "name": "Chicken Sandwich" 
+        }
+    ]
+}
