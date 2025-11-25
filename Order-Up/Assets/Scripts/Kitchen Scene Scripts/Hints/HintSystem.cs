@@ -171,9 +171,10 @@ public class HintSystem : MonoBehaviour
         int level = GameData.CurrentLevel;
         int round = GameData.CurrentRound;
         string purchaseType = "hint";
+        string dishName = DishNameLibrary.GetName(dishID);
         
-        Debug.Log($"[HintSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount}, purchaseType: {purchaseType}, dishID: {dishID}, hintIndex: {hintIndex}");
+        Debug.Log($"[HintSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount}, purchaseType: {purchaseType}, dishName: {dishName}, hintIndex: {hintIndex}");
         
-        AnalyticsManager.Instance.SendSpend(sessionID, level, round, amount, purchaseType, dishID: dishID, hintIndex: hintIndex);
+        AnalyticsManager.Instance.SendSpend(sessionID, level, round, amount, purchaseType, dishName: dishName, hintIndex: hintIndex);
     }
 }

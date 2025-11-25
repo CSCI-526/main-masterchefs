@@ -122,13 +122,13 @@ public class AnalyticsManager : MonoBehaviour
         }
     }
     
-    public void SendEarn(long sessionID, int level, int round, int amount, int dishID, int rating)
+    public void SendEarn(long sessionID, int level, int round, int amount, string dishName, int rating)
     {
-        Debug.Log($"Sending Transaction Data: Session: {sessionID}, Level: {level}, Round: {round}, Amount: {amount}, Dish: {dishID}. rating: {rating}");
-        StartCoroutine(PostEarn(sessionID.ToString(), level.ToString(), round.ToString(),amount.ToString(), dishID.ToString(), rating.ToString()));
+        Debug.Log($"Sending Transaction Data: Session: {sessionID}, Level: {level}, Round: {round}, Amount: {amount}, Dish: {dishName}. rating: {rating}");
+        StartCoroutine(PostEarn(sessionID.ToString(), level.ToString(), round.ToString(),amount.ToString(), dishName, rating.ToString()));
     }
 
-    private IEnumerator PostEarn(string sessionID, string level, string round, string amount, string dishID,
+    private IEnumerator PostEarn(string sessionID, string level, string round, string amount, string dishName,
         string rating)
     {
         // Create the form and enter responses
@@ -137,7 +137,7 @@ public class AnalyticsManager : MonoBehaviour
         form.AddField("entry.351929486", level);
         form.AddField("entry.1474034226", round);
         form.AddField("entry.1284491017", amount);
-        form.AddField("entry.69673593", dishID);
+        form.AddField("entry.69673593", dishName);
         form.AddField("entry.349720690", rating);
 
 
@@ -158,13 +158,13 @@ public class AnalyticsManager : MonoBehaviour
         }
     }
 
-    public void SendSpend(long sessionID, int level, int round, int amount, string purchaseType, string cookware = "", int dishID = -1, int hintIndex = 0)
+    public void SendSpend(long sessionID, int level, int round, int amount, string purchaseType, string cookware = "", string dishName="", int hintIndex = 0)
     {
-        Debug.Log($"Sending Transaction Data: Session: {sessionID}, Level: {level}, Round: {round}, Amount: {amount}, PurchaseType: {purchaseType}, Cookware: {cookware}, Dish: {dishID}. HintIndex: {hintIndex}");
-        StartCoroutine(PostSpend(sessionID.ToString(), level.ToString(), round.ToString(),amount.ToString(), purchaseType, cookware, dishID.ToString(), hintIndex.ToString()));
+        Debug.Log($"Sending Transaction Data: Session: {sessionID}, Level: {level}, Round: {round}, Amount: {amount}, PurchaseType: {purchaseType}, Cookware: {cookware}, Dish: {dishName}. HintIndex: {hintIndex}");
+        StartCoroutine(PostSpend(sessionID.ToString(), level.ToString(), round.ToString(),amount.ToString(), purchaseType, cookware, dishName, hintIndex.ToString()));
     }
 
-    private IEnumerator PostSpend(string sessionID, string level, string round, string amount, string purchaseType, string cookware, string dishID, string hintIndex)
+    private IEnumerator PostSpend(string sessionID, string level, string round, string amount, string purchaseType, string cookware, string dishName, string hintIndex)
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
@@ -174,7 +174,7 @@ public class AnalyticsManager : MonoBehaviour
         form.AddField("entry.2063797328", amount);
         form.AddField("entry.809055744", purchaseType);
         form.AddField("entry.226808417", cookware);
-        form.AddField("entry.331723635", dishID);
+        form.AddField("entry.331723635", dishName);
         form.AddField("entry.826326779", hintIndex);
         
         // Send responses and verify result
@@ -194,13 +194,13 @@ public class AnalyticsManager : MonoBehaviour
         
       
     }
-    public void SendFailureData(long sessionID, int level, int round, int attempt, int dish, string reason)
+    public void SendFailureData(long sessionID, int level, int round, int attempt, string dishName, string reason, string missingIngredients="", string wrongIngredients="", string overcookedIngredients="", string rawIngredients="", string wrongCookware="")
     {
-        Debug.Log($"[Analytics Manager] Sending Failure Log: {sessionID}, Level: {level}, Round: {round}, attempt: {attempt}, Dish:{dish}, Reason: {reason}");
-        StartCoroutine(PostFailureData(sessionID.ToString(), level.ToString(), round.ToString(), attempt.ToString(), dish.ToString(), reason));
+        Debug.Log($"[Analytics Manager] Sending Failure Log: {sessionID}, Level: {level}, Round: {round}, attempt: {attempt}, Dish:{dishName}, Reason: {reason}, Missing Ingredients: {missingIngredients}, Wrong Ingredients:{wrongIngredients}, Overcooked Ingredients:{overcookedIngredients}, Raw Ingredients:{rawIngredients}, Wrong Cookware: {wrongCookware}");
+        StartCoroutine(PostFailureData(sessionID.ToString(), level.ToString(), round.ToString(), attempt.ToString(), dishName, reason, missingIngredients, wrongIngredients, overcookedIngredients, rawIngredients, wrongCookware));
     }
     
-    private IEnumerator PostFailureData(string sessionID, string level, string round, string attempt, string dish, string reason)
+    private IEnumerator PostFailureData(string sessionID, string level, string round, string attempt, string dishName, string reason, string missingIngredients="", string wrongIngredients="", string overcookedIngredients="", string rawIngredients="", string wrongCookware="")
     {
         // Create the form and enter responses
         WWWForm form = new WWWForm();
@@ -208,8 +208,14 @@ public class AnalyticsManager : MonoBehaviour
         form.AddField("entry.1280208837", level);
         form.AddField("entry.39041271", round);
         form.AddField("entry.1663960025", attempt);
-        form.AddField("entry.206919008", dish);
+        form.AddField("entry.206919008", dishName);
         form.AddField("entry.892720662", reason);
+        form.AddField("entry.1063221403", missingIngredients);
+        form.AddField("entry.1568725325", wrongIngredients);
+        form.AddField("entry.1437370441", overcookedIngredients);
+        form.AddField("entry.935375524", rawIngredients);
+        form.AddField("entry.1807950957", wrongCookware);
+        
     
         // Send responses and verify result
         using (UnityWebRequest www = UnityWebRequest.Post(failureURL, form))

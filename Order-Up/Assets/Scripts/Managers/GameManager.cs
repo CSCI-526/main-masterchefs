@@ -1,7 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class GameManager : MonoBehaviour
     public long SessionID { get; private set; }
     public int CurrentLevel { get; private set; }
     public int CurrentRound { get; private set; }
+    public TextAsset dishData;
+    private Dictionary<int, Dish> dishLookup;
     private void Awake()
     {
         // Ensure only one instance exists
