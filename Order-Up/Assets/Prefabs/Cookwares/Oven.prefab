@@ -806,7 +806,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 101.799995, y: 66}
+    oldSize: {x: 127.25, y: 82.5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -861,6 +861,7 @@ MonoBehaviour:
   cookwareName: Oven
   cookwareType: 3
   timerDisplayText: {fileID: 0}
+  fireOn: 0
   enableDebugLogs: 0
   sliderPanel: {fileID: 2276123678364862653}
   cookingTimeSlider: {fileID: 835799840917441949}

@@ -5,7 +5,7 @@ using UnityEngine;
 /// - Accepts dragged ingredients and notifies their pantry to respawn
 /// </summary>
 /// 
-[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
 public class Trash : MonoBehaviour, IDropZone
 {
     [SerializeField] private Plate plate;

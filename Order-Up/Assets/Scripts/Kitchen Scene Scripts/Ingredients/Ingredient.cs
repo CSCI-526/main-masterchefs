@@ -87,12 +87,11 @@ public class Ingredient : MonoBehaviour
 
 
     // Public API for runtime sprite swaps
-    public void SetSprite(Sprite newSprite, Color color, string newName = null)
+    public void SetSprite(Sprite newSprite, string newName = null)
     {
         spriteRenderer.sprite = newSprite;
         if (!string.IsNullOrEmpty(newName))
             gameObject.name = newName;
-        spriteRenderer.color = color;
         ResetCollider();
     }
 
@@ -102,9 +101,7 @@ public class Ingredient : MonoBehaviour
         if(ingredientData.cookedResult != null)
         {
             currentState = IngredientState.Cooked;
-            Color newColor;
-            ColorUtility.TryParseHtmlString("#00FF00", out newColor);
-            SetSprite(ingredientData.cookedResult.icon, newColor, ingredientData.cookedResult.ingredientName);
+            SetSprite(ingredientData.cookedResult.icon, ingredientData.cookedResult.ingredientName);
         }
     }
 
@@ -114,9 +111,7 @@ public class Ingredient : MonoBehaviour
         if(ingredientData.overcookedResult != null)
         {
             currentState = IngredientState.Overcooked;
-            Color newColor;
-            ColorUtility.TryParseHtmlString("#000000", out newColor);
-            SetSprite(ingredientData.overcookedResult.icon, newColor, ingredientData.overcookedResult.ingredientName);
+            SetSprite(ingredientData.overcookedResult.icon, ingredientData.overcookedResult.ingredientName);
         }
     }
 
