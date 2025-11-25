@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/huyng/Desktop/unity project/build03;C:/Users/huyng/Desktop/unity project/build04;C:/Users/huyng/Desktop/unity project/build;C:/Users/huyng/Desktop/unity project/paired-prototype-untitled/2d-pov/WebGL Builds;;;;;;\"}"
+                "value": "{\"m_Value\":\"/Users/ceci/Desktop/game;C:/Users/huyng/Desktop/unity project/build03;C:/Users/huyng/Desktop/unity project/build04;C:/Users/huyng/Desktop/unity project/build;C:/Users/huyng/Desktop/unity project/paired-prototype-untitled/2d-pov/WebGL Builds;;;;;\"}"
             }
         ]
     }

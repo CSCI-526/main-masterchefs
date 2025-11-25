@@ -24,7 +24,7 @@ public class RatingSystem : MonoBehaviour
     private static List<float> completionTimes = new List<float>();
     private static List<int> starRatings = new List<int>();
 
-    private static List<string> failureReasons = new List<string>();
+    private static Dictionary<string, string> failureReasons = new Dictionary<string, string>();
 
 
     /// <summary>
@@ -61,8 +61,15 @@ public class RatingSystem : MonoBehaviour
         // if player did not get 3 stars send failure analytics data 
         if (!isPerfectScore)
         {
-            string failureReasonsString = string.Join(", ", failureReasons);
-            sendFailureData(Attempts.Instance.GetCurrentAttempt(), GameData.CurrentDishId, failureReasonsString);
+            List<string> reasons = failureReasons.Keys.ToList();
+            string failureReasonsString = string.Join(", ", reasons);
+            failureReasons.TryGetValue("Missing Ingredients", out string missingIngredients);
+            failureReasons.TryGetValue("Wrong Ingredients", out string wrongIngredients);
+            failureReasons.TryGetValue("Overcooked Ingredients", out string overcookedIngredients);
+            failureReasons.TryGetValue("Raw Ingredients", out string rawIngredients);
+            failureReasons.TryGetValue("Wrong Cookware", out string wrongCookware);
+
+            sendFailureData(Attempts.Instance.GetCurrentAttempt(), GameData.CurrentDishId, failureReasonsString,missingIngredients ?? "", wrongIngredients ?? "", overcookedIngredients ?? "", rawIngredients ?? "", wrongCookware?? "");
         }
        
         // clear failure reason list for next round
@@ -78,7 +85,6 @@ public class RatingSystem : MonoBehaviour
             // Send level data to Analytics manager
             // sendTimeData(timeTaken);
             sendLevelCompleteData(isPerfectScore, timeTaken, Attempts.Instance.GetCurrentAttempt(), stars);
-            
             
             //Attempts.Instance.CompleteLevel(); 
             
@@ -150,7 +156,7 @@ public class RatingSystem : MonoBehaviour
                     if (enableDebugLogs)
                         Debug.Log($"[RatingSystem] Wrong dish! Got {dishComponent.recipe.dishName}, expected recipe ID {expectedDishId}");
                     // log reason of failure
-                    failureReasons.Add("wrong dish:" + dishComponent.recipe.dishName);
+                    failureReasons.Add("wrong dish", dishComponent.recipe.dishName);
                     return 1; // Wrong dish = 1 star
                 }
             }
@@ -162,7 +168,7 @@ public class RatingSystem : MonoBehaviour
         if (ingredientsOnPlate.Count == 0)
         {
             // log reason of failure
-            failureReasons.Add("no ingredients");
+            failureReasons.Add("no ingredients", "true");
             if (enableDebugLogs)
                 Debug.LogWarning("[RatingSystem] No ingredients or dish found on plate!");
             return 0;
@@ -264,17 +270,13 @@ public class RatingSystem : MonoBehaviour
             {
                 wrongIngredients += ingredient.ingredientData.ingredientName + "/";
             }
-        }
-
-        // Count overcooked ingredients (without double counting)
-        foreach (Ingredient ingredient in ingredientsOnPlate)
-        {
+            // Count overcooked ingredients (without double counting)
             if (ingredient.currentState == IngredientState.Overcooked && !matchedIngredients.Contains(ingredient))
             {
                 overcookedCount++;
             }
         }
-
+        
         // Calculate percentage of correct ingredients
         float correctPercentage = (float)correctIngredients / expectedRecipe.requiredIngredients.Count * 100f;
         
@@ -306,27 +308,27 @@ public class RatingSystem : MonoBehaviour
         // populate failure reasons list
         if (!string.IsNullOrEmpty(missingIngredients))
         {
-            failureReasons.Add("Missing Ingredients: " + missingIngredients);
+            failureReasons.Add("Missing Ingredients", missingIngredients);
         }
 
         if (!string.IsNullOrEmpty(wrongIngredients))
         {
-            failureReasons.Add("Wrong Ingredients: " + wrongIngredients);
+            failureReasons.Add("Wrong Ingredients", wrongIngredients);
         }
 
         if (!string.IsNullOrEmpty(overcookedIngredients))
         {
-            failureReasons.Add("Overcooked Ingredients: " + overcookedIngredients);
+            failureReasons.Add("Overcooked Ingredients", overcookedIngredients);
         }
 
         if (!string.IsNullOrEmpty(rawIngredients))
         {
-            failureReasons.Add("Raw Ingredients: " + rawIngredients);
+            failureReasons.Add("Raw Ingredients", rawIngredients);
         }
 
         if (!string.IsNullOrEmpty(wrongCookware))
         {
-            failureReasons.Add("Wrong Cookware: " + wrongCookware);
+            failureReasons.Add("Wrong Cookware", wrongCookware);
         }
 
         return stars;
@@ -573,15 +575,16 @@ public class RatingSystem : MonoBehaviour
         
         AnalyticsManager.Instance.SendLevelComplete(sessionID, level, round, status, time, attempts, rating);
     }
-    private void sendFailureData(int attempt, int dishID, string reason)
+    private void sendFailureData(int attempt, int dishID, string reason, string missingIngredients, string wrongIngredients, string overcookedIngredients, string rawIngredients, string wrongCookware)
     {
         long sessionID = GameManager.Instance.SessionID;
         int level = GameData.CurrentLevel;
         int round = GameData.CurrentRound;
+        string dishName = DishNameLibrary.GetName(dishID);
         
-        Debug.Log($"[RatingSystem] Sending failure data...Game Session ID: {sessionID}, Level: {level}. Round: {round}, Attempt: {attempt}, Reason: {reason}");
+        Debug.Log($"[RatingSystem] Sending failure data...Game Session ID: {sessionID}, Level: {level}. Round: {round}, Attempt: {attempt}, Dish: {dishName}, Reason: {reason}");
         
-        AnalyticsManager.Instance.SendFailureData(sessionID, level, round, attempt, dishID, reason);
+        AnalyticsManager.Instance.SendFailureData(sessionID, level, round, attempt, dishName, reason, missingIngredients, wrongIngredients, overcookedIngredients, rawIngredients, wrongCookware);
     }
     
 

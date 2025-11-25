@@ -187,9 +187,10 @@ public class RevenueSystem : MonoBehaviour
         long sessionID = GameManager.Instance.SessionID;
         int level = GameData.CurrentLevel;
         int round = GameData.CurrentRound;
+        string dishName = DishNameLibrary.GetName((dishID));
         
-        Debug.Log($"[RevenueSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount},  dishID: {dishID}, rating: {rating}");
+        Debug.Log($"[RevenueSystem] Game Session ID: {sessionID}, Level: {level}, Round: {round}, amount: {amount},  dishName: {dishName}, rating: {rating}");
         
-        AnalyticsManager.Instance.SendEarn(sessionID, level, round, amount, dishID, rating);
+        AnalyticsManager.Instance.SendEarn(sessionID, level, round, amount, dishName, rating);
     }
 }
