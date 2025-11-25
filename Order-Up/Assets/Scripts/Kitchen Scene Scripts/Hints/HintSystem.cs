@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+﻿using System.Collections.Generic;
 using System.Linq;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class HintSystem : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class HintSystem : MonoBehaviour
 
     private HintDatabase hintDB;
     private int currentHintIndex = 0;       // Tracks which hint to show next (0, 1, or 2)
+    private List<string> purchasedHints;
+
 
     private void Awake()
     {
@@ -37,6 +40,8 @@ public class HintSystem : MonoBehaviour
         // Hide panel at start
         if (hintPanel != null)
             hintPanel.SetActive(false);
+
+        purchasedHints = new List<string>();
 
         ResetForNewRecipe();
     }
@@ -63,7 +68,7 @@ public class HintSystem : MonoBehaviour
     public void ResetForNewRecipe()
     {
         currentHintIndex = 0;
-
+        purchasedHints.Clear();
         if (hintPanel != null)
             hintPanel.SetActive(false);
 
@@ -97,7 +102,8 @@ public class HintSystem : MonoBehaviour
             if (enableDebugLogs)
                 Debug.Log("[HintSystem] No more hints available");
 
-            ShowHintPanel("No more hints available!");
+            string combinedHints = string.Join("\n\n", purchasedHints);
+            ShowHintPanel(combinedHints);
             return;
         }
 
@@ -118,8 +124,11 @@ public class HintSystem : MonoBehaviour
             {
                 // Show the hint
                 string hint = recipe.hints[currentHintIndex];
-                ShowHintPanel(hint);
+                string hintMessage = $"Hint {currentHintIndex + 1}: {hint}";
+                purchasedHints.Add(hint);
+                string combinedHints = string.Join("\n\n", purchasedHints);
 
+                ShowHintPanel(combinedHints);
                 if (enableDebugLogs)
                     Debug.Log($"[HintSystem] Showing hint {currentHintIndex + 1}/{recipe.hints.Length}: {hint}");
 
