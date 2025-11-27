@@ -155,13 +155,21 @@ public class DraggableIngredient : MonoBehaviour
             // Handle based on type
             if (dropZone is Plate plate)
             {
-                plate.AddIngredient(this);
-                OnDroppedOnPlate?.Invoke(this, plate);
-                
-                // Notify the TutorialManager that ingredient has been dropped on plate
-                if (TutorialManager.Instance != null)
+                if (plate.AddIngredient(this))
                 {
-                    TutorialManager.Instance.OnIngredientDroppedOnPlate(this, plate); 
+                    OnDroppedOnPlate?.Invoke(this, plate);
+
+                    // Notify the TutorialManager that ingredient has been dropped on plate
+                    if (TutorialManager.Instance != null)
+                    {
+                        TutorialManager.Instance.OnIngredientDroppedOnPlate(this, plate);
+                    }
+
+                }
+                else
+                {
+                    Debug.Log($"[{gameObject.name}] Plate is full or cannot accept ingredient, returning to original position");
+                    ReturnToOriginalPosition();
                 }
             }
             else if (dropZone is BaseCookware cookware)
@@ -174,7 +182,7 @@ public class DraggableIngredient : MonoBehaviour
                     OnDroppedOnCookware?.Invoke(this, cookware);
                     cookware.ManuallyAcceptIngredient(gameObject);
                     cookware.SetIngredientParent(gameObject);
-                    
+
                     // Notify TutorialManager that ingredient has been dropped on cookware
                     if (TutorialManager.Instance != null)
                     {
