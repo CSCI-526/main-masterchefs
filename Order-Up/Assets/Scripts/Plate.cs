@@ -18,6 +18,7 @@ public class Plate : MonoBehaviour, IDropZone
 
     [Header("Dish Display Settings")]
     public TextMeshProUGUI dishIngredientsText; // Text component to show dish ingredients
+    public Button combineButton; // Button to trigger combination
     public float maxTextWidth = 200f; // Maximum width for text box
     public float minFontSize = 12f;
     public float maxFontSize = 24f;
@@ -48,6 +49,12 @@ public class Plate : MonoBehaviour, IDropZone
         if (highlightEffect != null)
             highlightEffect.SetActive(false);
 
+        if (combineButton != null)
+        {
+            combineButton.onClick.AddListener(OnCombineButtonPressed);
+            UpdateCombineButtonState();
+        }
+
         UpdateDishDisplay(); // Initialize display
     }
     #region IDropZone Implementation
@@ -60,6 +67,10 @@ public class Plate : MonoBehaviour, IDropZone
     #region Ingredient Management
     public bool AddIngredient(DraggableIngredient ingredient)
     {
+        // check if the ingredient is already on the plate
+        if (ingredientsOnPlate.Contains(ingredient))
+            return true;
+
         if (!CanAddIngredient(ingredient))
             return false;
 
@@ -74,10 +85,10 @@ public class Plate : MonoBehaviour, IDropZone
         if (IsFull())
             OnPlateFull?.Invoke();
 
-        if (ingredientsOnPlate.Count > 1)
-            comboSystem.CheckForCombinations();
-
         UpdateDishDisplay(); // Update display after adding ingredient
+        UpdateCombineButtonState();
+
+
 
         Debug.Log($"Added {ingredient.name} to plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
@@ -95,7 +106,6 @@ public class Plate : MonoBehaviour, IDropZone
         ingredient.transform.SetParent(null);
 
         Destroy(ingredient.gameObject);
-        //RepositionIngredients();
 
         OnIngredientRemoved?.Invoke(ingredient);
 
@@ -103,6 +113,7 @@ public class Plate : MonoBehaviour, IDropZone
             OnPlateEmpty?.Invoke();
 
         UpdateDishDisplay(); // Update display after removing ingredient
+        UpdateCombineButtonState();
 
         Debug.Log($"Removed {ingredient.name} from plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
@@ -130,6 +141,82 @@ public class Plate : MonoBehaviour, IDropZone
         }
 
         return true;
+    }
+
+    /// <summary>
+    /// Called when the player presses the combine button
+    /// </summary>
+    public void OnCombineButtonPressed()
+    {
+        Recipe matchedRecipe = GetMatchingRecipe();
+
+        if (matchedRecipe != null)
+        {
+            Debug.Log($"Combining ingredients into: {matchedRecipe.dishName}");
+            CombineIntoRecipe(matchedRecipe);
+        }
+        else
+        {
+            Debug.Log("No matching recipe found for current ingredients.");
+            // Optionally show feedback to player (shake button, play sound, etc.)
+        }
+    }
+
+    private void CombineIntoRecipe(Recipe recipe)
+    {
+        if (recipe == null || recipe.dishPrefab == null)
+        {
+            Debug.LogWarning("Recipe or dish prefab is null!");
+            return;
+        }
+
+        // Clear all ingredients from the plate
+        ClearIngredientsOnly();
+
+        // Spawn the combined dish on the plate
+        GameObject dish = Instantiate(recipe.dishPrefab, ingredientParent);
+        dish.transform.localPosition = Vector3.zero;
+        dish.name = recipe.dishName;
+
+        // If the dish has a DraggableIngredient component, register it
+        DraggableIngredient draggable = dish.GetComponent<DraggableIngredient>();
+        if (draggable != null)
+        {
+            ingredientsOnPlate.Add(draggable);
+        }
+
+        UpdateDishDisplay();
+        UpdateCombineButtonState();
+
+        Debug.Log($"Successfully created: {recipe.dishName}");
+    }
+
+    /// <summary>
+    /// Clears ingredients without destroying the plate's other children
+    /// </summary>
+    private void ClearIngredientsOnly()
+    {
+        for (int i = ingredientsOnPlate.Count - 1; i >= 0; i--)
+        {
+            if (ingredientsOnPlate[i] != null)
+            {
+                Destroy(ingredientsOnPlate[i].gameObject);
+            }
+        }
+        ingredientsOnPlate.Clear();
+    }
+
+    /// <summary>
+    /// Updates the combine button visibility/interactability
+    /// </summary>
+    private void UpdateCombineButtonState()
+    {
+        if (combineButton == null)
+            return;
+
+        Recipe matchedRecipe = GetMatchingRecipe();
+        combineButton.interactable = (matchedRecipe != null);
+
     }
     #endregion
 
@@ -254,7 +341,7 @@ public class Plate : MonoBehaviour, IDropZone
             AdjustTextSize(displayText);
         }
     }
-    
+    #region Display Text
     private string GetIngredientsDisplayText()
     {
         if (IsEmpty())
@@ -306,7 +393,9 @@ public class Plate : MonoBehaviour, IDropZone
             dishIngredientsText.fontSize = newFontSize;
         }
     }
+    #endregion
 
+    #region Recipe Matching
     /// <summary>
     /// Checks if current ingredients match any recipe
     /// </summary>
@@ -341,7 +430,7 @@ public class Plate : MonoBehaviour, IDropZone
 
         return null;
     }
-
+    #endregion
     public List<string> GetIngredientNames()
     {
         List<string> names = new List<string>();
@@ -366,6 +455,7 @@ public class Plate : MonoBehaviour, IDropZone
 
         return "";
     }
+
     public bool IsFull() => ingredientsOnPlate.Count >= maxIngredients;
     public bool IsEmpty() => ingredientsOnPlate.Count == 0;
     public int GetIngredientCount() => ingredientsOnPlate.Count;
