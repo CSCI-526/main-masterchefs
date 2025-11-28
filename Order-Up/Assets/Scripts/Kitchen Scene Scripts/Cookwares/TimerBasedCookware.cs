@@ -16,8 +16,8 @@ public class TimerBasedCookware : BaseCookware
 
     [Header("Timer Settings")]
     [SerializeField] private float minCookingTime = 3f;
-    [SerializeField] private float maxCookingTime = 7f;
-    private float selectedCookingTime = 10f; // default value, can decrement if they upgrade the appliance
+    [SerializeField] private float maxCookingTime = 6f;
+    private float selectedCookingTime = 6f; // default value, can decrement if they upgrade the appliance
 
     protected override void Start()
     {
@@ -27,6 +27,7 @@ public class TimerBasedCookware : BaseCookware
         {
             sliderPanel.SetActive(true);
         }
+        fireOn = true; // always on for timer-based cookware
     }
 
     protected override void InitializeUI()

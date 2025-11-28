@@ -41,23 +41,28 @@ public class RatingSystem : MonoBehaviour
         int stars = CalculateRating();
         if (enableDebugLogs)
             Debug.Log($"[RatingSystem] Dish submitted. Calculated Rating: {stars} stars.");
-        float timeTaken = Timer.Instance.StopTimer();
-        completionTimes.Add(timeTaken);
-        starRatings.Add(stars);
-        RevenueSystem.Instance.AddRevenue(stars);
+        
 
         // Record the attempt
         if (Attempts.Instance != null)
         {
             Attempts.Instance.RecordAttempt(stars);
         }
-
-        DisplayEvaluation(stars);
-        
-
-        
         bool hasAttemptsLeft = Attempts.Instance.HasAttemptsRemaining();
         bool isPerfectScore = (stars == 3);
+
+        starRatings.Add(stars);
+        RevenueSystem.Instance.AddRevenue(stars);
+        
+        float timeTaken = 0f;
+        if (isPerfectScore || !hasAttemptsLeft)
+        {
+            timeTaken = Timer.Instance.StopTimer();
+            completionTimes.Add(timeTaken);
+        }
+
+        DisplayEvaluation(stars);
+
         // if player did not get 3 stars send failure analytics data 
         if (!isPerfectScore)
         {
