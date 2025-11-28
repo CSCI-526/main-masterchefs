@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 12f27dfd6c7c4420a99c75f75c130307
+guid: 5a8a73aef3c31524894cc76c36313999
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4086368222646569467
-    second: IMG_0866_0
-  - first:
-      213: 8166332224718543435
-    second: IMG_0866_1
-  - first:
-      213: 7485070393231788871
-    second: IMG_0866_2
+      213: 8303883723458673611
+    second: Untitled_Artwork_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 5
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -119,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_0866_0
+      name: Untitled_Artwork_2_0
       rect:
         serializedVersion: 2
-        x: 326
-        y: 481
-        width: 302
-        height: 273
+        x: 0
+        y: 0
+        width: 2160
+        height: 1620
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 506f4b380cd4a47c0800000000000000
-      internalID: -4086368222646569467
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_0866_1
-      rect:
-        serializedVersion: 2
-        x: 725
-        y: 618
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b4a9c2c24e3a45170800000000000000
-      internalID: 8166332224718543435
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IMG_0866_2
-      rect:
-        serializedVersion: 2
-        x: 738
-        y: 620
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 74bcf537ddf40e760800000000000000
-      internalID: 7485070393231788871
+      spriteID: bcbf6e820425d3370800000000000000
+      internalID: 8303883723458673611
       vertices: []
       indices: 
       edges: []
@@ -198,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_0866_0: -4086368222646569467
-      IMG_0866_1: 8166332224718543435
-      IMG_0866_2: 7485070393231788871
+      Untitled_Artwork_2_0: 8303883723458673611
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

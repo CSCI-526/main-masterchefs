@@ -116,7 +116,7 @@ public class Attempts : MonoBehaviour
         // Update text display
         if (attemptText != null)
         {
-            attemptText.text = $"Attempts: {currentAttempt}/{maxAttempts}";
+            attemptText.text = $"Attempts: {GetAttemptsRemaining()}";
         }
 
         // Update visual indicators
