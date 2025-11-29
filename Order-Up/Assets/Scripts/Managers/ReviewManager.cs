@@ -33,7 +33,7 @@ public class ReviewSceneManager : MonoBehaviour
 
         LevelData current = levels[level - 1];
 
-        // UI basics
+        // UI basics haha
         levelText.text = $"Level {level} Complete!";
         roundsText.text = $"Recipes Completed: {current.recipes.Length}";
         coinsText.text = $"Total Coins: 0";
