@@ -161,7 +161,7 @@ public class RatingSystem : MonoBehaviour
                     if (enableDebugLogs)
                         Debug.Log($"[RatingSystem] Wrong dish! Got {dishComponent.recipe.dishName}, expected recipe ID {expectedDishId}");
                     // log reason of failure
-                    failureReasons.Add("wrong dish", dishComponent.recipe.dishName);
+                    failureReasons.Add("Wrong Dish", dishComponent.recipe.dishName);
                     return 1; // Wrong dish = 1 star
                 }
             }
@@ -173,9 +173,9 @@ public class RatingSystem : MonoBehaviour
         if (ingredientsOnPlate.Count == 0)
         {
             // log reason of failure
-            failureReasons.Add("no ingredients", "true");
+            failureReasons.Add("No Ingredient", "true");
             if (enableDebugLogs)
-                Debug.LogWarning("[RatingSystem] No ingredients or dish found on plate!");
+                Debug.LogWarning("[RatingSystem] No ingredient or dish found on plate!");
             return 0;
         }
 

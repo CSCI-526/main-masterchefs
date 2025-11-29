@@ -219,6 +219,11 @@ public class StirBasedCookware : BaseCookware
         if (!isStirring)
         {
             isStirring = true;
+            // Notify tutorial manager that cooking has started
+            if (TutorialManager.Instance != null)
+            {
+                TutorialManager.Instance.OnStirring(this);
+            }
 
             if (enableDebugLogs)
             {
