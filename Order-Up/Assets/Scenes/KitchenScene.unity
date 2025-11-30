@@ -4393,8 +4393,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -4.313}
-  m_SizeDelta: {x: 72.627, y: 71.977}
+  m_AnchoredPosition: {x: 0, y: -2.211}
+  m_SizeDelta: {x: 72.627, y: 85.478}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609724090
 MonoBehaviour:
@@ -12308,7 +12308,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 150.1, y: -50}
-  m_SizeDelta: {x: 89.99, y: 98.163}
+  m_SizeDelta: {x: 89.99, y: 110}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2052433315
 MonoBehaviour:
@@ -16008,7 +16008,7 @@ PrefabInstance:
       objectReference: {fileID: 1899353713}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: pantryGrid
