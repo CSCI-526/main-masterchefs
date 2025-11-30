@@ -24,6 +24,12 @@ jobs:
           key: Library-${{ runner.os }}-${{ hashFiles('**/Packages/manifest.json') }}
           restore-keys: |
             Library-${{ runner.os }}-
+      
+      # Step 2.5 : Clean Docker space
+      - name: Clean Docker space
+        run: |
+          docker system prune -af
+          docker volume prune -f
 
       # Step 3: Build Unity project
       - name: Build Unity project for WebGL
