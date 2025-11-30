@@ -59,12 +59,12 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("Starting pot tutorial");
             StartTutorial(TutorialType.Level3_Pot, PotSteps);
         }
-        else if (GameData.CurrentLevel == 4 && GameData.CurrentRound == 2)
-        {
-            // Run the pan tutorial on Level 4 Round 2
-            Debug.Log("Starting pan tutorial");
-            StartTutorial(TutorialType.Level4_Pan, PanSteps);
-        }
+        // else if (GameData.CurrentLevel == 4 && GameData.CurrentRound == 2)
+        // {
+        //     // Run the pan tutorial on Level 4 Round 2
+        //     Debug.Log("Starting pan tutorial");
+        //     StartTutorial(TutorialType.Level4_Pan, PanSteps);
+        // }
         else
         {
             // It's not a tutorial level. Disable tutorial GameObject.
