@@ -20,7 +20,7 @@ public class StirFryPan : BaseCookware
 
     [Header("Pan Boundaries")]
     [SerializeField] private CircleCollider2D panBoundary; // The circular boundary
-    [SerializeField] private float boundaryRadius = 1.5f; // Auto-set if panBoundary exists
+    [SerializeField] private float boundaryRadius; // Auto-set if panBoundary exists
 
     [Header("Stir Detection")]
     [SerializeField] private float stirSpeedThreshold = 3f; // How fast pan must move
@@ -184,8 +184,8 @@ public class StirFryPan : BaseCookware
             ingredientRb.bodyType = RigidbodyType2D.Dynamic;
             ingredientRb.gravityScale = 0f; // No gravity (top-down view)
             ingredientRb.mass = 1f;
-            ingredientRb.linearDamping = 0.5f; // Some air resistance
-            ingredientRb.angularDamping = 0.5f;
+            ingredientRb.linearDamping = 10.5f; // Some air resistance
+            ingredientRb.angularDamping = 10.5f;
 
             // Position ingredient at center of pan
             ingredient.transform.position = transform.position;
@@ -360,6 +360,7 @@ public class StirFryPan : BaseCookware
 
     public override void StartCooking()
     {
+        ingredientInside.transform.position = transform.position;
         base.StartCooking();
 
         totalStirTime = 0f;
