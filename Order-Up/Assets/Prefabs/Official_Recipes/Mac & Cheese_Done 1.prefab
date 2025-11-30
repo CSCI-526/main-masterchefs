@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -8433272103631269588, guid: 5ec2936feb76940dca23bf1c5a44dd1d, type: 3}
+  m_Sprite: {fileID: -8433272103631269588, guid: b6ebfd6aa1d8341beb268e13c6c0a489, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2e3f79363f2be44e83e923a8d89dbfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Dish
-  recipe: {fileID: 11400000, guid: f55e904ae5f2142ca83a1d51786a7b02, type: 2}
+  recipe: {fileID: 11400000, guid: a85ae1c85d1ebf34e9bf1b51449d4256, type: 2}
   ID: 3
 --- !u!114 &-6273763148672330950
 MonoBehaviour:
