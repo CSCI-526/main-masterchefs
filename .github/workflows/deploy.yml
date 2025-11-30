@@ -26,10 +26,28 @@ jobs:
             Library-${{ runner.os }}-
       
       # Step 2.5 : Clean Docker space
-      - name: Clean Docker space
+      - name: Free up disk space on GitHub runner
         run: |
-          docker system prune -af
-          docker volume prune -f
+          echo "Before cleanup:"
+          df -h /
+
+          echo "Removing unnecessary large packages..."
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf /usr/lib/jvm
+          sudo rm -rf /opt/android-sdk
+          sudo rm -rf /opt/mono
+
+          echo "Cleaning APT cache..."
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+
+          echo "Pruning Docker system..."
+          docker system prune -af --volumes
+
+          echo "After cleanup:"
+          df -h /
 
       # Step 3: Build Unity project
       - name: Build Unity project for WebGL
