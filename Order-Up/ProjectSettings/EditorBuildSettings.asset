@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CustomerScene.unity
     guid: d6a23b2f8a52a44bc9891ca2aafeca76
-  - enabled: 0
-    path: Assets/Scenes/OldCustomerScene.unity
-    guid: 623a31e8b3de1af46a01a8d949302e70
   - enabled: 1
     path: Assets/Scenes/KitchenScene.unity
     guid: 39962eb8e537d4e649714bf1dd94f78e
