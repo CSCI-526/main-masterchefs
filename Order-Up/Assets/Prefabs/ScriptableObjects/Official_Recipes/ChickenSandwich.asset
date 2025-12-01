@@ -32,4 +32,4 @@ MonoBehaviour:
     requiredCookware: 3
     requiredChoppingState: 0
   dishPrefab: {fileID: 8873301173016745754, guid: 6ffd582eebd4946428ab211d169be54b, type: 3}
-  icon: {fileID: -2798507893268480548, guid: 6520d7a3b54d443cda0d44558fd6ecbd, type: 3}
+  icon: {fileID: 21300000, guid: cb2233e4f70b8497aa05f51b9d05d243, type: 3}
