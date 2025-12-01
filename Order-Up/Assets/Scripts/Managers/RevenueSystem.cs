@@ -34,13 +34,18 @@ public class RevenueSystem : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        //persist across scenes - customer scene needs access to money
+        DontDestroyOnLoad(gameObject); 
+
+        // Load saved money or use starting amount
+        //currentMoney = PlayerPrefs.GetInt("PlayerMoney", startingMoney);
+        currentMoney = startingMoney; // Temporarily disable saving for testing
     }
 
     private void Start()
     {
-        // Load saved money or use starting amount
-        //currentMoney = PlayerPrefs.GetInt("PlayerMoney", startingMoney);
-        currentMoney = startingMoney; // Temporarily disable saving for testing
+
         FindMoneyUI();
         UpdateMoneyUI();
 
