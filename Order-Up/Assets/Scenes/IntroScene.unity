@@ -1290,6 +1290,87 @@ MonoBehaviour:
   kitchenBGM: {fileID: 0}
   maxVolume: 0.5
   fadeDuration: 0.8
+--- !u!1001 &1475279877
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 638796289241671738, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_Name
+      value: Analytics Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: earnURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSc91SMiX2EK4MVYhXqEipOOFkw43LHJQhlNshB7iTjdj300sw/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: spendURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSdidx0_d1qGaOH4E5F4mZ2KmOM3uBSEcFlE8BaiSFzND4Gmtw/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: failureURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSdAUuiBzNX2n56qDU28YgA1ZA0c8wVKFyiiIG2OQ4lra-wfMQ/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: levelStartURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSe5ZVTN38ucgr2-n3485AArBWwlDTZHp0gYU2VsxVOibbJT_A/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: levelCompleteURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSfT8wkIH7V-OK8BFgzySn1p9ZwcW5wbiZdpNXGD30S-PNKCKQ/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1521948191733053168, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: timeToCompleteURL
+      value: https://docs.google.com/forms/u/0/d/e/1FAIpQLSc-R3VA4qxfxw0GR82HZBBUJk_1l24QodBgJNovJsppYPLnvQ/formResponse
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.81586
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 18.80706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1659956285813013274, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 917d072d3e672564e893106156fa3e2a, type: 3}
 --- !u!1 &1577247540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1943,3 +2024,4 @@ SceneRoots:
   - {fileID: 1297466759}
   - {fileID: 2107615228}
   - {fileID: 1317287684}
+  - {fileID: 1475279877}
