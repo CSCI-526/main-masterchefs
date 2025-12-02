@@ -43,7 +43,7 @@
 			"dishName": "Mac & Cheese",
 			"sentenceTemplate": "I’m not saying {dish} is my weakness but I am saying I’d marry one.",
 			"color": "orange",
-			"image": "MacAndCheese"
+			"image": "mac dish"
 		},
 		{
 			"id": 6,
@@ -59,7 +59,7 @@
 			"dishName": "Spaghetti with Tomato Sauce",
 			"sentenceTemplate": "{dish} is the reason I haven’t fully given up on life.",
 			"color": "orange",
-			"image": "Spaghetti"
+			"image": "spaghetti"
 		},
 		{
 			"id": 8,
@@ -67,7 +67,7 @@
 			"dishName": "Mac & Cheese",
 			"sentenceTemplate": "Be honest, chef. Do you put extra cheese in your {dish}? I need to know.",
 			"color": "orange",
-			"image": "Spaghetti"
+			"image": "mac dish"
 		},
 
 
@@ -78,7 +78,7 @@
 			"dishName": "Omelette Sandwich",
 			"sentenceTemplate": "I woke up craving {dish} and absolutely no one is surprised.",
 			"color": "orange",
-			"image": "OmeletteSandwich"
+			"image": "omelette dish"
 		},
 		{
 			"id": 10,
@@ -94,7 +94,7 @@
 			"dishName": "Chicken Cheesy Melt",
 			"sentenceTemplate": "I didn’t know what I wanted until I thought about {dish}. Now I’m sure.",
 			"color": "orange",
-			"image": "ChickenCheesyMelt"
+			"image": "chickenCheesy"
 		},
 		{
 			"id": 12,
@@ -102,7 +102,7 @@
 			"dishName": "Omelette Sandwich",
 			"sentenceTemplate": "Tell me you still have {dish}. I need good news today.",
 			"color": "orange",
-			"image": "OmeletteSandwich"
+			"image": "omelette dish"
 		},
 
 
@@ -129,7 +129,7 @@
 			"dishName": "Chicken Cheesy Melt",
 			"sentenceTemplate": "Everything is better with a {dish}. That’s just science.",
 			"color": "orange",
-			"image": "ChickenCheesyMelt"
+			"image": "chickenCheesy"
     },
 		{
 			"id": 16,
