@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: c27c28145218a41d6aca260ac4a784d8
+guid: 2de302fb707a2494696e8a050f2ead0e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7793805357005861423
-    second: CheeseDoughBites_0
-  - first:
-      213: 8326891409974014515
-    second: CheeseDoughBites_1
+      213: -5392581928417495356
+    second: cheeseCooked_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 4
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CheeseDoughBites_1
+      name: cheeseCooked_0
       rect:
         serializedVersion: 2
-        x: 473
-        y: 964
-        width: 506
-        height: 552
+        x: 479
+        y: 755
+        width: 1121
+        height: 959
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 332b0ce9e9f0f8370800000000000000
-      internalID: 8326891409974014515
+      spriteID: 4c6fb76ae43b925b0800000000000000
+      internalID: -5392581928417495356
       vertices: []
       indices: 
       edges: []
@@ -141,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e07247a334fddde47bb726b26cbd8af0
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -151,9 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CheeseDoughBites_0: 7793805357005861423
-      CheeseDoughBites_1: 8326891409974014515
-      CheeseDoughBites_2: -1541327693
+      cheeseCooked_0: -5392581928417495356
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
