@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode] // Runs in editor without Play
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(Rigidbody2D))]
+
 public class DraggableDish : MonoBehaviour
 {
     [Header("Drag Settings")]
@@ -20,6 +25,7 @@ public class DraggableDish : MonoBehaviour
 
     private Collider2D col2D;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rig;
     private int originalSortingOrder;
     private Color originalColor;
 
@@ -33,11 +39,31 @@ public class DraggableDish : MonoBehaviour
 
         col2D = GetComponent<Collider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rig = GetComponent<Rigidbody2D>();
 
         if (spriteRenderer != null)
         {
             originalSortingOrder = spriteRenderer.sortingOrder;
             originalColor = spriteRenderer.color;
+        }
+
+        if (rig != null)
+        {
+            rig.bodyType = RigidbodyType2D.Kinematic;
+        }
+
+        ResetCollider();
+    }
+    void ResetCollider()
+    {
+        if (col2D != null)
+        {
+            // Disable and re-enable the collider to force Unity to refresh it
+            col2D.enabled = false;
+            col2D.enabled = true;
+
+            if (enableDebugLogs)
+                Debug.Log("[Dish] Collider reset");
         }
     }
 
@@ -132,6 +158,8 @@ public class DraggableDish : MonoBehaviour
             Debug.Log("[Dish] Returning to original position");
 
         ReturnToOriginalPosition();
+
+        ResetCollider();
     }
 
     // ───────────────────────────────────────────────────────────────

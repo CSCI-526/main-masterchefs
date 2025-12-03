@@ -55,7 +55,6 @@ public class StirFryPan : BaseCookware
         // Set up pan boundary
         if (panBoundary != null)
         {
-            boundaryRadius = panBoundary.radius;
             panBoundary.sharedMaterial = panPhysicsMaterial;
         }
     }
