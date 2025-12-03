@@ -470,7 +470,22 @@ public class RatingSystem : MonoBehaviour
                     if (enableDebugLogs)
                         Debug.Log($"[RatingSystem] All rounds complete for level {currentLevel}. Moving to ReviewScene.");
                     
-                    SceneManager.LoadScene("ReviewScene");
+                    if (currentLevel + 1 < levelDesignManager.levels.Count)
+                    {
+                        SceneManager.LoadScene("ReviewScene");
+                    } 
+                    else
+                    {
+                        if (RevenueSystem.Instance.currentMoney >= 100)
+                        {
+                            SceneManager.LoadScene("GoodEndScene");
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene("BadEndScene");
+                        }
+                        
+                    }
                     return;
                 }
             }

@@ -20,7 +20,7 @@ public class RevenueSystem : MonoBehaviour
     [Header("Debug")]
     public bool enableDebugLogs = true;
 
-    private int currentMoney;
+    public int currentMoney;
 
     private void Awake()
     {
