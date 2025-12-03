@@ -36,7 +36,7 @@ public class ReviewSceneManager : MonoBehaviour
         // UI basics haha
         levelText.text = $"Level {level} Complete!";
         roundsText.text = $"Recipes Completed: {current.recipes.Length}";
-        coinsText.text = $"Total Coins: 0";
+        coinsText.text = $"Total Coins: {RevenueSystem.Instance.GetCurrentMoney()}";
         // HARDCODE FOR NOW
 
         // Determine next level data (if level == 1, nothing is new)
