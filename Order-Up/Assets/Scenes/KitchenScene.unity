@@ -1150,6 +1150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+--- !u!1 &193400183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5148992416158093061, guid: a2168c0a5d76cfe45ae4b9645afc2b07, type: 3}
+  m_PrefabInstance: {fileID: 8513117624255767836}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &194141869
 GameObject:
   m_ObjectHideFlags: 0
@@ -5958,7 +5963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag cheese onto fryer
+  m_text: Drag cheese onto oven
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11085,6 +11090,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86548b5fad72d0342a376ca0b7b796a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StirFryPan
+--- !u!1 &1707786907 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5368284701439756160, guid: a108381e42fa943449f20a6d9ce351c3, type: 3}
+  m_PrefabInstance: {fileID: 2413072439145525571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1722732353
 GameObject:
   m_ObjectHideFlags: 0
@@ -15998,6 +16008,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Kitchen Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: pan
+      value: 
+      objectReference: {fileID: 193400183}
+    - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
+      propertyPath: pot
+      value: 
+      objectReference: {fileID: 1707786907}
     - target: {fileID: 8218621305344121061, guid: 79db4852dbe84d04ab7142be7cde8019, type: 3}
       propertyPath: Level
       value: 0
