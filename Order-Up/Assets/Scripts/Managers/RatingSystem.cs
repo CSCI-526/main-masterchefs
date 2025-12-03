@@ -18,6 +18,8 @@ public class RatingSystem : MonoBehaviour
     public Image[] starDisplay = new Image[3];
     public Sprite filledStar;
     public Sprite emptyStar;
+    public GameObject attemptsPanel;
+    public TMPro.TextMeshProUGUI attemptsLeft;
     [SerializeField] private Button submitButton;
 
     // Tracking variables
@@ -503,14 +505,19 @@ public class RatingSystem : MonoBehaviour
         if (stars == 3)
         {
             evaluationResults.text = "Order Complete! Perfect Dish!";
+            attemptsPanel.SetActive((false));
         }
         else if (stars == 2)
         {
             evaluationResults.text = "Almost! Good Effort!";
+            attemptsLeft.text = "Attempts left:" + Attempts.Instance.GetAttemptsRemaining();
+            attemptsPanel.SetActive((true));
         }
         else
         {
             evaluationResults.text = "Incorrect Dish! Try Again.";
+            attemptsLeft.text = "Attempts left:" + Attempts.Instance.GetAttemptsRemaining();
+            attemptsPanel.SetActive((true));
         }
 
         // 2. Update the star images

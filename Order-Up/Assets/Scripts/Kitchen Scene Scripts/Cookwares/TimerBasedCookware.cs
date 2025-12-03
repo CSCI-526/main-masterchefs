@@ -121,8 +121,7 @@ public class TimerBasedCookware : BaseCookware
     {
         if (sliderPanel != null)
         {
-            sliderPanel.SetActive(!sliderPanel.activeSelf);
-
+            // sliderPanel.SetActive(!sliderPanel.activeSelf);
             if (sliderPanel.activeSelf)
             {
                 UpdateSliderState();

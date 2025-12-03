@@ -125,12 +125,12 @@ public class HintSystem : MonoBehaviour
                 // Show the hint
                 string hint = recipe.hints[currentHintIndex];
                 string hintMessage = $"Hint {currentHintIndex + 1}: {hint}";
-                purchasedHints.Add(hint);
+                purchasedHints.Add(hintMessage);
                 string combinedHints = string.Join("\n\n", purchasedHints);
 
                 ShowHintPanel(combinedHints);
                 if (enableDebugLogs)
-                    Debug.Log($"[HintSystem] Showing hint {currentHintIndex + 1}/{recipe.hints.Length}: {hint}");
+                    Debug.Log($"[HintSystem] Showing hint {currentHintIndex}: {hint}");
                 
                 // Send transaction data to Analytics Manager
                 sendSpendData(hintCost, currentDishId, currentHintIndex);
