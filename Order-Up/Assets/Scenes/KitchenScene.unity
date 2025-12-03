@@ -3394,12 +3394,16 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8807650720606110738, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
+      propertyPath: m_margin.z
+      value: -5.362549
+      objectReference: {fileID: 0}
+    - target: {fileID: 8807650720606110738, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8807650720606110738, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_fontStyle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8807650720606110738, guid: ca94f063953718f478b88cf3bfdc3eb2, type: 3}
       propertyPath: m_fontSizeBase
@@ -4304,7 +4308,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 20}
+  m_SizeDelta: {x: 98.1, y: 20}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &599776705
 MonoBehaviour:
@@ -4353,13 +4357,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 10
+  m_fontStyle: 8
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -4848,7 +4852,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &657430597
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6004,7 +6008,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Drag cheese onto oven
+  m_text: Drag cheese to oven
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10283,15 +10287,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6130602127548779721, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_fontSize
-      value: 15
+      value: 17.3
       objectReference: {fileID: 0}
     - target: {fileID: 6130602127548779721, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_fontStyle
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6130602127548779721, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_fontSizeBase
-      value: 15
+      value: 17.3
       objectReference: {fileID: 0}
     - target: {fileID: 6130602127548779721, guid: eed003b3c4270c9419e6101218200fd7, type: 3}
       propertyPath: m_RaycastTarget
@@ -10802,8 +10806,8 @@ MonoBehaviour:
   dishIngredientsText: {fileID: 599776705}
   combineButton: {fileID: 1688675925}
   maxTextWidth: 6
-  minFontSize: 5
-  maxFontSize: 10
+  minFontSize: 13
+  maxFontSize: 15
   comboSystem: {fileID: 2105213806}
 --- !u!58 &1616915305
 CircleCollider2D:
@@ -11776,8 +11780,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -12336,8 +12340,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

@@ -91,7 +91,12 @@ public class LevelDesignManager : MonoBehaviour
             pot.SetActive(false);
             pan.SetActive(false);
         }
-        else
+        else if (level == 3)
+        {
+            pot.SetActive(true);
+            pan.SetActive(false);
+        }
+        else if (level >= 4)
         {
             pot.SetActive(true);
             pan.SetActive(true);
