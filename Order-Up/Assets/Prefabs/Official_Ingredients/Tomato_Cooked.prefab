@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8790594884621348540}
   - component: {fileID: 925973582212601801}
   - component: {fileID: 3270292737445621684}
-  - component: {fileID: 4585888499034227368}
   - component: {fileID: 3149610511155209700}
   - component: {fileID: -619143663906118181}
+  - component: {fileID: 3429573352899506385}
   m_Layer: 0
   m_Name: Tomato_Cooked
   m_TagString: Untagged
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2413806693520163455, guid: bda853ef10fd84f33b0adfdfa8139739, type: 3}
+  m_Sprite: {fileID: 9040080445783760635, guid: 00aafd6d66c79484c913691f26b84cde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,73 +128,6 @@ MonoBehaviour:
   ingredientData: {fileID: 11400000, guid: 452da14797ede4a6f99cee4b33fd7917, type: 2}
   currentState: 1
   currentCookware: 3
---- !u!60 &4585888499034227368
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 931581625128535829}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85333335, y: 0.85333335}
-    newSize: {x: 8.533334, y: 8.533334}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 1
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.42666668}
-      - {x: -0.13000001, y: 0.40333334}
-      - {x: -0.25, y: 0.34333333}
-      - {x: -0.34333333, y: 0.25}
-      - {x: -0.40333334, y: 0.13000001}
-      - {x: -0.42666668, y: 0}
-      - {x: -0.40333334, y: -0.13000001}
-      - {x: -0.34333333, y: -0.25}
-      - {x: -0.25, y: -0.34333333}
-      - {x: -0.13000001, y: -0.40333334}
-      - {x: 0, y: -0.42666668}
-      - {x: 0.13000001, y: -0.40333334}
-      - {x: 0.25, y: -0.34333333}
-      - {x: 0.34333333, y: -0.25}
-      - {x: 0.40333334, y: -0.13000001}
-      - {x: 0.42666668, y: 0}
-      - {x: 0.40333334, y: 0.13000001}
-      - {x: 0.34333333, y: 0.25}
-      - {x: 0.25, y: 0.34333333}
-      - {x: 0.13000001, y: 0.40333334}
-  m_UseDelaunayMesh: 0
 --- !u!50 &3149610511155209700
 Rigidbody2D:
   serializedVersion: 5
@@ -238,3 +171,39 @@ MonoBehaviour:
   animationSpeed: 8
   ingredientText: {fileID: 0}
   textFadeSpeed: 5
+--- !u!58 &3429573352899506385
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931581625128535829}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.6140001

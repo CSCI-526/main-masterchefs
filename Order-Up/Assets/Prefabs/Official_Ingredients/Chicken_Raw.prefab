@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3672354593817994883}
   - component: {fileID: 170445375882245411}
   - component: {fileID: 1692019481822630163}
-  - component: {fileID: 7637768521612052145}
   - component: {fileID: 2421421925566461611}
   - component: {fileID: 7325567517638801520}
+  - component: {fileID: 5724941757010885883}
   m_Layer: 0
   m_Name: Chicken_Raw
   m_TagString: Untagged
@@ -128,79 +128,6 @@ MonoBehaviour:
   ingredientData: {fileID: 11400000, guid: 0f1029261c49049539992e58df6c7658, type: 2}
   currentState: 0
   currentCookware: 4
---- !u!60 &7637768521612052145
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3968348579794098679}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.59, y: 1.0400001}
-    newSize: {x: 2.048, y: 2.048}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 1
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.7727337, y: -0.2249219}
-      - {x: 0.7727337, y: -0.013984394}
-      - {x: 0.7199993, y: 0.070390604}
-      - {x: 0.61453056, y: 0.22859374}
-      - {x: 0.58289, y: 0.34460935}
-      - {x: 0.5301556, y: 0.42898437}
-      - {x: 0.44578058, y: 0.48171875}
-      - {x: 0.40359306, y: 0.51335937}
-      - {x: 0.18210869, y: 0.51335937}
-      - {x: 0.066093065, y: 0.4922656}
-      - {x: -0.060469437, y: 0.460625}
-      - {x: -0.32414132, y: 0.37625}
-      - {x: -0.45070383, y: 0.35515624}
-      - {x: -0.61945385, y: 0.29187497}
-      - {x: -0.73546946, y: 0.20749998}
-      - {x: -0.777657, y: 0.16531248}
-      - {x: -0.777657, y: -0.07726564}
-      - {x: -0.7565632, y: -0.13000003}
-      - {x: -0.59836006, y: -0.23546878}
-      - {x: -0.19757882, y: -0.40421876}
-      - {x: -0.007735062, y: -0.4780469}
-      - {x: 0.28757745, y: -0.50968754}
-      - {x: 0.40359306, y: -0.50968754}
-      - {x: 0.4774212, y: -0.49914065}
-      - {x: 0.63562435, y: -0.41476566}
-      - {x: 0.75163996, y: -0.2671094}
-  m_UseDelaunayMesh: 0
 --- !u!50 &2421421925566461611
 Rigidbody2D:
   serializedVersion: 5
@@ -244,3 +171,49 @@ MonoBehaviour:
   animationSpeed: 8
   ingredientText: {fileID: 0}
   textFadeSpeed: 5
+--- !u!61 &5724941757010885883
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3968348579794098679}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.59, y: 1.0400001}
+    newSize: {x: 2.048, y: 2.048}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 1
+  m_AutoTiling: 0
+  m_Size: {x: 1.59, y: 1.0400001}
+  m_EdgeRadius: 0

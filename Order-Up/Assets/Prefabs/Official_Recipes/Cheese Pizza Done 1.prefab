@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7858051381920438281}
   - component: {fileID: -9011166896684941922}
   - component: {fileID: 6430660224188808271}
-  - component: {fileID: 4498505600963985845}
+  - component: {fileID: 5201417398936646363}
   m_Layer: 0
   m_Name: Cheese Pizza
   m_TagString: Untagged
@@ -153,8 +153,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!70 &4498505600963985845
-CapsuleCollider2D:
+--- !u!58 &5201417398936646363
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -188,5 +188,4 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_Radius: 70

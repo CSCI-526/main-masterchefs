@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[ExecuteInEditMode] // Runs in editor without Play
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class DraggableIngredient : MonoBehaviour
 {
     [Header("Drag Settings")]

@@ -3,8 +3,6 @@ using UnityEngine;
 
 [ExecuteInEditMode] // Runs in editor without Play
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(PolygonCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 
 public class DraggableDish : MonoBehaviour
 {
@@ -52,7 +50,6 @@ public class DraggableDish : MonoBehaviour
             rig.bodyType = RigidbodyType2D.Kinematic;
         }
 
-        ResetCollider();
     }
     void ResetCollider()
     {
@@ -159,7 +156,6 @@ public class DraggableDish : MonoBehaviour
 
         ReturnToOriginalPosition();
 
-        ResetCollider();
     }
 
     // ───────────────────────────────────────────────────────────────

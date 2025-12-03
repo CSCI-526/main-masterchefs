@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Potato_Overcooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Potato_Overcooked
-  icon: {fileID: -712631045867808456, guid: c1d5d64293de649958641cb5657ede08, type: 3}
+  icon: {fileID: 9130133218310531392, guid: d68e33d7bba77a446a7df8741b4c60b5, type: 3}
   cookedResult: {fileID: 0}
   overcookedResult: {fileID: 0}

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5441712463894028953}
   - component: {fileID: 8582653425292525919}
   - component: {fileID: 2987408843506760670}
-  - component: {fileID: 5623640995956706327}
   - component: {fileID: 6676587240460845249}
   - component: {fileID: -4238519716958592639}
+  - component: {fileID: 7755828607152760418}
   m_Layer: 0
   m_Name: Potato_Cooked
   m_TagString: Untagged
@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -712631045867808456, guid: c1d5d64293de649958641cb5657ede08, type: 3}
+  m_Sprite: {fileID: 9130133218310531392, guid: d68e33d7bba77a446a7df8741b4c60b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -128,59 +128,6 @@ MonoBehaviour:
   ingredientData: {fileID: 11400000, guid: 53974216dea4b4536b33b61defb314e7, type: 2}
   currentState: 1
   currentCookware: 1
---- !u!60 &5623640995956706327
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378597899136247894}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85333335, y: 0.75333333}
-    newSize: {x: 8.172619, y: 6.0238094}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 1
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.21333334, y: 0.37}
-      - {x: -0.42666668, y: 0}
-      - {x: -0.21333334, y: -0.37}
-      - {x: 0.21333334, y: -0.37}
-      - {x: 0.42666668, y: 0}
-      - {x: 0.21333334, y: 0.37}
-  m_UseDelaunayMesh: 0
 --- !u!50 &6676587240460845249
 Rigidbody2D:
   serializedVersion: 5
@@ -224,3 +171,49 @@ MonoBehaviour:
   animationSpeed: 8
   ingredientText: {fileID: 0}
   textFadeSpeed: 5
+--- !u!61 &7755828607152760418
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378597899136247894}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.892, y: 1.19}
+    newSize: {x: 8.172619, y: 6.0238094}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 1
+  m_AutoTiling: 0
+  m_Size: {x: 1.892, y: 1.19}
+  m_EdgeRadius: 0

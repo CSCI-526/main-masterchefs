@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Dough_Cooked
   m_EditorClassIdentifier: Assembly-CSharp::IngredientData
   ingredientName: Dough_Cooked
-  icon: {fileID: 3625043607559282579, guid: 11d33a8f6143b4ba2adcd54ce068c76b, type: 3}
+  icon: {fileID: -2946018181820000106, guid: 19697679f91eaec498a971eac6421784, type: 3}
   cookedResult: {fileID: 0}
   overcookedResult: {fileID: 11400000, guid: 0abd52367bad243cf928611e75474f9a, type: 2}

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1236628304609202849}
   - component: {fileID: 5989396832455468125}
   - component: {fileID: 4845815821420720332}
-  - component: {fileID: -6695545281593983293}
   m_Layer: 0
   m_Name: Omelette Sandwich
   m_TagString: Untagged
@@ -106,21 +105,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Dish
   recipe: {fileID: 11400000, guid: 11d547bdf82ea40a6bb9489dfa7bc540, type: 2}
   ID: 5
---- !u!114 &-6695545281593983293
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9162137006038502844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4df87001277177479095e60058b1174, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DraggableDish
-  dropZoneLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  dragOffset: 0.1
-  enableDebugLogs: 0
-  hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
