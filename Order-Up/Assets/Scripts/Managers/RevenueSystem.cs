@@ -166,7 +166,7 @@ public class RevenueSystem : MonoBehaviour
     private void UpdateMoneyUI()
     {
         if (moneyText != null)
-            moneyText.text = $"${currentMoney}";
+            moneyText.text = $"{currentMoney}";
     }
 
     private void SaveMoney()

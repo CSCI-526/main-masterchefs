@@ -1873,7 +1873,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2094200405}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2107615229}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: StartSession
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2094200405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2014,6 +2026,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc939085a3296e49ba5552be58ca304, type: 3}
+--- !u!114 &2107615229 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6221891125016995609, guid: ebc939085a3296e49ba5552be58ca304, type: 3}
+  m_PrefabInstance: {fileID: 2107615228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7452822e7d902c74c80b91b12af2cb65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
