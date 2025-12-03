@@ -25,7 +25,7 @@ MonoBehaviour:
     requiredChoppingState: 0
   - ingredient: {fileID: 11400000, guid: e94dc45a7162b408985766c60e17d41e, type: 2}
     requiredState: 1
-    requiredCookware: 1
+    requiredCookware: 3
     requiredChoppingState: 0
   dishPrefab: {fileID: 1332861967603227936, guid: 73d999f5c0d064b90b07b18b3ae53fec, type: 3}
   icon: {fileID: 21300000, guid: 9f423a5d3bf6944c88989b0c36713c6e, type: 3}

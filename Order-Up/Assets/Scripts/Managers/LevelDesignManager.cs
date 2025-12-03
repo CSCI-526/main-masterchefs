@@ -17,6 +17,10 @@ public class LevelDesignManager : MonoBehaviour
     [Header("Pantry Grid")]
     public Transform pantryGrid;
 
+    [Header("Cookwares")]
+    public GameObject pot;
+    public GameObject pan;
+
     [Header("Debug Settings")]
     [SerializeField] bool enableDebugLogs = false;
 
@@ -79,6 +83,18 @@ public class LevelDesignManager : MonoBehaviour
             var slot = pantrySlots[i];
             slot.ingredientPrefab = data.activeIngredients[i];
             slot.gameObject.SetActive(true);
+        }
+
+        // Enable/Disable cookwares based on level
+        if (level <= 2)
+        {
+            pot.SetActive(false);
+            pan.SetActive(false);
+        }
+        else
+        {
+            pot.SetActive(true);
+            pan.SetActive(true);
         }
     }
 

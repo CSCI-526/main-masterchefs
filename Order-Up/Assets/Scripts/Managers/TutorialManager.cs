@@ -336,7 +336,7 @@ public class TutorialManager : MonoBehaviour
             else if (currentStep == 4)
             {
                 // Check if it's the correct cookware
-                bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
+                bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Oven;
 
                 // Check if it's the correct ingredient (cheese)
                 Ingredient ing = ingredient.GetComponent<Ingredient>();
@@ -396,9 +396,9 @@ public class TutorialManager : MonoBehaviour
             else if (currentStep == 5)
             {
                 // Check if it's the correct cookware (the fryer)
-                if (cookware.GetCookwareType() == CookwareType.Fryer)
+                if (cookware.GetCookwareType() == CookwareType.Oven)
                 {
-                    Debug.Log("OnCookwareStarted: Fryer started cooking!");
+                    Debug.Log("OnCookwareStarted: Oven started cooking!");
                     isWaitingForCookingToEnd = true;
                 }
             }
@@ -463,7 +463,7 @@ public class TutorialManager : MonoBehaviour
             }
             else if (currentStep == 5)
             {
-                bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
+                bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Oven;
 
                 bool isCorrectIngredient = false;
                 if (ingredient != null)
