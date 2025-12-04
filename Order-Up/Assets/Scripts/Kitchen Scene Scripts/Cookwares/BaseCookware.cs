@@ -114,6 +114,11 @@ public abstract class BaseCookware : MonoBehaviour, IDropZone
                       $"Ingredient's Cookware: {ingredient.currentCookware}, " +
                       $"This Cookware: {cookwareType})");
         }
+        if (!cookwareMatches)
+        {
+            
+            PopupManager.Instance.ShowPopup("Does not go in there", this.transform);
+        }
 
         return cookwareMatches;
     }
