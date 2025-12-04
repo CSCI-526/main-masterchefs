@@ -5,17 +5,17 @@
       "currentRecipe": "Cheesy Fries",
       "hints": [
         "Ok first hint: You just need Potato and Cheese",
-        "Repeat after me: Fryer",
-        "OMG who let you in to the kitchen?"
+        "Potato -> Fryer",
+        "Cheese -> Oven"
       ]
     },
     {
       "id": 1,
       "currentRecipe": "Cheese Dough Bites",
       "hints": [
-        "Dough and Cheese bru - that's all you need",
+        "Dough and Cheese - that's all you need",
         "Please don't tell me you put Dough in the Fryer",
-        "Dough into the Oven first, then Cheese into the Fryer >->"
+        "Dough into the Oven first, then Cheese into the Fryer ;-;"
       ]
     },
     {
@@ -23,8 +23,8 @@
       "currentRecipe": "Cheese Pizza",
       "hints": [
         "You need Dough, Tomato, and Cheese ... I think",
-        "Actually we don't make ... Pizza",
-        "Just do something :,)"
+        "They all need to be cooked one-by-one",
+        "All you need is the oven!"
       ]
     },
     {
@@ -32,44 +32,44 @@
       "currentRecipe": "Mac & Cheese",
       "hints": [
         "Really, you don't know this one :| Pasta and Cheese",
-        "You Are A Dounut: Pasta in to the Pot",
-        "1) Boil Pasta in Pot. 2) Melt Cheese in the Fryer."
+        "Pasta in to the Pot Please!",
+        "1) Boil Pasta in Pot. 2) Melt Cheese in the Oven."
       ]
     },
     {
       "id": 4,
       "currentRecipe": "Spaghetti with Tomato Sauce",
       "hints": [
-        "Pasta, Tomato, and Cheese… it's not rocket science.",
-        "Pot for Pasta. Oven for Tomato. Pan for Cheese. Please.",
-        "1) Boil Pasta in the Pot. 2) Cook Cheese in the Fryer. 3) Cook Tomato in the Oven. You Dounut."
+        "Pasta, Tomato, and Cheese...Pretty Simple!",
+        "Pot for Pasta. Oven for Tomato. Pan for Cheese. You got it!",
+        "1) Boil Pasta in the Pot. 2) Cook Cheese in the Oven. 3) Cook Tomato in the Oven."
       ]
     },
     {
       "id": 5,
       "currentRecipe": "Omelette Sandwich",
       "hints": [
-        "You have no future in cooking if you don't know this one: Bread and Eggs",
-        "If you Bread into the pot, you're fired. Bread doesn’t go in any cookware, same as Eggs",
-        "1) Grab Bread and cooked Egg. 2) Boom, Breakfast."
+        "Just Bread and Eggs :)",
+        "Bread doesn't need to be cooked!",
+        "1) Grab Bread and the cooked Egg. 2) Boom, Breakfast."
       ]
     },
     {
       "id": 6,
       "currentRecipe": "Chicken Cheesy Melt",
       "hints": [
-        "Boil the chicken. Are you stupid? Pan sears it.",
-        "Bread stays dry. Like your cooking skills.",
-        "1) Cook Chicken in the pan. 2) Cook Cheese in the Fryer."
+        "Chicken in the pan please!",
+        "Bread doesn't need to be cooked!",
+        "1) Cook Chicken in the pan. 2) Cook Cheese in the Oven."
       ]
     },
     {
       "id": 7,
       "currentRecipe": "Chicken Sandwich",
       "hints": [
-        "Bread, Chicken, Tomato, Lettuce. Don't even think about cooking the Lettuce.",
-        "Chicken = Pan. Tomato = Oven. Lettuce = raw. Bread = also raw. My Grandma could do better.",
-        "1) Cook Chicken in the Pan. 2) Roast Tomato in the Oven. 3) Add Lettuce and Bread. Dounut."
+        "Bread, Chicken, Tomato, Lettuce. Please don't cook the Lettuce.",
+        "Chicken = Pan. Tomato = Oven. Lettuce = raw. Bread = raw.",
+        "1) Cook Chicken in the Pan. 2) Roast Tomato in the Oven. 3) Add Lettuce and Bread. That's all!"
       ]
     }
   ]
