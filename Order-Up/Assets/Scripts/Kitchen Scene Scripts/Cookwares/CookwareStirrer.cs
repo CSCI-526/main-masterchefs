@@ -9,6 +9,10 @@ public class CookwareStirrer : MonoBehaviour
     [SerializeField] private LayerMask cookwareLayer;
     [SerializeField] private float stirSensitivity = 1.5f;
     [SerializeField] private float stirThreshold = 0.05f;
+    [SerializeField] private float followLerpSpeed = 12f;
+    [SerializeField] private float returnLerpSpeed = 6f;
+    private Vector3 startPosition;
+
 
     [Header("Debug")]
     [SerializeField] private bool enableDebugLogs = false;
@@ -27,17 +31,23 @@ public class CookwareStirrer : MonoBehaviour
         {
             mainCamera = FindAnyObjectByType<Camera>();
         }
+        startPosition = transform.position;
     }
 
     void Update()
     {
-        if (!isDragging) return;
+        if (!isDragging)
+        {
+            // Spoon to return to original start position when not being dragged
+            transform.position = Vector3.Lerp(transform.position, startPosition, Time.deltaTime * returnLerpSpeed);
+            return;
+        }
 
         Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = transform.position.z;
 
         // Move spoon with mouse
-        transform.position = mouseWorld + mouseOffset;
+        transform.position = Vector3.Lerp(transform.position, mouseWorld + mouseOffset, Time.deltaTime * followLerpSpeed);
 
         // Calculate stirring intensity based on movement
         float distanceMoved = Vector3.Distance(mouseWorld, lastMousePosition);
@@ -49,7 +59,6 @@ public class CookwareStirrer : MonoBehaviour
         if (hit != null)
         {
             StirBasedCookware cookware = hit.GetComponent<StirBasedCookware>();
-
             if (cookware != null)
             {
                 // If we're over a different cookware, stop stirring the old one
@@ -74,7 +83,6 @@ public class CookwareStirrer : MonoBehaviour
         }
         else
         {
-            // Not over any cookware
             if (currentCookware != null)
             {
                 currentCookware.StopStirring();
@@ -85,27 +93,29 @@ public class CookwareStirrer : MonoBehaviour
         lastMousePosition = mouseWorld;
     }
 
+
     void OnMouseDown()
     {
-        isDragging = true;
-
         Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mouseWorld.z = transform.position.z;
+
         mouseOffset = transform.position - mouseWorld;
         lastMousePosition = mouseWorld;
+        isDragging = true;
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[Stirrer] Started dragging");
+            Debug.Log("[Stirrer] Started dragging");
         }
     }
+
 
     void OnMouseUp()
     {
         isDragging = false;
         stirIntensity = 0f;
 
-        // Stop stirring when releasing spoon
+        // Stop stirring 
         if (currentCookware != null)
         {
             currentCookware.StopStirring();
@@ -114,9 +124,13 @@ public class CookwareStirrer : MonoBehaviour
 
         if (enableDebugLogs)
         {
-            Debug.Log($"[Stirrer] Stopped dragging");
+            Debug.Log("[Stirrer] Stopped dragging, returning to rest");
         }
+
+        transform.position = Vector3.Lerp(transform.position, startPosition, 1f);
     }
+
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
