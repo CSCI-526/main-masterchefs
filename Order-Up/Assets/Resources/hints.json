@@ -5,7 +5,7 @@
       "currentRecipe": "Cheesy Fries",
       "hints": [
         "Ok first hint: You just need Potato and Cheese",
-        "Repeat after me: Fryer",
+        "Potato goes into the fryer, cheese goes into the oven",
         "OMG who let you in to the kitchen?"
       ]
     },
@@ -15,7 +15,7 @@
       "hints": [
         "Dough and Cheese bru - that's all you need",
         "Please don't tell me you put Dough in the Fryer",
-        "Dough into the Oven first, then Cheese into the Fryer >->"
+        "Both dough and cheese need to go into the oven >->"
       ]
     },
     {
@@ -33,7 +33,7 @@
       "hints": [
         "Really, you don't know this one :| Pasta and Cheese",
         "You Are A Dounut: Pasta in to the Pot",
-        "1) Boil Pasta in Pot. 2) Melt Cheese in the Fryer."
+        "1) Boil Pasta in Pot. 2) Melt Cheese in the Oven."
       ]
     },
     {
@@ -41,8 +41,8 @@
       "currentRecipe": "Spaghetti with Tomato Sauce",
       "hints": [
         "Pasta, Tomato, and Cheese… it's not rocket science.",
-        "Pot for Pasta. Oven for Tomato. Pan for Cheese. Please.",
-        "1) Boil Pasta in the Pot. 2) Cook Cheese in the Fryer. 3) Cook Tomato in the Oven. You Dounut."
+        "Pot for Pasta. Oven for Tomato and Cheese. Please.",
+        "1) Boil Pasta in the Pot. 2) Cook Cheese in the Oven. 3) Cook Tomato in the Oven. You Dounut."
       ]
     },
     {
@@ -51,16 +51,16 @@
       "hints": [
         "You have no future in cooking if you don't know this one: Bread and Eggs",
         "If you Bread into the pot, you're fired. Bread doesn’t go in any cookware, same as Eggs",
-        "1) Grab Bread and cooked Egg. 2) Boom, Breakfast."
+        "1) Grab Bread and boiled Egg. 2) Boom, Breakfast."
       ]
     },
     {
       "id": 6,
       "currentRecipe": "Chicken Cheesy Melt",
       "hints": [
-        "Boil the chicken. Are you stupid? Pan sears it.",
+        "Sear the chicken in the pan",
         "Bread stays dry. Like your cooking skills.",
-        "1) Cook Chicken in the pan. 2) Cook Cheese in the Fryer."
+        "1) Cook Chicken in the pan. 2) Cook Cheese in the Oven."
       ]
     },
     {

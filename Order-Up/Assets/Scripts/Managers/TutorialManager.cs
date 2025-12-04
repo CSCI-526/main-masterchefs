@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+// ReSharper disable Unity.PerformanceCriticalCodeInvocation
 
 
 public class TutorialManager : MonoBehaviour
@@ -25,11 +26,10 @@ public class TutorialManager : MonoBehaviour
     
     private GameObject[] currentActivePopups;
     
-    // private int previousStep = -1;
-    
     private bool isWaitingForCookingToEnd = false;
     
     public Button orderUpButton;
+    public Button hintCloseBtn;
     
     void Awake()
     {
@@ -59,12 +59,12 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("Starting pot tutorial");
             StartTutorial(TutorialType.Level3_Pot, PotSteps);
         }
-        // else if (GameData.CurrentLevel == 4 && GameData.CurrentRound == 2)
-        // {
-        //     // Run the pan tutorial on Level 4 Round 2
-        //     Debug.Log("Starting pan tutorial");
-        //     StartTutorial(TutorialType.Level4_Pan, PanSteps);
-        // }
+        else if (GameData.CurrentLevel == 4 && GameData.CurrentRound == 2)
+        {
+            // Run the pan tutorial on Level 4 Round 2
+            Debug.Log("Starting pan tutorial");
+            StartTutorial(TutorialType.Level4_Pan, PanSteps);
+        }
         else
         {
             // It's not a tutorial level. Disable tutorial GameObject.
@@ -97,16 +97,6 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        // TODO
-        // if (previousStep != currentStep)
-        // {
-        //     // Run the setup logic for the new step
-        //     EnterStep(currentStep);
-        //     
-        //     // Update previousStep so this block doesn't run again
-        //     // until currentStep changes.
-        //     previousStep = currentStep;
-        // }
         switch (activeTutorial)
         {
             case TutorialType.Level1_Basic:
@@ -124,7 +114,7 @@ public class TutorialManager : MonoBehaviour
 
     void UpdateLevel1()
     {
-        if (currentStep == 0)
+        if (currentStep == 1)
         {
             // increment step when player clicks anywhere on canvas
             if (Input.GetMouseButtonDown(0))
@@ -133,14 +123,14 @@ public class TutorialManager : MonoBehaviour
             }
             
         }
-        else if (currentStep == 9)
-        {
-            // end tutorial when player clicks anywhere
-            if (Input.GetMouseButtonDown(0))
-            {
-                EndTutorial();
-            }
-        }
+        // if (currentStep == 9)
+        // {
+        //     // end tutorial when player clicks anywhere
+        //     if (Input.GetMouseButtonDown(0))
+        //     {
+        //         EndTutorial();
+        //     }
+        // }
     }
 
     void UpdateLevel3()
@@ -167,7 +157,24 @@ public class TutorialManager : MonoBehaviour
 
     void UpdateLevel4()
     {
-        // TODO
+        if (currentStep == 0)
+        {
+            // increment step when player clicks anywhere on canvas
+            if (Input.GetMouseButtonDown(0))
+            {
+                AdvanceStep();
+            }
+            
+        }
+
+        if (currentStep == 5)
+        {
+            // end tutorial when player clicks anywhere
+            if (Input.GetMouseButtonDown(0))
+            {
+                EndTutorial();
+            }
+        }
     }
     
     void AdvanceStep()
@@ -223,43 +230,46 @@ public class TutorialManager : MonoBehaviour
         switch (step)
         {
             case 0:
-                // Debug.Log($"Step {step}: show player dish window...");
+                // prompt player to click hint button
                 break;
             case 1:
-                // Debug.Log($"Step {step}: show player first ingredient and tell them to drag and drop onto cookware");
+                // tell player hint cost, 3 hints per level, prompt player to click anywhere to continue
                 break;
             case 2:
-                // Debug.Log($"Step {step}: show player how to use the cookware (press start button on fryer and wait for progress bar to finish)");
-                isWaitingForCookingToEnd = false; // reset the flag
+                Invoke(nameof(enableHintCloseBtn), 1f);
+                // tell player we need potato and cheese, prompt player to close hint panel
                 break;
             case 3:
-                // Debug.Log($"Step {step}: plate the ingredient");
+                // drag potato to fryer
                 break;
             case 4:
-                // Debug.Log($"Step {step}: show player second ingredient...");
-                break;
-            case 5:
-                // Debug.Log($"Step {step}: show player how to use cookware");
+                // show player how to use fryer
                 isWaitingForCookingToEnd = false; // reset the flag
                 break;
+            case 5:
+                // tell player to drag cooked potato to plate
+                break;
             case 6:
-                // Debug.Log($"Step {step}: drag second ingredient onto plate");
+                // tell player to drag cheese to oven
                 break;
             case 7:
-                // Debug.Log($"Step {step}: click combine btn to combine ingredients");
+                // show player how to use oven
+                isWaitingForCookingToEnd = false; // reset the flag
                 break;
             case 8:
-                // Debug.Log($"Step {step}: submit dish by clicking order up btn");
+                // tell player to drag cheese to plate
+            case 9:
+                // tell player to click combine button
+                break;
+            case 10:
+                // tell player to click order up button
                 // Enable Order Up button
                 if (orderUpButton != null)
                 {
                     orderUpButton.interactable = true;
                 }
                 break;
-            case 9:
-                // Debug.Log($"Step {step}: tell player the goal of the game");
                 break;
-            
             default:
                 Debug.LogWarning($"Entered an unknown tutorial step: {step}");
                 break;
@@ -306,18 +316,73 @@ public class TutorialManager : MonoBehaviour
     {
         // Logic for Pan tutorial
         Debug.Log($"[Pan Tutorial] Entered Step {step}");
+        switch (step)
+        {
+            case 0:
+                // Display text "you have unlocked new cookware: pan!"
+                break;
+            case 1:
+                // Instruct player to turn on burner
+                break;
+            case 2:
+                // Instruct player drag chicken to pot
+                break;
+            case 3:
+                // Instruct player to shake pan
+                isWaitingForCookingToEnd = false; // reset the flag
+                break;
+            case 4:
+                // Instruct player to drag chicken to plate
+                break;
+            case 5:
+                // Congratulate player on learning how to use pan
+                {
+                    orderUpButton.interactable = true;
+                }
+                break;
+            default:
+                Debug.LogWarning($"Entered an unknown tutorial step: {step}");
+                break;
+        }
     }
-        
+
+    private void enableHintCloseBtn()
+    {
+        hintCloseBtn.interactable = true;
+    }
+    
+    public void onHintBtnClicked()
+    {
+        if (activeTutorial == TutorialType.Level1_Basic)
+        {
+            // Check if we're currently on step 0
+            if (currentStep == 0)
+            {
+                hintCloseBtn.interactable = false;
+                AdvanceStep(); // Advance to step 1
+            }
+        }
+    }
+    
+    public void onHintCloseBtnClicked()
+    {
+        if (activeTutorial == TutorialType.Level1_Basic)
+        {
+            // Check if we're currently on step 2
+            if (currentStep == 2)
+            {
+                AdvanceStep(); // Advance to step 3
+            }
+        }
+    }
     public void OnIngredientDroppedOnCookware(DraggableIngredient ingredient, BaseCookware cookware)
     {
         if (activeTutorial == TutorialType.Level1_Basic)
         {
-            // Check for Potato + Fryer
-            // if (cookware.GetCookwareType() == CookwareType.Fryer) { AdvanceStep(); }
-            // Check if we're currently on step 1 on step 5
-            if (currentStep == 1)
+            // Check if we're currently on step 3 on step 6
+            if (currentStep == 3)
             { 
-                // Check if it's the correct cookware
+                // Check if it's the correct cookware (fryer)
                 bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
 
                 // Check if it's the correct ingredient (potato)
@@ -330,12 +395,12 @@ public class TutorialManager : MonoBehaviour
         
                 if (isCorrectCookware && isCorrectIngredient)
                 {
-                    AdvanceStep();; // Advance to step 2
+                    AdvanceStep(); // Advance to step 4
                 }
             }
-            else if (currentStep == 4)
+            else if (currentStep == 6)
             {
-                // Check if it's the correct cookware
+                // Check if it's the correct cookware (oven)
                 bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Oven;
 
                 // Check if it's the correct ingredient (cheese)
@@ -348,16 +413,16 @@ public class TutorialManager : MonoBehaviour
         
                 if (isCorrectCookware && isCorrectIngredient)
                 {
-                    AdvanceStep(); // Advance to step 5
+                    AdvanceStep(); // Advance to step 7
                 }
             }
         }
-        if (activeTutorial == TutorialType.Level3_Pot)
+        else if (activeTutorial == TutorialType.Level3_Pot)
         {
             // Check if we're on step 2
             if (currentStep == 2)
             {
-                // Check if it's the correct cookware
+                // Check if it's the correct cookware (pot)
                 bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Pot;
                 
                 // Check if it's the correct ingredient (pasta)
@@ -366,6 +431,28 @@ public class TutorialManager : MonoBehaviour
                 if (ing != null)
                 {
                     isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Pasta");
+                }
+        
+                if (isCorrectCookware && isCorrectIngredient)
+                {
+                    AdvanceStep(); // Advance to step 3
+                }
+            }
+        }
+        else if (activeTutorial == TutorialType.Level4_Pan)
+        {
+            // Check if we're on step 2
+            if (currentStep == 2)
+            {
+                // Check if it's the correct cookware (pan)
+                bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Pan;
+                
+                // Check if it's the correct ingredient (chicken)
+                Ingredient ing = ingredient.GetComponent<Ingredient>();
+                bool isCorrectIngredient = false;
+                if (ing != null)
+                {
+                    isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Chicken");
                 }
         
                 if (isCorrectCookware && isCorrectIngredient)
@@ -383,8 +470,8 @@ public class TutorialManager : MonoBehaviour
         Debug.Log($"[Tutorial] Cookware Started: {cookware.GetCookwareType()}");
         if (activeTutorial == TutorialType.Level1_Basic)
         {
-            // Check if we're currently on step 2 or 6
-            if (currentStep == 2)
+            // Check if we're currently on step 4 or 7
+            if (currentStep == 4)
             {
                 // Check if it's the correct cookware (the fryer)
                 if (cookware.GetCookwareType() == CookwareType.Fryer)
@@ -393,7 +480,7 @@ public class TutorialManager : MonoBehaviour
                     isWaitingForCookingToEnd = true;
                 }
             }
-            else if (currentStep == 5)
+            else if (currentStep == 7)
             {
                 // Check if it's the correct cookware (the fryer)
                 if (cookware.GetCookwareType() == CookwareType.Oven)
@@ -416,9 +503,22 @@ public class TutorialManager : MonoBehaviour
                 // Check if it's the correct cookware (the pot)
                 if (cookware.GetCookwareType() == CookwareType.Pot)
                 {
-                    Debug.Log("OnCookwareStarted: Pot started cooking!");
+                    Debug.Log("[OnStirring]: Pot started cooking!");
                     isWaitingForCookingToEnd = true;
                 }
+            }
+        }
+    }
+
+    public void OnPanToss(StirFryPan pan)
+    {
+        if (activeTutorial == TutorialType.Level4_Pan)
+        {
+            // Check if we're currently on step 3
+            if (currentStep == 3)
+            {
+                Debug.Log("[OnPanToss]: Pan started cooking!");
+                isWaitingForCookingToEnd = true;
             }
         }
     }
@@ -435,8 +535,8 @@ public class TutorialManager : MonoBehaviour
                 return;
             }
 
-            // Check if we are on Step 2 or Step 6 
-            if (currentStep == 2)
+            // Check if we are on Step 4 or Step 7
+            if (currentStep == 4)
             {
                 bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Fryer;
 
@@ -451,7 +551,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     Debug.Log("OnCookingFinished: Cooking finished!");
                     AdvanceStep();
-                    ; // Advance to Step 3
+                    // Advance to Step 5
                     isWaitingForCookingToEnd = false;
                 }
                 else
@@ -461,7 +561,7 @@ public class TutorialManager : MonoBehaviour
                         $"OnCookingFinished: Ignored {ingredient.ingredientData.ingredientName} finishing in {cookware.name}. Waiting for Potato_Raw.");
                 }
             }
-            else if (currentStep == 5)
+            else if (currentStep == 7)
             {
                 bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Oven;
 
@@ -476,7 +576,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     Debug.Log("OnCookingFinished: Cooking finished!");
                     AdvanceStep();
-                    ; // Advance to Step 6
+                    ; // Advance to Step 8
                     isWaitingForCookingToEnd = false;
                 }
                 else
@@ -487,8 +587,7 @@ public class TutorialManager : MonoBehaviour
                 }
             }
         }
-
-        if (activeTutorial == TutorialType.Level3_Pot)
+        else if (activeTutorial == TutorialType.Level3_Pot)
         {
             // Check if we were waiting for cooking to end
             if (!isWaitingForCookingToEnd)
@@ -518,6 +617,28 @@ public class TutorialManager : MonoBehaviour
                 {
                     // Another item finished, but not the one we're waiting for.
                     Debug.Log(
+                        $"OnCookingFinished: Ignored {ingredient.ingredientData.ingredientName} finishing in {cookware.name}. Waiting for Chicken.");
+                }
+            }
+        }
+        else if (activeTutorial == TutorialType.Level4_Pan)
+        {
+            bool isCorrectCookware = cookware.GetCookwareType() == CookwareType.Pan;
+            bool isCorrectIngredient = false;
+            if (ingredient != null)
+            {
+                // Check for the Cooked ingredient name (chicken)
+                isCorrectIngredient = ingredient.ingredientData.ingredientName.Contains("Chicken");
+                if (isCorrectCookware && isCorrectIngredient)
+                {
+                    Debug.Log("OnCookingFinished: Cooking finished!");
+                    AdvanceStep(); // Advance to Step 4
+                    isWaitingForCookingToEnd = false;
+                }
+                else
+                {
+                    // Another item finished, but not the one we're waiting for.
+                    Debug.Log(
                         $"OnCookingFinished: Ignored {ingredient.ingredientData.ingredientName} finishing in {cookware.name}. Waiting for Pasta.");
                 }
             }
@@ -535,46 +656,58 @@ public class TutorialManager : MonoBehaviour
             }
         }
     }
-    
+
+    public void onPanFireButtonClicked()
+    {
+        if (activeTutorial == TutorialType.Level4_Pan)
+        {
+            // Check if we're currently on step 1
+            if (currentStep == 1)
+            {
+                AdvanceStep(); // Advance to step 2
+            }
+        }
+    }
+
     public void OnIngredientDroppedOnPlate(DraggableIngredient draggable, Plate plate)
     {
         if (activeTutorial == TutorialType.Level1_Basic)
         {
-            // Check if we are on Step 3 or Step 6
-            if (currentStep == 3)
+            // Check if we are on Step 5 or Step 8
+            if (currentStep == 5)
             {
                 // Check if it's the correct ingredient (Cooked Potato)
                 Ingredient ing = draggable.GetComponent<Ingredient>();
                 if (ing != null)
                 {
                     bool isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Potato");
-                    bool isCooked = ing.currentState == IngredientState.Cooked;
-
+                    bool isCooked = ing.currentState == IngredientState.Cooked || ing.currentState == IngredientState.Overcooked;
+ 
                     if (isCorrectIngredient && isCooked)
                     {
                         Debug.Log("OnIngredientDroppedOnPlate: Cooked ingredient plated!");
-                        AdvanceStep(); // Advance to Step 4
+                        AdvanceStep(); // Advance to Step 6
                     }
                 }
             }
-            else if (currentStep == 6)
+            else if (currentStep == 8)
             {
                 // Check if it's the correct ingredient (Cooked Cheese)
                 Ingredient ing = draggable.GetComponent<Ingredient>();
                 if (ing != null)
                 {
                     bool isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Cheese");
-                    bool isCooked = ing.currentState == IngredientState.Cooked;
+                    bool isCooked = ing.currentState == IngredientState.Cooked || ing.currentState == IngredientState.Overcooked;
 
                     if (isCorrectIngredient && isCooked)
                     {
                         Debug.Log("OnIngredientDroppedOnPlate: Cooked ingredient plated!");
-                        AdvanceStep(); // Advance to Step 7
+                        AdvanceStep(); // Advance to Step 9
                     }
                 }
             }
         }
-        if (activeTutorial == TutorialType.Level3_Pot)
+        else if (activeTutorial == TutorialType.Level3_Pot)
         {
             // Check if we are on Step 4
             if (currentStep == 4)
@@ -584,7 +717,27 @@ public class TutorialManager : MonoBehaviour
                 if (ing != null)
                 {
                     bool isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Pasta");
-                    bool isCooked = ing.currentState == IngredientState.Cooked;
+                    bool isCooked = ing.currentState == IngredientState.Cooked || ing.currentState == IngredientState.Overcooked;
+
+                    if (isCorrectIngredient && isCooked)
+                    {
+                        Debug.Log("OnIngredientDroppedOnPlate: Cooked ingredient plated!");
+                        AdvanceStep(); // Advance to Step 5
+                    }
+                }
+            }
+        }
+        else if (activeTutorial == TutorialType.Level4_Pan)
+        {
+            // Check if we are on Step 4
+            if (currentStep == 4)
+            {
+                // Check if it's the correct ingredient (Chicken)
+                Ingredient ing = draggable.GetComponent<Ingredient>();
+                if (ing != null)
+                {
+                    bool isCorrectIngredient = ing.ingredientData.ingredientName.Contains("Chicken");
+                    bool isCooked = ing.currentState == IngredientState.Cooked || ing.currentState == IngredientState.Overcooked;
 
                     if (isCorrectIngredient && isCooked)
                     {
@@ -600,36 +753,34 @@ public class TutorialManager : MonoBehaviour
     {
         if (activeTutorial == TutorialType.Level1_Basic)
         {
-            // Check if we are on Step 7
-            if (currentStep != 7)
+            // Check if we are on Step 9
+            if (currentStep != 9)
             {
                 return;
             }
-            AdvanceStep(); // Advance to Step 8
+            AdvanceStep(); // Advance to Step 10
         }
     }
     public void OnOrderUpClicked()
     {
         if (activeTutorial == TutorialType.Level1_Basic)
         {
-            // Check if we are on Step 8
-            if (currentStep != 8)
+            // Check if we are on Step 10
+            if (currentStep != 10)
             {
                 return;
             }
 
             Debug.Log("OnOrderUpClicked: Dish submitted!");
-            AdvanceStep(); // Advance to the step 9
+            
+            // End tutorial
+            EndTutorial();
         }
     }
     
     void EndTutorial()
     {
         Debug.Log("Tutorial Finished!");
-        // if (currentStep >= 0 && currentStep < Steps.Length && Steps[currentStep] != null)
-        // {
-        //     Steps[currentStep].SetActive(false);
-        // }
         if (currentActivePopups != null && currentStep < currentActivePopups.Length)
         {
             if(currentActivePopups[currentStep]) 

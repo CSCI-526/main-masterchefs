@@ -298,6 +298,12 @@ public class StirFryPan : BaseCookware
         if (speed > stirSpeedThreshold)
         {
             isStirring = true;
+            
+            // Notify tutorial manager that cooking has started
+            if (TutorialManager.Instance != null)
+            {
+                TutorialManager.Instance.OnPanToss(this);
+            }
 
             if (enableDebugLogs)
             {
