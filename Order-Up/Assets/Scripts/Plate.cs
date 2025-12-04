@@ -118,6 +118,22 @@ public class Plate : MonoBehaviour, IDropZone
         Debug.Log($"Removed {ingredient.name} from plate. Total ingredients: {ingredientsOnPlate.Count}");
         return true;
     }
+    
+    public void ReleaseIngredient(DraggableIngredient ingredient)
+    {
+        if (ingredientsOnPlate.Contains(ingredient))
+        {
+            ingredientsOnPlate.Remove(ingredient);
+            
+            UpdateDishDisplay();
+            
+            OnIngredientRemoved?.Invoke(ingredient);
+            if (ingredientsOnPlate.Count == 0)
+                OnPlateEmpty?.Invoke();
+
+            Debug.Log($"Released {ingredient.name} from plate. Remaining count: {ingredientsOnPlate.Count}");
+        }
+    }
 
     bool CanAddIngredient(DraggableIngredient ingredient)
     {
@@ -215,7 +231,7 @@ public class Plate : MonoBehaviour, IDropZone
             return;
 
         Recipe matchedRecipe = GetMatchingRecipe();
-        combineButton.interactable = (matchedRecipe != null);
+        // combineButton.interactable = (matchedRecipe != null);
 
     }
     #endregion
@@ -342,25 +358,53 @@ public class Plate : MonoBehaviour, IDropZone
         }
     }
     #region Display Text
+    // private string GetIngredientsDisplayText()
+    // {
+    //     if (IsEmpty())
+    //         return "Dish Empty";
+    //
+    //     List<string> ingredientNames = new List<string>();
+    //     
+    //     // Get ingredient names from the plate
+    //     foreach (Transform child in ingredientParent)
+    //     {
+    //         Ingredient ingredient = child.GetComponent<Ingredient>();
+    //         if (ingredient != null && ingredient.ingredientData != null)
+    //         {
+    //             ingredientNames.Add(ingredient.ingredientData.ingredientName);
+    //         }
+    //         else
+    //         {
+    //             // Fallback to object name if no Ingredient component
+    //             ingredientNames.Add(child.gameObject.name);
+    //         }
+    //     }
+    //
+    //     return string.Join(" + ", ingredientNames);
+    // }
     private string GetIngredientsDisplayText()
     {
-        if (IsEmpty())
+        if (ingredientsOnPlate.Count == 0)
             return "Dish Empty";
 
         List<string> ingredientNames = new List<string>();
         
-        // Get ingredient names from the plate
-        foreach (Transform child in ingredientParent)
+        foreach (DraggableIngredient draggable in ingredientsOnPlate)
         {
-            Ingredient ingredient = child.GetComponent<Ingredient>();
-            if (ingredient != null && ingredient.ingredientData != null)
+            if (draggable == null) continue;
+            
+            Ingredient ingredientScript = draggable.GetComponent<Ingredient>();
+
+            if (ingredientScript != null && ingredientScript.ingredientData != null)
             {
-                ingredientNames.Add(ingredient.ingredientData.ingredientName);
+                // Use the fancy name from ScriptableObject
+                ingredientNames.Add(ingredientScript.ingredientData.ingredientName);
             }
             else
             {
-                // Fallback to object name if no Ingredient component
-                ingredientNames.Add(child.gameObject.name);
+                // Fallback: Use the GameObject name and clean up "(Clone)"
+                string cleanName = draggable.name.Replace("(Clone)", "").Trim();
+                ingredientNames.Add(cleanName);
             }
         }
 
@@ -415,7 +459,7 @@ public class Plate : MonoBehaviour, IDropZone
                 ingredients.Add(ing);
             }
         }
-
+     
         if (ingredients.Count == 0)
             return null;
 

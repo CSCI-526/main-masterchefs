@@ -30,6 +30,8 @@ public class DraggableIngredient : MonoBehaviour
     public System.Action<DraggableIngredient> OnEndDrag;
     public System.Action<DraggableIngredient, Plate> OnDroppedOnPlate;
     public System.Action<DraggableIngredient, BaseCookware> OnDroppedOnCookware;
+    
+    private Plate currentPlate;
 
     void Start()
     {
@@ -160,6 +162,8 @@ public class DraggableIngredient : MonoBehaviour
             {
                 if (plate.AddIngredient(this))
                 {
+                    // Track that we are now on this plate
+                    currentPlate = plate;
                     OnDroppedOnPlate?.Invoke(this, plate);
 
                     // Notify the TutorialManager that ingredient has been dropped on plate
@@ -180,6 +184,13 @@ public class DraggableIngredient : MonoBehaviour
                 // Check if cookware can accept this ingredient (only one at a time)
                 if (cookware.CanAcceptIngredient(this.gameObject))
                 {
+                    // If we were previously on a plate, tell it to let go
+                    if (currentPlate != null)
+                    {
+                        currentPlate.ReleaseIngredient(this);
+                        currentPlate = null; // We are no longer on the plate
+                    }
+                    
                     // Position ingredient inside cookware bounds
                     transform.position = dropZone.GetGameObject().transform.position;
                     OnDroppedOnCookware?.Invoke(this, cookware);
@@ -208,6 +219,12 @@ public class DraggableIngredient : MonoBehaviour
             }
             else if (dropZone is Trash trash)
             {
+                // If we were previously on a plate, tell it to let go
+                if (currentPlate != null)
+                {
+                    // currentPlate.ReleaseIngredient(this);
+                    currentPlate = null; // We are no longer on the plate
+                }
                 if (enableDebugLogs)
                 {
                     Debug.Log($"[{gameObject.name}] Dropped on Trash: {trash.GetGameObject().name}");
@@ -218,6 +235,12 @@ public class DraggableIngredient : MonoBehaviour
             }
             else
             {
+                // Leave the plate if we were on one
+                if (currentPlate != null)
+                {
+                    currentPlate.ReleaseIngredient(this);
+                    currentPlate = null;
+                }
                 if (enableDebugLogs)
                     Debug.LogWarning($"[{gameObject.name}] Dropped on unknown drop zone type, returning to original position");
                 ReturnToOriginalPosition();
@@ -225,6 +248,12 @@ public class DraggableIngredient : MonoBehaviour
         }
         else
         {
+            // Leave the plate if we were on one
+            if (currentPlate != null)
+            {
+                currentPlate.ReleaseIngredient(this);
+                currentPlate = null;
+            }
             if (enableDebugLogs)
                 Debug.Log($"[{gameObject.name}] No drop zone found, returning to original position");
             ReturnToOriginalPosition();
