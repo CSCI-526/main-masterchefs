@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/huyng/Desktop/unity project/gold-take01;C:/Users/huyng/Desktop/unity project/beta-build03;C:/Users/huyng/Desktop/unity project/New folder;C:/Users/huyng/Desktop/unity project/build05;C:/Users/huyng/Desktop/unity project/build03;C:/Users/huyng/Desktop/unity project/build04;C:/Users/huyng/Desktop/unity project/build;C:/Users/huyng/Desktop/unity project/paired-prototype-untitled/2d-pov/WebGL Builds;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/huyng/Desktop/unity project/GoldTake2;C:/Users/huyng/Desktop/unity project/gold-take01;C:/Users/huyng/Desktop/unity project/beta-build03;C:/Users/huyng/Desktop/unity project/New folder;C:/Users/huyng/Desktop/unity project/build05;C:/Users/huyng/Desktop/unity project/build03;C:/Users/huyng/Desktop/unity project/build04;C:/Users/huyng/Desktop/unity project/build;C:/Users/huyng/Desktop/unity project/paired-prototype-untitled/2d-pov/WebGL Builds;\"}"
             }
         ]
     }
