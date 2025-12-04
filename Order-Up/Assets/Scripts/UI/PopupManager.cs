@@ -20,11 +20,10 @@ public class PopupManager : MonoBehaviour
 
         SpriteRenderer sr = target.GetComponent<SpriteRenderer>();
         float spriteHeight = (sr != null) ? sr.bounds.size.y : 1f;
+        float spriteWidth = (sr != null) ? sr.bounds.size.x : 1f;
 
-        Vector3 offset = new Vector3(0, spriteHeight * 1.4f, 0);    
-        popup.transform.position = target.position + offset;
- 
-
+        Vector3 offset = new Vector3(spriteWidth * 1.3f, spriteHeight * 0.6f, 0);    
+        popup.transform.position = target.position + offset;  
 
         Debug.Log("POPUP SPAWNED: " + message);
 
@@ -33,6 +32,6 @@ public class PopupManager : MonoBehaviour
         text.text = message;
 
         // Auto-destroy after animation 
-        Destroy(popup, 2.7f);
+        Destroy(popup, 1.5f);
     }
 }
