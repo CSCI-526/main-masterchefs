@@ -32,6 +32,7 @@ public class DraggableIngredient : MonoBehaviour
     public System.Action<DraggableIngredient, BaseCookware> OnDroppedOnCookware;
     
     private Plate currentPlate;
+    public Ingredient ingredientScript;
 
     void Start()
     {
@@ -49,6 +50,8 @@ public class DraggableIngredient : MonoBehaviour
             originalSortingOrder = spriteRenderer.sortingOrder;
             originalColor = spriteRenderer.color;
         }
+        
+        ingredientScript = GetComponent<Ingredient>();
     }
 
     void OnMouseDown()
@@ -229,7 +232,7 @@ public class DraggableIngredient : MonoBehaviour
                 {
                     Debug.Log($"[{gameObject.name}] Dropped on Trash: {trash.GetGameObject().name}");
                 }
-
+                
                 trash.OnIngredientDropped(this);
                 return;
             }

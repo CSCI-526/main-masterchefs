@@ -65,7 +65,9 @@ public class Trash : MonoBehaviour, IDropZone
         {
             pantry.ResetSlots();
         }
+        plate.ReleaseDish(dish);
         Destroy(dish.gameObject);
+
     }
 
 

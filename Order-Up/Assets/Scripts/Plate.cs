@@ -26,6 +26,8 @@ public class Plate : MonoBehaviour, IDropZone
 
     [Header("CombinationSystem")]
     private List<DraggableIngredient> ingredientsOnPlate; // make sure to take it out if the ingredient is removed
+
+    private Dish dishOnPlate;
     public CombinationSystem comboSystem;
 
     // Events
@@ -135,6 +137,13 @@ public class Plate : MonoBehaviour, IDropZone
         }
     }
 
+    public void ReleaseDish(DraggableDish dish)
+    {
+        // TODO: current implementation assumes only one dish exists on plate at a time, add logic to prevent multiple dishes
+        dishOnPlate = null;
+        UpdateDishDisplay();
+    }
+
     bool CanAddIngredient(DraggableIngredient ingredient)
     {
         if (IsFull())
@@ -193,7 +202,9 @@ public class Plate : MonoBehaviour, IDropZone
         GameObject dish = Instantiate(recipe.dishPrefab, ingredientParent);
         dish.transform.localPosition = Vector3.zero;
         dish.name = recipe.dishName;
-
+        dishOnPlate = dish.GetComponent<Dish>();
+        Debug.Log($"[Plate] combined ingredients into {dishOnPlate}");
+        
         // If the dish has a DraggableIngredient component, register it
         DraggableIngredient draggable = dish.GetComponent<DraggableIngredient>();
         if (draggable != null)
@@ -230,7 +241,7 @@ public class Plate : MonoBehaviour, IDropZone
         if (combineButton == null)
             return;
 
-        Recipe matchedRecipe = GetMatchingRecipe();
+        // Recipe matchedRecipe = GetMatchingRecipe();
         // combineButton.interactable = (matchedRecipe != null);
 
     }
@@ -333,7 +344,17 @@ public class Plate : MonoBehaviour, IDropZone
     {
         if (dishIngredientsText == null)
             return;
-
+        
+        // Check if dish exists on plate
+        if (dishOnPlate != null && ingredientsOnPlate.Count == 0)
+        {
+            string dishName = dishOnPlate.recipe.dishName;
+            dishIngredientsText.text = dishName;
+            AdjustTextSize(dishName);
+            return;
+        }
+        
+        Debug.Log($"no existing dish found on plate, checking individual ingredients");
         // Check if a recipe is formed
         Recipe matchedRecipe = GetMatchingRecipe();
 
@@ -352,9 +373,14 @@ public class Plate : MonoBehaviour, IDropZone
         else
         {
             // Show ingredient names separated by " + "
+            string dishName = "";
+            if (dishOnPlate != null)
+            {
+                dishName = dishOnPlate.recipe.dishName+ " + ";
+            }
             string displayText = GetIngredientsDisplayText();
-            dishIngredientsText.text = displayText;
-            AdjustTextSize(displayText);
+            dishIngredientsText.text = dishName+displayText;
+            AdjustTextSize(dishName+displayText);
         }
     }
     #region Display Text
@@ -388,21 +414,18 @@ public class Plate : MonoBehaviour, IDropZone
             return "Dish Empty";
 
         List<string> ingredientNames = new List<string>();
-        
+
         foreach (DraggableIngredient draggable in ingredientsOnPlate)
         {
             if (draggable == null) continue;
-            
-            Ingredient ingredientScript = draggable.GetComponent<Ingredient>();
 
-            if (ingredientScript != null && ingredientScript.ingredientData != null)
+            if (draggable.ingredientScript != null && draggable.ingredientScript.ingredientData != null)
             {
-                // Use the fancy name from ScriptableObject
-                ingredientNames.Add(ingredientScript.ingredientData.ingredientName);
+                ingredientNames.Add(draggable.ingredientScript.ingredientData.ingredientName);
             }
             else
             {
-                // Fallback: Use the GameObject name and clean up "(Clone)"
+                // Fallback: If it's a generic object or the link is missing, use the GameObject name
                 string cleanName = draggable.name.Replace("(Clone)", "").Trim();
                 ingredientNames.Add(cleanName);
             }
@@ -443,30 +466,71 @@ public class Plate : MonoBehaviour, IDropZone
     /// <summary>
     /// Checks if current ingredients match any recipe
     /// </summary>
+    // private Recipe GetMatchingRecipe()
+    // {
+    //     if (comboSystem == null || ingredientParent == null)
+    //         return null;
+    //
+    //     List<Ingredient> ingredients = new List<Ingredient>();
+    //
+    //     // Get all ingredients from the plate
+    //     foreach (Transform child in ingredientParent)
+    //     {
+    //         Ingredient ing = child.GetComponent<Ingredient>();
+    //         if (ing != null)
+    //         {
+    //             ingredients.Add(ing);
+    //         }
+    //     }
+    //  
+    //     if (ingredients.Count == 0)
+    //         return null;
+    //
+    //     // Check all recipes to find a match
+    //     foreach (Recipe recipe in comboSystem.allRecipes)
+    //     {
+    //         if (recipe.MatchesIngredients(ingredients))
+    //         {
+    //             return recipe;
+    //         }
+    //     }
+    //
+    //     return null;
+    // }
+    
     private Recipe GetMatchingRecipe()
     {
-        if (comboSystem == null || ingredientParent == null)
+        if (comboSystem == null || ingredientsOnPlate.Count == 0)
             return null;
 
-        List<Ingredient> ingredients = new List<Ingredient>();
+        List<Ingredient> ingredientsToMatch = new List<Ingredient>();
 
-        // Get all ingredients from the plate
-        foreach (Transform child in ingredientParent)
+        // Iterate through ingredientsOnPlate
+        foreach (DraggableIngredient draggable in ingredientsOnPlate)
         {
-            Ingredient ing = child.GetComponent<Ingredient>();
-            if (ing != null)
+            if (draggable == null) continue;
+            
+            if (draggable.ingredientScript != null)
             {
-                ingredients.Add(ing);
+                ingredientsToMatch.Add(draggable.ingredientScript);
+            }
+            else
+            {
+                Ingredient foundScript = draggable.GetComponent<Ingredient>();
+                if (foundScript != null)
+                {
+                    ingredientsToMatch.Add(foundScript);
+                }
             }
         }
-     
-        if (ingredients.Count == 0)
+        
+        if (ingredientsToMatch.Count == 0)
             return null;
 
-        // Check all recipes to find a match
+        // Check against all recipes in the system
         foreach (Recipe recipe in comboSystem.allRecipes)
         {
-            if (recipe.MatchesIngredients(ingredients))
+            if (recipe.MatchesIngredients(ingredientsToMatch))
             {
                 return recipe;
             }
@@ -474,6 +538,7 @@ public class Plate : MonoBehaviour, IDropZone
 
         return null;
     }
+    
     #endregion
     public List<string> GetIngredientNames()
     {
