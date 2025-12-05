@@ -26,6 +26,7 @@ public class DraggableDish : MonoBehaviour
     private Rigidbody2D rig;
     private int originalSortingOrder;
     private Color originalColor;
+    
 
     void Start()
     {

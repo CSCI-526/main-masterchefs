@@ -269,7 +269,7 @@ public class TutorialManager : MonoBehaviour
                     orderUpButton.interactable = true;
                 }
                 break;
-                break;
+
             default:
                 Debug.LogWarning($"Entered an unknown tutorial step: {step}");
                 break;
