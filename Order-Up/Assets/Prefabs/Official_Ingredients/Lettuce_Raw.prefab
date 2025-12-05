@@ -113,6 +113,7 @@ MonoBehaviour:
   dragOffset: 0.1
   enableDebugLogs: 0
   hoverColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  ingredientScript: {fileID: 0}
 --- !u!114 &242588704828302275
 MonoBehaviour:
   m_ObjectHideFlags: 0
